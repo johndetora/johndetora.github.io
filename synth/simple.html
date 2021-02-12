@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synthesizer</title> 
+</head>
+
+<body>
+
+<script>
+// NOTE: LOOK INTO FIREFOX DEVELOPER TOOLS TO VISUALIZE NODES
+
+// Step 1: create context
+var context = new (window.AudioContext || window.webkitAudioContext)(); 
+
+// Step 2: create Oscillator node
+var osc = context.createOscillator();                                
+osc.type = 'triangle';
+osc.frequency.value = 400;
+
+/* Optional: Create filter
+var filter = context.createBiquadFilterNode();
+filter.type = 'low-pass';
+filter.frequency.value = 1000;
+filter.connect(gain);
+*/
+
+// Step 3: create Gain node
+var gain = context.createGain();
+gain.gain.value = 0.1;
+
+// Step 4: Connect oscillator to gain node
+osc.connect(gain);
+// Step 5: Connect gain to output
+gain.connect(context.destination);
+
+// Step 6: Play
+var now = context.currentTime; // creates time context
+osc.start(now);                // Oscillator starts at time context
+osc.stop(now + 1);                 // Oscillator stops after 1 second
+
+
+
+
+</script>
+
+</body>
+
+
+
+</html>

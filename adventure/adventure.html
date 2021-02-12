@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Adventure</title>
+
+</head>
+<body>
+
+    <div id="art">
+        jsafasfasfasfjmnxvm,xz,mncvcafasfasfasfjmnxvm,xz,mncvcafa
+        sfasfasfjmnxvm,xz,mncvcafasfasfasfjmnxvm,xz,mncvcafasfasfasfjmnxvm,xz,m
+        ncvcafasfasfasfjmnxvm,xz,mncvcafasfasfasfjmnxvm,xz,mncvcafasfasfasfjmnx
+        vm,xz,mncvcafasfasfasfjmnxvm,xz,mncvcafasfasfasfjmnxvm,xz,mncvcafasfasfas
+        fjmnxvm,xz,mncvcafasfasfasfjmnxvm,xz,mncvcafasfasfasfjmnxvm,xz,mncvcafasf
+        asfasfjmnxvm,xz,mncvcafasfasfasfjmnxvm,xz,mncvcafasfasfasfjmnxvm,xz,mncvca
+        fasfasfasfjmnxvm,\nxz,mncvcafasfasfasfjmnxvm,xz,mncvcafasfasfasfjmnxvm,xz,
+        mncvc</div>
+
+        <p id="text">Welcome</p>
+        <input id="inputField" type="text" id="input"><button type="submit" button id="enter">Enter</button>
+<script>
+
+let art = document.getElementById("art");
+let text = document.getElementById("text");
+let enter = document.getElementById("enter")
+
+function start() {
+    text.innerHTML = "Echo Coast"
+}
+
+var clearing = function(){
+    var u = innerHTML = "you find yourself in a clearing. There is a house here. There is a path that leads to the east and you see a waterfall in the distance"
+   // enter.addEventListener("click", );
+
+    u = u.toLowerCase();
+    if (u.includes("go")) {
+        if (u.includes("house")){
+            house();
+        }  else if (u.includes("east") || u.includes("waterfall")){
+            waterfall();
+        }
+    }   
+}
+
+
+var house = function(){
+    text.innerHTML = "You are at a house"
+}
+
+var waterfall = function(){
+    alert("You're at the waterfall");
+}
+
+clearing();
+/*
+var clearing = function(){
+    var u = prompt("you find yourself in a clearing. There is a house here. There is a path that leads to the east and you see a waterfall in the distance")
+    u = u.toLowerCase();
+    if (u.includes("go")) {
+        if (u.includes("house")){
+            house();
+        }  else if (u.includes("east") || u.includes("waterfall")){
+            waterfall();
+        }
+    }   
+}
+
+var house = function(){
+    alert("You're at the house");
+}
+
+var waterfall = function(){
+    alert("You're at the waterfall");
+}
+
+clearing();
+*/
+</script>
+
+</body>
+</html>
