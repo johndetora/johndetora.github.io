@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    
+    <input type="text" input id="input" />
+    <button id="submit">+</button>
+
+ <script>
+
+ 
+
+     
+    var text = document.getElementById("input");
+    var button = document.getElementById("submit");
+    
+
+  
+    button.addEventListener("click", input);
+  
+    function input(){
+        var result = text.value;
+        return result;
+    } 
+   
+    var inp = input();
+
+    
+    function hello(){
+        if (inp == 3){
+            alert("nice");
+        }
+        
+    }
+
+    hello();
+  
+    
+</script>
+</body>
+</html>
