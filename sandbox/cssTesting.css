@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+div {
+    padding: 2%;
+    margin: 5px;
+}
+
+#nav {
+    background-color: teal;
+}
+
+button {
+    background-color: white;
+}
+
+button:hover {
+    animation-name: primaries;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes primaries {
+    0% {
+        background-color: teal;
+    }
+    50% {
+        background-color: gold;
+    }
+    100% {
+        background-color: tomato;
+    }
+}
+
+#top {
+    background-color: tomato;
+    
+}   
+
+.middle {
+    background-color: gold;
+}
+
+#middleTop {
+    font-size: larger;
+}
+
+#middleBottom {
+    font-size: larger;
+}
+
+div:hover {
+    animation-name: primaries;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
