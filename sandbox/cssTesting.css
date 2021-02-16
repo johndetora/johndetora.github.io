@@ -20,11 +20,13 @@ button:hover {
     animation-name: primaries;
     animation-duration: 1s;
     animation-fill-mode: forwards;
+    
 }
 
 @keyframes primaries {
     0% {
         background-color: teal;
+        transform: scale(1.01);
     }
     50% {
         background-color: gold;
@@ -51,8 +53,9 @@ button:hover {
     font-size: larger;
 }
 
-div:hover {
+.middle:hover {
     animation-name: primaries;
     animation-duration: 1s;
     animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
 }

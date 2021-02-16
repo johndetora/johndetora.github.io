@@ -9,91 +9,14 @@
 </head>
 <body>
     <div id="gameContainer">
-        <div id="gameText">Welcome to Echo Coast<br>press Enter to begin</div>
-        <p id="userText"></p>
+        <div id="gameText">Welcome to Echo Coast</div>
+        <br>
+        <p id="response">press Enter to begin</p>
+        <br><br>
         <div id="inputContainer"><input type="text" id="inputField"></input></div>
     </div>
   
-       <script>
-        
-        var gameTextContainer = document.getElementById("gameTextContainer");
-        var gameText = document.getElementById("gameText");
-        var userText = document.getElementById("userText");
-        var button = document.getElementById("enter");
-        var inputField = document.getElementById("inputField");
-
-        inputField.value = "";
-        start();
-
-        function start(){
-            gameText.innerHTML = "You approach a clearing.  You see a tree to the east.  Where would you like to go?"
-            inputField.addEventListener("keyup", function(event){
-                if (event.key === "Enter") {
-                    var userInput = inputField.value
-                        if (userInput.includes("tree")){
-                            inputField.value = "";
-                            tree();
-                }
-                }
-            });
-        };
-
-        function tree(){
-            
-            gameText.innerHTML = "you approach the tree.  You find a mysterious crystal."
-            var inputField = document.getElementById("inputField");
-            var userInput = inputField.value;
-            userText.innerText = userInput
-                if (userInput.includes("take")) {
-                    inputField.value = "";
-                    crystal();
-                }
-        }
-
-        function crystal(){
-            gameText.innerHTML = "You hold the crystal in your hand. It glows.  You hear a sound coming from the bushes"
-            var inputField = document.getElementById("inputField");
-            var userInput = inputField.value;
-            userText.innerText = userInput
-                if (inp.includes("")) {
-                    npc();
-                }
-        }
-
-        function npc(){
-            gameText.innerHTML = "a man approaches"
-            input();
-                if (inp.includes("look")) {
-                    npc();
-                }
-        }
-
-
-/*
-
-        function tree(){
-            gameText.innerHTML = "you approach and find a mysterious crystal?"
-            var inputField = document.getElementById("inputField");
-            var userInput = inputField.value;
-            userText.innerText = userInput
-            inputField.value = "";
-                if (userInput.includes("tree")){
-                    tree();
-                }
-                
-        }
-        
-
-         function submit() {
-                var inputField = document.getElementById("inputField");
-                var userInput = inputField.value;
-                userText.innerText = userInput
-                inputField.value = "";
-            }
-*/
-
-       </script>
-
-   <!--<script type="text/javascript" src="main.js"></script>--> 
+    
+    <script type="text/javascript" src="main.js"></script>
 </body>
 </html>
