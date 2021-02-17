@@ -27,11 +27,9 @@ function tree(){
     inputField.addEventListener("keyup", function(event){
         if (event.key === "Enter") {
             var userInput = inputField.value
-                if (userInput.includes("tree")){
-                    crystal();
-                } else {
+                if (userInput.includes("tree")) crystal();
+                else {
                     response.innerHTML = "Please Retry" 
-                   
                 }
             }
     });
@@ -44,9 +42,8 @@ function crystal(){
     inputField.addEventListener("keyup", function(event){
         if (event.key === "Enter") {
             var userInput = inputField.value
-                if (userInput.includes("take")){
-                    crystalHave();
-                } else {
+                if (userInput.includes("take")) crystalHave();
+                else {
                     response.innerHTML = "Please Retry" 
                 }
             }
