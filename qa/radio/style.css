@@ -10,24 +10,36 @@ input {
     
 }
 
-#submit {
+
+.main-container {
+    display: flex;
+    border: 1px solid black;
+}
+
+.frequencies{
+    margin: 10px;
+    border: 1px solid black;
+}
+
+#submit-button {
     background-color: #4CAF50; 
     border: none;
     color: white;
     padding: 10px 15px;
     text-align: center;
     text-decoration: none;
-    
     font-size: 16px;
 }
 
-#table {
+.results {
+    margin: 10px;
+    width: 15%;
     border: 1px solid black;
-    width: 50%;
     background-color: white;
+    height: auto;
 }
 
-#results {
-    width: 25%;
-    
+#table {
+    padding: 5px;
 }
+

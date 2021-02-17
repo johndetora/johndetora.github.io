@@ -23,6 +23,10 @@ button:hover {
     
 }
 
+.container {
+    display: flex;
+}
+
 @keyframes primaries {
     0% {
         background-color: teal;
