@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEST</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+    <h3>FM Station Quality </h3>
+         
+    <form id="radio" action="index.html" method="post"> 
+        <label>88.1</label>
+        <input type="text" name="|88.1|" value="" /><br> 
+        <label>88.7</label>
+        <input type="text" name="|88.7|" value="" /><br> 
+        <label>88.9</label>
+        <input type="text" name="|88.9|" value="" /><br> 
+        <label>89.7</label>
+        <input type="text" name="|89.7|" value="" /><br> 
+        <label>90.9</label>
+        <input type="text" name="|90.9|" value="" /><br> 
+        <br>
+        <button type="button" name="button" onclick="results()"> 
+            Submit 
+        </button> 
+    </form> 
+        <p id="table"></div>
+
+            
+            
+            |90.9|3|
+            |92.3|10|
+            |92.9|2|
+            |93.3|10|
+            |94.1|10|
+            |94.5|10|
+            |95.1|10|
+            |95.5|10|
+            |96.1|1|
+            |96.9|6|
+            |97.3|9|
+            |97.7|1|
+            |98.1|7|
+            |98.5|3|
+            |99.1|1|
+            |100.1|1|
+            |100.3|2|
+            |100.7|2|
+            |101.3|1|
+            |101.5|10|
+            |102.1|7|
+            |102.5|1|
+            |103.3|10|
+            |103.7|2|
+            |104.1|8|
+            |105.1|10|
+            |105.7|5|
+            |106.1|2|
+            |106.3|10|
+            |106.5|7|
+            |106.7|8|
+            |107.3|1|
+            |107.9|7|
+            
+        <script>
+            table.innerHTML = ""; 
+           
+        function results() { 
+            var val = "";
+            var table = document.getElementById("table");
+            var input = document.getElementsByTagName("input");// may need to change this if other inputs are added
+            for (let i = 0; i < input.length; i++){ // while i is less than the number of input tags
+                var n = input[i]                  // stores data for that input node
+                val = val + n.name + n.value + "|" + "<br>";              // adds that data to the values
+            }
+            table.innerHTML = val;  // Next I have to 
+        } 
+
+
+
+
+
+
+
+
+        
+        var k = "The respective values are :"; 
+      /*   function results() { 
+            var input = document.getElementsByTagName('input'); 
+  
+            for (var i = 0; i < input.length; i++) { 
+                var a = input[i]; 
+                k = k + "array[" + i + "].value= " 
+                                   + a.value + " "; 
+            } 
+  
+            document.getElementById("table").innerHTML = k; 
+            document.getElementById("po").innerHTML = "Output"; 
+        } 
+
+           function results(){
+                // look into using querySelectorAll
+                // Try document.writeIn
+                var table = document.getElementById("table");
+                var test = document.getElementById('88.1').value;
+                
+                table.innerHTML = test;
+
+            }
+
+            */
+        </script>
+        <br>
+
+        
+        
+</body>
+</html>
