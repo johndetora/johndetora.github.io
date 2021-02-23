@@ -40,6 +40,8 @@
         </div>
   </div>
             
+  Feature request: add QR code
+  To DO: add array that stores the expected values 
             
            <!--
            
@@ -108,7 +110,7 @@
         var input = document.getElementsByTagName("input");// may need to change this if other inputs are added
         for (let i = 0; i < input.length; i++){ // while i is less than the number of input tags
             var n = input[i]                  // stores data for that input node
-            val = val + n.name + n.value + "|" + "<br>";              // adds that data to the values
+            val = val + "/= n.name + n.value + "|" + "<br>";              // adds that data to the values
         }
         table.innerHTML = val;  // Next I have to 
     } 
