@@ -2,6 +2,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: rgb(196, 233, 255);
     
+    
 }
 
 input {
@@ -11,15 +12,46 @@ input {
 }
 
 
-.main-container {
-    display: flex;
-    border: 1px solid black;
-    width: 50%
-}
 
-.frequencies{
+
+
+.input-form{
     margin: 10px;
     border: 1px solid black;
+    width: 60%;
+    flex: content;
+    display: flex;
+    flex-direction: row;
+}
+
+.box {
+    margin: 1%;
+    border: 1px solid black;
+    width: 20%;
+}
+
+#label {
+    font-size: 15px;
+    font-weight: bold;
+    margin: 2%;
+}
+
+#title-box {
+    width: 50%;
+}
+
+#location {
+    width: 40%;
+}
+
+
+#freq-inputs{
+    width: 50%
+    
+}
+
+#expected {
+    
 }
 
 #submit-button {
@@ -33,11 +65,12 @@ input {
 }
 
 .results {
-    margin: 10px;
-    width: 15%;
+    margin: 1%;
+    width: 90%;
     border: 1px solid black;
     background-color: white;
     height: auto;
+    font-size: 12px;
 }
 
 #table {
