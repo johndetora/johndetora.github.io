@@ -124,7 +124,7 @@ const radioStations = {
           let quality = input[i].value;                 
           let station = Object.keys(radioStations)[i];
           let expected = Object.values(radioStations)[i];
-          rows += "|=. " + station + " |=. " + expected + " |=. " + quality + " |=. " + seekVal[i] + "&#13;&#10;";     // adds that data to the values
+          rows += "|=. " + station + " |=. " + expected + " |=. " + quality + " |=. " + seekVal[i] + "|" + "&#13;&#10;";     // adds that data to the values
       }
       
       const header = "|_\\5=. " + locationInput + " | " + "&#13;&#10;"
