@@ -32,7 +32,7 @@ table {
     table-layout: fixed;
     display: inline-table;
     width: 90%;
-    
+    margin: auto;
   }
 
   
@@ -44,10 +44,10 @@ th {
 
   td {
       text-align: center;
-
+      
   }
 #input-table-outdoor {
-    display: none;
+    display: inline-table;
 }
 
 .title {
@@ -99,6 +99,17 @@ th {
     margin: 1px;
 
 }
+
+input.station {
+    width: 20px;
+    height: 10px;
+}
+
+input.station-outdoor {
+    width: 20px;
+    height: 10px;
+}
+
 
 #freq-inputs{
     width: 50%;
