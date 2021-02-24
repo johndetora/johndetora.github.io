@@ -101,6 +101,11 @@ th {
     
 }
 
+.input-table-outdoor {
+    width: 80%;
+    display: none;
+}
+
 #title-box {
     width: 50%;
 }
