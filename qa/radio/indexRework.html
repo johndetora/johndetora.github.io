@@ -10,7 +10,7 @@
 </head>
 <body>
   <header><h4>FM Station Quality</h4></header>
-  <form class="freq-inputs" id="radio" action="index.html" method="post"> 
+ 
     <div id="location-input">
         <label>Location</label>
         <input id="location" type="text" value="Inside">
@@ -18,46 +18,52 @@
     <div class="input-form">
         <div id="freq-inputs" class="box">
             Station Quality<br><br>
-                <label>88.1</label>
-                <input type="number" name="88.1" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"/> Expected: 3<br>
-                <label>88.7</label>
-                <input type="number" name="88.7" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"/> Expected: 8<br> 
-                <label>88.9</label> 
-                <input type="number" name="88.9" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"/><br>   
-                <label>89.1</label> 
-                <input type="number" name="89.1" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"/><br> 
-                <label>89.7</label>
-                <input type="number" name="89.7" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"/><br> 
-                <label>90.9</label>
-                <input type="number" name="90.9" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"/><br> 
-                <label>92.3</label>
-                <input type="number" name="92.3" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"/><br> 
-                <label>92.9</label>
-                <input type="number" name="93.3" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2" /><br> 
-                <label>93.3</label>
-                <input type="number" name="90.9" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"/><br> 
-                <label>94.1</label>
-                <input type="number" name="94.1" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"/><br> 
-                </form> 
-        
+            <label>88.1</label>
+            <input class="station" type="number" name="88.1" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"/>seek:<input class="seek-check" type="checkbox" name="88.1"/><br>
+            <label>88.7</label>
+            <input class="station" type="number" name="88.7" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"/>seek:<input class="seek-check" type="checkbox" name="88.1"/><br>
+            <label>88.9</label> 
+            <input class="station" type="number" name="88.9" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"/>seek:<input class="seek-check" type="checkbox" name="88.1"/><br>
+            <label>89.1</label> 
+            <input class="station" type="number" name="89.1" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"/>seek:<input class="seek-check" type="checkbox" name="88.1"/><br> 
+            <label>89.7</label>
+            <input class="station" type="number" name="89.7" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"/>seek:<input class="seek-check" type="checkbox" name="88.1"/><br> 
+            <label>90.3</label>
+            <input class="station" type="number" name="90.3" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"/>seek:<input class="seek-check" type="checkbox" name="88.1"/><br> 
+            <label>90.9</label>
+            <input class="station" type="number" name="90.9" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"/>seek:<input class="seek-check" type="checkbox" name="88.1"/><br> 
+            <label>91.3</label>
+            <input class="station" type="number" name="91.3" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"/>seek:<input class="seek-check" type="checkbox" name="88.1"/><br> 
+            <label>91.5</label>
+            <input class="station" type="number" name="91.5" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"/>seek:<input class="seek-check" type="checkbox" name="88.1"/><br>
+            <label>92.3</label>
+            <input class="station" type="number" name="92.3" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"/>seek:<input class="seek-check" type="checkbox" name="88.1"/><br>
+            
+    
         <br><button id="submit-button" type="button" name="button" onclick="results()">Submit</button> 
         
+
     </div>
     <div id="seek-inputs" class="box">
         Seek?<br><br>
-            <input type="checkbox" name="88.1" > <br>
-            <input type="checkbox" name="88.1" > <br>
+            <input class="seek-check" type="checkbox" name="88.1"/><br>
+            <input class="seek-check" type="checkbox" name="88.1"/><br>
+            <input class="seek-check" type="checkbox" name="88.1"/><br>
+            <input class="seek-check" type="checkbox" name="88.1"/><br>
+            <input class="seek-check" type="checkbox" name="88.1"/><br>
+            <input class="seek-check" type="checkbox" name="88.1"/><br>
+            <input class="seek-check" type="checkbox" name="88.1"/><br>
+            <input class="seek-check" type="checkbox" name="88.1"/><br>
+            <input class="seek-check" type="checkbox" name="88.1"/><br>
+            <input class="seek-check" type="checkbox" name="88.1"/><br>
             </form>
     </div>
+   
     <div class="results">
-        <div id="location-result">|_\5=.       				                         Inside         			 |<br> </div>
-        |_\1=. FM Stations    |_\1=. Expected    |_\1=. Rating 1-10 |_\1=.   Seek       |_\1=. Lights On    |
-        <div id="table">
-            <p></p>
+        <div id="table-container">
+            <textarea id="table"></textarea>
         </div>
     </div>
-
-            
 
             
            <!--
@@ -93,7 +99,7 @@
             |=. 	 99.7 		  |=.  		1  		 |=.  		  		|=.  		  		|=.  		  		|
             |=. 	 99.9 		  |=.  		10  	 |=.  		  		|=.  		  		|=.  		  		|
             |=. 	 100.1 		  |=.  		2  		 |=.  		  		|=.  		  		|=.  		  		|
-            |=. 	 100.3 		  |=.  		10       |=.  		  		|=.  		  		|=.  		  		|
+            |=. 	 100.3 		  |=.  		10       ">|=.  		  		|=.  		  		|=.  		  		|
             |=. 	 100.7 		  |=.  		1  		 |=.  		  		|=.  		  		|=.  		  		|
             |=. 	 101.1 		  |=.  		1  		 |=.  		  		|=.  		  		|=.  		  		|
             |=. 	 101.3 		  |=.  		1  		 |=.  		  		|=.  		  		|=.  		  		|
@@ -113,8 +119,9 @@
             |=. 	 107.9 		  |=.  		8  		 |=.  		  		|=.  		  		|=.  		  		|
             -->
   <script>
+const columnNames = "|_\\1=. FM Stations    |_\\1=. Expected    |_\\1=. Rating 1-10 |_\\1=.   Seek       |_\\1=. Lights On    |" + "&#13;&#10;"
 
-const radioFreqs = {
+const radioStations = {
     88.1: 3,
     88.7: 8,
     88.9: 1,
@@ -124,6 +131,8 @@ const radioFreqs = {
     90.3: 2,
     90.9: 6,
     91.3: 1,
+    91.5: 8,
+    92.3: 10
 
   }
 
@@ -136,25 +145,34 @@ const radioFreqs = {
 
     function results() { 
         let head = "";
-        let val = "";
-        let seekVal = "";
+        let rows = "";
+        let seekVal = [];
         const table = document.getElementById("table");
-        const header = document.getElementById("location-result")
-        const input = document.querySelectorAll("#freq-inputs > input");
-        const location = document.getElementById("location").value;
-        const seek = document.querySelectorAll("#seek-inputs > input")
+        // const header = document.getElementById("location-result")
+        const input = document.querySelectorAll("input.station");
+        const locationInput = document.getElementById("location").value;
+        const seek = document.querySelectorAll("input.seek-check")
         
-        for (let i = 0; i < input.length; i++){ // while i is less than the number of input tags
-            let n = input[i];                  // stores data for that input node
-            let freqs = Object.keys(radioFreqs)[i];
-            let expected = Object.values(radioFreqs)[i];
-            val += "|=. " + freqs + " |=. " + expected + " |=. " + n.value + " |=. " + "<br>";     // adds that data to the values
+        for (let j = 0; j< seek.length; j++) {
+            if (seek[j].checked) {
+                seekVal.push("yes")
+            } else {
+                seekVal.push("no");
+            } 
+        } 
+        for (let i = 0; i < input.length; i++){ 
+            let quality = input[i].value;                 
+            let station = Object.keys(radioStations)[i];
+            let expected = Object.values(radioStations)[i];
+            rows += "|=. " + station + " |=. " + expected + " |=. " + quality + " |=. " + seekVal[i] + "&#13;&#10;";     // adds that data to the values
         }
-       header.innerHTML = "|_\\5=. " + location + " | ";
-        table.innerHTML = val;
+        
+        const header = "|_\\5=. " + locationInput + " | " + "&#13;&#10;"
+        table.innerHTML = header + columnNames + rows 
     } 
 
   </script>
          
 </body>
 </html>
+
