@@ -1,15 +1,53 @@
+html {
+    scroll-behavior: smooth;
+}
+
+@media (max-width: 420px) {
+    body {
+    -webkit-appearance: none;
+    font-family: Helvetica, Arial, sans-serif;
+    background-color: rgb(196, 233, 255);
+    font-size: 11px;
+
+    }
+}
 body {
     -webkit-appearance: none;
     font-family: Helvetica, Arial, sans-serif;
     background-color: rgb(196, 233, 255);
 }
-
 .input-form{
     margin: 10px;
-    width: auto;
+    width: 100%;
     flex: content;
     display: flex;
     flex-direction: row;
+}
+
+.station-head {
+    width: 10%;
+}
+
+table {
+    table-layout: fixed;
+    display: inline-table;
+    width: 90%;
+    
+  }
+
+  
+th {
+   width: 10%;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  td {
+      text-align: center;
+
+  }
+#input-table-outdoor {
+    display: none;
 }
 
 .title {
@@ -23,8 +61,10 @@ body {
     
 }
 
-.seek-check {
-    positon: absolute;
+.station-outdoor {
+    margin: 3%;
+    width: 35px;
+    
 }
 
 .box {
@@ -33,6 +73,18 @@ body {
     padding: 1%;
 }
 
+.results {
+    margin: 1%;
+    margin-top: 3%;
+    width: 45%;
+    height: auto;
+    font-size: 12px;
+}
+
+#input-table {
+    width: 80%;
+    
+}
 
 #title-box {
     width: 50%;
@@ -48,7 +100,6 @@ body {
 
 }
 
-
 #freq-inputs{
     width: 50%;
 }
@@ -61,28 +112,36 @@ body {
     text-align: center;
     text-decoration: none;
     font-size: 16px;
+    margin-top: 20%;
+    cursor: pointer;
+}
+
+#submit-button-outdoor {
+    background-color: #4CAF50; 
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin-top: 20%;
+    cursor: pointer;
 }
 
 #copy-button {
     background-color: #4CAF50; 
+    width: 90%;
+    margin-left: 5px;
     border: none;
     color: white;
     padding: 5px 7px;
     text-align: center;
     text-decoration: none;
     font-size: 16px;
+    cursor: pointer;
 }
 
-.results {
-    margin: 1%;
-    width: 45%;
-    height: auto;
-    font-size: 12px;
-}
-
-
-
-#table {
+#table-text {
     margin: 5px;
     width: 90%;
     height: 90%;
