@@ -60,19 +60,15 @@ body {
 
 .results {
     margin: 1%;
-    width: 40%;
+    width: 45%;
     border: 1px solid black;
     height: auto;
     font-size: 12px;
 }
 
 
-#table-container{
-    padding: 5px;
-    
-}
 
 #table {
-    width: 50%;
-    height: 50%;
+    width: 90%;
+    height: 90%;
 }
