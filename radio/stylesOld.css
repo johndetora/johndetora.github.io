@@ -6,10 +6,17 @@ body {
     
 }
 
+input {
+    width: 40px;
+    margin-left: 10px;
+    
+}
+
+
 .input-form{
     margin: 10px;
     border: 1px solid black;
-    width: auto;
+    width: 60%;
     flex: content;
     display: flex;
     flex-direction: row;
@@ -17,34 +24,37 @@ body {
 
 .station {
     margin: 3%;
-    width: 35px;
-    
 }
 
 .seek-check {
-    positon: absolute;
+    margin-top: 30%;
 }
-
 .box {
     margin: 1%;
     border: 1px solid black;
     width: 12%;
-    padding: 1%;
+    display:inline-block;
 }
 
+#label {
+    font-size: 15px;
+    font-weight: bold;
+    margin: 2%;
+}
 
 #title-box {
     width: 50%;
 }
 
 #location {
-    width: 10%;
+    width: 40%;
 }
 
 
 #freq-inputs{
     border: 1px solid black;
-    width: 50%;
+    width: 20%
+    
 }
 
 #submit-button {
@@ -57,28 +67,17 @@ body {
     font-size: 16px;
 }
 
-#copy-button {
-    background-color: #4CAF50; 
-    border: none;
-    color: white;
-    padding: 5px 7px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-}
 
 .results {
     margin: 1%;
-    width: 45%;
+    width: 90%;
     border: 1px solid black;
     height: auto;
     font-size: 12px;
 }
 
-
-
-#table {
-    margin: 5px;
-    width: 90%;
-    height: 90%;
+#table-container{
+    padding: 5px;
+    
 }
+
