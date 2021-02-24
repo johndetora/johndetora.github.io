@@ -4,20 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rework</title>
+    <title>Radio Quality</title>
     <link rel="stylesheet" href="styles.css">
 
 </head>
 <body>
   <header><h4>FM Station Quality</h4></header>
  
-    <div id="location-input">
-        <label>Location</label>
-        <input id="location" type="text" value="Inside">
-    </div>
+  <div id="location-input">
+    <label>Location</label>
+    <input id="location" class="box" type="text" value="Inside">
+</div>
     <div class="input-form">
+      
         <div id="freq-inputs" class="box">
-            Station Quality<br><br>
+            <p class="title">Station Quality</p>
             <label>88.1</label>
             <input class="station" type="number" name="88.1" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"/>seek:<input class="seek-check" type="checkbox" name="88.1"/><br>
             <label>88.7</label>

@@ -1,20 +1,22 @@
 body {
     -webkit-appearance: none;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
     background-color: rgb(196, 233, 255);
-    
-    
 }
 
 .input-form{
     margin: 10px;
-    border: 1px solid black;
     width: auto;
     flex: content;
     display: flex;
     flex-direction: row;
 }
 
+.title {
+    padding: 1px;
+    margin-top: 1px;
+    margin-bottom: 10px;
+}
 .station {
     margin: 3%;
     width: 35px;
@@ -27,7 +29,6 @@ body {
 
 .box {
     margin: 1%;
-    border: 1px solid black;
     width: 12%;
     padding: 1%;
 }
@@ -37,13 +38,18 @@ body {
     width: 50%;
 }
 
+#location-input {
+    margin-left: 5%;
+
+}
 #location {
-    width: 10%;
+    width: 15%;
+    margin: 1px;
+
 }
 
 
 #freq-inputs{
-    border: 1px solid black;
     width: 50%;
 }
 
@@ -70,7 +76,6 @@ body {
 .results {
     margin: 1%;
     width: 45%;
-    border: 1px solid black;
     height: auto;
     font-size: 12px;
 }
