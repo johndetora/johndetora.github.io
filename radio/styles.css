@@ -1,0 +1,74 @@
+body {
+    -webkit-appearance: none;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(196, 233, 255);
+    
+    
+}
+
+.input-form{
+    margin: 10px;
+    border: 1px solid black;
+    width: auto;
+    flex: content;
+    display: flex;
+    flex-direction: row;
+}
+
+.station {
+    margin: 3%;
+    width: 35px;
+    
+}
+
+.seek-check {
+    positon: absolute;
+}
+
+.box {
+    margin: 1%;
+    border: 1px solid black;
+    width: 12%;
+    padding: 1%;
+}
+
+
+#title-box {
+    width: 50%;
+}
+
+#location {
+    width: 10%;
+}
+
+
+#freq-inputs{
+    border: 1px solid black;
+    width: 50%;
+}
+
+#submit-button {
+    background-color: #4CAF50; 
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+
+.results {
+    margin: 1%;
+    width: 45%;
+    border: 1px solid black;
+    height: auto;
+    font-size: 12px;
+}
+
+
+
+#table {
+    width: 90%;
+    height: 90%;
+}
