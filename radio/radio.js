@@ -107,16 +107,22 @@ const radioStationsOutdoor = {
 
 
   function locationSelect() {
+    const table = document.getElementById("table-text");
+    
     const locationInput = document.getElementById("location-select").value;
       if (locationInput == "outdoor"){
+          table.innerHTML = ""
           document.getElementById("input-table-indoor").style.display = "none";
           document.getElementById("input-table-outdoor").style.display = "inline-table";
           console.log("outdoor selected")
       } else {
+            table.innerHTML = ""
             document.getElementById("input-table-outdoor").style.display = "none";
             document.getElementById("input-table-indoor").style.display = "inline-table";
           console.log("indoor-selected")
       }
 }
 
+        document.getElementById("input-table-outdoor").style.display = "none";
+        document.getElementById("input-table-indoor").style.display = "inline-table";
 

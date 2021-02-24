@@ -10,6 +10,20 @@ html {
     font-size: 11px;
 
     }
+    label {
+        font-size: 12px;
+    }
+    input.station {
+        width: 20px;
+        height: 10px;
+    }
+    
+    input.station-outdoor {
+        width: 20px;
+        height: 10px;
+    }
+    
+    
 }
 body {
     -webkit-appearance: none;
@@ -17,7 +31,8 @@ body {
     background-color: rgb(196, 233, 255);
 }
 .input-form{
-    margin: 10px;
+    margin-left: 0%;
+    margin-top: 3%;
     width: 100%;
     flex: content;
     display: flex;
@@ -98,16 +113,6 @@ th {
     width: 15%;
     margin: 1px;
 
-}
-
-input.station {
-    width: 20px;
-    height: 10px;
-}
-
-input.station-outdoor {
-    width: 20px;
-    height: 10px;
 }
 
 
