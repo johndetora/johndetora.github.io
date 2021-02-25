@@ -10,6 +10,15 @@ html {
     font-size: 11px;
 
     }
+
+    .input-form { 
+        margin-left: 0%;
+        margin-top: 3%;
+        width: 100%;
+        flex: content;
+        display: flex;
+        flex-direction: row;
+    }
     label {
         font-size: 12px;
     }
@@ -22,22 +31,39 @@ html {
         width: 20px;
         height: 10px;
     }
-    
+    #copy-button {
+        background-color: #4CAF50; 
+        width: 40%;
+        height: 2%;
+        min-width: 100px;
+        margin-left: 5px;
+        border: none;
+        color: white;
+        padding: 5px 7px;
+        text-align: center;
+        text-decoration: none;
+        font-size:11px;
+        cursor: pointer;
+    }
     
 }
+
+.input-form { 
+    margin-left: 0%;
+    margin-top: 1%;
+    width: 100%;
+    max-width: 800px;
+    flex: content;
+    display: flex;
+    flex-direction: row;
+}
+
 body {
     -webkit-appearance: none;
     font-family: Helvetica, Arial, sans-serif;
     background-color: rgb(196, 233, 255);
 }
-.input-form{
-    margin-left: 0%;
-    margin-top: 3%;
-    width: 100%;
-    flex: content;
-    display: flex;
-    flex-direction: row;
-}
+
 
 .station-head {
     width: 10%;
@@ -94,6 +120,7 @@ th {
     width: 45%;
     height: auto;
     font-size: 12px;
+    
 }
 
 #input-table {
@@ -112,6 +139,7 @@ th {
 
 #location-input {
     margin-left: 5%;
+    margin-top: 2%;
 
 }
 #location {
@@ -151,19 +179,21 @@ th {
 
 #copy-button {
     background-color: #4CAF50; 
-    width: 90%;
+    width: 40%;
+    height: 2%;
+    min-width: 100px;
     margin-left: 5px;
     border: none;
     color: white;
     padding: 5px 7px;
     text-align: center;
     text-decoration: none;
-    font-size: 16px;
+    font-size:11px;
     cursor: pointer;
 }
 
 #table-text {
     margin: 5px;
-    width: 90%;
-    height: 70%;
+    width: 60%;
+    height: 10%;
 }
