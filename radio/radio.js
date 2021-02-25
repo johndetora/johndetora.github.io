@@ -58,7 +58,8 @@ const radioStationsOutdoor = {
           } 
       } 
       for (let i = 0; i < input.length; i++){ 
-          let quality = input[i].value;                 
+          let quality = input[i].value;      
+          console.log(input.length)
           let station = Object.keys(radioStations)[i];
           let expected = Object.values(radioStations)[i];
           rows += "|=. " + station + " |=. " + expected + " |=. " + quality + " |=. " + seekVal[i] + " |=." + lightsOn[i] + " |" + "&#13;&#10;";     // adds that data to the values

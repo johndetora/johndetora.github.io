@@ -61,6 +61,12 @@
             <td><input class="lights-check" type="checkbox"></td>
           </tr>
           <tr>
+            <td><label>89.7</label></td>
+            <td><input class="station" type="number" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"></td>
+            <td><input class="seek-check" type="checkbox"/></td>
+            <td><input class="lights-check" type="checkbox"></td>
+          </tr>
+          <tr>
             <td><label>90.3</label></td>
             <td><input class="station" type="number" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"></td>
             <td><input class="seek-check" type="checkbox"/></td>
@@ -74,6 +80,18 @@
           </tr>
           <tr>
             <td><label>91.3</label></td>
+            <td><input class="station" type="number" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"></td>
+            <td><input class="seek-check" type="checkbox"/></td>
+            <td><input class="lights-check" type="checkbox"></td>
+          </tr>
+          <tr>
+            <td><label>91.5</label></td>
+            <td><input class="station" type="number" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"></td>
+            <td><input class="seek-check" type="checkbox"/></td>
+            <td><input class="lights-check" type="checkbox"></td>
+          </tr>
+          <tr>
+            <td><label>92.3</label></td>
             <td><input class="station" type="number" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"></td>
             <td><input class="seek-check" type="checkbox"/></td>
             <td><input class="lights-check" type="checkbox"></td>
@@ -98,6 +116,12 @@
           </tr>
           <tr>
             <td><label>93.1</label></td>
+            <td><input class="station" type="number" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"></td>
+            <td><input class="seek-check" type="checkbox"/></td>
+            <td><input class="lights-check" type="checkbox"></td>
+          </tr>
+          <tr>
+            <td><label>93.3</label></td>
             <td><input class="station" type="number" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"></td>
             <td><input class="seek-check" type="checkbox"/></td>
             <td><input class="lights-check" type="checkbox"></td>
@@ -307,11 +331,18 @@
             <td><input class="lights-check" type="checkbox"></td>
           </tr>
           <tr>
+            <td><label>106.7</label></td>
+            <td><input class="station" type="number" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"></td>
+            <td><input class="seek-check" type="checkbox"/></td>
+            <td><input class="lights-check" type="checkbox"></td>
+          </tr>
+          <tr>
             <td><label>107.9</label></td>
             <td><input class="station" type="number" pattern="[0-9]*" inputmode="numeric" min="0" max="10" maxlength="2"></td>
             <td><input class="seek-check" type="checkbox"/></td>
             <td><input class="lights-check" type="checkbox"></td>
           </tr>
+          
           <tr>
               <td><a href="#copy-button"><button id="submit-button" type="button" name="button" onclick="results()">submit</button></a></td>
           </tr>
@@ -539,7 +570,7 @@
 
     <div class="results">
       <button id="copy-button" type="button" onclick="copy()">copy to clipboard</button> 
-          <textarea id="table-text"></textarea>
+          <textarea id="table-text" maxlength="99999999"></textarea>
     </div>
 
     <script src="radio.js"></script>
