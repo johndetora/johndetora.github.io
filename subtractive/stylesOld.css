@@ -19,9 +19,6 @@ button {
 
 }
 
-p {
-    margin: 1px;
-}
 button:hover{
     background-color: rgb(255, 255, 255);
     opacity: 1;
@@ -29,63 +26,28 @@ button:hover{
 
 #main-container {
     margin-top: 20px;
-    display: grid;
-    width: 90%;
-    height: 100%;
-    grid-template-columns: 33% 33% 33%;
-    grid-template-rows: 60% 60%;
-    gap: 20px;
-    
-    grid-template-areas:
-    "play oscillator filter",
-    "lfo envelope .",
-    "keyboard";
+    display: flex;
+    flex-direction: row;
 }
 
 #button-container {
-    grid-area: "play";
-    width: 100%;
-    
+    width: 10%;
 }
 
-#oscillator-container {
-    grid-area: "oscillator";
-    width: 100%;
-}
-
-.controls {
-    width: 100%;
-    height: 100%;
-}
-#vcf-container {
-    grid-area: "filter";
-    width: 100%;
-}
-
-#lfo-container {
-    grid-area: "lfo";
-    width: 100%;
-    height: 100%;
-}
-
-#envelope-container {
-    grid-area: "envelope";
-    width: 100%;
-    height: 100%;
-    
-}
 #play-button {
     appearance: none;
     background-color: pink;
     opacity: 80%;
-    width: 50%;
-    height: 40%;
+    width: 100%;
+    height: 30%;
     padding: 4px;
+   
+    margin-top: 80%;
 }
 
 
 #osc-selector {
-    width: 70%;
+    width: 100%;
 }
 
 
@@ -96,21 +58,14 @@ button:hover{
 }
 
 .controls {
-    border: 2px solid white;
+    margin: 1%;
     padding: 2%;
-}
-
-#keyboard-container {
-    margin-top: 15%;
-    height: 20%;
-
+    border: 2px solid white;
+    width: 20%;
 }
 
 #keyboard {
     display: flex;
-    margin: 5%;
-    
-    
 }
 
 .key {

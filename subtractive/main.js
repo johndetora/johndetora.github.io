@@ -1,3 +1,14 @@
+// TO DO: 
+// Better trigger action: https://dev.to/shimphillip/building-a-piano-with-tone-js-5c2f
+// add function for waveform selector
+// create better clicking for keys (stuck notes are happening)
+// add function for keys
+// make button state function for all buttons
+// LFO Needs work - it offsets the frequency value with the way it's setup
+//- https://tonejs.github.io/docs/r13/LFO 
+// LFO max could be the max output? I can also set the amplitude,
+
+
 document.querySelector('button')?.addEventListener('click', async () => {
 	await Tone.start()
 	console.log('audio is ready')
@@ -41,8 +52,8 @@ lfo.connect(lfoVcoGain)
 lfoVcfGain.connect(vcf.frequency)
 // lfoVcaGain.connect(gain.gain)
 
-var lfoToFilter = document.getElementById('to-filter');
-var lfoToGain = document.getElementById('to-gain');
+let lfoToFilter = document.getElementById('to-filter');
+let lfoToGain = document.getElementById('to-gain');
 let lfoVcfAmt = document.getElementById('lfo-vcf-gain')
 
 // LFO to Filter logic
@@ -50,14 +61,16 @@ let lfoState = ""
 
 lfoToFilter.addEventListener('click', function() {
   if (lfoState !== "filter") {
+    lfoToFilter.style.backgroundColor = "beige";
     lfoVcfGain.gain.value = lfoVcfAmt.value;
     lfoVcfAmt.addEventListener('input', function() {
         lfoVcfGain.gain.value = this.value;
     });
     return lfoState = "filter"
   } else {
+    lfoToFilter.style.backgroundColor = "gray";
     lfoVcfGain.gain.value = 0;
-    return lfoState = "none"
+    return lfoState = "none";
   }
 });
 
@@ -84,22 +97,28 @@ const now = Tone.now()
 
 //notes
 
-var notes = ['D4', 'F4', 'A4', 'C4']
+const notes = ['D4', 'F4', 'A4', 'C4']
 
 //play a note every quarter-note
-const loopA = new Tone.Loop(time => {
-	synthA.triggerAttackRelease("C3", "8n", time);
-}, "4n").start(0);
+const pattern = new Tone.Pattern((time, note) => {
+	synthA.triggerAttackRelease(note, '4n', time);
+}, ["C2", "D4", "E5", "A6"], "upDown").start(0);
 
 
+function trigger(){
+  synthA.triggerAttackRelease(note);
+}
 // Controls
 
 // Play
-document.getElementById("play-button").addEventListener("click", function() {
+let playButton = document.getElementById("play-button");
+playButton.addEventListener("click", function() {
 // .state: the playback state of the source, either "started", "stopped", or "paused"
     if (Tone.Transport.state !== 'started') {
+      playButton.style.backgroundColor = "paleGreen";
       Tone.Transport.start();
     } else {
+      playButton.style.backgroundColor = "pink";
       Tone.Transport.stop();
     }
   });
@@ -115,9 +134,20 @@ document.querySelector("#sawtooth-button").addEventListener('click', function(){
   synthA.oscillator.type = "sawtooth";
 });
 
-document.querySelector('#glide').addEventListener('click', () => {
-  console.log("glide on")
-  synthA.portamento = 0.25;
+
+const glideButton = document.querySelector('#glide')
+let glideState = false;
+glideButton.addEventListener('click', () => {
+  if (!glideState){
+    console.log("glide on")
+    glideButton.style.backgroundColor = "white";
+    synthA.portamento = 0.25;
+    glideState = true;
+  } else {
+    glideButton.style.backgroundColor = "gray";
+    synthA.portamento = 0;
+    glideState = false;
+  }
 });
 
 
@@ -139,6 +169,13 @@ envInputs.addEventListener('input', ({ target }) => {
 
 
 
+// Buttons -> will have to add data-set
+// allButtons.addEventListener('click', ({target}) => {
+// 
+//   allButtons[target] 
+//  
+// });
+
 
 // I can switch to this method of initialization if I implement presets
 // function initialize(){
@@ -154,11 +191,47 @@ envInputs.addEventListener('input', ({ target }) => {
 
 // initialize();
 
+////////////////////////////////
+//////////////////Keyboard
 
-// play note
+const keys = document.querySelectorAll(".key")
+keys.forEach((key) => {
+  key.addEventListener('mousedown', () => {
+      synthA.triggerAttack(key.id);
+  });
+});
 
-// document.querySelector("#play").addEventListener('click', e => {
-//     synthA.triggerAttackRelease("C3", "8n");
-// });
+keys.forEach((key) => {
+  key.addEventListener('mouseup', () => {
+      synthA.triggerRelease();
+  });
+});
 
+
+const keyboardControls = {
+  a: {pressed: false, note: 'C3'},
+  s: {pressed: false, note: 'D3'},
+  d: {pressed: false, note: 'E3'},
+  f: {pressed: false, note: 'F3'},
+  g: {pressed: false, note: 'G3'},
+  h: {pressed: false, note: 'A3'},
+  j: {pressed: false, note: 'B3'},
+  k: {pressed: false, note: 'C4'}
+}
+
+window.addEventListener("keydown", (event) => {
+  let letterKey = event.key.toLowerCase()
+  if (keyboardControls[letterKey] && !keyboardControls[letterKey].pressed) {
+    keyboardControls[letterKey].pressed = true;
+    synthA.triggerAttack(keyboardControls[letterKey].note);
+  }
+});
+
+window.addEventListener("keyup", (event) => {
+  let letterKey = event.key.toLowerCase()
+  if (keyboardControls[letterKey]) {
+      keyboardControls[letterKey].pressed = false;
+      synthA.triggerRelease();
+  }
+})
 

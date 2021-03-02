@@ -16,10 +16,14 @@
             
         </div>
         <div id="oscillator-container" class="controls">
-                <button id="triangle-button">Triangle</button>
-                <button id="square-button">Square</button>
-                <button id="sawtooth-button">Saw</button>
+            <p class="parameters">Waveform</p>
+            <select id="osc-selector">
+                <option id="sawtooth-button">Saw</option>
+                <option id="triangle-button">Triangle</option>
+                <option id="square-button">Square</option>
+            </select>   
                 <button id="glide">Glide</button>
+                
         </div>
         <div id="vcf-container" class="controls">
             <p class="parameters">VCF Cutoff</p>
@@ -31,8 +35,9 @@
             <p class="parameters">LFO Rate</p>
             <input id="lfo-rate" type="range" value="3" min="0.1" max="20" step="0.1">
             <p class="parameters">VCF Amt</p>
-            <input id="lfo-vcf-gain" type="range" value="0" min="0.1" max="1" step="0.01">
+            <input id="lfo-vcf-gain" type="range" value="0" min="0" max="1" step="0.01">
             <div class="lfo-boxes" id="lfo-destination">
+                <p class="parameters">Destination:</p>
                 <button id="to-filter">VCF</button>
                 <button id="to-gain">VCA</button>
                
@@ -48,9 +53,20 @@
             <p class="parameters">Release</p>
             <input class="adsrV" id="release-input" type="range" data-action='release' value="1" min="0" max="5" step="0.01">
         </div>
-
+       
     </div>
-    
+    <div id="keyboard-container">
+        <div id="keyboard">
+            <div id="C3" class="key"></div>
+            <div id="D3" class="key"></div>
+            <div id="E3" class="key"></div>
+            <div id="F3" class="key"></div>
+            <div id="G3" class="key"></div>
+            <div id="A3" class="key"></div>
+            <div id="B3" class="key"></div>
+            <div id="C4" class="key"></div>
+        </div>
+        </div>
 
     <script src="main.js"></script>
 </body>
