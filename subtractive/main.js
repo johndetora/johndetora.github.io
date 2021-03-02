@@ -61,48 +61,17 @@ lfoToFilter.addEventListener('click', function() {
   }
 });
 
-
-// lfoVcfAmt.addEventListener('input', function() {
-//   if (lfoState === "filter") {
-//     lfoVcfGain.gain.value = this.value;
-//   } else {
-//     lfoVcfGain.gain.value = 0;
-//   }
-// });
-  
-  
-
 let lfoRate = document.getElementById('lfo-rate')
 lfoRate.addEventListener('input', function() {
   lfo.frequency.value = this.value;
 });
 
 
-
-// lfoToFilter.addEventListener('click', () => {
-//   if (lfoVcfGain.gain.value === 0) return lfoVcfGain.gain.value = 1;
-//   else return lfoVcfGain.gain.value = 0;
-// }),
-
 // LFO to VCA logic. have to figure this out
 // lfoToGain.addEventListener('click', () => {
 //   if (lfoVcaGain.gain.value === 0) return lfoVcaGain.gain.value = 1;
 //   else return lfoVcaGain.gain.value = 0;
 // }),
-
-
-// var lfoDestination = document.querySelectorAll('div.lfo-boxes > input');
-// function lfoSelector(){
-//   for (var i=0; i<lfoDestination.length; i++){
-//     console.log(lfoDestination[i])
-//       lfoDestination[i].addEventListener('change', function(){
-//         if
-//         lfo.connect(vcf.frequency);
-//       });
-//   }
-// }
-// lfoSelector();
-
 
 
 // Routing
@@ -167,7 +136,6 @@ let envInputs = document.querySelector('#envelope-container')
 envInputs.addEventListener('input', ({ target }) => {
     adsr[target.dataset.action] = target.value;
     });
-
 
 
 
