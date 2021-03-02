@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="Tone.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <title>Tone Playground</title>
+    <h2>Tone Playground</h2>
+</head>
+<body>
+    <div id="main-container">
+        <div id="button-container" class="controls">
+            <button id="play-button">play pause</button>
+            
+        </div>
+        <div id="oscillator-container" class="controls">
+                <button id="triangle-button">Triangle</button>
+                <button id="square-button">Square</button>
+                <button id="sawtooth-button">Saw</button>
+                <button id="glide">Glide</button>
+        </div>
+        <div id="vcf-container" class="controls">
+            <p class="parameters">VCF Cutoff</p>
+            <input id="vcf-cutoff" type="range" value="1500" min="10" max="3000" step="0.1">
+            <p class="parameters">Q</p>
+            <input id="vcf-q" type="range" value="1" min="0" max="10" step="0.1">
+        </div>
+        <div id="lfo-container" class="controls">
+            <p class="parameters">LFO Rate</p>
+            <input id="lfo-rate" type="range" value="3" min="0.1" max="20" step="0.1">
+            <p class="parameters">VCF Amt</p>
+            <input id="lfo-vcf-gain" type="range" value="0" min="0.1" max="1" step="0.01">
+            <div class="lfo-boxes" id="lfo-destination">
+                <button id="to-filter">VCF</button>
+                <button id="to-gain">VCA</button>
+               
+            </div>
+        </div>
+        <div id="envelope-container" class="controls">
+            <p class="parameters">Attack</p>
+            <input class="adsrV" id="attack-input" type="range" data-action='attack' value="0" min="0" max="2" step="0.01">
+            <p class="parameters">Decay</p>
+            <input class="adsrV" id="decay-input" type="range" data-action='decay' value="0.5" min="0.05" max="2" step="0.01">
+            <p class="parameters">Sustain</p>
+            <input class="adsrV" id="sustain-input" type="range" data-action='sustain' value="0.5" min="0.1" max="1" step="0.01">
+            <p class="parameters">Release</p>
+            <input class="adsrV" id="release-input" type="range" data-action='release' value="1" min="0" max="5" step="0.01">
+        </div>
+
+    </div>
+    
+
+    <script src="main.js"></script>
+</body>
+</html>
+

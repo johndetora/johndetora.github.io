@@ -1,0 +1,59 @@
+Solution 1: https://jsfiddle.net/041ceam2/
+
+<label for="attack">Attack</label>
+<input id="attack" type="range" min="0" max="100" value="0" />
+<br />
+<label for="decay">Decay</label>
+<input id="decay" type="range" min="0" max="100" value="0" />
+<br />
+<label for="sustain">Sustain</label>
+<input id="sustain" type="range" min="0" max="100" value="0" />
+<br />
+<label for="release">Release</label>
+<input id="release" type="range" min="0" max="100" value="0" />
+<br />
+<pre id="adsr"></pre>
+
+javascript: 
+
+let adsr = { attack: 0, decay: 0, sustain: 0, release: 0 };
+const adsrValue = document.getElementById("adsr"); // demo only
+
+for (const property in adsr) {
+  const propertyInput = document.getElementById(property);
+  if (propertyInput) {
+    propertyInput.addEventListener("input", (e) => {
+      adsr[property] = e.target.value;
+      adsrValue.innerHTML = JSON.stringify(adsr); // demo only
+    });
+  }
+}
+
+adsrValue.innerHTML = JSON.stringify(adsr); // demo only
+
+
+
+solution 2:
+(pug to simplify)
+#inputs
+  input(data-action='attack' placeholder='attack')
+  input(data-action='decay' placeholder='decay')
+  input(data-action='sustain' placeholder='sustain')
+  input(data-action='release' placeholder='release')
+
+
+
+const adsr = {};
+const inputs = document.querySelector('#inputs');
+
+inputs.addEventListener('input', ({ target }) => {
+  adsr[target.dataset.action] = target.value;
+});
+
+
+
+
+
+
+
+
