@@ -1,3 +1,7 @@
+html {
+    -webkit-tap-highlight-color: transparent;
+}
+
 .container {
     display: grid;
     grid-template-columns: repeat(9, 45px);
