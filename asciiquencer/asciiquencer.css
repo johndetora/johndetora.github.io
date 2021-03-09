@@ -1,0 +1,75 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(9, 45px);
+    grid-template-rows: auto auto auto auto auto;
+    /* grid-auto-rows: minmax(100px, auto) */
+    grid-template-areas: 'buttons', 'meters', 'checks', 'playhead', 'controls';
+    width: 100%;
+    position: relative;
+}
+/* 
+pre {
+    margin: 1px;
+    padding: 1px;
+} */
+
+input[type='range'][orient='vertical'] {
+    -webkit-appearance: slider-vertical;
+    width: 30px;
+    height: 267px;
+}
+
+button {
+    width: 40px;
+    height: 40px;
+    grid-area: buttons;
+}
+
+/* .step {
+    width: 1px;
+} */
+#ascii-meter {
+    font-family: monospace;
+    font-size: 20px;
+    font-weight: bold;
+    grid-area: meters;
+    z-index: -1;
+}
+
+.meter {
+    opacity: 0%;
+    margin-top: 20px;
+    margin-left: 5px;
+    position: absolute;
+    top: 1%;
+}
+
+.check-container {
+    position: relative;
+    bottom: 4%;
+    left: 14%;
+    /* right: 20%;
+    grid-area: controls;
+    margin: 2px; */
+}
+
+.synth-controls {
+    grid-area: controls;
+}
+
+#check {
+    opacity: 6%;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    /* bottom: 10%; */
+}
+
+#ascii-checkbox {
+    position: absolute;
+    margin: 1px;
+    padding: 1px;
+    /* bottom: 13%; */
+    z-index: -1;
+}
