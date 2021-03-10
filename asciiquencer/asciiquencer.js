@@ -5,6 +5,20 @@ document.querySelector('button')?.addEventListener('click', async () => {
     console.log('audio is ready');
 });
 
+/////// BPM Set ///////
+
+window.addEventListener('load', () => {
+    let bpm = 240;
+    Tone.Transport.bpm.value = bpm;
+});
+
+//// BPM Change
+let transport = document.querySelector('#bpm');
+transport.addEventListener('input', function () {
+    bpm = this.value;
+    Tone.Transport.bpm.value = bpm;
+});
+///// Test Note Array Button
 function tester() {
     console.log(notes);
     console.log(notes[0].velocity);
@@ -14,10 +28,16 @@ let playButton = document.getElementById('play-button');
 playButton.addEventListener('click', () => {
     if (Tone.Transport.state !== 'started') {
         playButton.style.backgroundColor = 'paleGreen';
+        playButton.innerHTML = 'pause';
         Tone.Transport.start();
+        asciiUpdate(0);
+        index = 0;
     } else {
         playButton.style.backgroundColor = 'pink';
+        playButton.innerHTML = 'play';
         Tone.Transport.stop();
+        index = 0;
+        asciiUpdate(0);
     }
 });
 
@@ -30,7 +50,9 @@ const steps = 8;
 let meter = document.getElementById('ascii-meter');
 let meters = document.querySelectorAll('#ascii-meter');
 let asciiCheck = document.querySelectorAll('#ascii-checkbox');
+
 let max = 10;
+// let bpm = 240;
 const synth = new Tone.Synth().toDestination();
 
 // Range slider note values
@@ -71,22 +93,22 @@ let notes = [
         velocity: 1,
     },
     {
-        time: '0:4',
+        time: '1:0',
         note: 'G3',
         velocity: 1,
     },
     {
-        time: '0:5',
+        time: '1:1',
         note: 'G3',
         velocity: 1,
     },
     {
-        time: '0:6',
+        time: '1:2',
         note: 'G3',
         velocity: 1,
     },
     {
-        time: '0:7',
+        time: '1:3',
         note: 'G3',
         velocity: 1,
     },
@@ -94,25 +116,32 @@ let notes = [
 
 let index = 0;
 
+///// ASCII Animation
+function asciiUpdate(step) {
+    // asciiCheck[7].innerHTML = '[#]';
+    if (step > 0 && step <= 8) {
+        playHead.prepend('─────');
+        // asciiCheck[step - 1].innerHTML = '[#]';
+        // asciiCheck[step].innerHTML = '[o]';
+    } else {
+        playHead.innerHTML = '─>';
+        // asciiCheck[step].innerHTML = '[o]';
+    }
+}
 ///// Part - To Do: move the ascii animation to its own function once it's good
 let part = new Tone.Part(function (time, value) {
     let step = index % steps;
-    if (step > 0 && step <= 8) playHead.append(step + '------>');
-    // playHead.append('>');
-    else {
-        console.log('else');
-        playHead.innerHTML = '>';
-    }
+    asciiUpdate(step);
     index++;
     synth.triggerAttackRelease(value.note, '16n', time, value.velocity);
 }, notes);
 
 /////// Transport and Loop
+
 part.start('0m');
 part.loopStart = '0m';
 part.loopEnd = '2m';
 part.loop = true;
-Tone.Transport.bpm.value = 240;
 Tone.Transport.loopStart = '0m';
 Tone.Transport.loopEnd = '2m';
 Tone.Transport.loop = true;
@@ -133,7 +162,7 @@ stepContainer.addEventListener('input', ({ target }) => {
 
 stepContainer.addEventListener('change', ({ target }) => {
     if (target.type == 'checkbox' && target.checked) {
-        asciiCheck[target.dataset.index].innerHTML = '[x]';
+        asciiCheck[target.dataset.index].innerHTML = '[#]';
         console.log('checked');
     } else if (target.type == 'checkbox' && !target.checked) {
         asciiCheck[target.dataset.index].innerHTML = '[ ]';
