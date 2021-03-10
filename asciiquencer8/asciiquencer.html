@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="asciiquencer.css" />
+    <script src="Tone.js"></script>
+    <title>ASCIIQUENCER</title>
+</head>
+
+<body>
+    <pre id="ascii-window">
+|-----------------------------------------|
+|                                         |
+|                                         |                                         
+|-----------------------------------------|
+|                                         |
+|                                         |
+|                                         |
+|                                         |
+|                                         |                                                                                             
+|                                         |
+|                                         |
+|                                         |
+|                                         |
+|                                         |
+|                                         |
+|                                         |
+|                                         |
+|                                         |                                         
+|                                         |
+|-----------------------------------------|                                        
+|_________________________________________|              </pre>
+
+    <div id="top-controls">
+        <button id="play-button" class="transport">play</button>
+        <button class="transport" id="test-button" onclick="tester()">array tester</button>
+        <label for="bpm">BPM</label>
+        <input id="bpm" class="transport" type="range" min="20" max="400" value="240">
+
+    </div>
+    <div id="playhead">─></div>
+    <div id="steps" class="container">
+        <div class="step" id="step-1">
+            <pre id="ascii-meter"></pre>
+            <div class="check-container">
+                <pre id="ascii-checkbox">[#]</pre>
+                <input type="checkbox" data-index="0" id="check" checked />
+            </div>
+            <input type="range" id="slider-1" data-index="0" class="meter" value="4" min="0" max="10" step="1"
+                orient="vertical" />
+        </div>
+        <div class="step" id="step-2">
+            <pre id="ascii-meter"></pre>
+            <div class="check-container">
+                <pre id="ascii-checkbox">[#]</pre>
+                <input type="checkbox" data-index="1" id="check" checked />
+            </div>
+            <input type="range" id="slider-2" data-index="1" class="meter" value="4" min="0" max="10" step="1"
+                orient="vertical" />
+        </div>
+        <div class="step" id="step-3">
+            <pre id="ascii-meter"></pre>
+            <div class="check-container">
+                <pre id="ascii-checkbox">[#]</pre>
+                <input type="checkbox" data-index="2" id="check" checked />
+            </div>
+            <input type="range" id="slider-3" data-index="2" class="meter" value="4" min="0" max="10" step="1"
+                orient="vertical" />
+        </div>
+        <div class="step" id="step-4">
+            <pre id="ascii-meter"></pre>
+            <div class="check-container">
+                <pre id="ascii-checkbox">[#]</pre>
+                <input type="checkbox" data-index="3" id="check" checked />
+            </div>
+            <input type="range" id="slider-4" data-index="3" class="meter" value="4" min="0" max="10" step="1"
+                orient="vertical" />
+        </div>
+        <div class="step" id="step-5">
+            <pre id="ascii-meter"></pre>
+            <div class="check-container">
+                <pre id="ascii-checkbox">[#]</pre>
+                <input type="checkbox" data-index="4" id="check" checked />
+            </div>
+            <input type="range" id="slider-5" data-index="4" class="meter" value="4" min="0" max="10" step="1"
+                orient="vertical" />
+        </div>
+        <div class="step" id="step-6">
+            <pre id="ascii-meter"></pre>
+            <div class="check-container">
+                <pre id="ascii-checkbox">[#]</pre>
+                <input type="checkbox" data-index="5" id="check" checked />
+            </div>
+            <input type="range" id="slider-6" data-index="5" class="meter" value="4" min="0" max="10" step="1"
+                orient="vertical" />
+        </div>
+        <div class="step" id="step-7">
+            <pre id="ascii-meter"></pre>
+            <div class="check-container">
+                <pre id="ascii-checkbox">[#]</pre>
+                <input type="checkbox" data-index="6" id="check" checked />
+            </div>
+            <input type="range" id="slider-7" data-index="6" class="meter" value="4" min="0" max="10" step="1"
+                orient="vertical" />
+        </div>
+        <div class="step" id="step-8">
+            <pre id="ascii-meter"></pre>
+            <div class="check-container">
+                <pre id="ascii-checkbox">[#]</pre>
+                <input type="checkbox" data-index="7" id="check" checked />
+            </div>
+            <input type="range" id="slider-8" data-index="7" class="meter" value="4" min="0" max="10" step="1"
+                orient="vertical" />
+        </div>
+        <div class="synth-controls">
+            <input type="range" id="test">
+        </div>
+        <script src="asciiquencer.js"></script>
+    </div>
+</body>
+
+</html>
