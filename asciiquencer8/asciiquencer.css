@@ -3,16 +3,6 @@ html {
     font-family: monospace;
 }
 
-.container {
-    display: grid;
-    grid-template-columns: repeat(9, 45px);
-    grid-template-rows: auto auto auto auto auto;
-    /* grid-auto-rows: minmax(100px, auto) */
-    grid-template-areas: 'buttons', 'meters', 'checks', 'playhead', 'controls';
-    width: 100%;
-    margin-left: 3%;
-    position: relative;
-}
 /* 
 pre {
     margin: 1px;
@@ -35,6 +25,7 @@ button {
 
 #ascii-window {
     position: absolute;
+    width: 99%;
     font-size: 16px;
     top: 1px;
     left: 1px;
@@ -88,6 +79,7 @@ button {
 #ascii-meter {
     font-size: 20px;
     font-weight: bold;
+    padding: 1px;
     grid-area: meters;
     z-index: -1;
 }
@@ -111,6 +103,7 @@ button {
 
 .synth-controls {
     grid-area: controls;
+    display: none;
 }
 
 #check {
@@ -132,4 +125,24 @@ button {
     margin-left: 2px;
     /* bottom: 13%; */
     z-index: -1;
+}
+
+@media all and (max-width: 700px) {
+    .container {
+        display: grid;
+        grid-template-columns: repeat(9, 44px);
+        grid-template-rows: auto auto auto auto auto;
+        /* grid-auto-rows: minmax(100px, auto) */
+        grid-template-areas: 'buttons', 'meters', 'checks', 'playhead',
+            'controls';
+        width: 100%;
+        margin-left: 2%;
+        position: relative;
+    }
+    #playhead {
+        margin-top: 10px;
+        margin-left: 15px;
+        font-size: 14px;
+        position: absolute;
+    }
 }
