@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet">
+    <title>start</title>
+</head>
+
+<body>
+    <div class="main">
+        <div id="date-time-container">
+            <span id="date-time">3/11/21 7:07 PM</span>
+        </div>
+
+        <div class="art">
+            <pre class="ascii">
+             ,,,,,,.
+         o#'9MMHb':'-%,.
+      .oH":HH$' "' ' -*R&o,
+     dMMM*""'`'      .oM"HM?.
+   ,MMM'          "HLbd< ?&H\
+  .:MH ."           ` MM  MM&b
+ . "*H    -        &MMMMMMMMMH:
+ .    dboo        MMMMMMMMMMMM.
+ .   dMMMMMMb      *MMMMMMMMMP.
+ .    MMMMMMMP        *MMMMMP .
+      `#MMMMM           MM6P ,
+  '    `MMMP"           HM*`,
+   '    :MM             .- ,
+    '.   `#?..  .       ..'
+       -.   .         .-
+         ''-.oo,oo.-''
+            </pre>
+        </div>
+
+        <div class="search">
+            <input id="search-field" type="text" name="search-field" onkeypress="return search(event)"
+                autofocus="true" />
+            <div id="search-cursor">></div>
+            <script type="text/javascript">
+                function search(e) {
+                    if (e.keyCode == 13) {
+                        var val = document.getElementById('search-field').value;
+                        window.location = "https://www.google.com/search?q=" + val + "&kp=1&kl=de-de&kh=1&kg=p&k5=1&kae=d&k1=-1";
+                        return false;
+                    }
+                }
+            </script>
+        </div>
+        <div class="link-box" id="a">
+            <div class="links-title">favorites</div>
+            <div class="links-container">
+                <div class="link">
+                    <span><a href="https://www.youtube.com">> YouTube</a></span>
+                </div>
+                <div class="link">
+                    <span><a href="https://monkeytype.com/">> monkeytype</a></span>
+                </div>
+                <div class="link">
+                    <span><a href="https://echocoast.net/asciiquencer/">> asciiquencer</a></span>
+                </div>
+                <div class="link">
+                    <span>link 4</span>
+                </div>
+            </div>
+        </div>
+        <div class="link-box" id="b">
+            <div class="links-title">web dev</div>
+            <div class="links-container">
+                <div class="link">
+                    <span><a href="https://coolors.co/generate">> coolors.co</a></span>
+                </div>
+                <div class="link">
+                    <span><a href="https://tonejs.github.io/">> Tone.js</a></span>
+                </div>
+                <div class="link">
+                    <span>link 3</span>
+                </div>
+                <div class="link">
+                    <span>link 4</span>
+                </div>
+            </div>
+        </div>
+        <div class="link-box" id="c">
+            <div class="links-title">reddit</div>
+            <div class="links-container">
+                <div class="link">
+                    <span><a href="https://www.reddit.com/r/MechanicaKeyboards/">> r/mechkeyboards</a></span>
+                </div>
+                <div class="link">
+                    <span>link 2</span>
+                </div>
+                <div class="link">
+                    <span>link 3</span>
+                </div>
+                <div class="link">
+                    <span>link 4</span>
+                </div>
+            </div>
+        </div>
+        <div class="link-box" id="d">
+            <div class="links-title">work</div>
+            <div class="links-container">
+                <div class="link">
+                    <span><a href="https://teams.microsoft.com/">> Teams</a></span>
+                </div>
+                <div class="link">
+                    <span><a href="https://trello.com/john94180064/cards">> Trello</a></span>
+                </div>
+                <div class="link">
+                    <span>link 3</span>
+                </div>
+                <div class="link">
+                    <span>link 4</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+
+
+    </script>
+</body>
+
+</html>
