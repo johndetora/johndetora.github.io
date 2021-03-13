@@ -43,6 +43,27 @@ a:hover {
         'five search search eight'
         'a b c d';
 }
+
+#app-container {
+    text-align: center;
+}
+#temp-icon {
+    height: 20%;
+    width: 20%;
+    color: var(--white);
+}
+
+.ascii {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--green);
+}
+.art {
+    font-size: 1rem;
+    color: var(--red);
+    grid-area: art;
+}
+
 .search {
     position: relative;
     grid-area: search;
@@ -79,16 +100,7 @@ a:hover {
 }
 #date-time-container {
     grid-area: time;
-}
-.ascii {
-    margin: 0;
-    font-size: 1rem;
-    color: var(--green);
-}
-.art {
-    font-size: 1rem;
-    color: var(--red);
-    grid-area: art;
+    font-size: 1.2rem;
 }
 
 .link-box {

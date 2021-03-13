@@ -14,7 +14,8 @@
 <body>
     <div class="main">
         <div id="date-time-container">
-            <span id="date-time">3/11/21 7:07 PM</span>
+            <div id="time"></div><br>
+            <div id="date"></div>
         </div>
 
         <div class="art">
@@ -42,21 +43,13 @@
             <input id="search-field" type="text" name="search-field" onkeypress="return search(event)"
                 autofocus="true" />
             <div id="search-cursor">></div>
-            <script type="text/javascript">
-                function search(e) {
-                    if (e.keyCode == 13) {
-                        var val = document.getElementById('search-field').value;
-                        window.location = "https://www.google.com/search?q=" + val + "&kp=1&kl=de-de&kh=1&kg=p&k5=1&kae=d&k1=-1";
-                        return false;
-                    }
-                }
-            </script>
         </div>
         <div class="link-box" id="a">
             <div class="links-title">favorites</div>
             <div class="links-container">
+
                 <div class="link">
-                    <span><a href="https://www.youtube.com">> YouTube</a></span>
+                    <span><a href="https://github.com/">> GitHub</a></span>
                 </div>
                 <div class="link">
                     <span><a href="https://monkeytype.com/">> monkeytype</a></span>
@@ -65,14 +58,9 @@
                     <span><a href=https://www.how-to-type.com/typing-practice/programming/js />> typing
                         pratice</a></span>
                 </div>
+
                 <div class="link">
-                    <span><a href="https://echocoast.net/asciiquencer/">> asciiquencer</a></span>
-                </div>
-                <div class="link">
-                    <span><a href="https://github.com/">> GitHub</a></span>
-                </div>
-                <div class="link">
-                    <span><a href="https://github.com/">> GitHub</a></span>
+                    <span><a href="https://www.youtube.com">> YouTube</a></span>
                 </div>
             </div>
         </div>
@@ -80,33 +68,25 @@
             <div class="links-title">web dev</div>
             <div class="links-container">
                 <div class="link">
+                    <span><a href="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/">>
+                            freeCodeCamp</a></span>
+                </div>
+                <div class="link">
                     <span><a href="https://coolors.co/generate">> coolors.co</a></span>
                 </div>
                 <div class="link">
                     <span><a href="https://tonejs.github.io/">> Tone.js</a></span>
                 </div>
                 <div class="link">
-                    <span>link 3</span>
-                </div>
-                <div class="link">
-                    <span>link 4</span>
+                    <span><a href="https://echocoast.net/asciiquencer/">> asciiquencer</a></span>
                 </div>
             </div>
         </div>
         <div class="link-box" id="c">
-            <div class="links-title">reddit</div>
+            <div class="links-title">shop</div>
             <div class="links-container">
                 <div class="link">
-                    <span><a href="https://www.reddit.com/r/MechanicaKeyboards/">> r/mechkeyboards</a></span>
-                </div>
-                <div class="link">
-                    <span>link 2</span>
-                </div>
-                <div class="link">
-                    <span>link 3</span>
-                </div>
-                <div class="link">
-                    <span>link 4</span>
+                    <span><a href='https://www.amazon.com/''>> amazon</a></span>
                 </div>
             </div>
         </div>
@@ -114,26 +94,23 @@
             <div class="links-title">work</div>
             <div class="links-container">
                 <div class="link">
+                    <span><a href="https://workforcenow.adp.com">> ADP</a></span>
+                </div>
+                <div class="link">
                     <span><a href="https://teams.microsoft.com/">> Teams</a></span>
                 </div>
                 <div class="link">
                     <span><a href="https://trello.com/john94180064/cards">> Trello</a></span>
                 </div>
-                <div class="link">
-                    <span>link 3</span>
-                </div>
-                <div class="link">
-                    <span>link 4</span>
-                </div>
+                
+               
+               
             </div>
         </div>
 
     </div>
 
-    <script>
+   <script src="main.js"></script>
+</body >
 
-
-    </script>
-</body>
-
-</html>
+</html >
