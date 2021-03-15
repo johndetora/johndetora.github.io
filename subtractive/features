@@ -1,8 +1,0 @@
- 
-- would be cool to turn this into a learning tool about synthesis for others
-
-features
-- presets
-- generate random presets
-- generate random preset, but not show it to the user.  have a seperate play button for the hidden preset.  The goal here is to try and match the sound to the preset.  Solution shows by raising opacity of an overlay so they can see how close they were
-

@@ -3,12 +3,6 @@ html {
     font-family: monospace;
 }
 
-/* 
-pre {
-    margin: 1px;
-    padding: 1px;
-} */
-
 input[type='range'][orient='vertical'] {
     -webkit-appearance: slider-vertical;
     width: 30px;
@@ -26,9 +20,11 @@ button {
 .container {
     display: grid;
     grid-template-columns: repeat(9, 45px);
-    grid-template-rows: auto auto auto auto auto;
+    grid-template-rows: auto;
     /* grid-auto-rows: minmax(100px, auto) */
-    grid-template-areas: 'buttons', 'meters', 'checks', 'playhead', 'controls';
+    grid-template-areas:
+        'buttons'
+        'meters';
     width: 100%;
     margin-left: 2%;
     position: relative;
@@ -43,13 +39,38 @@ button {
     z-index: -2;
 }
 
+#ascii-spin {
+    font-size: 18px;
+    font-weight: bold;
+    position: absolute;
+    left: 105px;
+    top: 30px;
+}
+
+#ascii-bpm {
+    letter-spacing: -5px;
+    position: absolute;
+    top: 34px;
+    left: 133px;
+}
+
+#ascii-bpm-container {
+    font-weight: bold;
+    letter-spacing: -5px;
+    position: absolute;
+    top: 21px;
+    left: 130px;
+}
+
 #bpm {
     appearance: none;
+    opacity: 0;
     outline: none;
     background-color: lightgray;
     position: absolute;
     top: 37px;
     height: 7px;
+    left: 120px;
 }
 .transport {
     margin: 1px;
@@ -58,15 +79,10 @@ button {
 
 #play-button {
     outline: none;
-    margin-top: 24px;
-    margin-left: 4px;
+    margin-top: 32px;
+    margin-left: 15px;
     width: 50px;
     height: 20px;
-}
-
-#bpm-button {
-    width: 30px;
-    height: 30px;
 }
 
 #test-button {
@@ -79,11 +95,14 @@ button {
 
 #top-controls {
     flex-direction: row;
+    position: relative;
+    margin-left: 10px;
+    margin-bottom: 8px;
 }
 
 #playhead {
     margin-top: 10px;
-    margin-left: 28px;
+    margin-left: 15px;
     font-size: 15px;
     position: absolute;
 }
@@ -96,7 +115,7 @@ button {
 }
 
 .meter {
-    opacity: 0%;
+    opacity: 0;
     margin-top: 35px;
     margin-left: 5px;
     position: absolute;
@@ -110,11 +129,6 @@ button {
     /* right: 20%;
     grid-area: controls;
     margin: 2px; */
-}
-
-.synth-controls {
-    grid-area: controls;
-    display: none;
 }
 
 #check {
@@ -138,14 +152,62 @@ button {
     z-index: -1;
 }
 
+/*///////   SYNTH LAYOUT    ////////////*/
+#synth-container {
+    width: 40%;
+    grid-area: controls;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas:
+        'oscillatorA envelope filter'
+        'oscillatorB mod mixer';
+    gap: 5px;
+    margin: 0;
+}
+
+.synth-control {
+    padding: 4px;
+}
+#oscillator-container-a {
+    border: 1px solid black;
+    grid-area: oscillatorA;
+    margin: 0;
+}
+
+#oscillator-container-b {
+    border: 1px solid lightpink;
+    grid-area: oscillatorB;
+    margin: 0;
+}
+#filter-container {
+    border: 1px solid lightblue;
+    grid-area: filter;
+}
+
+#envelope-container {
+    border: 1px solid red;
+    grid-area: envelope;
+}
+
+#modulation-envelope {
+    border: 1px solid lawngreen;
+    grid-area: mod;
+}
+
+#mixer {
+    border: 1px solid brown;
+    grid-area: mixer;
+}
 @media all and (max-width: 700px) {
     .container {
         display: grid;
         grid-template-columns: repeat(9, 44px);
         grid-template-rows: auto auto auto auto auto;
         /* grid-auto-rows: minmax(100px, auto) */
-        grid-template-areas: 'buttons', 'meters', 'checks', 'playhead',
-            'controls';
+        grid-template-areas:
+            'buttons'
+            'meters';
         width: 100%;
         margin-left: 2%;
         position: relative;

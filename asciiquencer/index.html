@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="asciiquencer.css" />
     <script src="../libraries/Tone.js"></script>
     <title>ASCIIQUENCER</title>
+    <header>asciiquencer v0.0.2</header>
 </head>
 
 <body>
-    <pre id="ascii-window">
+    <!-- <pre id="ascii-window">
 |--------------------------------------|
 |                                      |
 |                                      |                                         
@@ -31,18 +32,20 @@
 |                                      |
 |                                      |                                         
 |                                      |
-|--------------------------------------|                                        
-|______________________________________|              </pre>
+|-----------------Zzz------------------|                                        
+|______________________________________|              </pre> -->
 
     <div id="top-controls">
+        <div id="ascii-spin">/</div>
         <button id="play-button" class="transport">play</button>
         <button class="transport" id="test-button" onclick="tester()">array tester</button>
-        <label for="bpm">BPM</label>
-        <input id="bpm" class="transport" type="range" min="20" max="400" value="240">
-
+        <span id="ascii-bpm"></span>
+        <pre id="ascii-bpm-container">|                                           |</pre>
+        <input id="bpm" class="transport" type="range" min="30" max="600" value="200">
     </div>
-    <div id="playhead">─></div>
+
     <div id="steps" class="container">
+        <div id="playhead">►</div>
         <div class="step" id="step-1">
             <pre id="ascii-meter"></pre>
             <div class="check-container">
@@ -115,11 +118,72 @@
             <input type="range" id="slider-8" data-index="7" class="meter" value="4" min="0" max="10" step="1"
                 orient="vertical" />
         </div>
-        <div class="synth-controls">
-            <input type="range" id="test">
-        </div>
-        <script src="asciiquencer.js"></script>
     </div>
+
+    <div id="synth-container">
+        <div class="synth-control" id="oscillator-container-a">
+            Osc Wave<br>
+            <select id="osc-wave">
+                <option value="sine" sekected="selected">sine</option>
+                <option value="triangle">triangle</option>
+                <option value="square">square</option>
+                <option value="sawtooth">saw</option>>
+            </select>
+        </div>
+        <div class="synth-control" id="filter-container">
+            Filter<br>
+            <input type="range" class="filter" id="cutoff" data-parameter="frequency" value="1500" min="20" max="1500"
+                step="0.001">
+            <br>Q<br>
+            <input type="range" class="filter" id="Q" data-parameter="Q" value="0" min="0" max="10" step="0.001">
+        </div>
+
+        <div class="synth-control" id="oscillator-container-b">
+            Mod Wave<br>
+            <select id="mod-wave">
+                <option value="sine" selecte="selected">sine</option>
+                <option value="triangle">triangle</option>
+                <option value="square">square</option>
+                <option value="sawtooth">saw</option>
+            </select><br><br>
+            Harmonicity<br>
+            <select id="harmonicity">
+                <option value="0">0</option>
+                <option value="0.5">0.5</option>
+                <option value="1" selected="selected">1</option>
+                <option value="1.5">1.5</option>
+                <option value="2">2</option>
+                <option value="2.5">2.5</option>
+                <option value="3">3</option>
+            </select>
+
+        </div>
+        <div class="synth-control" id="modulation-envelope">
+            Modulation Index<br>
+            <input type="range" class="envelope" data-action="modulationIndex" min="0" max="100" value="10" step="1">
+            <br>Mod Env<br>
+            A<input type="range" class="envelope" data-action="attack" min="0.01" max="1" value="0.01" step="0.01"><br>
+            D<input type="range" class="envelope" data-action="release" min="0.01" max="1" value="0.5" step="0.01"><br>
+        </div>
+        <div class="synth-control" id="envelope-container">
+            Envelope<br>
+            A<br>
+            <input type="range" class="envelope" data-action="attack" min="0.01" max="1" value="0.01" step="0.01"><br>
+            D
+            <input type="range" class="envelope" data-action="release" min="0.01" max="1" value="0.5" step="0.01">
+        </div>
+        <div class="synth-control" id="mixer">
+            Mixer<br>
+            Osc <-> Mod
+                <br><input type="range" class="mixer" id="crossfader" min="0" max="1" value="0" step="0.01"><br>
+                Texture (Noise and distortion amount)
+                <br><input type="range" class="mixer" min="-1" max="1" value="0" step="0.01"><br>
+                LFO Rate / Amount
+                <br><input type="range" class="mixer" min="-1" max="1" value="0" step="0.01"><br>
+
+        </div>
+    </div>
+    <script src="asciiquencer.js"></script>
 </body>
 
 </html>
