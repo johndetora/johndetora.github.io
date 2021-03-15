@@ -1,4 +1,4 @@
-asciitone v1.0.0 alpha
+asciitone and asciitone v1.0.0 alpha
 Created by John DeTora
 3/15/21
 
