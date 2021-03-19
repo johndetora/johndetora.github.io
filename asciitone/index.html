@@ -48,7 +48,6 @@
 ~
 ~
 ~
-~
 ~ the #snooze buttons allow the steps to snooze
 ~
 ~
@@ -265,7 +264,7 @@
                 <input type="range" class="filter" id="cutoff" data-parameter="frequency" data-ascii="ascii-frequency"
                     value="1500" min="0" max="1500" step="0.001"><span id="ascii-frequency"
                     class="ascii-params">||||||||||||||||||||||||||||||||▓</span>
-                <br> &nbsp;Q<br>
+                <br> &nbsp;esonance<br>
                 <input type="range" class="filter" id="Q" data-parameter="Q" data-ascii="ascii-q" value="0" min="0"
                     max="10" step="0.001"><span id="ascii-q" class="ascii-params">|▓</span>
             </div>
@@ -328,9 +327,27 @@
                     value="0" min="0" max="1" step="0.01"><span id="ascii-lfo-amt" class="ascii-params">|▓</span>
             </div>
         </div>
-    </div>
 
-    <script src="asciitone.js"></script>
+        <!-- //////// FX  ////////// -->
+        <div id="fx-container">
+            <div class="fx-control" id="delay-container">
+                <p class="group-label">Delay</p>
+                <p class="label">Time</p>
+                <input type="range" class="delay" data-parameter="delayTime" value="0" min="0" max="1" step="0.05">
+                <p class="label">Feedback</p>
+                <input type="range" class="delay" data-parameter="feedback" value="0" min="0" max="1" step="0.01">
+                <p class="label">Mix</p>
+                <input type="range" class="delay" data-parameter="wet" value="0" min="0" max="1" step="0.01">
+
+            </div>
+            <div class="synth-control" id="filter-container">
+                <p class="group-label">Reverb</p>
+                <p>coming soon</p>
+            </div>
+
+        </div>
+        <button id="param-swap">[ fx ]</button>
+        <script src="asciitone.js"></script>
 </body>
 
 </html>

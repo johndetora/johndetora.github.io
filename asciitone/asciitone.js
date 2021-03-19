@@ -49,6 +49,8 @@ playButton.addEventListener('click', () => {
 });
 
 /////////////// Elements /////////////////////////////
+const synthControls = document.querySelector('#synth-container');
+const fxControls = document.querySelector('#fx-container');
 const stepContainer = document.querySelector('#steps');
 const paramContainer = document.querySelector('#params');
 const playHead = document.querySelector('#playhead');
@@ -64,6 +66,8 @@ const modWave = document.querySelector('#mod-wave');
 const steps = 8; // Total step length
 const max = 10; // Max slider value for note meters
 const filterControls = document.querySelector('#filter-container');
+const delayControl = document.querySelector('#delay-container');
+
 ///////// SYNTH CONTROLS //////////////
 const synth = new Tone.FMSynth({
     harmonicity: 1,
@@ -168,6 +172,14 @@ lfoAmt.addEventListener('input', function () {
     toFilt.gain.value = this.value;
 });
 
+//////// FX /////////////
+
+const delay = new Tone.FeedbackDelay({
+    delayTime: '0',
+    feedback: 0.3,
+    wet: 0,
+});
+
 ////// Distortion ////// doesn't sound that good :/
 // const dist = new Tone.Distortion(0.2);
 // const distControl = document.getElementById('distortion');
@@ -186,10 +198,8 @@ synth.chain(gain, crossFade.a);
 synth.modulationEnvelope.chain(modGain, crossFade.b);
 //gain.toDestination();
 crossFade.connect(filter);
-filter.toDestination(0.8);
-/////////////////////////////////
-
-////// MODULATION /////
+filter.connect(delay);
+delay.toDestination(0.8);
 
 /////////// SEQUENCER DATA ///////////////
 // Range slider note values
@@ -315,21 +325,12 @@ stepContainer.addEventListener('change', ({ target }) => {
     }
 });
 
-///////// PARAM SEQUENCING
-// paramContainer.addEventListener('input', ({ target }) => {
-//     if (target.type === 'range') {
-//         paraMeters[target.dataset.index].innerHTML = bars(target.value); // Sets bar animation value
-//         // notes[target.dataset.index].note = sliderNotes[target.value];
-//     }
-//     // if (target.type == 'checkbox' && !target.checked) {
-//     //     notes[target.dataset.index].velocity = 0;
-//     //     //       notes[target.dataset.index - 1].timing = '16n';        Not sure if this is desired behavior but it works
-//     // } else if (target.type == 'checkbox' && target.checked) {
-//     //     notes[target.dataset.index].velocity = 1;
-//     //     //      notes[target.dataset.index - 1].timing = '16n';
-//     // }
-// });
-////////// ANIMATIONS ///////////////
+//////// FX  /////////
+
+delayControl.addEventListener('input', ({ target }) => {
+    console.log(target.dataset.parameter);
+    delay[target.dataset.parameter].value = target.value;
+});
 
 ///////  Bar  ////////
 function bars(v) {
@@ -382,7 +383,7 @@ function init() {
 }
 
 ///// Horizontal Slider for Parameters /////
-const synthControls = document.querySelector('#synth-container');
+
 synthControls.addEventListener('input', ({ target }) => {
     console.log(target.max);
     //// The '/ n' parts make it so the lines amount equal 31 at their max. Just divide/multiply target max so it reaches 31
@@ -426,22 +427,46 @@ synthControls.addEventListener('input', ({ target }) => {
 let circle = document.getElementById('ascii-cutoff');
 console.log(circle.style.left);
 function circleGrow(target) {
-    let circleSize = parseInt(target.value / 50);
-    let circleX = parseInt(target.value / 25);
-    /// IMPORTANT This value is the top position + font.size and may need to be adjusted later
-    let circleLocation = 35;
-    let circlePosition = -circleSize + circleLocation;
+    if (target.id === 'cutoff') {
+        let circleSize = parseInt(target.value / 50);
+        let circleX = parseInt(target.value / 25);
+        /// IMPORTANT This value is the top position + font.size and may need to be adjusted later
+        let circleLocation = 35;
+        let circlePosition = -circleSize + circleLocation;
 
-    // When the animation turns into a period
-    if (target.value <= 250) {
-        circle.style.opacity = 0;
-        document.getElementById('filterLabel').innerHTML = '&nbsp;Cutoff.';
-        // When the animation is growing/shrinking
-    } else {
-        document.getElementById('filterLabel').innerHTML = '&nbsp;Cutoff';
-        circle.style.fontSize = circleSize + '.px';
-        circle.style.opacity = 1;
-        circle.style.top = circlePosition + '.px';
-        circle.style.left = circleX + 50 + '.px'; // Comment this out to have circle stay in x position
+        // When the animation turns into a period
+        if (target.value <= 250) {
+            circle.style.opacity = 0;
+            document.getElementById('filterLabel').innerHTML = '&nbsp;Cutoff.';
+            // When the animation is growing/shrinking
+        } else {
+            document.getElementById('filterLabel').innerHTML = '&nbsp;Cutoff';
+            circle.style.fontSize = circleSize + '.px';
+            circle.style.opacity = 1;
+            circle.style.top = circlePosition + '.px';
+            circle.style.left = circleX + 50 + '.px'; // Comment this out to have circle stay in x position
+        }
     }
 }
+
+//////////////// SWAP PARAMETERS ///////////////
+
+let paramState = 'synth';
+const fxSwap = document.getElementById('param-swap');
+
+fxSwap.addEventListener('click', function () {
+    if (paramState === 'fx') {
+        console.log('fx state');
+
+        synthControls.style.display = 'grid';
+        fxControls.style.display = 'none';
+
+        return (paramState = 'synth');
+    } else {
+        fxControls.style.display = 'grid';
+        synthControls.style.display = 'none';
+        console.log('synth state');
+        return (paramState = 'fx');
+    }
+    console.log(paramState);
+});

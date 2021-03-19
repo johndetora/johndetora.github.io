@@ -1,5 +1,12 @@
 @import './skins/skins-template.css';
 
+html,
+body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
 html {
     -webkit-tap-highlight-color: transparent;
     font-family: monospace;
@@ -52,11 +59,11 @@ p {
 #heading {
 }
 #main-container {
-    margin: auto;
-    padding: 1px;
+    margin: 5% 50% 10% 30%;
+    padding: 1% 2% 2% 2%;
     border: 1px solid black;
     width: fit-content;
-    height: 90%;
+    height: 58%;
 }
 #help {
     margin-bottom: 1px;
@@ -88,15 +95,15 @@ p {
 
 /*///////   SYNTH LAYOUT    ////////////*/
 #synth-container {
-    position: relative;
+    /* display: grid; */
     display: grid;
-    grid-template-columns: 100px 145px 145px;
-    grid-template-rows: auto;
+    position: relative;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto;
     grid-template-areas:
         'oscillatorA envelope filter'
         'oscillatorB mod mixer';
     gap: 1px;
-
     margin: auto;
     width: fit-content;
 }
@@ -162,10 +169,19 @@ p {
     letter-spacing: -4px;
 }
 
+#fx-container {
+    display: none;
+}
+.fx-control {
+    border: 1px solid black;
+}
+
 @media all and (max-width: 600px) {
     #main-container {
+        margin: auto;
         width: auto;
         height: 90%;
+        border: none;
     }
     #synth-container {
         position: relative;

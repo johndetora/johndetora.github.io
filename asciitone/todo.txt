@@ -1,0 +1,36 @@
+ascii-tone To Do
+
+Priority 1:
+- Glide
+- LFO - see if I can do negative values without going under 0;
+- lower default decay values
+- see if vibrato is easy to work with
+-   Simple Modulation destination matrix
+- The main decay is being funky.  When the main wave is set to saw, it overdrives every few steps. 
+Priority 2:
+-   Note Randomizer
+-  Crossfader animation
+-   Add parameter name WITHIN the ascii
+-   Put play-pause button behind the playhead start to save space. when paused, the first character in playhead will be '❚❚'
+-   select step with keyboard (or tab to it) and set value with keyboard,
+- A robust function generator instead of LFO
+
+
+Priority 3:
+noise sequencer for percussion
+
+Bugs:
+
+- When unchecked, the velocity is set to 0 to simulate a rest, but this means that the previous release is cut off
+Fix: if next box is unchecked, trigger release then?
+FIX: make tone.fm a polysynth?
+https://github.com/Tonejs/Tone.js/issues/429
+FIX: redo system so setNote is used instead of Velocity?
+
+
+Portamento 
+Note from https://github.com/Tonejs/Tone.js/issues/140
+also this https://github.com/Tonejs/Tone.js/issues/429
+
+Another way to do this (again not with PolySynth) is to use setNote which will change the frequency value without retriggering the envelope. Then set the synth's portamento to your desired glide time.
+@christophejourdan you could do the exact same thing as above, but instead of var startTime = synth.now(), just use the time that is passed in by the sequence callback. schedule the current value with setRampPoint(time) and then the exponentialRampToValueAtTime(note, time + glissTime)
