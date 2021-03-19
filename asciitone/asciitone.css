@@ -37,6 +37,7 @@ input[type='range']:focus {
 
 input[type='range']::-ms-track {
     width: 100%;
+    -webkit-appearance: none;
     cursor: pointer;
 
     /* Hides the slider so custom styles can be added */
@@ -63,6 +64,7 @@ p {
     padding: 1% 2% 2% 2%;
     border: 1px solid black;
     width: fit-content;
+    min-width: 420;
     height: 58%;
 }
 #help {
@@ -81,7 +83,7 @@ p {
     width: 100%;
     height: 100%;
     display: none;
-    z-index: 0;
+    z-index: 1;
     /* border: 1px solid black; */
     background-color: transparent;
 }
@@ -117,10 +119,8 @@ p {
     grid-area: oscillatorA;
 }
 #crossfader {
-    opacity: 1;
     position: absolute;
     width: 80px;
-
     z-index: 1;
 }
 #oscillator-container-b {

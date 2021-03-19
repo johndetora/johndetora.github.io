@@ -19,7 +19,6 @@ input[type='range'][orient='vertical'] {
     margin: auto;
     width: fit-content;
     height: auto;
-    overflow: hidden;
 }
 /* 
 #params {
