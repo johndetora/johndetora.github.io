@@ -9,6 +9,18 @@ body {
     background-color: transparent;
 }
 
+/* main overlay */
+#ascii-window {
+    color: black;
+}
+
+.ascii-label {
+    color: black;
+}
+/* Horizontal seperators of overlay */
+.divider {
+    color: black;
+}
 /* For coloring specific animations, use the following: */
 
 /* The spinning BPM animation */

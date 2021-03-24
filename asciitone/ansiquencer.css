@@ -41,13 +41,17 @@ input[type='range'][orient='vertical'] {
     margin-bottom: 3px;
     text-align: center;
 }
+
+#overlay-container {
+    position: relative;
+}
 #ascii-window {
     position: absolute;
-    width: 99%;
-    font-size: 16px;
-    top: 1px;
-    left: 1px;
-    z-index: -2;
+    line-height: 13px;
+    font-size: 14px;
+    top: -92px;
+    left: -137px;
+    z-index: -4;
 }
 
 .transport {
@@ -111,7 +115,7 @@ input[type='range'][orient='vertical'] {
 }
 
 #playhead {
-    margin-top: 10px;
+    margin-top: 14px;
     margin-left: 15px;
     font-size: 15px;
     position: absolute;
@@ -134,7 +138,7 @@ input[type='range'][orient='vertical'] {
 
 .check-container {
     position: relative;
-    bottom: 4%;
+    bottom: 3%;
     left: 3%;
     /* right: 20%;
     grid-area: controls;

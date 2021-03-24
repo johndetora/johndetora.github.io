@@ -1,7 +1,22 @@
-/////////// COLORS ///////////////
+/////////// COLORS and Skins ///////////////
 let bgColor = 'white';
 let defaultColor = 'black';
 let offColor = 'gray';
+let skin = 'default';
+
+const skinSwap = document.querySelector('#skinSwap');
+const skinSelector = document.getElementById('skin');
+skinSwap.addEventListener('click', function () {
+    if (skin === 'default') {
+        skinSelector.setAttribute('href', 'skins/skin-dark.css');
+        skinSwap.innerHTML = '[ light ]';
+        return (skin = 'dark');
+    } else if (skin === 'dark') {
+        skinSelector.setAttribute('href', 'skins/skin-light.css');
+        skinSwap.innerHTML = '[ dark ]';
+        return (skin = 'default');
+    }
+});
 
 //// Audio play confirmation
 document.querySelector('button')?.addEventListener('click', async () => {
@@ -42,9 +57,10 @@ playButton.addEventListener('click', () => {
     } else {
         playButton.style.backgroundColor = 'rgb(227, 157, 157)';
         playButton.innerHTML = '►';
+        playHeadUpdate(0);
         Tone.Transport.stop();
         index = 0;
-        document.getElementById('ascii-spin').innerHTML = '&ndash;';
+        document.getElementById('ascii-spin').innerHTML = '/';
     }
 });
 
@@ -72,7 +88,7 @@ const delayControl = document.querySelector('#delay-container');
 const synth = new Tone.FMSynth({
     harmonicity: 1,
     modulationIndex: 10,
-    portamento: 0.06,
+    portamento: 0,
     detune: 0,
     oscillator: {
         type: 'sine',
@@ -104,15 +120,16 @@ oscWave.addEventListener('change', ({ target }) => {
 });
 
 console.log(synth.get());
-// const glide = document.getElementById('glide');
-// glide.addEventListener('change', function () {
-//     if (!glide.checked) {
-//         console.log('checked');
-//     } else {
-//         synth.portamento = 0.25;
-//         console.log('unchecked');
-//     }
-// });
+const glide = document.getElementById('glide');
+glide.addEventListener('change', function () {
+    if (glide.checked) {
+        console.log('checked');
+        synth.portamento = 0.05;
+    } else {
+        synth.portamento = 0;
+        console.log('unchecked');
+    }
+});
 
 /////// MOD WAVE ///////
 modWave.addEventListener('change', ({ target }) => {
@@ -273,10 +290,18 @@ let index = 0;
 
 ///// ASCII Playhead Animation
 function playHeadUpdate(step) {
-    if (step > 0 && step <= 8) {
+    // if (step === 7) {
+    //     asciiCheck[step].style = '[>]';
+    //     asciiCheck[step - 1].innerHTML = '[#]';
+    // }
+    if (step > 0 && step <= 7) {
         playHead.prepend('─────');
-    } else {
+        // asciiCheck[step].innerHTML = '[>]';
+        // asciiCheck[step - 1].innerHTML = '[#]';
+    } else if (step === 0) {
         playHead.innerHTML = '►';
+        // asciiCheck[7].innerHTML = '[#]';
+        // asciiCheck[0].innerHTML = '[>]';
     }
 }
 ///// Part - To Do: move the ascii animation to its own function once it's good
@@ -314,13 +339,13 @@ stepContainer.addEventListener('input', ({ target }) => {
 stepContainer.addEventListener('change', ({ target }) => {
     if (target.type == 'checkbox' && target.checked) {
         asciiCheck[target.dataset.index].innerHTML = '[#]';
-        asciiCheck[target.dataset.index].style.color = defaultColor;
-        meters[target.dataset.index].style.color = defaultColor;
+        asciiCheck[target.dataset.index].style.color = 'var(--on)';
+        meters[target.dataset.index].style.color = 'var(--on)';
         console.log('checked');
     } else if (target.type == 'checkbox' && !target.checked) {
         asciiCheck[target.dataset.index].innerHTML = '[ ]';
-        asciiCheck[target.dataset.index].style.color = offColor;
-        meters[target.dataset.index].style.color = offColor;
+        asciiCheck[target.dataset.index].style.color = 'var(--off)';
+        meters[target.dataset.index].style.color = 'var(--off)';
         console.log('not checked');
     }
 });
@@ -346,6 +371,7 @@ function bars(v) {
 const ASCIIs = [
     ['&ndash;', '\\', '|', '/'], // Forward Spin
     ['&ndash;', '/', '|', '\\'], // Backward Spin
+    ['', '', '', '█', '█', '█'], // Cursor blink
 ];
 
 function animate(index) {
@@ -385,6 +411,66 @@ function init() {
 ///// Horizontal Slider for Parameters /////
 
 synthControls.addEventListener('input', ({ target }) => {
+    let empty = '|';
+    let emptyAlt = '═';
+    console.log(target.max);
+    //// The '/ n' parts make it so the lines amount equal 31 at their max. Just divide/multiply target max so it reaches 31
+
+    /// Mod index
+    if (target.max == 100) {
+        let linesAmount = parseInt(target.value / 3.2);
+        console.log(parseInt(32 - linesAmount));
+        document.getElementById(target.dataset.ascii).innerHTML =
+            lines +
+            lines.repeat(linesAmount) +
+            block +
+            emptyAlt.repeat(31 - linesAmount) +
+            empty;
+    } else if (target.id === 'crossfader') {
+        let linesAmount = parseInt(target.value * 18); // Change this value back to 31 if width is reverted
+        document.getElementById(target.dataset.ascii).innerHTML =
+            lines.repeat(linesAmount) +
+            block +
+            empty.repeat(17 - linesAmount + 1); // Fills in empty space.  +1 so that it doesn't hit 0 and throw an error
+        /// Filter
+    } else if (target.max == 1) {
+        /// Envelopes
+        let linesAmount = parseInt(target.value * 31);
+        document.getElementById(target.dataset.ascii).innerHTML =
+            lines +
+            lines.repeat(linesAmount) +
+            block +
+            emptyAlt.repeat(31 - linesAmount) +
+            empty;
+        /// Filter
+    } else if (target.max == 1500) {
+        let linesAmount = parseInt(target.value / 47);
+        document.getElementById(target.dataset.ascii).innerHTML =
+            lines +
+            lines.repeat(linesAmount) +
+            block +
+            emptyAlt.repeat(31 - linesAmount) +
+            empty;
+        // Resonance
+    } else if (target.max == 10) {
+        let linesAmount = parseInt(target.value * 3.1);
+        document.getElementById(target.dataset.ascii).innerHTML =
+            lines +
+            lines.repeat(linesAmount) +
+            block +
+            emptyAlt.repeat(31 - linesAmount) +
+            empty;
+    } else if (target.id === 'lfo-rate') {
+        let linesAmount = parseInt(target.value * 2.1);
+        document.getElementById(target.dataset.ascii).innerHTML =
+            lines +
+            lines.repeat(linesAmount) +
+            block +
+            emptyAlt.repeat(31 - linesAmount) +
+            empty;
+    }
+});
+fxControls.addEventListener('input', ({ target }) => {
     console.log(target.max);
     //// The '/ n' parts make it so the lines amount equal 31 at their max. Just divide/multiply target max so it reaches 31
     /// Mod index
@@ -392,16 +478,6 @@ synthControls.addEventListener('input', ({ target }) => {
         let linesAmount = parseInt(target.value) / 3.2;
         document.getElementById(target.dataset.ascii).innerHTML =
             lines + lines.repeat(linesAmount) + block;
-    } else if (target.id === 'crossfader') {
-        let linesAmount = parseInt(target.value * 18); // Change this value back to 31 if width is reverted
-        document.getElementById(target.dataset.ascii).innerHTML =
-            lines + lines.repeat(linesAmount) + block;
-    } else if (target.id === 'distortion') {
-        /// Envelopes
-        let linesAmount = parseInt(target.value * 31);
-        document.getElementById(target.dataset.ascii).innerHTML =
-            lines + lines.repeat(linesAmount) + block;
-        /// Filter
     } else if (target.max == 1) {
         /// Envelopes
         let linesAmount = parseInt(target.value * 31);
@@ -435,12 +511,12 @@ function circleGrow(target) {
         let circlePosition = -circleSize + circleLocation;
 
         // When the animation turns into a period
-        if (target.value <= 250) {
+        if (target.value <= 400) {
             circle.style.opacity = 0;
-            document.getElementById('filterLabel').innerHTML = '&nbsp;Cutoff.';
+            document.getElementById('filterLabel').innerHTML = '> cutoff.';
             // When the animation is growing/shrinking
         } else {
-            document.getElementById('filterLabel').innerHTML = '&nbsp;Cutoff';
+            document.getElementById('filterLabel').innerHTML = '> cutoff';
             circle.style.fontSize = circleSize + '.px';
             circle.style.opacity = 1;
             circle.style.top = circlePosition + '.px';
@@ -448,6 +524,14 @@ function circleGrow(target) {
         }
     }
 }
+
+//////// Select Boxes ////////////
+const oscWaveSwitch = document.querySelector('#ascii-osc-wave');
+const asciiOscWave = document.querySelector('#ascii-osc-wave-options');
+oscWaveSwitch.addEventListener('click', function () {
+    console.log('clicked');
+    asciiOscWave.style.display = 'block';
+});
 
 //////////////// SWAP PARAMETERS ///////////////
 
@@ -457,16 +541,15 @@ const fxSwap = document.getElementById('param-swap');
 fxSwap.addEventListener('click', function () {
     if (paramState === 'fx') {
         console.log('fx state');
-
         synthControls.style.display = 'grid';
         fxControls.style.display = 'none';
-
+        fxSwap.innerHTML = '[ fx ]';
         return (paramState = 'synth');
     } else {
         fxControls.style.display = 'grid';
         synthControls.style.display = 'none';
+        fxSwap.innerHTML = '[ synth ]';
         console.log('synth state');
         return (paramState = 'fx');
     }
-    console.log(paramState);
 });

@@ -57,16 +57,21 @@ p {
     margin: 1px;
     margin-bottom: 1px;
 }
-#heading {
+
+.label {
+    margin: 1px;
 }
+
 #main-container {
     margin: 5% 50% 10% 30%;
     padding: 1% 2% 2% 2%;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     width: fit-content;
     min-width: 420;
     height: 58%;
 }
+
+/* //////// TOP BAR /////////////*/
 #help {
     margin-bottom: 1px;
 }
@@ -78,7 +83,8 @@ p {
 
 #help-menu {
     position: absolute;
-    color: green;
+    color: red;
+    font-weight: bold;
     margin: auto;
     width: 100%;
     height: 100%;
@@ -92,7 +98,8 @@ p {
     display: block;
 }
 
-#skin-select {
+#skinSwap {
+    cursor: cell;
 }
 
 /*///////   SYNTH LAYOUT    ////////////*/
@@ -115,8 +122,37 @@ p {
 }
 #oscillator-container-a {
     position: relative;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     grid-area: oscillatorA;
+}
+
+#osc-wave {
+    position: absolute;
+    opacity: 1;
+    z-index: 2;
+}
+
+#ascii-osc-wave {
+    position: absolute;
+    top: 9px;
+    opacity: 1;
+    color: red;
+    z-index: -2;
+}
+
+#ascii-osc-wave-options {
+    display: none;
+    position: absolute;
+    top: -15px;
+    background-color: white;
+    color: green;
+    line-height: 18px;
+    z-index: 0;
+}
+
+.ascii-waves {
+    line-height: 50%;
+    letter-spacing: 50%;
 }
 #crossfader {
     position: absolute;
@@ -124,13 +160,15 @@ p {
     z-index: 1;
 }
 #oscillator-container-b {
+    margin: 1px;
+    padding: 0;
     position: relative;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     grid-area: oscillatorB;
 }
 #filter-container {
     position: relative;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     grid-area: filter;
 }
 #ascii-cutoff {
@@ -146,19 +184,19 @@ p {
 }
 #envelope-container {
     position: relative;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     grid-area: envelope;
 }
 
 #modulation-envelope {
     position: relative;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     grid-area: mod;
 }
 
 #modulation {
     position: relative;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     grid-area: mixer;
 }
 .ascii-params {
@@ -173,13 +211,22 @@ p {
     display: none;
 }
 .fx-control {
-    border: 1px solid black;
+    /* border: 1px solid black; */
+    position: relative;
+}
+
+.ascii-label {
+    font-weight: bold;
+}
+
+#param-swap {
+    font-size: 15px;
 }
 
 @media all and (max-width: 600px) {
     #main-container {
         margin: auto;
-        width: auto;
+        width: fit-content;
         height: 90%;
         border: none;
     }
@@ -195,5 +242,8 @@ p {
         gap: 0;
 
         width: fit-content;
+    }
+    #ascii-window {
+        display: none;
     }
 }

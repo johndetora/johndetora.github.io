@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="asciitone.css" />
     <link rel="stylesheet" href="ansiquencer.css" />
+    <link id="skin" rel="stylesheet" href="skins/skin-light.css">
     <script src="../libraries/Tone.js"></script>
     <title>ascii-tone</title>
     <header>
@@ -17,11 +18,81 @@
 <body>
 
     <div id="main-container">
+
         <div id="heading">
-            <span id="title">ascii-tone v0.0.2 </span>
+            <div id="overlay-container">
+                <pre id="ascii-window">
+
+
+
+
+                 _____________________________________________    
+                |=============================================|
+                |                                             |
+                |                                             |
+                <span class="divider">|*~~~~~~~~~~~~~~~~~~ <span class="ascii-label">bpm</span> ~~~~~~~~~~~~~~~~~~~~*|</span>      
+                |^                                           ^|
+                ||                                           ||
+                <span class="divider">|v~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~v|</span>
+                |O                                           O|    
+                |o                                           o|
+                |*                                           *|
+                |.                                           .|
+                |                                             |                                                                                             
+                |                                             |
+                |                                             |
+                |                                             |
+                |                                             |
+                |                                             |
+                |                                             |
+                |                                             |
+                |                                             |
+                |                                             |
+                |                                             |
+                |                                             |
+                |                                             |                                         
+                |                                             |                                         
+                |                                             |                                         
+                |                                             |                                         
+                |                                             |                                                                            
+                |                                             |                                         
+                |                                             |                                         
+                |o                                           o|                                         
+                |------------------- <span class="ascii-label">Zzz</span> ---------------------|                                        
+                |                                             |
+                |                                             |
+                |                                             |     
+                |--- <span class="ascii-label">osc</span> ------- <span class="ascii-label">envelope</span> -------- <span class="ascii-label">filter</span> ----|
+                |          |                |                 |
+                |          |                |                 |
+                |          |                |                 |
+                |          |                |                 |
+                |          |                |                 |
+                |          |                |                 |
+                |          |                |                 |
+                |- <span class="ascii-label">mod osc</span> ----- <span class="ascii-label">mod env</span> ---------- <span class="ascii-label">lfo</span> ------|
+                |          |                |                 |
+                |          |                |                 |
+                |          |                |                 |
+                |          |                |                 |
+                |          |                |                 |
+                |          |                |                 |
+                |          |                |                 |
+                |          |                |                 |
+                |          |                |                 |
+                |---------------------------------------------|
+                |     |                                       |
+                |     |                                       |
+                |_____|_______________________________________|
+             
+             </pre>
+            </div>
+
+            <span id="title">&nbsp;ascii-tone v0.0.4 </span>
             <span id="about-menu"></span>
             <span id="money"> [ $ ]</span>
             <span id="help"> [ ? ]</span>
+            <span id="skinSwap">[ dark ]</span>
             <pre id="help-menu">
 
 ~ click             s l i d e
@@ -48,34 +119,16 @@
 ~
 ~
 ~
+~
+~
+~
 ~ the #snooze buttons allow the steps to snooze
 ~
 ~
                    </pre>
             <!-- <button id="skin-select">[ skins ]</button> -->
         </div>
-        <!-- <pre id="ascii-window">
-|--------------------------------------|
-|                                      |
-|                                      |                                         
-|--------------------------------------|
-|                                      |
-|                                      |
-|                                      |
-|                                      |
-|                                      |                                                                                             
-|                                      |
-|                                      |
-|                                      |
-|                                      |
-|                                      |
-|                                      |
-|                                      |
-|                                      |
-|                                      |                                         
-|                                      |
-|-----------------Zzz------------------|                                        
-|______________________________________|              </pre> -->
+
 
         <div id="top-controls">
             <div id="ascii-spin">/</div>
@@ -162,88 +215,13 @@
                     orient="vertical" />
             </div>
 
-
-
-            <!-- <div id="params" class="container">
-        <div id="playhead">►</div>
-        <div class="step" id="step-1">
-            <pre id="para-meter"></pre>
-            <div class="check-container">
-                <pre id="ascii-checkbox">[#]</pre>
-                <input type="checkbox" data-index="0" id="check" checked />
-            </div>
-            <input type="range" id="slider-1" data-index="0" class="meter" value="4" min="0" max="10" step="1"
-                orient="vertical" />
-        </div>
-        <div class="step" id="step-2">
-            <pre id="para-meter"></pre>
-            <div class="check-container">
-                <pre id="ascii-checkbox">[#]</pre>
-                <input type="checkbox" data-index="1" id="check" checked />
-            </div>
-            <input type="range" id="slider-2" data-index="1" class="meter" value="4" min="0" max="10" step="1"
-                orient="vertical" />
-        </div>
-        <div class="step" id="step-3">
-            <pre id="para-meter"></pre>
-            <div class="check-container">
-                <pre id="ascii-checkbox">[#]</pre>
-                <input type="checkbox" data-index="2" id="check" checked />
-            </div>
-            <input type="range" id="slider-3" data-index="2" class="meter" value="4" min="0" max="10" step="1"
-                orient="vertical" />
-        </div>
-        <div class="step" id="step-4">
-            <pre id="para-meter"></pre>
-            <div class="check-container">
-                <pre id="ascii-checkbox">[#]</pre>
-                <input type="checkbox" data-index="3" id="check" checked />
-            </div>
-            <input type="range" id="slider-4" data-index="3" class="meter" value="4" min="0" max="10" step="1"
-                orient="vertical" />
-        </div>
-        <div class="step" id="step-5">
-            <pre id="para-meter"></pre>
-            <div class="check-container">
-                <pre id="ascii-checkbox">[#]</pre>
-                <input type="checkbox" data-index="4" id="check" checked />
-            </div>
-            <input type="range" id="slider-5" data-index="4" class="meter" value="4" min="0" max="10" step="1"
-                orient="vertical" />
-        </div>
-        <div class="step" id="step-6">
-            <pre id="para-meter"></pre>
-            <div class="check-container">
-                <pre id="ascii-checkbox">[#]</pre>
-                <input type="checkbox" data-index="5" id="check" checked />
-            </div>
-            <input type="range" id="slider-6" data-index="5" class="meter" value="4" min="0" max="10" step="1"
-                orient="vertical" />
-        </div>
-        <div class="step" id="step-7">
-            <pre id="para-meter"></pre>
-            <div class="check-container">
-                <pre id="ascii-checkbox">[#]</pre>
-                <input type="checkbox" data-index="6" id="check" checked />
-            </div>
-            <input type="range" id="slider-7" data-index="6" class="meter" value="4" min="0" max="10" step="1"
-                orient="vertical" />
-        </div>
-        <div class="step" id="step-8">
-            <pre id="para-meter"></pre>
-            <div class="check-container">
-                <pre id="ascii-checkbox">[#]</pre>
-                <input type="checkbox" data-index="7" id="check" checked />
-            </div>
-            <input type="range" id="slider-8" data-index="7" class="meter" value="4" min="0" max="10" step="1"
-                orient="vertical" />
-        </div> -->
         </div>
 
         <div id="synth-container">
             <div class="synth-control" id="oscillator-container-a">
-                <p class="group-label">Osc</p>
-                Wave<br>
+                <!-- <p class="group-label">Osc</p> -->
+                <br>
+                <pre id="ascii-osc-wave"> sine </pre>
                 <select id="osc-wave">
                     <option value="sine" selected="selected">sine</option>
                     <option value="triangle">triangle</option>
@@ -251,34 +229,52 @@
                     <option value="sawtooth">saw</option>
 
                 </select>
-                <!-- <p>glide
-                    <input type="checkbox" id="glide">
-                </p> -->
-                <p class="label">Osc <-> Mod</p>
-                <input type="range" class="mixer" id="crossfader" data-ascii="ascii-crossfader" min="0" max="1"
-                    value="0" step="0.01"><span id="ascii-crossfader" class="ascii-params">|▓</span><br>
+                <pre id="ascii-osc-wave-options">
+
+<span id="ascii-sine">~ sine</span>
+~ tri 
+~ square
+~ saw 
+
+                </pre>
+                <br><br>
+                <p class="label"> glide <input type="checkbox" id="glide"></p>
+            </div>
+            <div class="synth-control" id="envelope-container">
+                <!-- <p class="group-label">Envelope</p> -->
+                <br>
+                <p class="label">> attack</p>
+                <input type="range" class="envelope" data-action="attack" data-ascii="ascii-attack" min="0.01" max="1"
+                    value="0.01" step="0.01"><span id="ascii-attack" class="ascii-params">
+                    |||▓-----------------------------|</span>
+                <p class="label">> decay</p>
+                <input type="range" class="envelope" data-action="release" data-ascii="ascii-release" min="0.01" max="1"
+                    value="0.2" step="0.01"><span id="ascii-release" class="ascii-params">
+                    ||||||||▓------------------------|</span>
             </div>
             <div class="synth-control" id="filter-container">
-                <p class="group-label">Filter</p>
-                <span id="filterLabel" class="label"> &nbsp;Cutoff</span> <span id="ascii-cutoff">o</span><br>
+                <!-- <p class="group-label">Filter</p> -->
+                <br>
+                <span id="filterLabel" class="label">> cutoff</span> <span id="ascii-cutoff">o</span><br>
                 <input type="range" class="filter" id="cutoff" data-parameter="frequency" data-ascii="ascii-frequency"
                     value="1500" min="0" max="1500" step="0.001"><span id="ascii-frequency"
                     class="ascii-params">||||||||||||||||||||||||||||||||▓</span>
-                <br> &nbsp;esonance<br>
+                <p class="label">> resonance</p>
                 <input type="range" class="filter" id="Q" data-parameter="Q" data-ascii="ascii-q" value="0" min="0"
-                    max="10" step="0.001"><span id="ascii-q" class="ascii-params">|▓</span>
+                    max="10" step="0.001"><span id="ascii-q"
+                    class="ascii-params">|▓-------------------------------|</span>
             </div>
 
             <div class="synth-control" id="oscillator-container-b">
-                <p class="group-label">Mod Osc</p>
-                wave
+                <!-- <p class="group-label">Mod Osc</p> -->
+                <br>
                 <select id="mod-wave">
                     <option value="sine" selected="selected">sine</option>
                     <option value="triangle">triangle</option>
                     <option value="square">square</option>
                     <option value="sawtooth">saw</option>
-                </select><br><br>
-                Harmonicity<br>
+                </select><br>
+                <p class="label">freq ratio</p>
                 <select id="harmonicity">
                     <option value="0">0</option>
                     <option value="0.5">0.5</option>
@@ -288,43 +284,41 @@
                     <option value="2.5">2.5</option>
                     <option value="3">3</option>
                 </select>
+                <p class="label">Osc <> Mod</p>
+                <input type="range" class="mixer" id="crossfader" data-ascii="ascii-crossfader" min="0" max="1"
+                    value="0" step="0.01"><span id="ascii-crossfader"
+                    class="ascii-params">|▓|||||||||||||||||</span><br>
+            </div>
 
-            </div>
-            <div class="synth-control" id="envelope-container">
-                <p class="group-label">Envelope</p>
-                <p class="label">A</p>
-                <input type="range" class="envelope" data-action="attack" data-ascii="ascii-attack" min="0.01" max="1"
-                    value="0.01" step="0.01"><span id="ascii-attack" class="ascii-params"> |||▓</span>
-                <p class="label">D</p>
-                <input type="range" class="envelope" data-action="release" data-ascii="ascii-release" min="0.01" max="1"
-                    value="0.2" step="0.01"><span id="ascii-release" class="ascii-params"> ||||||||▓</span>
-            </div>
             <div class="synth-control" id="modulation-envelope">
-                <p class="group-label">Mod Env</p>
-                <p class="label">Modulation Index</p>
-                <input type="range" class="envelope" data-action="modulationIndex" data-ascii="ascii-mod-index" min="0"
-                    max="100" value="10" step="1"><span id="ascii-mod-index" class="ascii-params"> |||||||▓</span>
+                <!-- <p class="group-label">Mod Env</p> -->
+                <br>
+                <p class="label">> mod index</p>
+                <input type="range" class="envelope" id="main-env" data-action="modulationIndex"
+                    data-ascii="ascii-mod-index" min="0" max="100" value="10" step="1"><span id="ascii-mod-index"
+                    class="ascii-params"> |||||||▓-------------------------|</span>
 
-                <p class="label">A</p>
+                <p class="label">> attack</p>
                 <input type="range" class="envelope" data-action="attack" data-ascii="ascii-mod-attack" min="0.01"
                     max="1" value="0.01" step="0.01"><span id="ascii-mod-attack" class="ascii-params">
-                    ||||▓</span>
-                <p class="label">D</p>
+                    ||||▓----------------------------|</span>
+                <p class="label">> decay</p>
                 <input type="range" class="envelope" data-action="release" data-ascii="ascii-mod-release" min="0.01"
                     max="1" value="0.2" step="0.01"> <span id="ascii-mod-release" class="ascii-params">
-                    ||||||||▓</span>
+                    ||||||||▓------------------------|</span>
             </div>
             <div class="synth-control" id="modulation">
-                <p class="group-label">LFO</p>
-
-                LFO Rate
+                <!-- <p class="group-label">LFO</p> -->
+                <br>
+                <p class="label">> rate</p>
                 <input type="range" id="lfo-rate" class="lfo" data-parameter="frequency" data-ascii="ascii-lfo-rate"
                     value="3" min="0.1" max="15" step="0.1"><span id="ascii-lfo-rate"
-                    class="ascii-params">|||||||▓</span>
+                    class="ascii-params">|||||||▓-------------------------|</span>
                 <!-- <span>LFO Amt ƒ<input type="checkbox">~<input type="checkbox"></span> -->
-                Amount
+                <p class="label">> amount</p>
                 <input type="range" id="lfo-amount" class="lfo" data-parameter="amplitude" data-ascii="ascii-lfo-amt"
-                    value="0" min="0" max="1" step="0.01"><span id="ascii-lfo-amt" class="ascii-params">|▓</span>
+                    value="0" min="0" max="1" step="0.01"><span id="ascii-lfo-amt"
+                    class="ascii-params">|▓-------------------------------|</span>
             </div>
         </div>
 
@@ -332,21 +326,81 @@
         <div id="fx-container">
             <div class="fx-control" id="delay-container">
                 <p class="group-label">Delay</p>
-                <p class="label">Time</p>
-                <input type="range" class="delay" data-parameter="delayTime" value="0" min="0" max="1" step="0.05">
-                <p class="label">Feedback</p>
-                <input type="range" class="delay" data-parameter="feedback" value="0" min="0" max="1" step="0.01">
-                <p class="label">Mix</p>
-                <input type="range" class="delay" data-parameter="wet" value="0" min="0" max="1" step="0.01">
+                <p class="label">time</p>
+                <input type="range" class="delay" data-parameter="delayTime" value="0" min="0" max="1" step="0.05"
+                    data-ascii="ascii-delay-time">
+                <span id="ascii-delay-time" class="ascii-params"> |▓</span>
+                <p class="label">feedback</p>
+                <input type="range" class="delay" data-parameter="feedback" value="0" min="0" max="1" step="0.01"
+                    data-ascii="ascii-delay-feedback">
+                <span id="ascii-delay-feedback" class="ascii-params"> |▓</span>
+                <p class="label">mix</p>
+                <input type="range" class="delay" data-parameter="wet" value="0" min="0" max="1" step="0.01"
+                    data-ascii="ascii-delay-mix">
+                <span id="ascii-delay-mix" class="ascii-params"> |▓</span>
 
             </div>
             <div class="synth-control" id="filter-container">
                 <p class="group-label">Reverb</p>
-                <p>coming soon</p>
+                <p class="label">coming soon</p>
             </div>
 
         </div>
-        <button id="param-swap">[ fx ]</button>
+        <button id="param-swap">
+            <p class="label">[ fx ]</p>
+        </button>
+        <br><br><br>
+        <!-- <div>
+            <pre class="ascii-waves">
+
+                  ****
+                  *  *
+                  *  *
+                ***  ***
+           </pre>
+            <pre class="ascii-waves">
+
+                   ***
+                  *   *
+                  *   *
+                  *   *
+                     
+         </pre>
+            <pre class="ascii-waves">
+
+                   *
+                  * *
+                 *   *
+                *     *
+              
+        </pre>
+            <pre class="ascii-waves">
+
+            *
+           **
+          * *
+        **  **
+       
+ </pre>
+        </div> -->
+        <!-- <pre class="ascii-waves">
+             **
+            *  *
+            *  *
+            *  *
+             **
+        </pre>
+        <pre class="ascii-waves">
+
+            ***
+           * * *
+           * * *
+           *   *
+           *   *
+            ***
+
+
+       </pre> -->
         <script src="asciitone.js"></script>
 </body>
 
