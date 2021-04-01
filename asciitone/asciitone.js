@@ -1,11 +1,10 @@
-/////////// COLORS and Skins ///////////////
-let bgColor = 'white';
-let defaultColor = 'black';
-let offColor = 'gray';
-let skin = 'default';
+// ------------------------- //
+//      Skin select         //
+// ------------------------- //
 
 const skinSwap = document.querySelector('#skinSwap');
 const skinSelector = document.getElementById('skin');
+let skin = 'default';
 skinSwap.addEventListener('click', function () {
     if (skin === 'default') {
         skinSelector.setAttribute('href', 'skins/skin-dark.css');
@@ -18,53 +17,53 @@ skinSwap.addEventListener('click', function () {
     }
 });
 
-//// Audio play confirmation
+// ------------------------- //
+//    Transport / Init       //
+// ------------------------- //
+
+//Audio play confirmation - needed because of autoplay policy
 document.querySelector('button')?.addEventListener('click', async () => {
     await Tone.start();
     console.log('audio is ready');
 });
 
-/////// BPM Set ///////
-
+//////////////// Start Stop Init ////////////////////////
+let playButton = document.getElementById('play-button');
+playButton.addEventListener('click', () => {
+    if (Tone.Transport.state !== 'started') {
+        playButton.innerHTML = '';
+        playButton.style.display = 'hidden';
+        Tone.Transport.start();
+        animate(0);
+        playHeadUpdate(0);
+        index = 0;
+    } else {
+        playButton.innerHTML = '►';
+        playHead.innerHTML = '';
+        Tone.Transport.stop();
+        index = 0;
+        document.getElementById('ascii-spin').innerHTML = '';
+    }
+});
+// Initialization of bpm and ascii meters
 window.addEventListener('load', () => {
     init();
     let bpm = transport.value;
     Tone.Transport.bpm.value = bpm;
 });
 
-//// BPM Change
+// BPM Change input
 let transport = document.querySelector('#bpm');
 transport.addEventListener('input', function () {
     bpm = this.value;
     Tone.Transport.bpm.value = bpm;
-});
-///// Test Note Array Button
-function tester() {
-    console.log(notes);
-    console.log(slider);
-    //console.log(notes[0].velocity);
-}
-//////////////// Start Stop Init ////////////////////////
-let playButton = document.getElementById('play-button');
-playButton.addEventListener('click', () => {
-    if (Tone.Transport.state !== 'started') {
-        playButton.style.backgroundColor = 'rgb(142, 209, 168)';
-        playButton.innerHTML = '❚❚';
-        Tone.Transport.start();
-        animate(0);
-        playHeadUpdate(0);
-        index = 0;
-    } else {
-        playButton.style.backgroundColor = 'rgb(227, 157, 157)';
-        playButton.innerHTML = '►';
-        playHeadUpdate(0);
-        Tone.Transport.stop();
-        index = 0;
-        document.getElementById('ascii-spin').innerHTML = '/';
-    }
+    console.log(bpm);
 });
 
-/////////////// Elements /////////////////////////////
+// ------------------------- //
+//         Variables         //
+// ------------------------- //
+
 const synthControls = document.querySelector('#synth-container');
 const fxControls = document.querySelector('#fx-container');
 const stepContainer = document.querySelector('#steps');
@@ -73,6 +72,7 @@ const playHead = document.querySelector('#playhead');
 const checks = document.querySelectorAll('#check');
 const meter = document.getElementById('ascii-meter');
 const meters = document.querySelectorAll('#ascii-meter');
+const asciiRepeater = document.querySelectorAll('#ascii-repeater');
 const paraMeters = document.querySelectorAll('#para-meter');
 const asciiCheck = document.querySelectorAll('#ascii-checkbox');
 const envelope = document.querySelector('#envelope-container');
@@ -84,7 +84,10 @@ const max = 10; // Max slider value for note meters
 const filterControls = document.querySelector('#filter-container');
 const delayControl = document.querySelector('#delay-container');
 
-///////// SYNTH CONTROLS //////////////
+// ------------------------- //
+//    Synth Parameters       //
+// ------------------------- //
+
 const synth = new Tone.FMSynth({
     harmonicity: 1,
     modulationIndex: 10,
@@ -112,11 +115,33 @@ const synth = new Tone.FMSynth({
         attackCurve: 'exponential',
     },
 });
+const noiseSynth = new Tone.NoiseSynth();
+
+// ------------------------- //
+//     Synth User Input      //
+// ------------------------- //
 
 /////// OSC ///////
-oscWave.addEventListener('change', ({ target }) => {
-    console.log(target.value);
-    synth.oscillator.type = target.value;
+//////// Select Boxes ////////////
+const oscWaveSwitch = document.querySelector('#ascii-osc-wave');
+const asciiOscWave = document.querySelector('#ascii-osc-wave-options');
+let waveSelectState = 0;
+oscWaveSwitch.addEventListener('click', function () {
+    if (waveSelectState == 0) {
+        console.log('clicked');
+        asciiOscWave.style.display = 'flex';
+        oscWaveSwitch.style.display = 'none';
+        return (waveSelectState = 1);
+    }
+});
+
+asciiOscWave.addEventListener('click', ({ target }) => {
+    synth.oscillator.type = target.dataset.parameter;
+    console.log(synth.oscillator.type);
+    asciiOscWave.style.display = 'none';
+    oscWaveSwitch.style.display = 'inline';
+    oscWaveSwitch.innerHTML = '[' + target.dataset.parameter + ']';
+    return (waveSelectState = 0);
 });
 
 console.log(synth.get());
@@ -132,9 +157,25 @@ glide.addEventListener('change', function () {
 });
 
 /////// MOD WAVE ///////
-modWave.addEventListener('change', ({ target }) => {
-    console.log(target.value);
-    synth.modulation.type = target.value;
+
+const modWaveSwitch = document.querySelector('#ascii-mod-wave');
+const asciiModWave = document.querySelector('#ascii-mod-wave-options');
+let modSelectState = 0;
+modWaveSwitch.addEventListener('click', function () {
+    if (modSelectState == 0) {
+        console.log('clicked');
+        asciiModWave.style.display = 'flex';
+        modWaveSwitch.style.display = 'none';
+        return (modSelectState = 1);
+    }
+});
+
+asciiModWave.addEventListener('click', ({ target }) => {
+    synth.modulation.type = target.dataset.parameter;
+    asciiModWave.style.display = 'none';
+    modWaveSwitch.style.display = 'inline';
+    modWaveSwitch.innerHTML = '[' + target.dataset.parameter + ']';
+    return (modSelectState = 0);
 });
 
 ///// HARMONICITY ///////
@@ -189,25 +230,22 @@ lfoAmt.addEventListener('input', function () {
     toFilt.gain.value = this.value;
 });
 
-//////// FX /////////////
+//////// Delay /////////////
 
 const delay = new Tone.FeedbackDelay({
     delayTime: '0',
     feedback: 0.3,
     wet: 0,
 });
+delayControl.addEventListener('input', ({ target }) => {
+    console.log(target.dataset.parameter);
+    delay[target.dataset.parameter].value = target.value;
+});
 
-////// Distortion ////// doesn't sound that good :/
-// const dist = new Tone.Distortion(0.2);
-// const distControl = document.getElementById('distortion');
-
-// distControl.addEventListener('input', ({ target }) => {
-//     dist.distortion = target.value;
-//     console.log(dist.distortion);
-// });
-
-// ////// !!! ROUTING  !!!////////
-
+// ------------------------- //
+//         Routing           //
+// ------------------------- //
+noiseSynth.toDestination(0.7);
 let gain = new Tone.Gain(0.7);
 let modGain = new Tone.Gain(0.2);
 let crossFade = new Tone.CrossFade(0);
@@ -218,8 +256,10 @@ crossFade.connect(filter);
 filter.connect(delay);
 delay.toDestination(0.8);
 
-/////////// SEQUENCER DATA ///////////////
-// Range slider note values
+// ------------------------- //
+//     Sequencer Data        //
+// ------------------------- //
+
 let sliderNotes = {
     0: 'C3',
     1: 'D3',
@@ -234,86 +274,134 @@ let sliderNotes = {
     10: 'F4',
 };
 
-////// Notes, value time object
+////// Notes, value time object each object is a step
+
 let notes = [
     {
-        time: '0',
+        // Step 1
+        time: '0:0:0',
         note: 'A3',
         velocity: 1,
         timing: '16n',
+        repeat: 0,
+    },
+
+    {
+        // Step 2
+        time: '0:1:0',
+        note: 'A3',
+        velocity: 1,
+        timing: '16n',
+        repeat: 0,
     },
     {
-        time: '0:1',
+        // Step 3
+        time: '0:2:0',
         note: 'A3',
         velocity: 1,
         timing: '16n',
+        repeat: 0,
+    },
+
+    {
+        // Step 4
+        time: '0:3:0',
+        note: 'A3',
+        velocity: 1,
+        timing: '16n',
+        repeat: 0,
     },
     {
-        time: '0:2',
+        // Step 5
+        time: '1:0:0',
         note: 'A3',
         velocity: 1,
         timing: '16n',
+        repeat: 0,
     },
     {
-        time: '0:3',
+        // Step 6
+        time: '1:1:0',
         note: 'A3',
         velocity: 1,
         timing: '16n',
+        repeat: 0,
     },
     {
-        time: '1:0',
+        // Step 7
+        time: '1:2:0',
         note: 'A3',
         velocity: 1,
         timing: '16n',
+        repeat: 0,
     },
     {
-        time: '1:1',
+        // Step 8
+        time: '1:3:0',
         note: 'A3',
         velocity: 1,
         timing: '16n',
-    },
-    {
-        time: '1:2',
-        note: 'A3',
-        velocity: 1,
-        timing: '16n',
-    },
-    {
-        time: '1:3',
-        note: 'A3',
-        velocity: 1,
-        timing: '16n',
+        repeat: 0,
     },
 ];
 
-let index = 0;
-
-///// ASCII Playhead Animation
-function playHeadUpdate(step) {
-    // if (step === 7) {
-    //     asciiCheck[step].style = '[>]';
-    //     asciiCheck[step - 1].innerHTML = '[#]';
-    // }
-    if (step > 0 && step <= 7) {
-        playHead.prepend('─────');
-        // asciiCheck[step].innerHTML = '[>]';
-        // asciiCheck[step - 1].innerHTML = '[#]';
-    } else if (step === 0) {
-        playHead.innerHTML = '►';
-        // asciiCheck[7].innerHTML = '[#]';
-        // asciiCheck[0].innerHTML = '[>]';
-    }
+// TEST Buttons
+function tester() {
+    // notes.splice(0, 1, repeatNote[0], repeatNote[1]);
+    console.log(notes);
+    console.log(bpm);
 }
-///// Part - To Do: move the ascii animation to its own function once it's good
+
+let repeatButton = document.getElementById('repeatTest');
+
+/// very important that this stays 0 ///
+
+// ------------------------- //
+//     Play Sequence         //
+// ------------------------- //
+
+let repStep; // Can delete this soon
+let index = 0; // Never change this
+
 let part = new Tone.Part(function (time, value) {
     let step = index % steps;
-    playHeadUpdate(step);
-    index++;
-    synth.triggerAttackRelease(value.note, value.timing, time, value.velocity);
+    console.log(value.repeat);
+    repeatButton.addEventListener('click', () => {
+        return (repStep = true);
+    });
+    // Regular play
+    if (value.repeat == 0) {
+        playHeadUpdate(step);
+        synth.triggerAttackRelease(value.note, value.timing, time, value.velocity);
+        index++;
+    }
+    // Repeat Logic
+    if (value.repeat == 1) {
+        playHeadUpdate(step);
+        synth.triggerAttackRelease(value.note, '32n', time, value.velocity);
+        synth.triggerAttackRelease(value.note, '32n', time + 0.1, value.velocity);
+        index++;
+    }
+    if (value.repeat == 2) {
+        playHeadUpdate(step);
+        synth.triggerAttackRelease(value.note, '48n', time, value.velocity);
+        synth.triggerAttackRelease(value.note, '48n', time + 0.075, value.velocity);
+        synth.triggerAttackRelease(value.note, '48n', time + 0.15, value.velocity);
+        index++;
+    }
+    if (value.repeat == 3) {
+        playHeadUpdate(step);
+        synth.triggerAttackRelease(value.note, '64n', time, value.velocity);
+        synth.triggerAttackRelease(value.note, '64n', time + 0.05, value.velocity);
+        synth.triggerAttackRelease(value.note, '64n', time + 0.1, value.velocity);
+        synth.triggerAttackRelease(value.note, '64n', time + 0.15, value.velocity);
+        index++;
+    }
 }, notes);
 
 /////// Transport and Loop ////////////
 part.start('0m');
+// repeatNoise.start('0m');
 part.loopStart = '0m';
 part.loopEnd = '2m';
 part.loop = true;
@@ -321,42 +409,81 @@ Tone.Transport.loopStart = '0m';
 Tone.Transport.loopEnd = '2m';
 Tone.Transport.loop = true;
 
-/////// MAIN NOTE SLIDERS /////////
+// ------------------------- //
+//   Sequencer User Input    //
+// ------------------------- //
+
+// Notes and Repeats
 stepContainer.addEventListener('input', ({ target }) => {
-    if (target.type === 'range') {
+    // Note Sliders
+    if (target.className == 'meter') {
+        // className == Meter so that the repeater slider isn't targeted
         meters[target.dataset.index].innerHTML = bars(target.value); // Sets bar animation value
         notes[target.dataset.index].note = sliderNotes[target.value];
     }
-    if (target.type == 'checkbox' && !target.checked) {
-        notes[target.dataset.index].velocity = 0;
-        //       notes[target.dataset.index - 1].timing = '16n';        Not sure if this is desired behavior but it works
-    } else if (target.type == 'checkbox' && target.checked) {
-        notes[target.dataset.index].velocity = 1;
-        //      notes[target.dataset.index - 1].timing = '16n';
+    if (target.className == 'repeater-range') {
+        notes[target.dataset.index].repeat = target.value;
+        repeatAnim(target);
     }
 });
 
+// Repeater ascii-animation
+// There's probably a better way to do this but it works.
+function repeatAnim(target) {
+    const empty = '│-│' + '<br>';
+    const arrowUp = '│-│↑' + '<br>';
+    const arrowDown = '│-│↓' + '<br>';
+    const arrowUpFilled = '│o│↑' + '<br>';
+    const arrowDownFilled = '│o│↓' + '<br>';
+    const filled = '│o│' + '<br>';
+    // console.log(asciiRepeater[target.dataset.index][asciiRepCount[0]]);
+
+    if (target.value == 0) {
+        asciiRepeater[target.dataset.index].innerHTML = empty + arrowUp + arrowDown + filled;
+    }
+    if (target.value == 1) {
+        asciiRepeater[target.dataset.index].innerHTML = empty + arrowUp + arrowDownFilled + empty;
+    }
+    if (target.value == 2) {
+        asciiRepeater[target.dataset.index].innerHTML = empty + arrowUpFilled + arrowDown + empty;
+    }
+    if (target.value == 3) {
+        asciiRepeater[target.dataset.index].innerHTML = filled + arrowUp + arrowDown + empty;
+    }
+}
+
+// Snooze Checks
 stepContainer.addEventListener('change', ({ target }) => {
     if (target.type == 'checkbox' && target.checked) {
+        // Turns step 'on'
+        notes[target.dataset.index].velocity = 1;
+        // UI Update
         asciiCheck[target.dataset.index].innerHTML = '[#]';
         asciiCheck[target.dataset.index].style.color = 'var(--on)';
         meters[target.dataset.index].style.color = 'var(--on)';
-        console.log('checked');
     } else if (target.type == 'checkbox' && !target.checked) {
+        // Turns step 'off'
+        notes[target.dataset.index].velocity = 0;
+        // UI Update
         asciiCheck[target.dataset.index].innerHTML = '[ ]';
         asciiCheck[target.dataset.index].style.color = 'var(--off)';
         meters[target.dataset.index].style.color = 'var(--off)';
-        console.log('not checked');
     }
 });
 
-//////// FX  /////////
+// ------------------------- //
+//       Animations          //
+// ------------------------- //
 
-delayControl.addEventListener('input', ({ target }) => {
-    console.log(target.dataset.parameter);
-    delay[target.dataset.parameter].value = target.value;
-});
-
+///// ASCII Playhead Animation
+function playHeadUpdate(step) {
+    if (step > 0 && step <= 7) {
+        playHead.prepend('──────');
+    } else if (step === 0) {
+        playHead.innerHTML = '►';
+    }
+}
+///
 ///////  Bar  ////////
 function bars(v) {
     let top = ' _' + '<br>';
@@ -395,16 +522,24 @@ let tempoMeter = document.getElementById('ascii-bpm');
 const lines = '|';
 const block = '▓';
 
-tempoMeter.innerHTML = '||||||||||||||▓';
+tempoMeter.innerHTML = '||||||||||||||▓══════════════════ |';
 transport.addEventListener('input', function () {
-    let animBars = this.value / 15;
-
-    tempoMeter.innerHTML = lines + lines.repeat(animBars) + block;
+    let animBars = parseInt(this.value / 15);
+    let empty = '═';
+    tempoMeter.innerHTML = lines.repeat(animBars - 1) + block + empty.repeat(33 - animBars) + ' |';
 });
 /// Initialization
 function init() {
     for (let i = 0; i < meters.length; i++) {
         meters[i].innerHTML = bars(5);
+        const empty = '│-│' + '<br>';
+        const arrowUp = '│-│↑' + '<br>';
+        const arrowDown = '│-│↓' + '<br>';
+        const arrowUpFilled = '│o│↑' + '<br>';
+        const arrowDownFilled = '│o│↓' + '<br>';
+        const filled = '│o│' + '<br>';
+        asciiRepeater[i].innerHTML =
+            '│-│' + '<br>' + '│-│↑' + '<br>' + '│-│↓' + '<br>' + '│o│' + '<br>';
     }
 }
 
@@ -412,7 +547,7 @@ function init() {
 
 synthControls.addEventListener('input', ({ target }) => {
     let empty = '|';
-    let emptyAlt = '═';
+    let emptyAlt = '-';
     console.log(target.max);
     //// The '/ n' parts make it so the lines amount equal 31 at their max. Just divide/multiply target max so it reaches 31
 
@@ -421,53 +556,31 @@ synthControls.addEventListener('input', ({ target }) => {
         let linesAmount = parseInt(target.value / 3.2);
         console.log(parseInt(32 - linesAmount));
         document.getElementById(target.dataset.ascii).innerHTML =
-            lines +
-            lines.repeat(linesAmount) +
-            block +
-            emptyAlt.repeat(31 - linesAmount) +
-            empty;
+            lines + lines.repeat(linesAmount) + block + emptyAlt.repeat(31 - linesAmount) + empty;
     } else if (target.id === 'crossfader') {
         let linesAmount = parseInt(target.value * 18); // Change this value back to 31 if width is reverted
         document.getElementById(target.dataset.ascii).innerHTML =
-            lines.repeat(linesAmount) +
-            block +
-            empty.repeat(17 - linesAmount + 1); // Fills in empty space.  +1 so that it doesn't hit 0 and throw an error
+            lines.repeat(linesAmount) + block + empty.repeat(17 - linesAmount + 1); // Fills in empty space.  +1 so that it doesn't hit 0 and throw an error
         /// Filter
     } else if (target.max == 1) {
         /// Envelopes
         let linesAmount = parseInt(target.value * 31);
         document.getElementById(target.dataset.ascii).innerHTML =
-            lines +
-            lines.repeat(linesAmount) +
-            block +
-            emptyAlt.repeat(31 - linesAmount) +
-            empty;
+            lines + lines.repeat(linesAmount) + block + emptyAlt.repeat(31 - linesAmount) + empty;
         /// Filter
     } else if (target.max == 1500) {
         let linesAmount = parseInt(target.value / 47);
         document.getElementById(target.dataset.ascii).innerHTML =
-            lines +
-            lines.repeat(linesAmount) +
-            block +
-            emptyAlt.repeat(31 - linesAmount) +
-            empty;
+            lines + lines.repeat(linesAmount) + block + emptyAlt.repeat(31 - linesAmount) + empty;
         // Resonance
     } else if (target.max == 10) {
         let linesAmount = parseInt(target.value * 3.1);
         document.getElementById(target.dataset.ascii).innerHTML =
-            lines +
-            lines.repeat(linesAmount) +
-            block +
-            emptyAlt.repeat(31 - linesAmount) +
-            empty;
+            lines + lines.repeat(linesAmount) + block + emptyAlt.repeat(31 - linesAmount) + empty;
     } else if (target.id === 'lfo-rate') {
         let linesAmount = parseInt(target.value * 2.1);
         document.getElementById(target.dataset.ascii).innerHTML =
-            lines +
-            lines.repeat(linesAmount) +
-            block +
-            emptyAlt.repeat(31 - linesAmount) +
-            empty;
+            lines + lines.repeat(linesAmount) + block + emptyAlt.repeat(31 - linesAmount) + empty;
     }
 });
 fxControls.addEventListener('input', ({ target }) => {
@@ -524,14 +637,6 @@ function circleGrow(target) {
         }
     }
 }
-
-//////// Select Boxes ////////////
-const oscWaveSwitch = document.querySelector('#ascii-osc-wave');
-const asciiOscWave = document.querySelector('#ascii-osc-wave-options');
-oscWaveSwitch.addEventListener('click', function () {
-    console.log('clicked');
-    asciiOscWave.style.display = 'block';
-});
 
 //////////////// SWAP PARAMETERS ///////////////
 

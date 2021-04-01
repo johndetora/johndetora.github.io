@@ -11,11 +11,12 @@
     --blue: rgba(134, 232, 254, 1);
     --on: rgba(241, 232, 208, 1);
     --off: rgba(241, 232, 208, 0.4);
+    --bg: black;
 }
 
 /* Background and text color 1 */
 body {
-    background-color: black;
+    background-color: var(--bg);
     color: var(--white);
 }
 
@@ -40,7 +41,11 @@ body {
 .divider {
     color: var(--white);
 }
-/* For coloring specific animations, use the following: */
+/* For coloring specific elements, use the following: */
+
+#play-button {
+    color: var(--white);
+}
 
 /* The spinning BPM animation */
 #ascii-spin {

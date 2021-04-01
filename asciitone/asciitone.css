@@ -1,10 +1,14 @@
 @import './skins/skins-template.css';
 
+html * {
+    font-family: monospace !important;
+}
 html,
 body {
     max-width: 100%;
     height: 100%;
     overflow-x: hidden;
+    font-family: monospace;
 }
 
 html {
@@ -104,56 +108,112 @@ p {
 
 /*///////   SYNTH LAYOUT    ////////////*/
 #synth-container {
+    /* border: 1px solid red; */
     /* display: grid; */
     display: grid;
     position: relative;
-    grid-template-columns: auto;
+    top: 60px;
+    grid-template-columns: 95px auto;
     grid-template-rows: auto auto auto;
     grid-template-areas:
         'oscillatorA envelope filter'
         'oscillatorB mod mixer';
     gap: 1px;
-    margin: auto;
+    margin: 10px auto auto auto;
     width: fit-content;
 }
 
 .synth-control {
+    justify-content: center;
+    align-content: center;
     padding: 4px;
 }
 #oscillator-container-a {
     position: relative;
     /* border: 1px solid black; */
+    text-align: left;
     grid-area: oscillatorA;
 }
 
 #osc-wave {
+    display: none;
     position: absolute;
+    width: 60px;
     opacity: 1;
     z-index: 2;
 }
-
-#ascii-osc-wave {
-    position: absolute;
-    top: 9px;
-    opacity: 1;
-    color: red;
-    z-index: -2;
+.wave-select {
+    width: 60px;
+    margin: 3px;
 }
 
-#ascii-osc-wave-options {
-    display: none;
+/* wave select "button" */
+#ascii-osc-wave {
     position: absolute;
-    top: -15px;
-    background-color: white;
-    color: green;
+    display: inline;
+    cursor: pointer;
+    text-align: center;
+
+    margin: 4px 0 6px 0;
+    width: 70px;
+    height: 16px;
+    padding: 2px;
+    top: 13px;
+    opacity: 1;
+    z-index: 3;
+}
+
+/* wave options */
+#ascii-osc-wave-options {
+    background-color: var(--bg);
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    position: absolute;
+    top: 15px;
+    left: 3px;
+    width: auto;
     line-height: 18px;
     z-index: 0;
 }
 
-.ascii-waves {
+/* MOD select "button" */
+#ascii-mod-wave {
+    position: absolute;
+    display: inline;
+    cursor: pointer;
+    text-align: center;
+
+    margin: 4px 0 6px 0;
+    width: 70px;
+    height: 16px;
+    padding: 2px;
+    top: 13px;
+    opacity: 1;
+    z-index: 3;
+}
+
+/* MOD options */
+#ascii-mod-wave-options {
+    background-color: var(--bg);
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    position: absolute;
+    top: 15px;
+    left: 3px;
+    width: 90%;
+    height: 90%;
+    line-height: 18px;
+    z-index: 0;
+}
+.ascii-wave:hover {
+    font-weight: 700;
+}
+/* .ascii-waves {
     line-height: 50%;
     letter-spacing: 50%;
-}
+} */
 #crossfader {
     position: absolute;
     width: 80px;
@@ -163,6 +223,7 @@ p {
     margin: 1px;
     padding: 0;
     position: relative;
+
     /* border: 1px solid black; */
     grid-area: oscillatorB;
 }
@@ -209,7 +270,11 @@ p {
 
 #fx-container {
     display: none;
+    position: relative;
+    top: 60px;
+    margin: 10px auto auto auto;
 }
+
 .fx-control {
     /* border: 1px solid black; */
     position: relative;
@@ -217,9 +282,12 @@ p {
 
 .ascii-label {
     font-weight: bold;
+    font-size: 14px;
 }
 
 #param-swap {
+    position: absolute;
+    bottom: 20px;
     font-size: 15px;
 }
 

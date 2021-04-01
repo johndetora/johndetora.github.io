@@ -3,8 +3,7 @@
     --greengray: rgba(67, 81, 87, 0.7);
     --darkgray: rgba(47, 60, 76, 1);
     --white: rgba(241, 232, 208, 1);
-    --black: rgba(0, 0, 0, 1)
-    --on: rgba(241, 232, 208, 1);
+    --black: rgba(0, 0, 0, 1);
     --green: rgba(208, 240, 192, 1);
     --red: rgba(246, 141, 141, 1);
     --yellow: rgba(245, 177, 81, 1);
@@ -12,11 +11,11 @@
     --blue: rgba(134, 232, 254, 1);
     --on: rgba(0, 0, 0, 1);
     --off: rgba(0, 0, 0, 0.4);
+    --bg: white;
 }
 
 /* Background and text color 1 */
 body {
-
     color: var(--black);
 }
 
@@ -41,7 +40,11 @@ body {
 .divider {
     color: var(--black);
 }
-/* For coloring specific animations, use the following: */
+/* For coloring specific elements, use the following: */
+
+#play-button {
+    color: var(--black);
+}
 
 /* The spinning BPM animation */
 #ascii-spin {

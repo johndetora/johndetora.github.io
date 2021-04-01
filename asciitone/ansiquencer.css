@@ -4,7 +4,7 @@ input[type='range'][orient='vertical'] {
     -webkit-appearance: slider-vertical;
     opacity: 0;
     width: 30px;
-    height: 270px;
+    height: 260px;
 }
 .container {
     position: relative;
@@ -20,20 +20,6 @@ input[type='range'][orient='vertical'] {
     width: fit-content;
     height: auto;
 }
-/* 
-#params {
-    grid-template-columns: repeat(9, 45px);
-    grid-template-rows: auto;
-    grid-template-areas:
-        'buttons'
-        'meters';
-    width: 100%;
-    margin-left: 2%;
-    position: relative;
-   
-    display: grid;
-} */
-
 .group-label {
     font-weight: bold;
     z-index: -1;
@@ -58,69 +44,74 @@ input[type='range'][orient='vertical'] {
     margin: 1px;
     margin-left: 15px;
 }
-
+#top-controls {
+    flex-direction: row;
+    position: relative;
+    margin: auto;
+    height: 50px;
+    width: 390px;
+}
 #ascii-spin {
     font-size: 18px;
     font-weight: bold;
     position: absolute;
-    left: 105px;
-    top: 30px;
+    left: 32px;
+    top: 27px;
+    z-index: -1;
 }
 
 #ascii-bpm {
     letter-spacing: -5px;
     position: absolute;
-    top: 34px;
-    left: 133px;
+    top: 30px;
+    left: 73px;
 }
 
 #ascii-bpm-container {
     font-weight: bold;
     letter-spacing: -5px;
     position: absolute;
-    top: 21px;
-    left: 130px;
+    top: 17px;
+    left: 70px;
 }
 
 #bpm {
-    appearance: none;
-    opacity: 0;
     outline: none;
     background-color: lightgray;
     position: absolute;
-    top: 37px;
+    width: 105px;
+    top: 33px;
+
     height: 7px;
-    left: 120px;
+    left: 60px;
 }
 
 #play-button {
+    position: absolute;
+
+    font-size: 16px;
+    padding: 1px;
     outline: none;
-    background-color: lightgray;
-    margin-top: 32px;
-    margin-left: 15px;
+    background-color: transparent;
+    top: 27px;
     width: 50px;
     height: 20px;
 }
 
 #test-button {
     margin: auto;
-    display: none;
-}
-
-#top-controls {
-    flex-direction: row;
-    position: relative;
-    margin: auto;
-    width: 390px;
 }
 
 #playhead {
     margin-top: 14px;
     margin-left: 15px;
-    font-size: 15px;
+    font-size: 12px;
     position: absolute;
 }
 #ascii-meter {
+    margin: auto;
+    margin-top: 20px;
+
     font-size: 20px;
     font-weight: bold;
     padding: 1px;
@@ -129,16 +120,44 @@ input[type='range'][orient='vertical'] {
 }
 
 .meter {
-    opacity: 0;
-    margin-top: 35px;
-    margin-left: 5px;
     position: absolute;
-    top: 1%;
+    top: 45px;
 }
 
+#repeater-container {
+    position: relative;
+    top: -4px;
+    right: 231px;
+}
+#ascii-repeater {
+    position: absolute;
+    line-height: 70%;
+    font-size: 17px;
+    font-weight: normal;
+    margin: 0px;
+    width: 20px;
+    z-index: -1;
+    margin: auto;
+    left: 234px;
+}
+
+.repeater-range {
+    opacity: 0 !important;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    height: 50px !important;
+    width: 20px;
+    left: 233px;
+    top: -3px;
+}
+
+.mini-label {
+    font-size: 11px;
+}
 .check-container {
     position: relative;
-    bottom: 3%;
+    bottom: -50px;
     left: 3%;
     /* right: 20%;
     grid-area: controls;
