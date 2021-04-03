@@ -348,6 +348,7 @@ p {
     }
     #main-container {
         margin: auto;
+        padding: 0;
         width: fit-content;
         height: 90%;
         border: none;
