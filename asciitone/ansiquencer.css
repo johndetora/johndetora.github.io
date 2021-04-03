@@ -1,4 +1,4 @@
-@import './skins/skins-template.css';
+@import './skins/skin-light.css';
 
 input[type='range'][orient='vertical'] {
     -webkit-appearance: slider-vertical;
@@ -108,7 +108,6 @@ a {
     margin-top: 14px;
     margin-left: 15px;
     font-size: 12px;
-
     position: absolute;
 }
 #ascii-meter {
@@ -201,9 +200,9 @@ a {
     }
 
     #playhead {
-        margin-top: 10px;
+        margin-top: 14px;
         margin-left: 15px;
-        font-size: 14px;
+        font-size: 12px;
         position: absolute;
     }
 }

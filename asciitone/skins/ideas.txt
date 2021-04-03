@@ -1,5 +1,0 @@
-gameboy themed (gray, purple, shades of green for meters)
-mutable instruments themed
-metropolis themed
-rgb 
-cmyk

@@ -11,17 +11,17 @@
     --blue: rgba(134, 232, 254, 1);
     --on: rgba(0, 0, 0, 1);
     --off: rgba(0, 0, 0, 0.4);
-    --bg: white;
+    --bg: rgb(247, 243, 239);
 }
 
 /* Background and text color 1 */
 body {
     color: var(--black);
+    background-color: var(--bg);
 }
 
 /* ascii-tone background color */
 #main-container {
-    background-color: transparent;
 }
 
 /* main overlay */

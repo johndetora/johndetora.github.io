@@ -1,18 +1,15 @@
-@import './skins/skins-template.css';
+@import './skins/skin-light.css';
 
 html * {
+    -webkit-tap-highlight-color: transparent;
     font-family: monospace !important;
 }
+
 html,
 body {
     max-width: 100%;
     height: 100%;
     overflow-x: hidden;
-    font-family: monospace;
-}
-
-html {
-    -webkit-tap-highlight-color: transparent;
     font-family: monospace;
 }
 
@@ -61,21 +58,32 @@ p {
     margin: 1px;
     margin-bottom: 1px;
 }
+/* 
+#background {
+    position: absolute;
+    margin: auto;
 
+    height: 90%;
+    width: 90%;
+    background-color: blue;
+    z-index: -99;
+} */
 #hidden {
     opacity: 0;
 }
 .label {
     margin: 1px;
 }
-
+#header {
+    width: 100%;
+    font-size: 12px;
+}
 #main-container {
-    margin: 5% 50% 10% 30%;
-    padding: 1% 2% 2% 2%;
+    margin: auto;
+    padding: 5% 10% 10% 10%;
     /* border: 1px solid black; */
     width: fit-content;
-    min-width: 420;
-    height: 58%;
+    height: 105vh;
 }
 
 /* //////// TOP BAR /////////////*/
@@ -335,6 +343,9 @@ p {
 }
 
 @media all and (max-width: 600px) {
+    #header {
+        font-size: 12px;
+    }
     #main-container {
         margin: auto;
         width: fit-content;
