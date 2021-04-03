@@ -38,9 +38,7 @@ ANSIquencer is the note input device for ascii-tone. It is made up of 8 steps wi
 
 ### Synthesizer
 
-Block Diagram
-
-<pre>
+<!-- <pre>
   ┌─────────┐  ┌─────────┐  ┌─────────┐             
   │         │  │         │  │         │             
   │         │  │         │  │         │             
@@ -66,7 +64,7 @@ Block Diagram
   └─────────┘  └─────────┘  └─────────┘      ↑      
                     ↓                        ↑      
                     → → → → → → → → → → → → →       
-</pre>
+</pre> -->
 
 ### There are several known issues and things to note:
 
