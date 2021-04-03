@@ -13,7 +13,7 @@ See a live demo [here](www.echocoast.net/asciitone/index.html)
 
 ascii-tone is inspired by the west coast synthesis paradigm. At its heart, ascii-tone is a 2 operator FM synthesizer routed through a low pass filter to encourage a broad range of tones. It aims to be a unique instrument that is simple and compact.
 
-Synthesizer Specs:
+Specifications:
 
 -   one main oscillator with sine, triangle, sawtooth, and square waveform selection11
 -   Simple glide/portamento on/off
@@ -38,7 +38,35 @@ ANSIquencer is the note input device for ascii-tone. It is made up of 8 steps wi
 
 ### Synthesizer
 
-1.
+Block Diagram
+
+<pre>
+  ┌─────────┐  ┌─────────┐  ┌─────────┐             
+  │         │  │         │  │         │             
+  │         │  │         │  │         │             
+  │  osc    │→→│   env   │→→│   lpf   │→ → → →               
+  │         │  │         │  │         │      ↓      
+  │   fm    │  │         │  │         │      ↓      
+  └─────────┘  └─────────┘  └─────────┘    ┌───┐    
+       ↑                         ↑         │ c │    
+       ↑                         ↑         │ r │    
+       ↑  ┌──────┐               ↑         │ o │    
+       ↑  │ mod  │               ↑         │ s │    
+        ← │index │ ←             ↑         │ s │→ → [ final output ] 
+          └──────┘  ↑            ↑         │ f │    
+                    ↑            ↑         │ a │    
+                    ↑            ↑         │ d │    
+                    ↑            ↑         │ e │    
+  ┌─────────┐  ┌─────────┐  ┌─────────┐    │ r │    
+  │         │  │         │  │         │    └───┘    
+  │         │  │         │  │         │      ↑      
+  │ mod osc │→→│ mod env │  │   lfo   │      ↑      
+  │         │  │         │  │         │      ↑      
+  │         │  │         │  │         │      ↑      
+  └─────────┘  └─────────┘  └─────────┘      ↑      
+                    ↓                        ↑      
+                    → → → → → → → → → → → → →       
+</pre>
 
 ### There are several known issues and things to note:
 
@@ -47,5 +75,4 @@ ANSIquencer is the note input device for ascii-tone. It is made up of 8 steps wi
 -   The lfo is uni-polar and only connects to the filter cutoff right now. This means that the filter cutoff must be set relatively low in frequency in order to hear the lfo doing its thing. If the decay is set to a low value, this will be even less noticeable.
 -   Similarly, the glide control will only work if the decay is set too low.
 -   The volume get slightly louder and then quiet again when the waveforms are set to anything but sine. I'm not sure why, so just consider it a quirk
--   The FX page is just getting started. the delay works but you'll see that the GUI gets messed up when on this page.
--   The top header has some icons. Press dark to change the skin to dark. The other ones are not yet implemented but please enjoy how cool they are.
+-   The FX page is just getting started. the delay works but you'll see that the GUI gets messed up when on this pag

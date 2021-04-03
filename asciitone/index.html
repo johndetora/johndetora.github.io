@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="asciitone.css" />
     <link rel="stylesheet" href="ansiquencer.css" />
     <link id="skin" rel="stylesheet" href="skins/skin-light.css">
-    <script src="../libraries/Tone.js"></script>
+    <script src="./scripts/Tone.js"></script>
     <title class="notranslate">ascii-tone</title>
     <header></header>
 </head>
@@ -18,7 +18,7 @@
     <div id="hidden">This is a hidden div for the purpose of telling google that this web page is in English, and not
         Portuguese like it seems to think.</div>
     <!--<button id="repeatTest">[Repeat]</button> -->
-    <!-- <button class="transport" id="test-button" onclick="tester()">[ array tester ]</button> -->
+    <!-- <button class="transport" id="test-button" onclick="tester()">[ array tester ]</button> teasfs-->
 
     <div id="main-container">
         <div id="background"></div>
@@ -368,12 +368,11 @@
                     <span id="b-sawtooth" class="ascii-wave" data-parameter="sawtooth">~ sawtooth</span>
                 </div>
                 <br>
-                <div id="harmonicity-container">
+                <div class="synth-control" id="harmonicity-container">
                     <p class="label">freq ratio</p>
                     <input id="harmonicity" data-ascii="ascii-harmonicity" type="range" value="1" min="0" max="6"
                         step="0.5"><span id="ascii-harmonicity" class="ascii-params"> |||▓|||||||||||||||</span>
-                    <br>
-                    <span class="label" id="ascii-harmonicity-num">|1.0|</span>
+                    <span id="ascii-harmonicity-num" class="label">|1.0|</span>
                 </div>
                 <!-- <select id="harmonicity">
                     <option value="0">0</option>
@@ -385,11 +384,12 @@
                     <option value="3">3</option>
                 </select> -->
                 <br><br>
-
-                <p class="label">osc <> mod</p>
-                <input type="range" class="mixer" id="crossfader" data-ascii="ascii-crossfader" min="0" max="1"
-                    value="0" step="0.01"><span id="ascii-crossfader"
-                    class="ascii-params">|▓|||||||||||||||||</span><br>
+                <div class="synth-control" id="crossfader-container">
+                    <p class="label">osc <> mod</p>
+                    <input type="range" class="mixer" id="crossfader" data-ascii="ascii-crossfader" min="0" max="1"
+                        value="0" step="0.01"><span id="ascii-crossfader"
+                        class="ascii-params">|▓|||||||||||||||||</span><br>
+                </div>
             </div>
 
             <div class="synth-control" id="modulation-envelope">
@@ -450,9 +450,17 @@
 
         </div>
         <br><br><br><br>
-        <button id="param-swap">
-            <p class="label" id="param-swap-text">[ fx ]</p>
-        </button>
+        <div id="tabs-container">
+            <button id="param-swap">
+                <p class="label" id="param-swap-text">[ fx ]</p>
+            </button>
+            <button id="param-swap">
+                <p class="label" id="param-swap-text">[ synth ]</p>
+            </button>
+            <button id="param-swap">
+                <p class="label" id="param-swap-text">[ fx ]</p>
+            </button>
+        </div>
         <br><br><br>
         <!-- <div>
             <pre class="ascii-waves">

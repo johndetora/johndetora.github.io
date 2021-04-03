@@ -239,13 +239,13 @@ p {
 } */
 #harmonicity-container {
     position: relative;
-    top: 10px;
+    top: 5px;
 }
 
 #ascii-harmonicity-num {
     position: absolute;
     left: 20px;
-    top: 33px;
+    top: 40px;
 }
 #harmonicity {
     position: absolute;
@@ -253,11 +253,14 @@ p {
     z-index: 1;
 }
 
+#crossfader-container {
+    position: relative;
+    bottom: -6px;
+}
 #crossfader {
     position: absolute;
     width: 80px;
     z-index: 1;
-    bottom: 7px;
 }
 
 #oscillator-container-b {
@@ -343,6 +346,17 @@ p {
 }
 
 @media all and (max-width: 600px) {
+    input[type='range']::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        border: 1px solid #000000;
+        height: 20px;
+        width: 23px;
+        background-color: transparent;
+        border-radius: 3px;
+        background: transparent;
+        cursor: pointer;
+        margin-top: -1px;
+    }
     #header {
         font-size: 12px;
     }
@@ -365,6 +379,11 @@ p {
         gap: 0;
 
         width: fit-content;
+    }
+    #crossfader {
+        position: absolute;
+        width: 80px;
+        z-index: 1;
     }
     #ascii-window {
         display: none;
