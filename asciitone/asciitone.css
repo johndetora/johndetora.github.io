@@ -156,7 +156,6 @@ p {
     display: inline;
     cursor: pointer;
     text-align: center;
-
     margin: 4px 0 6px 0;
     width: 70px;
     height: 16px;
@@ -174,10 +173,23 @@ p {
     flex-direction: column;
     position: absolute;
     top: 15px;
-    left: 3px;
+    left: 0px;
     width: auto;
     line-height: 18px;
-    z-index: 0;
+    z-index: 1;
+}
+
+#glide {
+    position: absolute;
+    left: 50px;
+    cursor: pointer;
+    opacity: 0;
+}
+#ascii-glide {
+    position: absolute;
+    left: 50px;
+    top: 36px;
+    z-index: -1;
 }
 
 /* MOD select "button" */
@@ -204,11 +216,11 @@ p {
     flex-direction: column;
     position: absolute;
     top: 15px;
-    left: 3px;
+    left: 0px;
     width: 90%;
     height: 90%;
     line-height: 18px;
-    z-index: 0;
+    z-index: 3;
 }
 .ascii-wave:hover {
     font-weight: 700;
@@ -217,11 +229,29 @@ p {
     line-height: 50%;
     letter-spacing: 50%;
 } */
+#harmonicity-container {
+    position: relative;
+    top: 10px;
+}
+
+#ascii-harmonicity-num {
+    position: absolute;
+    left: 20px;
+    top: 33px;
+}
+#harmonicity {
+    position: absolute;
+    width: 70px;
+    z-index: 1;
+}
+
 #crossfader {
     position: absolute;
     width: 80px;
     z-index: 1;
+    bottom: 7px;
 }
+
 #oscillator-container-b {
     margin: 1px;
     padding: 0;
@@ -263,6 +293,16 @@ p {
     /* border: 1px solid black; */
     grid-area: mixer;
 }
+
+#ascii-lfo-spin {
+    font-size: 18px;
+    font-weight: bold;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
 .ascii-params {
     z-index: -1;
     position: absolute;
@@ -289,9 +329,9 @@ p {
 }
 
 #param-swap {
-    position: absolute;
-    bottom: 32%;
+    position: relative;
     font-size: 15px;
+    display: none;
 }
 
 @media all and (max-width: 600px) {
@@ -305,7 +345,7 @@ p {
         position: relative;
         display: grid;
         grid-template-columns: 170px 170px;
-        grid-template-rows: auto;
+        grid-template-rows: auto auto;
         grid-template-areas:
             'oscillatorA oscillatorB '
             'envelope mod '

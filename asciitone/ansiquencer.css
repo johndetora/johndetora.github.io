@@ -6,6 +6,12 @@ input[type='range'][orient='vertical'] {
     width: 30px;
     height: 260px;
 }
+
+a {
+    -webkit-appearance: none;
+    color: inherit;
+    text-decoration: none;
+}
 .container {
     position: relative;
     display: grid;
@@ -52,8 +58,7 @@ input[type='range'][orient='vertical'] {
     width: 390px;
 }
 #ascii-spin {
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 12px;
     position: absolute;
     left: 32px;
     top: 27px;
@@ -77,22 +82,19 @@ input[type='range'][orient='vertical'] {
 
 #bpm {
     outline: none;
-    background-color: lightgray;
     position: absolute;
     width: 105px;
     top: 33px;
-
     height: 7px;
     left: 60px;
 }
 
 #play-button {
     position: absolute;
-
-    font-size: 16px;
+    font-size: 12px;
+    font-weight: bold;
     padding: 1px;
     outline: none;
-    background-color: transparent;
     top: 27px;
     width: 50px;
     height: 20px;
@@ -106,6 +108,7 @@ input[type='range'][orient='vertical'] {
     margin-top: 14px;
     margin-left: 15px;
     font-size: 12px;
+
     position: absolute;
 }
 #ascii-meter {

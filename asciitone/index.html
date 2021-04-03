@@ -32,7 +32,7 @@
                 |=============================================|
                 |                                             |
                 |                                             |
-                <span class="divider">|*~~~~~~~~~~~~ <span class="ascii-label">bpm</span> ~~~~~~~~~~~~~~~~~~~~~~~~~~*|</span>      
+                <span class="divider">|*~~~~~~~~~ tempo ~~~~~~~~~~~~~~~~~~~~~~~~~~~*|</span>      
                 |^                                           ^|
                 ||                                           ||
                 <span class="divider">|↓~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~↓|</span>
@@ -95,12 +95,15 @@
 
             <span id="title">&nbsp;ascii-tone v1.0 alpha </span>
             <span id="about-menu"></span>
-            <span id="money"> [ $ ]</span>
-            <span id="help"> [ ? ]</span>
-            <span id="skinSwap">[ dark ]</span>
-            <pre id="help-menu">
+            <!-- <a id="money" href=> [ $ ]</span> -->
+            <a id="help" href="https://github.com/johndetora/johndetora.github.io/blob/main/asciitone/README.md"
+                target="_blank">[
+                ? ]</a>
+            <span id="skinSwap">[ dark mode ]</span>
 
-~ click             s l i d e
+            <!-- <pre id="help-menu">
+
+~ click     s l i d e
 ~ 
 ~
 ~
@@ -130,14 +133,14 @@
 ~ the #snooze buttons allow the steps to snooze
 ~
 ~
-                   </pre>
+                   </pre> -->
             <!-- <button id="skin-select">[ skins ]</button> -->
         </div>
 
 
         <div id="top-controls">
             <div id="ascii-spin"></div>
-            <button id="play-button" class="transport">►</button>
+            <button id="play-button" class="transport">[play]</button>
 
             <span id="ascii-bpm"></span>
             <pre id="ascii-bpm-container">|</pre>
@@ -327,7 +330,10 @@
 
                 </div>
                 <br><br>
-                <p class="label"> glide <input type="checkbox" id="glide"></p>
+                <span class="label"> glide <input type="checkbox" id="glide">
+                    <pre id="ascii-glide">[ ]</pre>
+                </span>
+
             </div>
             <div class="synth-control" id="envelope-container">
                 <!-- <p class="group-label">Envelope</p> -->
@@ -359,16 +365,20 @@
                 <br>
                 <pre id="ascii-mod-wave">[sine]</pre>
                 <div id="ascii-mod-wave-options">
-
                     <span id="b-sine" class="ascii-wave" data-parameter="sine">~ sine</span>
                     <span id="b-triangle" class="ascii-wave" data-parameter="triangle">~ triangle</span>
                     <span id="b-square" class="ascii-wave" data-parameter="square">~ square</span>
                     <span id="b-sawtooth" class="ascii-wave" data-parameter="sawtooth">~ sawtooth</span>
-
                 </div>
-                <br><br>
-                <p class="label">freq ratio</p>
-                <select id="harmonicity">
+                <br>
+                <div id="harmonicity-container">
+                    <p class="label">freq ratio</p>
+                    <input id="harmonicity" data-ascii="ascii-harmonicity" type="range" value="1" min="0" max="6"
+                        step="0.5"><span id="ascii-harmonicity" class="ascii-params"> |||▓|||||||||||||||</span>
+                    <br>
+                    <span class="label" id="ascii-harmonicity-num">|1.0|</span>
+                </div>
+                <!-- <select id="harmonicity">
                     <option value="0">0</option>
                     <option value="0.5">0.5</option>
                     <option value="1" selected="selected">1</option>
@@ -376,8 +386,10 @@
                     <option value="2">2</option>
                     <option value="2.5">2.5</option>
                     <option value="3">3</option>
-                </select>
-                <p class="label">Osc <> Mod</p>
+                </select> -->
+                <br><br>
+
+                <p class="label">osc <> mod</p>
                 <input type="range" class="mixer" id="crossfader" data-ascii="ascii-crossfader" min="0" max="1"
                     value="0" step="0.01"><span id="ascii-crossfader"
                     class="ascii-params">|▓|||||||||||||||||</span><br>
@@ -412,6 +424,7 @@
                 <input type="range" id="lfo-amount" class="lfo" data-parameter="amplitude" data-ascii="ascii-lfo-amt"
                     value="0" min="0" max="1" step="0.01"><span id="ascii-lfo-amt"
                     class="ascii-params">|▓-------------------------------|</span>
+                <pre id="ascii-lfo-spin">/</pre>
             </div>
         </div>
 
@@ -441,7 +454,7 @@
         </div>
         <br><br><br><br>
         <button id="param-swap">
-            <p class="label">[ fx ]</p>
+            <p class="label" id="param-swap-text">[ fx ]</p>
         </button>
         <br><br><br>
         <!-- <div>

@@ -15,7 +15,7 @@ ascii-tone is inspired by the west coast synthesis paradigm. At its heart, ascii
 
 Synthesizer Specs:
 
--   one main oscillator with sine, triangle, sawtooth, and square waveform selection.
+-   one main oscillator with sine, triangle, sawtooth, and square waveform selection11
 -   Simple glide/portamento on/off
 -   one modulation oscillator with waveform selection, and frequency ratio to determine the pitch
 -   A crossfader that controls the final output level of the main oscillator and the modulation oscillator respectively
@@ -28,9 +28,9 @@ Synthesizer Specs:
 
 ### Sequencer
 
-ANSIquencer is the note input device for ascii-tone. It is made up of 8 steps with energy (repeats) and snooze (rest) for each.
+ANSIquencer is the note input device for ascii-tone. It is made up of 8 steps with energy (repeats) and snooze (rest) controls for each.
 
-1. ANSIquencer starts with the [ ► ] button. Press this button to start the sequencer. Press the animated tempo indicator to pause the sequencer.
+1. ANSIquencer starts with the [play] button. Press this button to start the sequencer. Press the animated tempo indicator to pause the sequencer.
 2. The playhead is a visual indicator for seeing the current step being played.
 3. The note input sliders are used for selecting which notes to play. Click or click and drag to the desired note position. The current note range is C3 to F4.
 4. Below the note input sliders are the energy meters. By default the step will play 1 time each pass. Setting this higher will repeat the step n amount of times up to 4 repeats.

@@ -8,11 +8,11 @@ let skin = 'default';
 skinSwap.addEventListener('click', function () {
     if (skin === 'default') {
         skinSelector.setAttribute('href', 'skins/skin-dark.css');
-        skinSwap.innerHTML = '[ light ]';
+        skinSwap.innerHTML = '[ light mode ]';
         return (skin = 'dark');
     } else if (skin === 'dark') {
         skinSelector.setAttribute('href', 'skins/skin-light.css');
-        skinSwap.innerHTML = '[ dark ]';
+        skinSwap.innerHTML = '[ dark mode ]';
         return (skin = 'default');
     }
 });
@@ -28,17 +28,18 @@ document.querySelector('button')?.addEventListener('click', async () => {
 });
 
 //////////////// Start Stop Init ////////////////////////
+//  Starts transport and initializes certain animations like playhead and spin //
 let playButton = document.getElementById('play-button');
 playButton.addEventListener('click', () => {
     if (Tone.Transport.state !== 'started') {
-        playButton.innerHTML = '';
+        playButton.innerHTML = '[pause]';
         playButton.style.display = 'hidden';
         Tone.Transport.start();
-        animate(0);
+        animateLFO(0);
         playHeadUpdate(0);
         index = 0;
     } else {
-        playButton.innerHTML = '►';
+        playButton.innerHTML = '[play]';
         playHead.innerHTML = '';
         Tone.Transport.stop();
         index = 0;
@@ -145,14 +146,18 @@ asciiOscWave.addEventListener('click', ({ target }) => {
 });
 
 console.log(synth.get());
-const glide = document.getElementById('glide');
+
 glide.addEventListener('change', function () {
+    const glide = document.getElementById('glide');
+    const asciiGlide = document.getElementById('ascii-glide');
     if (glide.checked) {
         console.log('checked');
         synth.portamento = 0.05;
+        asciiGlide.innerHTML = '[@]';
     } else {
         synth.portamento = 0;
         console.log('unchecked');
+        asciiGlide.innerHTML = '[ ]';
     }
 });
 
@@ -179,8 +184,8 @@ asciiModWave.addEventListener('click', ({ target }) => {
 });
 
 ///// HARMONICITY ///////
-let harmonicity = document.querySelector('#harmonicity');
-harmonicity.addEventListener('change', ({ target }) => {
+let harmonicityInput = document.querySelector('#harmonicity');
+harmonicityInput.addEventListener('input', ({ target }) => {
     synth.harmonicity.value = target.value;
 });
 
@@ -192,8 +197,7 @@ envelope.addEventListener('input', ({ target }) => {
 ///// MOD ENVELOPE
 mod.addEventListener('input', ({ target }) => {
     synth.modulationEnvelope[target.dataset.action] = target.value;
-    if (target.dataset.action === 'modulationIndex')
-        synth[target.dataset.action].value = target.value;
+    if (target.dataset.action === 'modulationIndex') synth[target.dataset.action].value = target.value;
 });
 
 ////// CROSSFADER ////////
@@ -366,9 +370,8 @@ let index = 0; // Never change this
 let part = new Tone.Part(function (time, value) {
     let step = index % steps;
     console.log(value.repeat);
-    repeatButton.addEventListener('click', () => {
-        return (repStep = true);
-    });
+    // repeatButton.addEventListener('click', () => {
+    //     return (repStep = true);
     // Regular play
     if (value.repeat == 0) {
         playHeadUpdate(step);
@@ -498,12 +501,12 @@ function bars(v) {
 const ASCIIs = [
     ['&ndash;', '\\', '|', '/'], // Forward Spin
     ['&ndash;', '/', '|', '\\'], // Backward Spin
-    ['', '', '', '█', '█', '█'], // Cursor blink
+    ['', '', '', 'pause', 'pause'], // Cursor blink
 ];
 
 function animate(index) {
     // Update the element id of elementID to have the index-th ASCII array entry in it. (Note: arrays start at 0)
-    document.getElementById('ascii-spin').innerHTML = ASCIIs[0][index];
+    document.getElementById('ascii-spin').innerHTML = ASCIIs[2][index];
     let inputSlider = document.getElementById('bpm');
     let frequency = inputSlider.value;
     // Call the update function after 1 second / frequency (Hz).
@@ -512,13 +515,25 @@ function animate(index) {
             // Pass the update function the index that it was called with this time, plus 1.
             // % means modulus (remainder when divided by)
             // This way, it doesnt' try to look for the 1000th element which doesn't exist
-            animate((index + 1) % ASCIIs[0].length);
+            animate((index + 1) % ASCIIs[2].length);
         }
     }, 10000 / frequency);
 }
 
+function animateLFO(index) {
+    document.getElementById('ascii-lfo-spin').innerHTML = ASCIIs[1][index];
+    let inputSlider = document.getElementById('lfo-rate');
+    let frequency = inputSlider.value;
+    // Call the update function after 1 second / frequency (Hz).
+    setTimeout(function () {
+        if (Tone.Transport.state === 'started') {
+            animateLFO((index + 1) % ASCIIs[1].length);
+        }
+    }, 500 / frequency);
+}
+
 /////// Horizontal Slider Animation ////////
-let tempoMeter = document.getElementById('ascii-bpm');
+const tempoMeter = document.getElementById('ascii-bpm');
 const lines = '|';
 const block = '▓';
 
@@ -538,8 +553,7 @@ function init() {
         const arrowUpFilled = '│o│↑' + '<br>';
         const arrowDownFilled = '│o│↓' + '<br>';
         const filled = '│o│' + '<br>';
-        asciiRepeater[i].innerHTML =
-            '│-│' + '<br>' + '│-│↑' + '<br>' + '│-│↓' + '<br>' + '│o│' + '<br>';
+        asciiRepeater[i].innerHTML = '│-│' + '<br>' + '│-│↑' + '<br>' + '│-│↓' + '<br>' + '│o│' + '<br>';
     }
 }
 
@@ -553,14 +567,13 @@ synthControls.addEventListener('input', ({ target }) => {
 
     /// Mod index
     if (target.max == 100) {
-        let linesAmount = parseInt(target.value / 3.2);
+        let linesAmount = parseInt(target.value / 3.2); // This ends up being the total width essentially
         console.log(parseInt(32 - linesAmount));
         document.getElementById(target.dataset.ascii).innerHTML =
             lines + lines.repeat(linesAmount) + block + emptyAlt.repeat(31 - linesAmount) + empty;
     } else if (target.id === 'crossfader') {
         let linesAmount = parseInt(target.value * 18); // Change this value back to 31 if width is reverted
-        document.getElementById(target.dataset.ascii).innerHTML =
-            lines.repeat(linesAmount) + block + empty.repeat(17 - linesAmount + 1); // Fills in empty space.  +1 so that it doesn't hit 0 and throw an error
+        document.getElementById(target.dataset.ascii).innerHTML = lines.repeat(linesAmount) + block + empty.repeat(17 - linesAmount + 1); // Fills in empty space.  +1 so that it doesn't hit 0 and throw an error
         /// Filter
     } else if (target.max == 1) {
         /// Envelopes
@@ -581,6 +594,10 @@ synthControls.addEventListener('input', ({ target }) => {
         let linesAmount = parseInt(target.value * 2.1);
         document.getElementById(target.dataset.ascii).innerHTML =
             lines + lines.repeat(linesAmount) + block + emptyAlt.repeat(31 - linesAmount) + empty;
+    } else if (target.id === 'harmonicity') {
+        let linesAmount = parseInt(target.value * 2.7);
+        document.getElementById(target.dataset.ascii).innerHTML = lines + lines.repeat(linesAmount) + block + empty.repeat(17 - linesAmount);
+        document.getElementById('ascii-harmonicity-num').innerHTML = '|' + parseFloat(target.value).toFixed(1) + '|';
     }
 });
 fxControls.addEventListener('input', ({ target }) => {
@@ -589,26 +606,21 @@ fxControls.addEventListener('input', ({ target }) => {
     /// Mod index
     if (target.max == 100) {
         let linesAmount = parseInt(target.value) / 3.2;
-        document.getElementById(target.dataset.ascii).innerHTML =
-            lines + lines.repeat(linesAmount) + block;
+        document.getElementById(target.dataset.ascii).innerHTML = lines + lines.repeat(linesAmount) + block;
     } else if (target.max == 1) {
         /// Envelopes
         let linesAmount = parseInt(target.value * 31);
-        document.getElementById(target.dataset.ascii).innerHTML =
-            lines + lines.repeat(linesAmount) + block;
+        document.getElementById(target.dataset.ascii).innerHTML = lines + lines.repeat(linesAmount) + block;
         /// Filter
     } else if (target.max == 1500) {
         let linesAmount = parseInt(target.value / 47);
-        document.getElementById(target.dataset.ascii).innerHTML =
-            lines + lines.repeat(linesAmount) + block;
+        document.getElementById(target.dataset.ascii).innerHTML = lines + lines.repeat(linesAmount) + block;
     } else if (target.max == 10) {
         let linesAmount = parseInt(target.value * 3.1);
-        document.getElementById(target.dataset.ascii).innerHTML =
-            lines + lines.repeat(linesAmount) + block;
+        document.getElementById(target.dataset.ascii).innerHTML = lines + lines.repeat(linesAmount) + block;
     } else if (target.id === 'lfo-rate') {
         let linesAmount = parseInt(target.value * 2.1);
-        document.getElementById(target.dataset.ascii).innerHTML =
-            lines + lines.repeat(linesAmount) + block;
+        document.getElementById(target.dataset.ascii).innerHTML = lines + lines.repeat(linesAmount) + block;
     }
 });
 
