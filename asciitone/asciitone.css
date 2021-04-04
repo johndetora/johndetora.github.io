@@ -415,10 +415,12 @@ p {
     }
     #crossfader {
         position: absolute;
-        width: 80px;
         z-index: 1;
     }
-    #ascii-synth-overlay {
+    #overlay-container {
+        display: none;
+    }
+    #tabs-container {
         display: none;
     }
 }
