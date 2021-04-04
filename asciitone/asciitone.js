@@ -533,6 +533,9 @@ function animateLFO(index) {
     }, 500 / frequency);
 }
 
+// ------------------------- //
+//    Slider Animations      //
+// ------------------------- //
 /////// Horizontal Slider Animation ////////
 const tempoMeter = document.getElementById('ascii-bpm');
 const lines = '|';

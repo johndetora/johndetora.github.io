@@ -66,6 +66,7 @@ Block Diagram
   └─────────┘   └─────────┘    └─────────┘            
 </pre>
 
+
 ### There are several known issues and things to note:
 
 -   Google chrome may think the page is in portuguese. Do not translate it.
