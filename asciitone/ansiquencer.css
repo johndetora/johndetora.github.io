@@ -34,18 +34,6 @@ a {
     text-align: center;
 }
 
-#overlay-container {
-    position: relative;
-}
-#ascii-window {
-    position: absolute;
-    line-height: 13px;
-    font-size: 14px;
-    top: -92px;
-    left: -137px;
-    z-index: -4;
-}
-
 .transport {
     margin: 1px;
     margin-left: 15px;
@@ -91,7 +79,7 @@ a {
 
 #play-button {
     position: absolute;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: bold;
     padding: 1px;
     outline: none;

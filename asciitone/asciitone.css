@@ -78,6 +78,26 @@ p {
     width: 100%;
     font-size: 12px;
 }
+
+#overlay-container {
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    line-height: 13px;
+    font-size: 14px;
+    top: -40px;
+    left: -137px;
+    z-index: -5;
+}
+#ascii-synth-overlay {
+    display: block;
+}
+
+#ascii-fx-overlay {
+    display: none;
+}
 #main-container {
     margin: auto;
     padding: 5% 10% 10% 10%;
@@ -182,11 +202,16 @@ p {
     position: absolute;
     top: 15px;
     left: 0px;
-    width: auto;
+    width: 92%;
+    height: 80%;
     line-height: 18px;
-    z-index: 1;
+    z-index: 3;
 }
 
+#glide-container {
+    margin-left: 5px;
+}
+/* input checkbox */
 #glide {
     position: absolute;
     left: 50px;
@@ -226,9 +251,9 @@ p {
     top: 15px;
     left: 0px;
     width: 90%;
-    height: 90%;
+    height: 80%;
     line-height: 18px;
-    z-index: 3;
+    z-index: 4;
 }
 .ascii-wave:hover {
     font-weight: 700;
@@ -239,7 +264,13 @@ p {
 } */
 #harmonicity-container {
     position: relative;
-    top: 5px;
+    top: 10px;
+}
+
+#harmonicity {
+    position: absolute;
+    width: 80px;
+    z-index: 1;
 }
 
 #ascii-harmonicity-num {
@@ -247,19 +278,16 @@ p {
     left: 20px;
     top: 40px;
 }
-#harmonicity {
-    position: absolute;
-    width: 70px;
-    z-index: 1;
-}
-
 #crossfader-container {
     position: relative;
-    bottom: -6px;
+    bottom: 0px;
+    padding: 3px;
+    width: 100px;
 }
 #crossfader {
     position: absolute;
     width: 80px;
+    left: 1px;
     z-index: 1;
 }
 
@@ -317,21 +345,20 @@ p {
 .ascii-params {
     z-index: -1;
     position: absolute;
-    left: 3px;
+    left: 7px;
     font-weight: bold;
     letter-spacing: -4px;
+}
+.fx-control {
+    padding: 4px;
+    margin-left: 5px;
 }
 
 #fx-container {
     display: none;
     position: relative;
     top: 60px;
-    margin: 10px auto auto auto;
-}
-
-.fx-control {
-    /* border: 1px solid black; */
-    position: relative;
+    margin: 10px 5px auto auto;
 }
 
 .ascii-label {
@@ -339,12 +366,18 @@ p {
     font-size: 14px;
 }
 
-#param-swap {
+#tabs-container {
     position: relative;
+    width: 90px;
+    top: 320px;
+    height: auto;
     font-size: 15px;
-    display: none;
 }
 
+#fx-swap {
+    position: absolute;
+    z-index: 2;
+}
 @media all and (max-width: 600px) {
     input[type='range']::-webkit-slider-thumb {
         -webkit-appearance: none;
@@ -385,7 +418,7 @@ p {
         width: 80px;
         z-index: 1;
     }
-    #ascii-window {
+    #ascii-synth-overlay {
         display: none;
     }
 }

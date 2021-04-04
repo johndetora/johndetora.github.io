@@ -49,6 +49,7 @@ playButton.addEventListener('click', () => {
 // Initialization of bpm and ascii meters
 window.addEventListener('load', () => {
     init();
+
     let bpm = transport.value;
     Tone.Transport.bpm.value = bpm;
 });
@@ -600,27 +601,19 @@ synthControls.addEventListener('input', ({ target }) => {
         document.getElementById('ascii-harmonicity-num').innerHTML = '|' + parseFloat(target.value).toFixed(1) + '|';
     }
 });
+
+// FX Horizontal slider animations
+
 fxControls.addEventListener('input', ({ target }) => {
+    let empty = '|';
+    let emptyAlt = '-';
     console.log(target.max);
-    //// The '/ n' parts make it so the lines amount equal 31 at their max. Just divide/multiply target max so it reaches 31
-    /// Mod index
-    if (target.max == 100) {
-        let linesAmount = parseInt(target.value) / 3.2;
-        document.getElementById(target.dataset.ascii).innerHTML = lines + lines.repeat(linesAmount) + block;
-    } else if (target.max == 1) {
+    if (target.id == 'delayTime' || target.id == 'delayFeedback' || target.id == 'delayMix') {
+        // Target max is 1
         /// Envelopes
         let linesAmount = parseInt(target.value * 31);
-        document.getElementById(target.dataset.ascii).innerHTML = lines + lines.repeat(linesAmount) + block;
-        /// Filter
-    } else if (target.max == 1500) {
-        let linesAmount = parseInt(target.value / 47);
-        document.getElementById(target.dataset.ascii).innerHTML = lines + lines.repeat(linesAmount) + block;
-    } else if (target.max == 10) {
-        let linesAmount = parseInt(target.value * 3.1);
-        document.getElementById(target.dataset.ascii).innerHTML = lines + lines.repeat(linesAmount) + block;
-    } else if (target.id === 'lfo-rate') {
-        let linesAmount = parseInt(target.value * 2.1);
-        document.getElementById(target.dataset.ascii).innerHTML = lines + lines.repeat(linesAmount) + block;
+        document.getElementById(target.dataset.ascii).innerHTML =
+            lines + lines.repeat(linesAmount) + block + emptyAlt.repeat(31 - linesAmount) + empty;
     }
 });
 
@@ -653,20 +646,26 @@ function circleGrow(target) {
 //////////////// SWAP PARAMETERS ///////////////
 
 let paramState = 'synth';
-const fxSwap = document.getElementById('param-swap');
+const fxSwap = document.getElementById('fx-swap');
 
 fxSwap.addEventListener('click', function () {
+    const synthOverlay = document.getElementById('ascii-synth-overlay');
+    const fxOverlay = document.getElementById('ascii-fx-overlay');
     if (paramState === 'fx') {
         console.log('fx state');
         synthControls.style.display = 'grid';
         fxControls.style.display = 'none';
         fxSwap.innerHTML = '[ fx ]';
+        synthOverlay.style.display = 'block';
+        fxOverlay.style.display = 'none';
         return (paramState = 'synth');
     } else {
         fxControls.style.display = 'grid';
         synthControls.style.display = 'none';
         fxSwap.innerHTML = '[ synth ]';
         console.log('synth state');
+        synthOverlay.style.display = 'none';
+        fxOverlay.style.display = 'block';
         return (paramState = 'fx');
     }
 });
