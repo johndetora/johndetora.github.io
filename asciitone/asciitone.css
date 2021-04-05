@@ -18,7 +18,7 @@ input[type='range'] {
     background-color: transparent;
     border: 1px solid black;
     cursor: pointer;
-    opacity: 0;
+    opacity: 1;
 }
 input[type='range']::-webkit-slider-thumb {
     -webkit-appearance: none;

@@ -222,9 +222,12 @@ filterControls.addEventListener('input', ({ target }) => {
 const lfo = new Tone.LFO(1, 0.1, 1500).start();
 
 const toFilt = new Tone.Gain(0);
-const toFreq = new Tone.Gain(0);
+const toModIndex = new Tone.Gain(0);
 lfo.connect(toFilt);
 toFilt.connect(filter.frequency);
+// Connect LFO to mod index
+// lfo.connect(toFreqRatio);
+toModIndex.connect(synth.modulationIndex);
 const lfoRate = document.getElementById('lfo-rate');
 const lfoAmt = document.querySelector('#lfo-amount');
 lfoRate.addEventListener('input', function () {
@@ -233,13 +236,14 @@ lfoRate.addEventListener('input', function () {
 lfoAmt.addEventListener('input', function () {
     console.log(this.value);
     toFilt.gain.value = this.value;
+    toFreqRatio.gain.value = this.value;
 });
 
 //////// Delay /////////////
 
 const delay = new Tone.FeedbackDelay({
-    delayTime: '0',
-    feedback: 0.3,
+    delayTime: 0.2,
+    feedback: 0.1,
     wet: 0,
 });
 delayControl.addEventListener('input', ({ target }) => {
