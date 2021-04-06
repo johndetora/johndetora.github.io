@@ -379,6 +379,7 @@ p {
     position: relative;
     top: 60px;
     margin: 10px 5px auto auto;
+    z-index: 0;
 }
 
 .ascii-label {
@@ -418,7 +419,6 @@ p {
         padding: 0;
         width: fit-content;
         height: 90%;
-        border: none;
     }
     #synth-container {
         position: relative;
@@ -441,6 +441,5 @@ p {
         display: none;
     }
     #tabs-container {
-        display: none;
     }
 }
