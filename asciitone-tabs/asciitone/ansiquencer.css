@@ -197,7 +197,8 @@ a {
 }
 
 @media all and (max-width: 600px) {
-    .container {
+    #steps {
+        position: relative;
         display: grid;
         grid-template-columns: repeat(8, 44px);
         grid-template-rows: auto auto auto auto auto auto;
@@ -205,11 +206,14 @@ a {
             'buttons'
             'meters'
             'tabs';
-
-        width: 100%;
-        position: relative;
+        padding: 0;
+        margin: 0;
+        width: 350px;
     }
-
+    /* #slider-1 {
+        padding: 0;
+        margin: 0;
+    } */
     #playhead {
         margin-top: 14px;
         margin-left: 15px;
