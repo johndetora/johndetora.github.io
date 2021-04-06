@@ -1,4 +1,7 @@
 @import './skins/skin-light.css';
+* {
+    box-sizing: border-box;
+}
 
 html * {
     -webkit-tap-highlight-color: transparent;
@@ -77,10 +80,18 @@ p {
 #header {
     width: 100%;
     font-size: 12px;
+    z-index: 9999 !important;
 }
 
 #overlay-container {
     position: relative;
+    margin: auto;
+    pointer-events: none;
+    height: auto;
+    width: auto;
+    padding: 0;
+    left: 26px;
+    z-index: 0;
 }
 
 .overlay {
@@ -88,8 +99,7 @@ p {
     line-height: 13px;
     font-size: 14px;
     top: -40px;
-    left: -137px;
-    z-index: -5;
+    left: -133px;
 }
 #ascii-synth-overlay {
     display: block;
@@ -100,10 +110,14 @@ p {
 }
 #main-container {
     margin: auto;
-    padding: 5% 10% 10% 10%;
-    /* border: 1px solid black; */
+    margin-top: 5%;
+    padding: 85px 100px 100px 100px;
+    border-radius: 2rem;
     width: fit-content;
-    height: 105vh;
+    height: fit-content;
+    min-height: 900px;
+    max-width: 800px;
+    z-index: -999;
 }
 
 /* //////// TOP BAR /////////////*/
@@ -124,7 +138,7 @@ p {
     width: 100%;
     height: 100%;
     display: none;
-    z-index: 1;
+    z-index: 1
     /* border: 1px solid black; */
     background-color: transparent;
 }
@@ -143,6 +157,7 @@ p {
     /* display: grid; */
     display: grid;
     position: relative;
+
     top: 60px;
     grid-template-columns: 95px auto;
     grid-template-rows: auto auto auto;
@@ -151,17 +166,17 @@ p {
         'oscillatorB mod mixer';
     gap: 1px;
     margin: 10px auto auto auto;
-    width: fit-content;
+    width: 390;
 }
 
 .synth-control {
     justify-content: center;
     align-content: center;
+    z-index: 0;
     padding: 4px;
 }
 #oscillator-container-a {
     position: relative;
-    /* border: 1px solid black; */
     text-align: left;
     grid-area: oscillatorA;
 }
@@ -184,8 +199,8 @@ p {
     display: inline;
     cursor: pointer;
     text-align: center;
-    margin: 4px 0 6px 0;
-    width: 70px;
+    margin: 10px 0 6px 0;
+    width: 59px;
     height: 16px;
     padding: 2px;
     top: 13px;
@@ -200,28 +215,33 @@ p {
     cursor: pointer;
     flex-direction: column;
     position: absolute;
+    margin: 10px 0 6px 0;
     top: 15px;
     left: 0px;
     width: 92%;
-    height: 80%;
+    height: 79%;
     line-height: 18px;
-    z-index: 3;
+    z-index: 4;
 }
 
 #glide-container {
-    margin-left: 5px;
+    position: relative;
+    left: 6px;
 }
 /* input checkbox */
 #glide {
     position: absolute;
     left: 50px;
+    top: 3px;
+    margin: auto;
+
     cursor: pointer;
     opacity: 0;
 }
 #ascii-glide {
     position: absolute;
-    left: 50px;
-    top: 36px;
+    left: 45px;
+    top: -13px;
     z-index: -1;
 }
 
@@ -233,7 +253,7 @@ p {
     text-align: center;
 
     margin: 4px 0 6px 0;
-    width: 70px;
+    width: 59px;
     height: 16px;
     padding: 2px;
     top: 13px;
@@ -281,14 +301,13 @@ p {
 #crossfader-container {
     position: relative;
     bottom: 0px;
-    padding: 3px;
+
     width: 100px;
 }
 #crossfader {
     position: absolute;
     width: 80px;
     left: 1px;
-    z-index: 1;
 }
 
 #oscillator-container-b {
@@ -343,11 +362,12 @@ p {
 }
 
 .ascii-params {
-    z-index: -1;
+    z-index: 0;
     position: absolute;
     left: 7px;
     font-weight: bold;
     letter-spacing: -4px;
+    z-index: -5;
 }
 .fx-control {
     padding: 4px;

@@ -236,7 +236,7 @@ lfoRate.addEventListener('input', function () {
 lfoAmt.addEventListener('input', function () {
     console.log(this.value);
     toFilt.gain.value = this.value;
-    toFreqRatio.gain.value = this.value;
+    // toFreqRatio.gain.value = this.value;
 });
 
 //////// Delay /////////////
@@ -494,8 +494,8 @@ function playHeadUpdate(step) {
 ///
 ///////  Bar  ////////
 function bars(v) {
-    let top = ' _' + '<br>';
-    let bottom = ' ^' + '<br>';
+    let top = '_' + '<br>';
+    let bottom = '^' + '<br>';
     let row = '|░|' + '<br>';
     let filled = '|▓|' + '<br>';
     return top + row.repeat(max - v) + filled.repeat(v) + filled + bottom;

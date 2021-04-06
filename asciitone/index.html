@@ -21,138 +21,138 @@
     <!-- <button class="transport" id="test-button" onclick="tester()">[ array tester ]</button> teasfs-->
 
     <div id="main-container">
-        <div id="background"></div>
+        <div id="overlay-container">
+            <pre id="ascii-synth-overlay" class="overlay">
+             ______________________________________________    
+           |================================================|
+           |                                                |
+           |                                                |
+           <span class="divider">|*~~~~~~~~~ tempo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*|</span>      
+           |^                                              ^|
+           ||                                              ||
+           <span class="divider">|↓~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~↓|</span>
+           |O                                              O|    
+           |o                                              o|
+           |*                                              *|
+           |.                                              .|
+           |                                                |                                                                                             
+           |                                                |
+           |                                                |
+           |                                                |
+           |                                                |
+           |                                                |
+           |                                                |
+           |                                                |
+           |                                                |
+           |                                                |
+           |                                                |
+           |                                                |
+           |                                                |                                         
+           |                                                |                                         
+           |                                                |                                         
+           |                                                |                                         
+           |                                                |
+           |                                                |                                                                            
+           |                                                |                                         
+           |______________<!--<span class="ascii-label">ƒ</span> -->__________________________________|                                         
+           |                                                |
+           |                                                |
+           |                                                |
+           | _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _  |                                         
+           | <!--<span class="ascii-label">Zzz</span> -->                                               |                                        
+           |                                                |
+           |--------------------- <span class="ascii-label">Zzz</span> ----------------------|
+           |                                                |     
+           |--- <span class="ascii-label">osc</span> -------- <span class="ascii-label">envelope</span> -------- <span class="ascii-label">filter</span> ------|
+           |                                                |
+           |                                                |
+           |                                                |
+           |                                                |
+           |                                                |
+           |                                                |
+           |                                                |
+           |-- <span class="ascii-label">mod osc</span> ------ <span class="ascii-label">mod env</span> ---------- <span class="ascii-label">lfo</span> -------|
+           |                                                |
+           |                                                |
+           |                                                |
+           |                                                |
+           |                                                |
+           |                                                |
+           |                                                |
+           |                                                |
+           |                                                |
+           |------------------------------------------------|
+           |                                                |
+           |________________________________________________|
+
+         </pre>
+            <pre id="ascii-fx-overlay" class="overlay">
+             ____________________________________________    
+            |=============================================|
+            |                                             |
+            |                                             |
+            <span class="divider">|*~~~~~~~~~ tempo ~~~~~~~~~~~~~~~~~~~~~~~~~~~*|</span>      
+            |^                                           ^|
+            ||                                           ||
+            <span class="divider">|↓~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~↓|</span>
+            |O                                           O|    
+            |o                                           o|
+            |*                                           *|
+            |.                                           .|
+            |                                             |                                                                                             
+            |                                             |
+            |                                             |
+            |                                             |
+            |                                             |
+            |                                             |
+            |                                             |
+            |                                             |
+            |                                             |
+            |                                             |
+            |                                             |
+            |                                             |
+            |                                             |                                         
+            |                                             |                                         
+            |                                             |                                         
+            |                                             |                                         
+            |                                             |
+            |                                             |                                                                            
+            |                                             |                                         
+            |________________<!--<span class="ascii-label">ƒ</span> -->_____________________________|                                         
+            |                                             |
+            |                                             |
+            |                                             |
+            |_____________________________________________|                                         
+            |                                             |                                        
+            |                                             |
+            |------------------- <span class="ascii-label">Zzz</span> ---------------------|
+            |                                             |     
+            |--- <span class="ascii-label">delay</span> -----------------------------------|
+            |                 |                           |    
+            |                 |                           |    
+            |                 |                           |
+            |                 |                           |
+            |                 |                           |
+            |                 |                           |
+            |                 |                           |
+            |                 |                           |
+            |                 |                           |
+            |                 |                           |
+            |                 |                           |
+            |                 |                           |
+            |                 |                           |
+            |                 |                           |
+            |                 |                           |
+            |                 |                           |
+            |                 |                           |
+            |---------------------------------------------|
+            |                                             |
+            |_____________________________________________|
+        </pre>
+        </div>
         <div id="heading">
 
-            <div id="overlay-container">
-                <pre id="ascii-synth-overlay" class="overlay">
-                 _____________________________________________    
-                |=============================================|
-                |                                             |
-                |                                             |
-                <span class="divider">|*~~~~~~~~~ tempo ~~~~~~~~~~~~~~~~~~~~~~~~~~~*|</span>      
-                |^                                           ^|
-                ||                                           ||
-                <span class="divider">|↓~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~↓|</span>
-                |O                                           O|    
-                |o                                           o|
-                |*                                           *|
-                |.                                           .|
-                |                                             |                                                                                             
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |                                         
-                |                                             |                                         
-                |                                             |                                         
-                |                                             |                                         
-                |                                             |
-                |                                             |                                                                            
-                |                                             |                                         
-                |________________<!--<span class="ascii-label">ƒ</span> -->_____________________________|                                         
-                |                                             |
-                |                                             |
-                |                                             |
-                |_____________________________________________|                                         
-                | <!--<span class="ascii-label">Zzz</span> -->                                            |                                        
-                |                                             |
-                |------------------- <span class="ascii-label">Zzz</span> ---------------------|
-                |                                             |     
-                |--- <span class="ascii-label">osc</span> ------- <span class="ascii-label">envelope</span> -------- <span class="ascii-label">filter</span> ----|
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |
-                |- <span class="ascii-label">mod osc</span> ----- <span class="ascii-label">mod env</span> ---------- <span class="ascii-label">lfo</span> ------|
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |
-                |---------------------------------------------|
-                |                                             |
-                |_____________________________________________|
-             
-             </pre>
-                <pre id="ascii-fx-overlay" class="overlay">
-                 ____________________________________________    
-                |=============================================|
-                |                                             |
-                |                                             |
-                <span class="divider">|*~~~~~~~~~ tempo ~~~~~~~~~~~~~~~~~~~~~~~~~~~*|</span>      
-                |^                                           ^|
-                ||                                           ||
-                <span class="divider">|↓~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~↓|</span>
-                |O                                           O|    
-                |o                                           o|
-                |*                                           *|
-                |.                                           .|
-                |                                             |                                                                                             
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |
-                |                                             |                                         
-                |                                             |                                         
-                |                                             |                                         
-                |                                             |                                         
-                |                                             |
-                |                                             |                                                                            
-                |                                             |                                         
-                |________________<!--<span class="ascii-label">ƒ</span> -->_____________________________|                                         
-                |                                             |
-                |                                             |
-                |                                             |
-                |_____________________________________________|                                         
-                |                                             |                                        
-                |                                             |
-                |------------------- <span class="ascii-label">Zzz</span> ---------------------|
-                |                                             |     
-                |--- <span class="ascii-label">delay</span> -----------------------------------|
-                |                 |                           |    
-                |                 |                           |    
-                |                 |                           |
-                |                 |                           |
-                |                 |                           |
-                |                 |                           |
-                |                 |                           |
-                |                 |                           |
-                |                 |                           |
-                |                 |                           |
-                |                 |                           |
-                |                 |                           |
-                |                 |                           |
-                |                 |                           |
-                |                 |                           |
-                |                 |                           |
-                |                 |                           |
-                |---------------------------------------------|
-                |                                             |
-                |_____________________________________________|
-            </pre>
-            </div>
+
             <div id="header">
                 <span id="title">&nbsp;$ ascii-tone v1.0b1 </span>
                 <span id="about-menu"></span>
@@ -390,8 +390,8 @@
                 </div>
                 <br><br>
                 <div id="glide-container">
-                    <span class="label">glide<input type="checkbox" id="glide">
-                        <pre id="ascii-glide">[ ]</pre>
+                    <p class="label">glide</p><input type="checkbox" id="glide">
+                    <pre id="ascii-glide">[ ]</pre>
                     </span>
                 </div>
                 <div class="synth-control" id="crossfader-container">
@@ -416,7 +416,7 @@
             <div class="synth-control" id="filter-container">
                 <!-- <p class="group-label">Filter</p> -->
                 <br>
-                <span id="filterLabel" class="label">> cutoff</span> <span id="ascii-cutoff">o</span><br>
+                <p id="filterLabel" class="label">> cutoff</p> <span id="ascii-cutoff">o</span>
                 <input type="range" class="filter" id="cutoff" data-parameter="frequency" data-ascii="ascii-frequency"
                     value="1500" min="0" max="1500" step="0.001"><span id="ascii-frequency"
                     class="ascii-params">||||||||||||||||||||||||||||||||▓</span>

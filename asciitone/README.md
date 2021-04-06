@@ -41,8 +41,9 @@ ANSIquencer is the note input device for ascii-tone. It is made up of 8 steps wi
 Block Diagram
 
 <pre>
+         
   ┌─────────┐   ┌─────────┐   ┌─────────┐             
-  │         │   │         │→ →│  osc    │             
+  │         │   │         │→ →│  osc    │             
   │         │   │         │   │         │             
   │   OSC   │→ →│   ENV   │   │  CROSS  │               
   │         │   │         │   │  FADER  │→  →            
@@ -58,13 +59,51 @@ Block Diagram
                   ↑     ↑           ↑          
                   ↑     ↑           ↑           
   ┌─────────┐   ┌─────────┐    ┌─────────┐       
-  │         │   │         │    │         │      
+  │2        │   │         │    │         │      
   │         │   │         │    │         │            
   │ MOD OSC │→ →│ MOD ENV │    │   LFO   │            
   │         │   │         │    │         │           
   │         │   │         │    │         │            
-  └─────────┘   └─────────┘    └─────────┘            
+  └─────────┘   └─────────┘    └─────────┘       
 </pre>
+
+### osc
+
+The $osc section controls the primary (carrier) operator as well as the blending of the carrier and modulator signal levels.
+
+-   Engage the [waveform] button to see all available waveform options. Click again to select the new waveform.
+-   To enable glide, click the glide box. Note that you may need to adjust the decay amount of the primary envelope generator in order to hear the effects.
+    -- [ ] = glide disabled
+    -- [@] = glide enabled
+-   The cross fader (labeled 'osc <> mod') controls the level blending of the carrier and modulator operators before reaching the lpf section. By default, only the primary carrier osc is heard.
+
+### mod osc
+
+The $mod osc section controls the secondary (modulation) operator's waveform and frequency ratio. Use this to change the timbre of te final output.
+
+-   Engage the [waveform] button to see all available waveform options. Click again to select the new waveform.
+-   Move the |freq ratio| to raise the frequency of $mod osc, thus changing the ratio between the carrier operator's frequency and the modulation operator's frequency.
+
+### envelope
+
+The $envelope section controls the amplitude of the carrier oscillator with a simple attack/decay envelope.
+
+-   Note that changes here will be more apparent the more that the tempo is lowered.
+
+### mod envelope
+
+The $mod env section controls the amplitude of the modulator oscillator with >mod index controlling the total amount that the modulator will influence the carrier's frequency.
+
+### filter
+
+The $filter section allows you to adjust the low pass filter's frequency cutoff and resonance, changing the timbre of the final output by cutting out higher frequencies.
+
+-   Adjust the >cutoff control to raise or lower the amount of high frequencies that are allowed to pass.
+-   Adjust the >resonance to change the 'quality' of the frequency band.
+
+### lfo
+
+The $lfo controls the modulation of the $filter section's cutoff. Note that the effect will be more apparent the more that the cutoff control is lowered.
 
 ### There are several known issues and things to note:
 
