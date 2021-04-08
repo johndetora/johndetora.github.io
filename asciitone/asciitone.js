@@ -1,3 +1,13 @@
+let OSName = 'Unknown OS';
+if (navigator.appVersion.indexOf('Win') != -1) OSName = 'Windows';
+if (navigator.appVersion.indexOf('Mac') != -1) OSName = 'MacOS';
+
+console.log('Your OS: ' + OSName);
+const overlay = document.getElementById('overlay-container');
+if (navigator.appVersion.indexOf('Win') != -1) {
+    overlay.style.left = '15px';
+}
+
 // ------------------------- //
 //      Skin select         //
 // ------------------------- //
