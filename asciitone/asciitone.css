@@ -5,6 +5,7 @@
 
 html * {
     -webkit-tap-highlight-color: transparent;
+    /* font-family: 'Courier New', Courier, monospace */
     font-family: monospace !important;
 }
 
@@ -490,16 +491,13 @@ p {
 }
 
 /* pixel */
-@media all and (max-height: 739px) {
+/* @media all and (max-height: 739px) {
     #tabs-container-mobile {
         border: 1px solid black;
         display: flex;
         flex-direction: row;
         position: fixed;
         top: 75vh;
-
-        /* bottom: 250px; */
-
         width: 350px;
         height: 60px;
         font-size: 15px;
@@ -507,18 +505,15 @@ p {
 }
 
 /* old iphone */
-@media all and (max-height: 600px) {
+/* @media all and (max-height: 600px) {
     #tabs-container-mobile {
         border: 1px solid black;
         display: flex;
         flex-direction: row;
         position: fixed;
         top: 85vh;
-
-        /* bottom: 250px; */
-
         width: 300px;
         height: 60px;
         font-size: 15px;
     }
-}
+} */
