@@ -5,7 +5,7 @@ if (navigator.appVersion.indexOf('Mac') != -1) OSName = 'MacOS';
 console.log('Your OS: ' + OSName);
 const overlay = document.getElementById('overlay-container');
 if (navigator.appVersion.indexOf('Win') != -1) {
-    overlay.style.left = '55px';
+    overlay.style.left = '48px';
 }
 // ------------------------- //
 //      Skin select         //
