@@ -9,6 +9,8 @@
     --yellow: rgba(245, 177, 81, 1);
     --paleyellow: rgba(246, 186, 101, 1);
     --blue: rgba(134, 232, 254, 1);
+
+    /* Don't remove these */
     --on: rgba(0, 0, 0, 1);
     --off: rgba(0, 0, 0, 0.4);
     --bg: rgb(255, 255, 246);

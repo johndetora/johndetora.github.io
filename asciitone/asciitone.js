@@ -82,7 +82,7 @@ const mod = document.querySelector('#modulation-envelope');
 const oscWave = document.querySelector('#osc-wave');
 const modWave = document.querySelector('#mod-wave');
 const steps = 8; // Total step length
-const max = 10; // Max slider value for note meters
+
 const filterControls = document.querySelector('#filter-container');
 const delayControl = document.querySelector('#delay-container');
 
@@ -266,22 +266,55 @@ filter.connect(delay);
 delay.toDestination(0.8);
 
 // ------------------------- //
-//     Sequencer Data        //
+//        Note Data          //
 // ------------------------- //
 
-let sliderNotes = {
-    0: 'C3',
-    1: 'D3',
-    2: 'E3',
-    3: 'F3',
-    4: 'G3',
-    5: 'A3',
-    6: 'B3',
-    7: 'C4',
-    8: 'D4',
-    9: 'E4',
-    10: 'F4',
-};
+/// SCALES /////
+const chromaticScale = ['C3', 'C#3', 'D3', 'D#3', 'E3', 'F3', 'F#3', 'G3', 'G#3', 'A3', 'A#3', 'B3', 'C4'];
+const majorScale = ['C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3', 'C4', 'D4', 'E4', 'F4', 'G4', 'A4'];
+const minorScale = ['A3', 'B3', 'C3', 'D3', 'E3', 'F3', 'G3', 'A4', 'B4', 'C4', 'D4', 'E4', 'F4'];
+const pentScale = ['C3', 'D3', 'E3', 'G3', 'A3', 'C4', 'D4', 'E4', 'G4', 'A4', 'C5', 'D5', 'E5'];
+const scales = [majorScale, minorScale, pentScale, chromaticScale];
+let currentScale = majorScale;
+
+/// Scale set logic
+const scaleSelect = document.getElementById('scale-select');
+scaleSelect.addEventListener('click', scaleSet);
+let scaleIndex = 0;
+function scaleSet() {
+    let currentNotes = document.querySelectorAll('.meter');
+    // Round Robin selection
+    scaleIndex++;
+    if (scaleIndex === scales.length) scaleIndex = 0; // counter resets to 0
+    currentScale = scales[scaleIndex];
+    // Loop through the current note object and set the values to the current slider values
+    for (let i = 0; i < notes.length; i++) {
+        notes[i].note = currentScale[currentNotes[i].value];
+    }
+    // DOM
+
+    if (currentScale === scales[0]) scaleSelect.innerHTML = '[scale: major]';
+    if (currentScale === scales[1]) scaleSelect.innerHTML = '[scale: minor]';
+    if (currentScale === scales[2]) scaleSelect.innerHTML = '[scale: pentatonic]';
+    if (currentScale === scales[3]) scaleSelect.innerHTML = '[scale: chromatic]';
+    return currentScale;
+}
+
+// let sliderNotes = {
+//     0: 'C3',
+//     1: 'D3',
+//     2: 'E3',
+//     3: 'F3',
+//     4: 'G3',
+//     5: 'A3',
+//     6: 'B3',
+//     7: 'C4',
+//     8: 'D4',
+//     9: 'E4',
+//     10: 'F4',
+//     11: 'G4',
+//     12: 'A4',
+// };
 
 ////// Notes, value time object each object is a step
 
@@ -289,7 +322,7 @@ let notes = [
     {
         // Step 1
         time: '0:0:0',
-        note: 'A3',
+        note: currentScale[6],
         velocity: 1,
         timing: '16n',
         repeat: 0,
@@ -298,7 +331,7 @@ let notes = [
     {
         // Step 2
         time: '0:1:0',
-        note: 'A3',
+        note: currentScale[6],
         velocity: 1,
         timing: '16n',
         repeat: 0,
@@ -306,7 +339,7 @@ let notes = [
     {
         // Step 3
         time: '0:2:0',
-        note: 'A3',
+        note: currentScale[6],
         velocity: 1,
         timing: '16n',
         repeat: 0,
@@ -315,7 +348,7 @@ let notes = [
     {
         // Step 4
         time: '0:3:0',
-        note: 'A3',
+        note: currentScale[6],
         velocity: 1,
         timing: '16n',
         repeat: 0,
@@ -323,7 +356,7 @@ let notes = [
     {
         // Step 5
         time: '1:0:0',
-        note: 'A3',
+        note: currentScale[6],
         velocity: 1,
         timing: '16n',
         repeat: 0,
@@ -331,7 +364,7 @@ let notes = [
     {
         // Step 6
         time: '1:1:0',
-        note: 'A3',
+        note: currentScale[6],
         velocity: 1,
         timing: '16n',
         repeat: 0,
@@ -339,7 +372,7 @@ let notes = [
     {
         // Step 7
         time: '1:2:0',
-        note: 'A3',
+        note: currentScale[6],
         velocity: 1,
         timing: '16n',
         repeat: 0,
@@ -347,12 +380,14 @@ let notes = [
     {
         // Step 8
         time: '1:3:0',
-        note: 'A3',
+        note: currentScale[6],
         velocity: 1,
         timing: '16n',
         repeat: 0,
     },
 ];
+
+// Scale Select button
 
 // TEST Buttons
 function tester() {
@@ -361,9 +396,8 @@ function tester() {
     console.log(bpm);
 }
 
+// For testing purposes.  Hidden
 let repeatButton = document.getElementById('repeatTest');
-
-/// very important that this stays 0 ///
 
 // ------------------------- //
 //     Play Sequence         //
@@ -386,6 +420,7 @@ let part = new Tone.Part(function (time, value) {
     // Repeat Logic
     if (value.repeat == 1) {
         playHeadUpdate(step);
+        // Can try setting the decay to a low value before this, and then setting it back after the notes play
         synth.triggerAttackRelease(value.note, '32n', time, value.velocity);
         synth.triggerAttackRelease(value.note, '32n', time + 0.1, value.velocity);
         index++;
@@ -427,7 +462,7 @@ stepContainer.addEventListener('input', ({ target }) => {
     if (target.className == 'meter') {
         // className == Meter so that the repeater slider isn't targeted
         meters[target.dataset.index].innerHTML = bars(target.value); // Sets bar animation value
-        notes[target.dataset.index].note = sliderNotes[target.value];
+        notes[target.dataset.index].note = currentScale[target.value];
     }
     if (target.className == 'repeater-range') {
         notes[target.dataset.index].repeat = target.value;
@@ -466,16 +501,17 @@ stepContainer.addEventListener('change', ({ target }) => {
         // Turns step 'on'
         notes[target.dataset.index].velocity = 1;
         // UI Update
-        asciiCheck[target.dataset.index].innerHTML = '[#]';
         asciiCheck[target.dataset.index].style.color = 'var(--on)';
+        asciiRepeater[target.dataset.index].style.color = 'var(--on)';
         meters[target.dataset.index].style.color = 'var(--on)';
     } else if (target.type == 'checkbox' && !target.checked) {
         // Turns step 'off'
         notes[target.dataset.index].velocity = 0;
         // UI Update
-        asciiCheck[target.dataset.index].innerHTML = '[ ]';
-        asciiCheck[target.dataset.index].style.color = 'var(--off)';
+
         meters[target.dataset.index].style.color = 'var(--off)';
+        asciiRepeater[target.dataset.index].style.color = 'var(--off)';
+        asciiCheck[target.dataset.index].style.color = 'var(--off)';
     }
 });
 
@@ -494,6 +530,7 @@ function playHeadUpdate(step) {
 ///
 ///////  Bar  ////////
 function bars(v) {
+    const max = 12; // Max slider value for note meters
     let top = '_' + '<br>';
     let bottom = '^' + '<br>';
     let row = '|░|' + '<br>';
@@ -554,7 +591,7 @@ transport.addEventListener('input', function () {
 /// Initialization
 function init() {
     for (let i = 0; i < meters.length; i++) {
-        meters[i].innerHTML = bars(5);
+        meters[i].innerHTML = bars(6);
         const empty = '│-│' + '<br>';
         const arrowUp = '│-│↑' + '<br>';
         const arrowDown = '│-│↓' + '<br>';
@@ -652,9 +689,8 @@ function circleGrow(target) {
 
 //////////////// SWAP PARAMETERS ///////////////
 
-let paramState = 'synth';
 const fxSwap = document.getElementById('fx-swap');
-
+let paramState = 'synth';
 fxSwap.addEventListener('click', function () {
     const synthOverlay = document.getElementById('ascii-synth-overlay');
     const fxOverlay = document.getElementById('ascii-fx-overlay');
@@ -674,5 +710,34 @@ fxSwap.addEventListener('click', function () {
         synthOverlay.style.display = 'none';
         fxOverlay.style.display = 'block';
         return (paramState = 'fx');
+    }
+});
+
+///////////// MOBILE TABS //////////////
+// const synthControls = document.querySelector('#synth-container');
+// const fxControls = document.querySelector('#fx-container');
+
+// const stepContainer = document.querySelector('#steps');
+// const fxSwap = document.getElementById('fx-swap');
+const fxSwapTab = document.getElementById('fx-swap-tab');
+const synthSwap = document.getElementById('synth-swap');
+const seqSwap = document.getElementById('seq-swap');
+const tabContainer = document.querySelector('#tabs-container-mobile');
+
+tabContainer.addEventListener('click', ({ target }) => {
+    tabState = target.dataset.state;
+    console.log(target);
+    if (tabState === 'seq') {
+        stepContainer.style.display = 'grid';
+        synthControls.style.display = 'none';
+        fxControls.style.display = 'none';
+    } else if (tabState === 'synth') {
+        stepContainer.style.display = 'none';
+        synthControls.style.display = 'grid';
+        fxControls.style.display = 'none';
+    } else if (tabState === 'fx') {
+        stepContainer.style.display = 'none';
+        synthControls.style.display = 'none';
+        fxControls.style.display = 'grid';
     }
 });

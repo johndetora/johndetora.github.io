@@ -9,7 +9,7 @@ input[type='range'][orient='vertical'] {
     width: auto;
     margin: 1px 5px 1px 5px;
     width: 35px;
-    height: 260px;
+    height: 310px;
     padding-left: 5px;
     padding-right: 5px;
 }
@@ -102,6 +102,14 @@ a {
     top: 27px;
     width: 50px;
     height: 20px;
+}
+
+#scale-select {
+    position: absolute;
+    cursor: pointer;
+    font-size: 14px;
+    top: 29px;
+    left: 220px;
 }
 
 #test-button {
@@ -197,17 +205,23 @@ a {
 }
 
 @media all and (max-width: 600px) {
-    .container {
+    #steps {
+        position: relative;
         display: grid;
         grid-template-columns: repeat(8, 44px);
-        grid-template-rows: auto auto auto auto auto;
+        grid-template-rows: auto auto auto auto auto auto;
         grid-template-areas:
             'buttons'
-            'meters';
-        width: 100%;
-        position: relative;
+            'meters'
+            'tabs';
+        padding: 0;
+        margin: 0;
+        width: 350px;
     }
-
+    /* #slider-1 {
+        padding: 0;
+        margin: 0;
+    } */
     #playhead {
         margin-top: 14px;
         margin-left: 15px;

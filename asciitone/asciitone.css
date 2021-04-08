@@ -12,7 +12,7 @@ html,
 body {
     max-width: 100%;
     height: 100%;
-    overflow-x: hidden;
+
     font-family: monospace;
 }
 
@@ -166,7 +166,7 @@ p {
         'oscillatorB mod mixer';
     gap: 1px;
     margin: 10px auto auto auto;
-    width: 390;
+    width: fit-content;
 }
 
 .synth-control {
@@ -356,8 +356,8 @@ p {
     font-size: 18px;
     font-weight: bold;
     margin: auto;
-    width: 100%;
-    height: 100%;
+    width: 3rem;
+    height: 3rem;
     text-align: center;
 }
 
@@ -395,11 +395,27 @@ p {
     font-size: 15px;
 }
 
+#tabs-container-mobile {
+    display: none;
+}
 #fx-swap {
     position: absolute;
+    width: 100px;
     z-index: 2;
 }
+
+.tab-btn {
+    margin: auto;
+    font-size: 16px;
+    z-index: 3;
+}
+
+/* ////// START MOBILE ///////// */
 @media all and (max-width: 600px) {
+    body {
+        overflow: hidden;
+        position: fixed;
+    }
     input[type='range']::-webkit-slider-thumb {
         -webkit-appearance: none;
         border: 1px solid #000000;
@@ -411,18 +427,28 @@ p {
         cursor: pointer;
         margin-top: -1px;
     }
+
     #header {
         font-size: 12px;
     }
     #main-container {
         margin: auto;
+
+        padding: 0;
+        width: 100%;
+    }
+
+    /* #main-container {
+        margin: auto;
         padding: 0;
         width: fit-content;
         height: 90%;
-    }
+        border: none;
+    } */
     #synth-container {
         position: relative;
-        display: grid;
+        display: none;
+        top: 0px;
         grid-template-columns: 170px 170px;
         grid-template-rows: auto auto;
         grid-template-areas:
@@ -433,6 +459,7 @@ p {
 
         width: fit-content;
     }
+
     #crossfader {
         position: absolute;
         z-index: 1;
@@ -441,5 +468,57 @@ p {
         display: none;
     }
     #tabs-container {
+        display: none;
+    }
+    #tabs-container-mobile {
+        border: 1px solid black;
+        display: flex;
+        flex-direction: row;
+        position: fixed;
+        top: 65vh;
+
+        /* bottom: 250px; */
+
+        width: 350px;
+        height: 60px;
+        font-size: 15px;
+    }
+    #fx-swap {
+        position: initial;
+        z-index: 2;
+    }
+}
+
+/* pixel */
+@media all and (max-height: 739px) {
+    #tabs-container-mobile {
+        border: 1px solid black;
+        display: flex;
+        flex-direction: row;
+        position: fixed;
+        top: 75vh;
+
+        /* bottom: 250px; */
+
+        width: 350px;
+        height: 60px;
+        font-size: 15px;
+    }
+}
+
+/* old iphone */
+@media all and (max-height: 600px) {
+    #tabs-container-mobile {
+        border: 1px solid black;
+        display: flex;
+        flex-direction: row;
+        position: fixed;
+        top: 85vh;
+
+        /* bottom: 250px; */
+
+        width: 300px;
+        height: 60px;
+        font-size: 15px;
     }
 }
