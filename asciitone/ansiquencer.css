@@ -67,7 +67,7 @@ a {
 }
 
 #ascii-bpm {
-    letter-spacing: -6px;
+    letter-spacing: -5px;
     position: absolute;
     top: 30px;
     left: 73px;
@@ -75,7 +75,6 @@ a {
 
 #ascii-bpm-container {
     font-weight: bold;
-
     letter-spacing: -5px;
     position: absolute;
     top: 17px;
@@ -193,9 +192,8 @@ a {
 }
 
 #ascii-checkbox {
-    font-weight: normal;
     text-align: center;
-    font-size: 18px;
+    font-size: 16px;
     position: absolute;
     margin: 1px;
     margin-left: 5px;
