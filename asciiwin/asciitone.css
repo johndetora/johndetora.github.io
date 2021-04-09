@@ -5,16 +5,14 @@
 
 html * {
     -webkit-tap-highlight-color: transparent;
-    /* font-family: 'Courier New', Courier, monospace */
-    font-family: monospace !important;
+    font-family: Courier, 'Courier New', monospace !important;
 }
 
 html,
 body {
     max-width: 100%;
     height: 100%;
-
-    font-family: monospace !important;
+    font-family: Courier, 'Courier New', monospace !important;
 }
 
 input[type='range'] {
@@ -22,7 +20,7 @@ input[type='range'] {
     background-color: transparent;
     border: 1px solid black;
     cursor: pointer;
-    opacity: 0;
+    opacity: 1;
 }
 input[type='range']::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -36,6 +34,9 @@ input[type='range']::-webkit-slider-thumb {
     margin-top: -1px;
 }
 
+input[type='range']::-moz-range-track {
+    -webkit-appearance: none;
+}
 input[type='range']:focus {
     outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
 }
@@ -77,11 +78,12 @@ p {
 }
 .label {
     margin: 1px;
+    font-size: 13px;
 }
 #header {
     width: 100%;
     font-size: 12px;
-    z-index: 9999 !important;
+    z-index: 9999;
 }
 
 #overlay-container {
@@ -91,6 +93,8 @@ p {
 }
 
 .overlay {
+    font-family: Courier, 'Courier New', monospace, monospace !important;
+    font-weight: bold;
     position: absolute;
     line-height: 13px;
     font-size: 14px;
@@ -154,8 +158,9 @@ p {
         'oscillatorA envelope filter'
         'oscillatorB mod mixer';
 
-    gap: 1px;
-    margin: 2.5rem auto auto 1px;
+    row-gap: 10px;
+
+    margin: 2rem auto auto 1px;
     width: 500px;
 }
 
@@ -184,6 +189,7 @@ p {
 /* wave select "button" */
 #ascii-osc-wave {
     position: absolute;
+    font-size: 14px;
     display: inline;
     cursor: pointer;
     text-align: center;
@@ -199,6 +205,7 @@ p {
 /* wave options */
 #ascii-osc-wave-options {
     background-color: var(--bg);
+    font-size: 14px;
     display: none;
     cursor: pointer;
     flex-direction: column;
@@ -229,12 +236,13 @@ p {
 #ascii-glide {
     position: absolute;
     left: 45px;
-    top: -13px;
+    top: -18px;
     z-index: -1;
 }
 
 /* MOD select "button" */
 #ascii-mod-wave {
+    font-size: 14px;
     position: absolute;
     display: inline;
     cursor: pointer;
@@ -251,6 +259,7 @@ p {
 
 /* MOD options */
 #ascii-mod-wave-options {
+    font-size: 14px;
     background-color: var(--bg);
     display: none;
     cursor: pointer;
@@ -290,7 +299,7 @@ p {
     position: relative;
     bottom: 0px;
 
-    width: 100px;
+    width: 120px;
 }
 #crossfader {
     position: absolute;
@@ -350,11 +359,13 @@ p {
 }
 
 .ascii-params {
+    font-family: Courier, 'Courier New', monospace, monospace !important;
+    font-size: 16px;
     z-index: 0;
     position: absolute;
     left: 7px;
     font-weight: bold;
-    letter-spacing: -4px;
+    letter-spacing: -6px;
     z-index: -5;
 }
 .fx-control {
