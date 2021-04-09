@@ -1,6 +1,0 @@
-@import './palette.css';
-
-body {
-    background-color: var(--bluegray);
-    color: var(--white);
-}
