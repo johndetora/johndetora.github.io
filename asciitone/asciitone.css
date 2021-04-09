@@ -91,16 +91,16 @@ p {
     height: auto;
     width: auto;
     padding: 0;
-    left: 26px;
     z-index: 0;
 }
 
 .overlay {
+    width: 600px;
     position: absolute;
     line-height: 13px;
     font-size: 14px;
     top: -40px;
-    left: -133px;
+    left: -108px;
 }
 #ascii-synth-overlay {
     display: block;
