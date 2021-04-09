@@ -8,7 +8,8 @@ Welcome to ascii-tone, a web based FM Synth and step sequencer with a 100% text 
 
 This project is in the early development period and there are a lot of features planned. I am a relatively new developer and this is my sandbox for learning and experimenting.
 
-ascii-tone runs best on google chrome or mozilla firefox, but will also work with many mobile devices.
+ascii-tone runs best on google chrome or mozilla firefox, but will also work with many mobile devices. As of 4/9/20 the text interface is not 100% compatible with Windows, though the software still functions.
+
 See a live demo [here](www.echocoast.net/asciitone/index.html)
 
 ## About
