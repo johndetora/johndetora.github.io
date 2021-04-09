@@ -5,6 +5,7 @@
 
 html * {
     -webkit-tap-highlight-color: transparent;
+    /* font-family: 'Courier New', Courier, monospace */
     font-family: monospace !important;
 }
 
@@ -12,8 +13,8 @@ html,
 body {
     max-width: 100%;
     height: 100%;
-    overflow-x: hidden;
-    font-family: monospace;
+
+    font-family: monospace !important;
 }
 
 input[type='range'] {
@@ -85,12 +86,7 @@ p {
 
 #overlay-container {
     position: relative;
-    margin: auto;
     pointer-events: none;
-    height: auto;
-    width: auto;
-    padding: 0;
-    left: 26px;
     z-index: 0;
 }
 
@@ -99,7 +95,7 @@ p {
     line-height: 13px;
     font-size: 14px;
     top: -40px;
-    left: -133px;
+    left: -105px;
 }
 #ascii-synth-overlay {
     display: block;
@@ -109,15 +105,12 @@ p {
     display: none;
 }
 #main-container {
+    border: 1px solid green;
     margin: auto;
-    margin-top: 5%;
-    padding: 85px 100px 100px 100px;
+    padding: 5% 10% 10% 10%;
     border-radius: 2rem;
-    width: fit-content;
-    height: fit-content;
-    min-height: 900px;
-    max-width: 800px;
-    z-index: -999;
+    width: 1000px;
+    height: 105vh;
 }
 
 /* //////// TOP BAR /////////////*/
@@ -125,7 +118,6 @@ p {
     margin-bottom: 1px;
 }
 #help:hover {
-    height: 100px;
     width: 70%;
     cursor: help;
 }
@@ -154,24 +146,21 @@ p {
 /*///////   SYNTH LAYOUT    ////////////*/
 #synth-container {
     /* border: 1px solid red; */
-    /* display: grid; */
     display: grid;
     position: relative;
-
-    top: 60px;
-    grid-template-columns: 95px auto;
-    grid-template-rows: auto auto auto;
+    top: 0px;
+    grid-template-columns: 95px 150px 150px;
+    grid-template-rows: 100px auto auto;
     grid-template-areas:
         'oscillatorA envelope filter'
         'oscillatorB mod mixer';
+
     gap: 1px;
-    margin: 10px auto auto auto;
-    width: fit-content;
+    margin: 2.5rem auto auto 1px;
+    width: 500px;
 }
 
 .synth-control {
-    justify-content: center;
-    align-content: center;
     z-index: 0;
     padding: 4px;
 }
@@ -356,8 +345,8 @@ p {
     font-size: 18px;
     font-weight: bold;
     margin: auto;
-    width: 100%;
-    height: 100%;
+    width: 3rem;
+    height: 3rem;
     text-align: center;
 }
 
@@ -390,7 +379,7 @@ p {
 #tabs-container {
     position: relative;
     width: 90px;
-    top: 320px;
+    top: 10px;
     height: auto;
     font-size: 15px;
 }
@@ -400,9 +389,22 @@ p {
 }
 #fx-swap {
     position: absolute;
-    z-index: 2;
+
+    width: 100px;
 }
+
+.tab-btn {
+    margin: auto;
+    font-size: 16px;
+    z-index: 3;
+}
+
+/* ////// START MOBILE ///////// */
 @media all and (max-width: 600px) {
+    body {
+        overflow: hidden;
+        position: fixed;
+    }
     input[type='range']::-webkit-slider-thumb {
         -webkit-appearance: none;
         border: 1px solid #000000;
@@ -458,15 +460,16 @@ p {
         display: none;
     }
     #tabs-container-mobile {
-        position: absolute;
-        top: 410px;
-        margin: 50px auto;
-        padding: 10px;
-        width: 390px;
-        height: 60px;
+        border: 1px solid black;
         display: flex;
         flex-direction: row;
+        position: fixed;
+        top: 70vh;
 
+        /* bottom: 250px; */
+
+        width: 350px;
+        height: 60px;
         font-size: 15px;
     }
     #fx-swap {
@@ -474,3 +477,31 @@ p {
         z-index: 2;
     }
 }
+
+/* pixel */
+/* @media all and (max-height: 739px) {
+    #tabs-container-mobile {
+        border: 1px solid black;
+        display: flex;
+        flex-direction: row;
+        position: fixed;
+        top: 75vh;
+        width: 350px;
+        height: 60px;
+        font-size: 15px;
+    }
+}
+
+/* old iphone */
+/* @media all and (max-height: 600px) {
+    #tabs-container-mobile {
+        border: 1px solid black;
+        display: flex;
+        flex-direction: row;
+        position: fixed;
+        top: 85vh;
+        width: 300px;
+        height: 60px;
+        font-size: 15px;
+    }
+} */

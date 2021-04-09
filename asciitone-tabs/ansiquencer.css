@@ -9,7 +9,7 @@ input[type='range'][orient='vertical'] {
     width: auto;
     margin: 1px 5px 1px 5px;
     width: 35px;
-    height: 260px;
+    height: 310px;
     padding-left: 5px;
     padding-right: 5px;
 }
@@ -20,21 +20,20 @@ a {
     text-decoration: none;
 }
 #steps {
+    /* border: 1px solid blue; */
+    margin-left: 15px;
     position: relative;
+    top: 1px;
+    width: 500px;
+    height: 450px;
     display: grid;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
     grid-template-columns: repeat(8, 45px);
-    grid-template-rows: auto;
+    grid-template-rows: auto auto auto;
     /* grid-auto-rows: minmax(100px, auto) */
     grid-template-areas:
-        'heading'
-        'buttons'
+        'steps'
+        'flutter'
         'meters';
-    margin: auto;
-    width: auto;
-    height: auto;
 
     z-index: 0;
 }
@@ -54,9 +53,7 @@ a {
     margin-left: 15px;
 }
 #top-controls {
-    flex-direction: row;
     position: relative;
-    margin: auto;
     height: 50px;
     width: 390px;
 }
@@ -104,13 +101,21 @@ a {
     height: 20px;
 }
 
+#scale-select {
+    position: absolute;
+    cursor: pointer;
+    font-size: 14px;
+    top: 29px;
+    left: 220px;
+}
+
 #test-button {
     margin: auto;
 }
 
 #playhead {
     margin-top: 14px;
-    margin-left: 33px;
+    margin-left: 23px;
     font-size: 12px;
     position: absolute;
     top: 0px;
@@ -133,7 +138,7 @@ a {
 
 #repeater-container {
     position: relative;
-    top: -2px;
+    top: 0px;
     right: 228px;
 }
 #ascii-repeater {
@@ -154,7 +159,7 @@ a {
     position: absolute;
     margin: 1px;
     padding: 0;
-    height: 50px !important;
+    height: 4.3rem !important;
     width: 20px;
     left: 228px;
     top: -6px;
@@ -165,10 +170,11 @@ a {
 }
 .check-container {
     position: relative;
-    bottom: -50px;
+    bottom: -57px;
     width: auto;
-    padding: auto;
-    margin: auto;
+
+    margin: 1px;
+
     left: 3%;
     /* right: 20%;
     grid-area: controls;
@@ -176,13 +182,12 @@ a {
 }
 
 #check {
-    position: relative;
-    justify-content: margin-left;
-    opacity: 0%;
+    position: absolute;
+    opacity: 0;
     width: 30px;
     height: 20px;
     cursor: pointer;
-    margin-left: 1px;
+
     /* bottom: 10%; */
 }
 
