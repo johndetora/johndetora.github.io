@@ -14,7 +14,7 @@ body {
     max-width: 100%;
     height: 100%;
 
-    font-family: monospace;
+    font-family: monospace !important;
 }
 
 input[type='range'] {
@@ -86,21 +86,16 @@ p {
 
 #overlay-container {
     position: relative;
-    margin: auto;
     pointer-events: none;
-    height: auto;
-    width: auto;
-    padding: 0;
     z-index: 0;
 }
 
 .overlay {
-    width: 600px;
     position: absolute;
     line-height: 13px;
     font-size: 14px;
     top: -40px;
-    left: -108px;
+    left: -105px;
 }
 #ascii-synth-overlay {
     display: block;
@@ -111,14 +106,10 @@ p {
 }
 #main-container {
     margin: auto;
-    margin-top: 5%;
-    padding: 85px 100px 100px 100px;
+    padding: 5% 10% 10% 10%;
     border-radius: 2rem;
-    width: fit-content;
-    height: fit-content;
-    min-height: 900px;
-    max-width: 800px;
-    z-index: -999;
+    width: 1000px;
+    height: 105vh;
 }
 
 /* //////// TOP BAR /////////////*/
@@ -126,7 +117,6 @@ p {
     margin-bottom: 1px;
 }
 #help:hover {
-    height: 100px;
     width: 70%;
     cursor: help;
 }
@@ -155,24 +145,21 @@ p {
 /*///////   SYNTH LAYOUT    ////////////*/
 #synth-container {
     /* border: 1px solid red; */
-    /* display: grid; */
     display: grid;
     position: relative;
-
-    top: 60px;
-    grid-template-columns: 95px auto;
-    grid-template-rows: auto auto auto;
+    top: 0px;
+    grid-template-columns: 95px 150px 150px;
+    grid-template-rows: 100px auto auto;
     grid-template-areas:
         'oscillatorA envelope filter'
         'oscillatorB mod mixer';
+
     gap: 1px;
-    margin: 10px auto auto auto;
-    width: fit-content;
+    margin: 2.5rem auto auto 1px;
+    width: 500px;
 }
 
 .synth-control {
-    justify-content: center;
-    align-content: center;
     z-index: 0;
     padding: 4px;
 }
@@ -391,7 +378,7 @@ p {
 #tabs-container {
     position: relative;
     width: 90px;
-    top: 320px;
+    top: 10px;
     height: auto;
     font-size: 15px;
 }
@@ -401,8 +388,8 @@ p {
 }
 #fx-swap {
     position: absolute;
+
     width: 100px;
-    z-index: 2;
 }
 
 .tab-btn {
