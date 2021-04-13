@@ -142,7 +142,7 @@ a {
 }
 #ascii-repeater {
     font-family: 'Courier New', Courier, monospace;
-    font-size: 19px;
+    font-size: 21px;
     font-weight: normal;
     text-align: center;
     position: absolute;
@@ -152,7 +152,7 @@ a {
     width: 20px;
     z-index: -1;
     margin: auto;
-    left: 234px;
+    left: 232px;
 }
 
 .repeater-range {
