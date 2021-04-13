@@ -452,7 +452,6 @@ p {
         display: none;
     }
     #tabs-container-mobile {
-        border: 1px solid black;
         display: flex;
         flex-direction: row;
         position: fixed;
