@@ -21,6 +21,7 @@ p {
 
 .container {
     margin: 3% auto;
+    position: relative;
     width: 50%;
     height: 50%;
     display: flex;
@@ -30,7 +31,7 @@ p {
 }
 
 .title {
-    margin: 5% auto;
+    margin: 3% auto;
     text-align: center;
     color: var(--yellow);
 }
@@ -48,11 +49,11 @@ p {
 #map-container {
     position: relative;
     margin: auto;
-    width: 900px;
+    right: 400px;
 }
 #results {
     font-weight: bold;
-    margin: 400px auto;
+    margin: 430px auto;
     padding: 0.5rem;
     text-align: center;
     width: 300px;
