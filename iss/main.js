@@ -21,9 +21,9 @@ async function getISS() {
     // Object destructuring syntax
     const { latitude, longitude, velocity } = data;
 
-    document.getElementById('lat').textContent = latitude;
-    document.getElementById('lon').textContent = longitude;
-    document.getElementById('vel').textContent = velocity;
+    document.getElementById('lat').textContent = parseFloat(latitude).toFixed(2);
+    document.getElementById('lon').textContent = parseFloat(longitude).toFixed(2);
+    document.getElementById('vel').textContent = parseInt(velocity) + ' km/h';
 
     let grid = createGrid(latitude, longitude);
     grid.forEach((row) => {
@@ -64,6 +64,6 @@ function createGrid(latitude, longitude) {
     return grid;
 }
 getISS();
-setInterval(getISS, 1500);
+setInterval(getISS, 5000);
 
 // lat, long
