@@ -1,4 +1,4 @@
-export function createGrid(latitude, longitude) {
+function createGrid(latitude, longitude) {
     // lat = lat / 4;
     // lon = lon / 4;
     longitude = parseInt(longitude / 2);
