@@ -1,0 +1,96 @@
+:root {
+    --white: rgb(254, 255, 218);
+    --blue: rgb(79, 141, 192);
+    --yellow: rgb(255, 253, 108);
+    --red: rgb(253, 110, 110);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Ubuntu Mono', courier, monospace;
+    color: var(--white);
+    background-color: var(--blue);
+}
+
+p {
+    color: var(--yellow);
+}
+
+.container {
+    margin: 3% auto;
+    width: 50%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    vertical-align: center;
+}
+
+.title {
+    margin: 5% auto;
+    text-align: center;
+    color: var(--yellow);
+}
+
+#map {
+    position: absolute;
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 15px;
+    margin: 1% auto;
+    padding: 2rem;
+    /* border: 1px solid var(--white); */
+}
+
+#map-container {
+    position: relative;
+    margin: auto;
+    width: 900px;
+}
+#results {
+    font-weight: bold;
+    margin: 400px auto;
+    padding: 0.5rem;
+    text-align: center;
+    width: 300px;
+    height: 20%;
+    border-radius: 0.5rem;
+    border: 1px solid var(--white);
+    /* background-image: linear-gradient(right, var(--white), var(--white) 58%, transparent 58%, transparent 100%);
+    background-image: -webkit-linear-gradient(right, var(--white), var(--white) 58%, transparent 58%, transparent 100%); */
+}
+
+.result {
+    color: var(--red);
+}
+
+.grid {
+    display: inline-grid;
+    padding: 5px;
+    grid-template-columns: repeat(180, 5px);
+    grid-template-rows: repeat(90, 5px);
+    position: absolute;
+    top: 10px;
+    left: -17px;
+    background-color: transparent;
+}
+
+.grid > [data-status='hidden'] {
+}
+
+.grid > [data-status='active'] {
+    font-size: 1rem;
+    width: 20px;
+    height: 10px;
+    font-weight: bold;
+    color: var(--red);
+    background-color: transparent;
+}
+/* span {
+    width: 5px;
+    height: 5px;
+    border: 1px solid white;
+} */
