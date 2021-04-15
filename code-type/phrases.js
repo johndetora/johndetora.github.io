@@ -12,4 +12,5 @@ export const phrases = [
     'let vals = [4, 8, 1, 2, 9, 6];',
     "document.addEventListener('click', ({target}) => {",
     "const createSpan = document.createElement('span');",
+    'vals = vals.map(x => x * 2);',
 ];
