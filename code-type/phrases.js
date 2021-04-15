@@ -10,6 +10,7 @@ export const phrases = [
     'parseFloat(value).toFixed(2);',
     'for (let i = 0; i < array.length; i++) {',
     'let vals = [4, 8, 1, 2, 9, 6];',
+    'const numbers = [2, 5, 8, 1, 69]',
     "document.addEventListener('click', ({target}) => {",
     "const createSpan = document.createElement('span');",
     'vals = vals.map(x => x * 2);',
