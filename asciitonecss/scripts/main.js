@@ -504,7 +504,6 @@ function repeatAnim(target) {
 // Snooze Checks
 stepContainer.addEventListener('change', ({ target }) => {
     if (target.type == 'checkbox' && target.checked) {
-        window.navigator.vibrate(200);
         // Turns step 'on'
         notes[target.dataset.index].velocity = 1;
         // UI Update
@@ -514,7 +513,6 @@ stepContainer.addEventListener('change', ({ target }) => {
 
         meters[target.dataset.index].style.color = 'var(--on)';
     } else if (target.type == 'checkbox' && !target.checked) {
-        window.navigator.vibrate(200);
         // Turns step 'off'
         notes[target.dataset.index].velocity = 0;
         // UI Update
