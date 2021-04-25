@@ -21,7 +21,6 @@ a {
 }
 
 #header {
-    margin-left: 10px;
     margin-bottom: 10px;
     border: 1px solid gray;
     width: auto;
@@ -50,6 +49,10 @@ a {
 /* Top Controls and Transport */
 .transport {
     margin: 0px 30px;
+}
+
+.active {
+    color: orange;
 }
 #top-controls {
     border: 1px solid chocolate;
@@ -98,7 +101,7 @@ a {
 
 #playhead {
     margin-top: 14px;
-    margin-left: 23px;
+    margin-left: 44px;
     font-size: 12px;
     position: absolute;
     top: 0px;

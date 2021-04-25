@@ -373,17 +373,19 @@ p {
 }
 
 #tabs-container {
+    border: 1px solid orange;
     display: block;
     position: relative;
 
-    width: 90px;
-    height: 100px;
+    width: 100px;
+    height: 50px;
     font-size: 15px;
     grid-area: footer;
 }
 #fx-swap {
     text-align: left;
     width: 120px;
+
     top: 10px;
 }
 #tabs-container-mobile {
@@ -419,15 +421,14 @@ p {
         font-size: 12px;
     }
     #main-container {
-        margin: auto;
-        padding: 0;
-        width: 100%;
+        margin-left: 10px;
         grid-template-columns: auto;
         grid-template-rows: auto;
         grid-template-areas: 'header' 'transport' 'main' 'footer';
     }
 
     #synth-container {
+        grid-area: main;
         display: none;
         grid-template-columns: 170px 170px;
         grid-template-rows: auto auto;
@@ -437,7 +438,6 @@ p {
             'filter mixer';
         gap: 0px;
 
-        grid-area: main;
         width: 350px;
         height: 470px;
     }

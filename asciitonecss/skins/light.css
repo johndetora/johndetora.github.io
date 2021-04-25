@@ -3,78 +3,90 @@
     --greengray: rgba(67, 81, 87, 0.7);
     --darkgray: rgba(47, 60, 76, 1);
     --white: rgba(241, 232, 208, 1);
-    --on: rgba(241, 232, 208, 1);
+    --black: rgba(0, 0, 0, 1);
     --green: rgba(208, 240, 192, 1);
     --red: rgba(246, 141, 141, 1);
     --yellow: rgba(245, 177, 81, 1);
     --paleyellow: rgba(246, 186, 101, 1);
     --blue: rgba(134, 232, 254, 1);
+
     /* Don't remove these */
-    --on: rgba(241, 232, 208, 1);
-    --off: rgba(241, 232, 208, 0.4);
-    --bg: black;
+    --repeaterOn: var(--black);
+    --on: rgba(0, 0, 0, 1);
+    --off: rgba(0, 0, 0, 0.4);
+    --bg: rgb(255, 255, 246);
 }
 
 /* Background and text color 1 */
 body {
-    background-color: var(--bg);
-    color: var(--white);
+    color: var(--black);
+    background-color: rgb(255, 255, 246);
 }
 
 /* ascii-tone background color */
 #main-container {
+    background: var(--bg);
+    z-index: -999;
 }
 
 /* main overlay */
 #ascii-window {
-    color: var(--white);
+    color: var(--black);
 }
 
 .ascii-label {
-    color: var(--white);
+    color: var(--black);
 }
 
 .label {
-    color: var(--white);
+    color: var(--black);
 }
 /* Horizontal seperators of overlay */
 .divider {
-    color: var(--white);
+    color: var(--black);
 }
 /* For coloring specific elements, use the following: */
 
 #play-button {
-    color: var(--white);
+    color: var(--black);
 }
 
 /* The spinning BPM animation */
 #ascii-spin {
-    color: var(--white);
+    color: var(--black);
 }
 
 /* The 'playhead' arrow that moves along the top */
 #playhead {
-    color: var(--white);
+    color: var(--black);
 }
 
 /* The note selection meters */
 #ascii-meter {
-    color: var(--white);
+    color: var(--black);
 }
 
 /* The snooze buttons */
 #ascii-checkbox {
-    color: var(--white);
+    color: var(--black);
 }
 
 /* synthesizer section background color */
 
 /* The synth control parameters */
 .ascii-params {
-    color: var(--white);
+    color: var(--black);
 }
 
 /*  Control box titles */
 .group-label {
-    color: var(--white);
+    color: var(--black);
+}
+
+#fx-swap {
+    color: var(--black);
+}
+
+#tabs-container-mobile {
+    color: var(--black);
 }

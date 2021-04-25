@@ -16,11 +16,11 @@ const skinSelector = document.getElementById('skin');
 let skin = 'default';
 skinSwap.addEventListener('click', function () {
     if (skin === 'default') {
-        skinSelector.setAttribute('href', 'skins/skin-dark.css');
+        skinSelector.setAttribute('href', 'skins/dark.css');
         skinSwap.innerHTML = '[ light mode ]';
         return (skin = 'dark');
     } else if (skin === 'dark') {
-        skinSelector.setAttribute('href', 'skins/skin-light.css');
+        skinSelector.setAttribute('href', 'skins/light.css');
         skinSwap.innerHTML = '[ dark mode ]';
         return (skin = 'default');
     }
@@ -504,13 +504,17 @@ function repeatAnim(target) {
 // Snooze Checks
 stepContainer.addEventListener('change', ({ target }) => {
     if (target.type == 'checkbox' && target.checked) {
+        window.navigator.vibrate(200);
         // Turns step 'on'
         notes[target.dataset.index].velocity = 1;
         // UI Update
+
         asciiCheck[target.dataset.index].style.color = 'var(--on)';
-        asciiRepeater[target.dataset.index].style.color = 'var(--on)';
+        asciiRepeater[target.dataset.index].style.color = 'var(--repeaterOn)';
+
         meters[target.dataset.index].style.color = 'var(--on)';
     } else if (target.type == 'checkbox' && !target.checked) {
+        window.navigator.vibrate(200);
         // Turns step 'off'
         notes[target.dataset.index].velocity = 0;
         // UI Update

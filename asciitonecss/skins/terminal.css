@@ -4,16 +4,20 @@
     --darkgray: rgba(47, 60, 76, 1);
     --white: rgba(241, 232, 208, 1);
     --black: rgba(0, 0, 0, 1);
-    --green: rgba(208, 240, 192, 1);
     --red: rgba(246, 141, 141, 1);
     --yellow: rgba(245, 177, 81, 1);
     --paleyellow: rgba(246, 186, 101, 1);
     --blue: rgba(134, 232, 254, 1);
 
+    --primary: rgb(130, 231, 89);
+    --secondary: rgba(246, 141, 141, 1);
     /* Don't remove these */
-    --on: rgba(0, 0, 0, 1);
-    --off: rgba(0, 0, 0, 0.4);
-    --bg: rgb(255, 255, 246);
+    --repeaterOn: rgba(134, 232, 254, 1);
+
+    --on: rgba(130, 231, 89, 1);
+    --off: rgba(130, 231, 89, 0.3);
+
+    --bg: rgb(24, 24, 24);
 }
 
 /* Background and text color 1 */
@@ -22,62 +26,84 @@ body {
     background-color: rgb(255, 255, 246);
 }
 
+#header {
+    color: var(--primary);
+}
 /* ascii-tone background color */
 #main-container {
     background: var(--bg);
     z-index: -999;
 }
 
+.transport {
+    color: var(--primary);
+}
+
+#scale-select {
+    color: var(--blue);
+}
 /* main overlay */
 #ascii-window {
-    color: var(--black);
+    color: var(--primary);
 }
-
-.ascii-label {
-    color: var(--black);
-}
-
-.label {
-    color: var(--black);
-}
-/* Horizontal seperators of overlay */
-.divider {
-    color: var(--black);
-}
-/* For coloring specific elements, use the following: */
-
-#play-button {
-    color: var(--black);
-}
-
-/* The spinning BPM animation */
-#ascii-spin {
-    color: var(--black);
-}
-
-/* The 'playhead' arrow that moves along the top */
-#playhead {
-    color: var(--black);
-}
-
 /* The note selection meters */
 #ascii-meter {
-    color: var(--black);
+    color: var(--on);
 }
 
 /* The snooze buttons */
 #ascii-checkbox {
-    color: var(--black);
+    color: var(--primary);
+}
+#ascii-repeater {
+    color: var(--blue);
+}
+.synth-control {
+    color: var(--primary);
+}
+.ascii-label {
+    color: var(--primary);
+}
+
+.label {
+    color: var(--secondary);
+}
+/* Horizontal seperators of overlay */
+.divider {
+    color: var(--primary);
+}
+/* For coloring specific elements, use the following: */
+
+#play-button {
+    color: var(--primary);
+}
+
+/* The spinning BPM animation */
+#ascii-lfo-spin {
+    color: var(--primary);
+}
+
+/* The 'playhead' arrow that moves along the top */
+#playhead {
+    color: var(--primary);
 }
 
 /* synthesizer section background color */
 
 /* The synth control parameters */
 .ascii-params {
-    color: var(--black);
+    color: var(--primary);
 }
 
 /*  Control box titles */
 .group-label {
-    color: var(--black);
+    color: var(--primary);
+}
+
+#fx-swap {
+    color: var(--primary);
+}
+
+#tabs-container-mobile {
+    color: var(--primary);
 }
