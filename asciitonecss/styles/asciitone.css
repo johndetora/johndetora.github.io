@@ -169,7 +169,6 @@ p {
     grid-template-areas:
         'oscillatorA envelope filter'
         'oscillatorB mod mixer';
-
     gap: 1px;
     margin: auto auto auto 1px;
     width: auto;
@@ -437,12 +436,16 @@ p {
             'envelope mod '
             'filter mixer';
         gap: 0px;
+
         grid-area: main;
-        width: fit-content;
+        width: 350px;
+        height: 470px;
     }
 
     #fx-container {
         grid-area: main;
+        width: 350px;
+        height: 470px;
     }
 
     #overlay-container {
@@ -454,8 +457,7 @@ p {
     #tabs-container-mobile {
         display: flex;
         flex-direction: row;
-        position: fixed;
-        top: 70vh;
+
         width: 350px;
         height: 60px;
         font-size: 15px;

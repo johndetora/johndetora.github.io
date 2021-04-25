@@ -35,12 +35,14 @@ a {
     border: 1px solid blue;
     margin: auto;
     position: relative;
-    width: auto;
+    width: 410px;
     height: 470px;
     display: grid;
+    place-content: start center;
     gap: 2px;
     grid-template-columns: repeat(8, 45px);
     grid-template-rows: auto auto auto;
+
     grid-area: main;
     z-index: 0;
 }
@@ -54,7 +56,6 @@ a {
     grid-area: transport;
     height: auto;
     width: auto;
-    max-width: 409px;
     display: flex;
     flex-direction: row;
 
@@ -87,7 +88,7 @@ a {
 
 #scale-select {
     cursor: pointer;
-    margin-left: 70px;
+    margin-left: 1%;
     font-size: 14px;
     width: auto;
     height: auto;
