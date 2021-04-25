@@ -1,0 +1,492 @@
+* {
+    box-sizing: border-box;
+}
+
+html * {
+    -webkit-tap-highlight-color: transparent;
+    /* font-family: 'Courier New', Courier, monospace */
+    font-family: monospace !important;
+}
+
+html,
+body {
+    max-width: 100%;
+    height: 100%;
+}
+
+input[type='range'] {
+    margin: 0;
+    -webkit-appearance: none;
+    background-color: transparent;
+    border: 1px solid black;
+    cursor: pointer;
+    opacity: 1;
+}
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: 1px solid #000000;
+    height: 18px;
+    width: 23px;
+    background-color: transparent;
+    border-radius: 3px;
+    background: transparent;
+    cursor: pointer;
+    margin-top: -1px;
+}
+
+input[type='range']:focus {
+    outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+
+input[type='range']::-ms-track {
+    width: 100%;
+    -webkit-appearance: none;
+    cursor: pointer;
+
+    /* Hides the slider so custom styles can be added */
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+button {
+    -webkit-appearance: none;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+p {
+    margin: 1px;
+    margin-bottom: 1px;
+}
+/* 
+#background {
+    position: absolute;
+    margin: auto;
+
+    height: 90%;
+    width: 90%;
+    background-color: blue;
+    z-index: -99;
+} */
+#hidden {
+    opacity: 0;
+}
+.label {
+    margin: 1px;
+}
+
+/* GUI Overlays */
+#overlay-container {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    position: relative;
+    pointer-events: none;
+    z-index: 0;
+    display: none;
+}
+.overlay {
+    position: absolute;
+    line-height: 13px;
+    font-size: 14px;
+    top: -40px;
+    left: -105px;
+}
+#ascii-synth-overlay {
+    display: block;
+}
+#ascii-fx-overlay {
+    display: none;
+}
+
+/* MAIN */
+#main-container {
+    margin: auto;
+    padding: 5% 10% 10% 10%;
+    border-radius: 2rem;
+    width: auto;
+    height: auto;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas: 'header' 'transport' 'main' 'controls' 'footer';
+    justify-content: center;
+    align-items: center;
+}
+
+/* //////// TOP BAR /////////////*/
+#help {
+    margin-bottom: 1px;
+}
+#help:hover {
+    width: 70%;
+    cursor: help;
+}
+#help-menu {
+    position: absolute;
+    color: red;
+    font-weight: bold;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 1;
+    /* border: 1px solid black; */
+    background-color: transparent;
+}
+#help:hover + #help-menu {
+    display: block;
+}
+#skinSwap {
+    cursor: cell;
+}
+
+/*///////   SYNTH LAYOUT    ////////////*/
+
+.synth-control {
+    padding: 4px;
+    z-index: 1;
+}
+.fx-control {
+    padding: 4px;
+    z-index: 1;
+}
+.ascii-params {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 13px;
+    z-index: 0;
+    position: absolute;
+    left: 7px;
+    font-weight: bold;
+    letter-spacing: -4px;
+    z-index: -5;
+}
+#synth-container {
+    border: 1px solid red;
+    display: grid;
+    grid-template-columns: 95px 155px 155px;
+    grid-template-rows: 100px auto auto;
+    grid-template-areas:
+        'oscillatorA envelope filter'
+        'oscillatorB mod mixer';
+
+    gap: 1px;
+    margin: auto auto auto 1px;
+    width: auto;
+    grid-area: controls;
+}
+#fx-container {
+    height: 245px;
+    border: 1px solid green;
+    display: none;
+    grid-template-columns: 95px 155px 155px;
+    grid-template-rows: 100px auto auto;
+    gap: 1px;
+    margin: auto auto auto 1px;
+    width: auto;
+    grid-area: controls;
+}
+#oscillator-container-a {
+    position: relative;
+    text-align: left;
+    grid-area: oscillatorA;
+}
+
+#oscillator-container-b {
+    position: relative;
+    text-align: left;
+    /* border: 1px solid black; */
+    grid-area: oscillatorB;
+}
+
+.wave-select {
+    width: 60px;
+    margin: 3px;
+}
+#osc-wave {
+    display: none;
+    position: absolute;
+    width: 60px;
+    opacity: 1;
+    z-index: 2;
+}
+
+/* wave select "button" */
+#ascii-osc-wave {
+    position: absolute;
+    display: inline;
+    cursor: pointer;
+    text-align: center;
+    width: 59px;
+    height: 16px;
+    margin: 0;
+    opacity: 1;
+    z-index: 3;
+}
+
+/* wave options */
+#ascii-osc-wave-options {
+    background-color: var(--bg);
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    position: absolute;
+    margin: 0px 0 6px 0;
+    width: 92%;
+    height: 79%;
+    line-height: 18px;
+    z-index: 4;
+}
+
+#glide-container {
+    position: relative;
+    top: -5px;
+    left: 6px;
+}
+/* input checkbox */
+#glide {
+    position: absolute;
+    left: 50px;
+    top: 3px;
+    margin: auto;
+    cursor: pointer;
+    opacity: 0;
+}
+#ascii-glide {
+    position: absolute;
+    left: 45px;
+    top: -13px;
+    z-index: -1;
+}
+
+/* MOD select "button" */
+#ascii-mod-wave {
+    position: absolute;
+    display: inline;
+    cursor: pointer;
+    text-align: center;
+    width: 59px;
+    height: 16px;
+    padding: 2px;
+    margin: 0;
+    opacity: 1;
+    z-index: 3;
+}
+
+/* MOD options */
+#ascii-mod-wave-options {
+    background-color: var(--bg);
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    position: absolute;
+    left: 0px;
+    width: 90%;
+    height: 80%;
+    line-height: 18px;
+    z-index: 4;
+}
+.ascii-wave:hover {
+    font-weight: 700;
+}
+/* .ascii-waves {
+    line-height: 50%;
+    letter-spacing: 50%;
+} */
+#harmonicity-container {
+    position: relative;
+    width: 100px;
+    top: 10px;
+}
+
+#harmonicity {
+    position: absolute;
+    width: 80px;
+    z-index: 1;
+}
+
+#ascii-harmonicity-num {
+    position: absolute;
+    left: 20px;
+    top: 40px;
+}
+#crossfader-container {
+    position: relative;
+    top: -5px;
+
+    width: 100px;
+}
+#crossfader {
+    position: absolute;
+    width: 80px;
+    left: 1px;
+}
+
+#filter-container {
+    position: relative;
+    /* border: 1px solid black; */
+    grid-area: filter;
+}
+#ascii-cutoff {
+    font-size: 30px;
+    opacity: 1;
+    position: absolute;
+    height: 30px;
+    margin: 1px;
+    width: 30px;
+    height: 30px;
+    left: 110px;
+    top: 5px;
+}
+#envelope-container {
+    position: relative;
+    /* border: 1px solid black; */
+    grid-area: envelope;
+}
+
+#modulation-envelope {
+    position: relative;
+    /* border: 1px solid black; */
+    grid-area: mod;
+}
+
+#modulation {
+    position: relative;
+    /* border: 1px solid black; */
+    grid-area: mixer;
+}
+
+#ascii-lfo-spin {
+    font-size: 18px;
+    font-weight: bold;
+    margin: auto;
+    width: 3rem;
+    height: 3rem;
+    text-align: center;
+}
+
+#delay-container {
+    position: absolute;
+}
+.ascii-label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#tabs-container {
+    display: block;
+    position: relative;
+
+    width: 90px;
+    height: 100px;
+    font-size: 15px;
+    grid-area: footer;
+}
+#fx-swap {
+    text-align: left;
+    width: 120px;
+    top: 10px;
+}
+#tabs-container-mobile {
+    display: none;
+    grid-area: footer;
+}
+
+.tab-btn {
+    margin: auto;
+    font-size: 16px;
+    z-index: 3;
+}
+
+/* ////// START MOBILE ///////// */
+@media all and (max-width: 600px) {
+    body {
+        overflow: hidden;
+        position: fixed;
+    }
+    input[type='range']::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        border: 1px solid #000000;
+        height: 20px;
+        width: 23px;
+        background-color: transparent;
+        border-radius: 3px;
+        background: transparent;
+        cursor: pointer;
+        margin-top: -1px;
+    }
+
+    #header {
+        font-size: 12px;
+    }
+    #main-container {
+        margin: auto;
+        padding: 0;
+        width: 100%;
+        grid-template-columns: auto;
+        grid-template-rows: auto;
+        grid-template-areas: 'header' 'transport' 'main' 'footer';
+    }
+
+    #synth-container {
+        display: none;
+        grid-template-columns: 170px 170px;
+        grid-template-rows: auto auto;
+        grid-template-areas:
+            'oscillatorA oscillatorB '
+            'envelope mod '
+            'filter mixer';
+        gap: 0px;
+        grid-area: main;
+        width: fit-content;
+    }
+
+    #fx-container {
+        grid-area: main;
+    }
+
+    #overlay-container {
+        display: none;
+    }
+    #tabs-container {
+        display: none;
+    }
+    #tabs-container-mobile {
+        display: flex;
+        flex-direction: row;
+        position: fixed;
+        top: 70vh;
+        width: 350px;
+        height: 60px;
+        font-size: 15px;
+        grid-area: footer;
+    }
+}
+
+/* pixel */
+/* @media all and (max-height: 739px) {
+    #tabs-container-mobile {
+        border: 1px solid black;
+        display: flex;
+        flex-direction: row;
+        position: fixed;
+        top: 75vh;
+        width: 350px;
+        height: 60px;
+        font-size: 15px;
+    }
+}
+
+/* old iphone */
+/* @media all and (max-height: 600px) {
+    #tabs-container-mobile {
+        border: 1px solid black;
+        display: flex;
+        flex-direction: row;
+        position: fixed;
+        top: 85vh;
+        width: 300px;
+        height: 60px;
+        font-size: 15px;
+    }
+} */

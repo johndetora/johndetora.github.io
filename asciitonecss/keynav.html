@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/keynav.css">
+    <title>hotkeys</title>
+</head>
+
+<body>
+    <div id="box1" class="box" style="background-color: green;">box 1</div>
+    <div id="box2" class="box" style="background-color: lightcoral;">box 2</div>
+    <div id="box3" class="box" style="background-color: rgb(32, 113, 218);">box 3</div>
+
+    <pre id="keeb">
+        ,---,---,---,---,---,---,---,---,---,---,---,---,---,-------,
+        | ~ | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 | [ | ] | <-    |
+        |---'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-----|
+        | ->| | " | , | . | P | Y | F | G | C | R | L | / | = |  \  |
+        |-----',--',--',--',--',--',--',--',--',--',--',--',--'-----|
+        | Caps | A | O | E | U | I | D | H | T | N | S | - |  Enter |
+        |------'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'--------|
+        |        | ; | Q | J | K | X | B | M | W | V | Z |          |
+        |------,-',--'--,'---'---'---'---'---'---'-,-'---',--,------|
+        | ctrl |  | alt |                          | alt  |  | ctrl |
+        '------'  '-----'--------------------------'------'  '------'
+
+    </pre>
+    <script>
+        const keys = {
+            shiftPressed: false,
+            leftPressed: false,
+            downPressed: false,
+            upPressed: false,
+            rightPressed: false,
+            //Numbers
+            onePressed: false,
+            twoPressed: false,
+            threePressed: false,
+
+        }
+        window.addEventListener('keydown', keyDownHandler, false);
+        window.addEventListener('keyup', keyUpHandler, false);
+        // Log keys object
+        window.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                console.log(keys)
+            }
+        })
+
+
+        const box1 = document.getElementById('box1')
+        const box2 = document.getElementById('box2')
+        const box3 = document.getElementById('box3')
+
+
+
+        function keyDownHandler(event) {
+            console.log(event)
+            if (event.key == "Shift") {
+                keys.shiftPressed = true;
+            }
+            if (event.key == "ArrowLeft") {
+                keys.leftPressed = true;
+            }
+            if (event.key == "ArrowDown") {
+                keys.downPressed = true;
+            }
+            if (event.key == "ArrowUp") {
+                keys.upPressed = true;
+            }
+            if (event.key == "ArrowRight") {
+                keys.rightPressed = true;
+            }
+            if (event.key == "1") {
+                keys.onePressed = true;
+            }
+            if (event.key == "2") {
+                keys.twoPressed = true;
+            }
+            if (event.key == "3") {
+                keys.threePressed = true;
+            }
+            // boxChange(event);
+        }
+
+        function keyUpHandler(event) {
+
+            if (event.key == "Shift") {
+                keys.shiftPressed = false;
+            }
+            if (event.key == "ArrowLeft") {
+                keys.leftPressed = false;
+            }
+            if (event.key == "ArrowDown") {
+                keys.downPressed = false;
+            }
+            if (event.key == "ArrowUp") {
+                keys.upPressed = false;
+            }
+            if (event.key == "ArrowRight") {
+                keys.rightPressed = false;
+            }
+            if (event.key == "1") {
+                keys.onePressed = false;
+            }
+            if (event.key == "2") {
+                keys.twoPressed = false;
+            }
+            if (event.key == "3") {
+                keys.threePressed = false;
+            }
+            // boxChange(event);
+
+        }
+
+        // this is just for testing
+        const colors = {
+            0: 'lightblue',
+            1: 'blue',
+            2: 'red',
+        }
+
+        // way to simplify some code//
+        // ------------------------//
+        // const boxes = document.querySelectorAll('.box')
+        // window.addEventListener('keydown', (event) => {
+        //     let num = parseInt(event.key - 1)
+        //     // Can try .classList.toggle()
+        //     boxes[num].style.backgroundColor = 'yellow'
+        //     boxes[num].style.backgroundColor = colors[num]
+        //     boxes[num].innerHTML = 'changed'
+
+        // })
+        // window.addEventListener('keyup', (event) => {
+        //     let num = parseInt(event.key - 1)
+        //     boxes[num].style.backgroundColor = colors[num]
+        // })
+        // boxes.forEach((item, index) => {
+        //     if (event.key)
+        // })
+
+
+        // Main system 
+        window.addEventListener('keydown', () => {
+            if (keys.shiftPressed) {
+                doThis();
+            }
+        })
+
+        function doThis() {
+            console.log('ok')
+        };
+
+        // Hold number, use arrows to change value //
+        //----------------------------------------//
+
+        // function boxChange(event) {
+        // let value;
+        //     const boxes = document.querySelectorAll('.box')
+
+        //     //  boxes[parseInt(event.key)].style.backGroundColor = "yellow";
+
+        //     if (keys.onePressed === true) {
+        //         console.log('ONE')
+        //         console.log(boxes[0])
+        //         boxes[0].style.backgroundColor = "gray"
+        //         if (keys.upPressed === true) {
+        //             1
+        //             boxes[0].style.backgroundColor = "blue"
+        //             value++;
+        //             console.log('value is' + value)
+        //         }
+        //     }
+        //     else boxes[0].style.backgroundColor = 'green'
+        // }
+
+        // --- This was so confusing and stupid. will ditch sooon --
+        // let index = 0;
+
+        // 
+        // console.log(index)
+        // function select() {
+        //     const boxes = document.querySelectorAll('.box')
+        //     if (index >= 0 && index < 3) {
+        //         if (shiftPressed && downPressed) {
+        //             boxes[index].style.backgroundColor = 'black'
+        //             index++;
+        //             console.log('index is ' + index)
+        //         }
+        //         if (shiftPressed && upPressed) {
+        //             boxes[index].style.backgroundColor = 'gray'
+        //             index--;
+        //             console.log('index is ' + index)
+
+        //         }
+        //     }
+        //     if (!shiftPressed) {
+
+        //         boxes.forEach((item, index) => {
+        //             boxes[index].style.backgroundColor = 'gray'
+        //         })
+        //         selection = false;
+        //         index = 0;
+        //     }
+
+
+
+    </script>
+
+</body>
+
+</html>
