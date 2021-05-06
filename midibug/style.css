@@ -45,8 +45,20 @@ h5 {
     background-color: var(--white);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-areas: 'current log';
+    grid-template-rows: 1fr 30px;
+
+    grid-template-areas: 'current log' 'status status2';
 }
+
+.connection-status {
+    grid-area: status2;
+    text-align: right;
+    margin-left: 130px;
+    padding: 5px;
+    height: 30px;
+    width: 300px;
+}
+
 .card {
     background-color: var(--denim);
     color: var(--white);
@@ -68,6 +80,7 @@ h5 {
     height: 90%;
     width: 90%;
 }
+
 .title {
     color: var(--white);
     font-size: 1.2rem;

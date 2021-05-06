@@ -2,19 +2,41 @@ import { noteTranslator } from './note-chart.js';
 
 const canvas = document.getElementById('velocity-bar');
 const ctx = canvas.getContext('2d');
-
+const statusEl = document.querySelector('.connection-status');
+const currentNoteCard = document.querySelector('.status');
 navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
 
 function onMIDIFailure() {
+    statusEl.innerHTML = 'status: midi device not found';
+    currentNoteCard.innerHTML = 'connection unsuccessful could not access your MIDI devices.';
     console.log('Could not access your MIDI devices.');
 }
 function onMIDISuccess(midiAccess) {
+    statusEl.innerHTML = 'status: connected';
+    currentNoteCard.innerHTML = 'connection successful midi input ready';
     const midi = midiAccess;
     // console.log(midi);
     for (let input of midiAccess.inputs.values()) input.onmidimessage = getMIDIMessage;
 }
+
+// function init(state) {
+//     const currentNoteCard = document.querySelector('.status');
+//     const statusEl = document.querySelector('.connection-status');
+//     if (state == true) {
+//         currentNoteCard.innerHTML = 'connection successful midi input ready';
+//         statusEl.innerHTML = 'status: connected';
+//     } else if (state == playing){
+
+//          currentNoteCard.innerHTML = 'connection successful midi input ready';
+//         statusEl.innerHTML = 'status: connected';
+//     } else {
+//         currentNoteCard.innerHTML = 'connection unsuccessful';
+//         statusEl.innerHTML = 'status: midi device not found';
+//     }
+// }
 const noteData = [];
 function getMIDIMessage(midiMessage) {
+    currentNoteCard.innerHTML = '';
     let status = midiMessage.data[0]; // Note on/ Note off
     let note = midiMessage.data[1];
     let velocity = midiMessage.data[2];
@@ -31,6 +53,7 @@ function getMIDIMessage(midiMessage) {
 
     return { status, note, velocity };
 }
+
 function currentNoteOn(note, velocity) {
     const statusEl = document.querySelector('.status');
     const noteEl = document.querySelector('.note');
@@ -38,6 +61,7 @@ function currentNoteOn(note, velocity) {
     noteEl.innerHTML = `note: ${note}, (${noteTranslator(note)})  `;
     velocityEl.innerHTML = `velocity: ${velocity}`;
 }
+
 function printLog(status, note, velocity) {
     const logEl = document.querySelector('.log');
     const lineBreak = '\n';
