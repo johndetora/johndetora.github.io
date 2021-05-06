@@ -4,6 +4,8 @@
 
 This is currently a work in progress. To use, plug in a USB MIDI device and input notes or move other controls.
 
+[Live Demo](https://echocoast.net/midibug/)
+
 ---
 
 ## About
