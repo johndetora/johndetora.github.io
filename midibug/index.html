@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="scripts/note-chart.js" type=module defer></script>
+    <script src="scripts/main.js" type="module" defer></script>
+    <title>midi-bug</title>
+</head>
+
+<body>
+    <header>
+        <h2> midi-bug</h2>
+        <h5>version 0.0.1b</h5>
+    </header>
+    <div class="container">
+        <div class="card midi-data">
+            <p class="title">current note</p>
+            <div class="card__content current__note">
+                <div class="midi-data__value status" data-status></div>
+                <div class="midi-data__value note" data-note></div>
+                <div class="midi-data__value velocity" data-velocity></div>
+                <canvas id="velocity-bar"></canvas>
+            </div>
+
+        </div>
+        <div class="card log-container">
+            <p class="title">log</p>
+
+            <textarea name="" id="" class="log card__content"></textarea>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
