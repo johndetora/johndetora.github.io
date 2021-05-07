@@ -45,9 +45,12 @@ h5 {
     background-color: var(--white);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 30px;
+    grid-template-rows: 1fr 1fr 30px;
 
-    grid-template-areas: 'current log' 'status status2';
+    grid-template-areas:
+        'current log'
+        'session log'
+        'status status2';
 }
 
 .connection-status {
@@ -63,7 +66,7 @@ h5 {
     background-color: var(--denim);
     color: var(--white);
     border-radius: 10px;
-    margin: 20% auto;
+    margin: auto;
     width: 250px;
     height: 80%;
     min-height: 220px;
@@ -87,8 +90,9 @@ h5 {
     padding: 10px;
 }
 
-.midi-data {
+.card__current {
     grid-area: current;
+
     height: 30%;
 }
 
@@ -99,10 +103,15 @@ h5 {
 .midi-data__value {
     margin: 1rem;
 }
+
+.card__session {
+    grid-area: session;
+    margin-top: 0;
+    height: 30%;
+}
 .log-container {
     background-color: var(--denim);
     grid-area: log;
-    margin: 20% auto;
     width: 350px;
 }
 
@@ -112,6 +121,9 @@ h5 {
     font-size: 1.3rem;
     letter-spacing: 1px;
     padding: 20px;
+    margin-bottom: 20px;
+    height: 90%;
+
     /* Reset */
     border: none;
     overflow: auto;

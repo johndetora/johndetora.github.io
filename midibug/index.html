@@ -9,7 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="scripts/note-chart.js" type=module defer></script>
+    <script src="scripts/note-chart.js" type=module></script>
+    <script src="scripts/velocity-bar.js" type=module></script>
     <script src="scripts/main.js" type="module" defer></script>
     <title>midi-bug</title>
 </head>
@@ -22,13 +23,21 @@
 
     <div class="container">
         <div class="connection-status">status: </div>
-        <div class="card midi-data">
+        <div class="card midi-data card__current">
             <p class="title">current note</p>
             <div class="card__content current__note">
-                <div class="midi-data__value status" data-status></div>
-                <div class="midi-data__value note" data-note></div>
-                <div class="midi-data__value velocity" data-velocity></div>
+                <div class="midi-data__value status"></div>
+                <div class="midi-data__value note"></div>
+                <div class="midi-data__value velocity"></div>
                 <canvas id="velocity-bar"></canvas>
+            </div>
+
+        </div>
+        <div class="card midi-data card__session">
+            <p class="title">session</p>
+            <div class="card__content current__note">
+                <div class="midi-data__value repetitions">awaiting session data</div>
+                <div class="midi-data__value avg-velocity"></div>
             </div>
 
         </div>
