@@ -3,6 +3,7 @@
     --white: rgb(255, 254, 245);
     --green: rgb(123, 194, 101);
     --yellow: rgb(250, 240, 102);
+    --mustard: rgb(224, 204, 18);
     --orange: rgb(243, 174, 83);
     --orangeRed: rgb(243, 128, 83);
     --red: rgb(231, 95, 85);
@@ -26,6 +27,22 @@ header {
     align-items: center;
 }
 
+button {
+    font-family: 'Ubuntu Mono', monospace;
+    /* letter-spacing: 1px; */
+    border: 1px solid var(--white);
+    border-radius: 5px;
+    background-color: var(--white);
+    color: var(--denim);
+    outline: none;
+    cursor: pointer;
+    padding: 2px;
+    margin-left: 60%;
+}
+
+span {
+    color: blue;
+}
 .logo__graphic {
     font-size: 6px;
     color: var(--white);
@@ -65,6 +82,9 @@ header {
         'current log'
         'session log'
         'status status2';
+    box-shadow: -1px 7px 53px -1px rgba(71, 83, 105, 1);
+    -webkit-box-shadow: -1px 7px 53px -1px rgba(71, 83, 105, 1);
+    -moz-box-shadow: -1px 7px 53px -1px rgba(71, 83, 105, 1);
 }
 
 .card {
@@ -79,8 +99,9 @@ header {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    -webkit-box-shadow: 0px 5px 15px -3px rgba(0, 0, 0, 0.88);
-    box-shadow: 0px 5px 15px -3px rgba(0, 0, 0, 0.88);
+    box-shadow: 1px 6px 20px -2px rgba(71, 83, 105, 0.7);
+    -webkit-box-shadow: 1px 6px 20px -2px rgba(71, 83, 105, 0.7);
+    -moz-box-shadow: 1px 6px 20px -2px rgba(71, 83, 105, 0.7);
 }
 
 .card__content {
@@ -118,6 +139,15 @@ header {
     grid-area: session;
     margin-top: 0;
     height: 30%;
+}
+
+.card__session--content {
+    height: 60%;
+}
+
+.session__reset {
+    margin-top: 15px;
+    width: 50px;
 }
 .log-container {
     background-color: var(--denim);
@@ -177,6 +207,17 @@ header {
     width: 18%;
 }
 
+.log__button {
+    width: 40px;
+    padding: 2px;
+    border: 1px solid var(--white);
+    background-color: var(--white);
+    color: var(--denim);
+    border-radius: 5px;
+    margin-bottom: 20px;
+
+    outline: none;
+}
 .connection-status {
     grid-area: status2;
     text-align: right;

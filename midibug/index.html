@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="style.css">
     <script src="scripts/note-chart.js" type=module></script>
     <script src="scripts/velocity-bar.js" type=module></script>
+    <script src="scripts/randomRGB.js" type=module></script>
+    <script src="scripts/print-log.js" type=module></script>
     <script src="scripts/main.js" type="module" defer></script>
     <title>midi-bug</title>
 </head>
@@ -48,11 +50,12 @@
         </div>
         <div class="card midi-data card__session">
             <p class="title">session</p>
-            <div class="card__content">
+            <div class="card__content card__session--content">
                 <div class="midi-data__value repetitions">awaiting session data</div>
                 <div class="midi-data__value avg-velocity"></div>
-            </div>
 
+            </div>
+            <button class="session__reset">reset</button>
         </div>
         <div class="card log-container">
             <p class="title">log</p>
@@ -63,6 +66,7 @@
                 <div class="log__column log__note--name"></div>
                 <div class="log__column log__velocity"></div>
             </div>
+            <button class="log__button">rgb</button>
         </div>
         <div class="connection-status">status: </div>
     </div>
