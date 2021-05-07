@@ -19,25 +19,36 @@ body {
     font-family: 'Ubuntu Mono', monospace;
 }
 header {
-    margin: 1% auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    text-align: center;
 }
 
-h2 {
+.logo__graphic {
+    font-size: 6px;
+    color: var(--white);
+    font-weight: bold;
+    margin-left: 8px;
+}
+
+.logo__text {
+    text-align: center;
+    margin-top: 5px;
+}
+.logo__title {
     color: var(--white);
     letter-spacing: 2px;
-    margin: 5px;
+}
+.logo__version {
+    color: rgba(255, 254, 245, 0.5);
+    text-align: center;
+
+    font-size: 9px;
 }
 
-h5 {
-    color: rgba(255, 254, 245, 0.5);
-}
 .container {
-    margin: 3vh auto;
+    margin: 1vh auto;
     max-width: 900px;
     height: 70vh;
     padding-top: 20px;
@@ -67,6 +78,8 @@ h5 {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    -webkit-box-shadow: 0px 5px 15px -3px rgba(0, 0, 0, 0.88);
+    box-shadow: 0px 5px 15px -3px rgba(0, 0, 0, 0.88);
 }
 
 .card__content {
@@ -157,6 +170,7 @@ h5 {
 }
 .log__note--name {
     width: 20%;
+    color: var(--denim);
 }
 .log__velocity {
     width: 18%;
