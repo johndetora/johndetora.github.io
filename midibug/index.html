@@ -22,10 +22,10 @@
     </header>
 
     <div class="container">
-        <div class="connection-status">status: </div>
+
         <div class="card midi-data card__current">
             <p class="title">current note</p>
-            <div class="card__content current__note">
+            <div class="card__content">
                 <div class="midi-data__value status"></div>
                 <div class="midi-data__value note"></div>
                 <div class="midi-data__value velocity"></div>
@@ -35,7 +35,7 @@
         </div>
         <div class="card midi-data card__session">
             <p class="title">session</p>
-            <div class="card__content current__note">
+            <div class="card__content">
                 <div class="midi-data__value repetitions">awaiting session data</div>
                 <div class="midi-data__value avg-velocity"></div>
             </div>
@@ -44,9 +44,14 @@
         <div class="card log-container">
             <p class="title">log</p>
 
-            <textarea name="" id="" class="log card__content"></textarea>
+            <div class="log card__content">
+                <div class="log__column log__status"></div>
+                <div class="log__column log__note"></div>
+                <div class="log__column log__note--name"></div>
+                <div class="log__column log__velocity"></div>
+            </div>
         </div>
-
+        <div class="connection-status">status: </div>
     </div>
 
 </body>

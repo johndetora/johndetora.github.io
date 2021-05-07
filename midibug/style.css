@@ -40,10 +40,12 @@ h5 {
     margin: 3vh auto;
     max-width: 900px;
     height: 70vh;
+    padding-top: 20px;
     min-height: 500px;
     border-radius: 10px;
     background-color: var(--white);
     display: grid;
+    gap: 10px;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 30px;
 
@@ -51,15 +53,6 @@ h5 {
         'current log'
         'session log'
         'status status2';
-}
-
-.connection-status {
-    grid-area: status2;
-    text-align: right;
-    margin-left: 130px;
-    padding: 5px;
-    height: 30px;
-    width: 300px;
 }
 
 .card {
@@ -80,7 +73,7 @@ h5 {
     background-color: var(--white);
     border-radius: 10px;
     color: black;
-    height: 90%;
+    height: 75%;
     width: 90%;
 }
 
@@ -90,18 +83,21 @@ h5 {
     padding: 10px;
 }
 
-.card__current {
-    grid-area: current;
-
-    height: 30%;
-}
-
-.current__note {
-    height: 75%;
-}
-
 .midi-data__value {
     margin: 1rem;
+}
+
+.card__current {
+    grid-area: current;
+    height: 30%;
+    margin-top: auto;
+}
+
+#velocity-bar {
+    padding: 10px;
+    z-index: 10;
+    width: 500px;
+    height: 50px;
 }
 
 .card__session {
@@ -120,23 +116,57 @@ h5 {
     font-family: 'Ubuntu Mono', monospace;
     font-size: 1.3rem;
     letter-spacing: 1px;
-    padding: 20px;
+    padding: 8px 0px;
     margin-bottom: 20px;
     height: 90%;
+    padding-left: 10px;
+    display: flex;
+    flex-direction: row;
+    overflow: auto;
 
     /* Reset */
-    border: none;
+    /* border: none;
     overflow: auto;
     outline: none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
-    resize: none;
+    resize: none; */
 }
 
-#velocity-bar {
-    padding: 10px;
-    z-index: 10;
-    width: 500px;
-    height: 50px;
+/* .log__column::before {
+    content: '\A';
+} */
+.log__column {
+    height: 100%;
+    white-space: pre-wrap;
+    text-align: right;
+}
+
+.log__status::after {
+    content: ' ';
+}
+
+.log__status {
+    width: 38%;
+    text-align: center;
+}
+
+.log__note {
+    width: 19%;
+}
+.log__note--name {
+    width: 20%;
+}
+.log__velocity {
+    width: 20%;
+}
+
+.connection-status {
+    grid-area: status2;
+    text-align: right;
+    margin-left: 130px;
+    padding: 5px;
+    height: 30px;
+    width: 300px;
 }

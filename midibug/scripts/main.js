@@ -63,25 +63,66 @@ function getReps() {
 
 function printLog(status, note, velocity) {
     const logEl = document.querySelector('.log');
+    const logCols = document.querySelectorAll('.log__column');
+    const statusEl = document.querySelector('.log__status');
+    const noteEl = document.querySelector('.log__note');
+    const noteNameEl = document.querySelector('.log__note--name');
+    const velElem = document.querySelector('.log__velocity');
     const lineBreak = '\n';
 
     if (status == 217) {
         status = 'aftertouch ';
-        logEl.append(`${status}  ${note + lineBreak}`);
+        statusEl.append(status + lineBreak);
+        noteEl.append(lineBreak);
+        noteNameEl.append(lineBreak);
+        velElem.append(note + lineBreak);
     }
 
+    // Note on/off
     if (status == 144 || status == 128) {
         if (status == 144) {
             status = 'note on ';
-        } else if (status == 128) status = 'note off';
-        // Spacing for text area so that columns are even
-        if (note > 99) {
-            logEl.append(`${status}  ${note} (${noteTranslator(note)}) ${velocity + lineBreak}`);
-        } else if (note > 9) {
-            logEl.append(`${status}  ${note} (${noteTranslator(note)})  ${velocity + lineBreak}`);
-        } else {
-            logEl.append(`${status}  ${note} (${noteTranslator(note)})   ${velocity + lineBreak}`);
+        } else if (status == 128) {
+            status = 'note off';
         }
+        statusEl.append(status + lineBreak);
+        noteEl.append(note + lineBreak);
+        noteNameEl.append(`(${noteTranslator(note)})${lineBreak}`);
+        velElem.append(velocity + lineBreak);
+        // noteEl.append(`${note}  (${noteTranslator(note)}) ${lineBreak}`);
+        // logEl.append(`${status}  ${note} (${noteTranslator(note)})  ${velocity + lineBreak}`);
+
+        // logEl.append(`${status}  ${note} (${noteTranslator(note)})   ${velocity + lineBreak}`);
     }
+    // Makes div auto scroll
     logEl.scrollTop = logEl.scrollHeight;
+    // logCols.forEach((column) => (column.scrollTop = column.scrollHeight));
 }
+// function printLog(status, note, velocity) {
+//     const logEl = document.querySelector('.log');
+//     const statusEl = document.querySelector('.log__status');
+//     const noteEl = document.querySelector('.log__note');
+//     const velElem = docuument.querySelector('.log__velocity');
+//     const lineBreak = '\n';
+
+//     if (status == 217) {
+//         status = 'aftertouch ';
+//         logEl.appned(lineBreak);
+//         logEl.append(`${status}  ${note + lineBreak}`);
+//     }
+
+//     if (status == 144 || status == 128) {
+//         if (status == 144) {
+//             status = 'note on ';
+//         } else if (status == 128) status = 'note off';
+//         // Spacing for text area so that columns are even
+//         if (note > 99) {
+//             logEl.append(`${status}  ${note} (${noteTranslator(note)}) ${velocity + lineBreak}`);
+//         } else if (note > 9) {
+//             logEl.append(`${status}  ${note} (${noteTranslator(note)})  ${velocity + lineBreak}`);
+//         } else {
+//             logEl.append(`${status}  ${note} (${noteTranslator(note)})   ${velocity + lineBreak}`);
+//         }
+//     }
+//     logEl.scrollTop = logEl.scrollHeight;
+// }
