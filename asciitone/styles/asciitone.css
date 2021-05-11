@@ -22,7 +22,7 @@ input[type='range'] {
     background-color: transparent;
     border: 1px solid black;
     cursor: pointer;
-    opacity: 0;
+    opacity: 1;
 }
 input[type='range']::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -450,7 +450,7 @@ use [class*="ascii-osc-"] to select this and the mod wave
 
     #synth-container {
         margin-top: 20px;
-        margin-left: 16px;
+        padding-left: 15px;
         grid-area: main;
         display: none;
         grid-template-columns: 170px 170px;
