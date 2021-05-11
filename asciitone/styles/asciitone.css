@@ -433,7 +433,7 @@ use [class*="ascii-osc-"] to select this and the mod wave
         font-size: 12px;
     }
     #main-container {
-        margin-left: 10px;
+        padding-left: 25px;
         grid-template-columns: auto;
         grid-template-rows: auto;
         grid-template-areas: 'header' 'transport' 'main' 'footer';
