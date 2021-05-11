@@ -75,6 +75,8 @@ p {
     opacity: 0;
 }
 .label {
+    font-size: 14px;
+    margin-bottom: 5px;
     margin-bottom: 1px;
 }
 
@@ -154,19 +156,18 @@ p {
 
 .group-label {
     padding: 0;
-
+    font-size: 14px;
     margin-bottom: 5px;
     letter-spacing: 2px;
     font-weight: bold;
 }
 .ascii-params {
     font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
     font-size: 13px;
-    z-index: 0;
+    letter-spacing: -4px;
     position: absolute;
     left: 0px;
-    font-weight: bold;
-    letter-spacing: -4px;
     z-index: -5;
 }
 #synth-container {
@@ -175,8 +176,8 @@ p {
     display: grid;
     padding-right: 20px;
     /* padding-left: 20px; */
-    grid-template-columns: 95px 145px 145px;
-    grid-template-rows: 100px auto auto;
+    grid-template-columns: 95px 148px 148px;
+    grid-template-rows: 115px auto;
     grid-template-areas:
         'oscillatorA envelope filter'
         'oscillatorB mod mixer';
@@ -227,10 +228,14 @@ p {
 use [class*="ascii-osc-"] to select this and the mod wave
 
 //// */
+.ascii-dropdown {
+    font-size: 14px;
+    cursor: pointer;
+}
+
 #ascii-osc-wave {
     position: absolute;
     display: inline;
-    cursor: pointer;
     text-align: center;
     width: 59px;
     height: 16px;
@@ -243,7 +248,6 @@ use [class*="ascii-osc-"] to select this and the mod wave
 #ascii-osc-wave-options {
     background-color: var(--bg);
     display: none;
-    cursor: pointer;
     flex-direction: column;
     position: absolute;
     margin: 0px 0 6px 0;
@@ -277,7 +281,6 @@ use [class*="ascii-osc-"] to select this and the mod wave
 #ascii-mod-wave {
     position: absolute;
     display: inline;
-    cursor: pointer;
     text-align: center;
     width: 59px;
     height: 16px;
@@ -291,7 +294,6 @@ use [class*="ascii-osc-"] to select this and the mod wave
 #ascii-mod-wave-options {
     background-color: var(--bg);
     display: none;
-    cursor: pointer;
     flex-direction: column;
     position: absolute;
     width: 92%;
@@ -363,6 +365,7 @@ use [class*="ascii-osc-"] to select this and the mod wave
 
 #modulation {
     position: relative;
+
     /* border: 1px solid black; */
     grid-area: mixer;
 }
@@ -372,7 +375,7 @@ use [class*="ascii-osc-"] to select this and the mod wave
     font-weight: bold;
     margin: auto;
     width: 3rem;
-    height: 3rem;
+    height: 2rem;
     text-align: center;
 }
 
@@ -441,7 +444,6 @@ use [class*="ascii-osc-"] to select this and the mod wave
 
     #synth-container {
         margin-top: 20px;
-        margin-left: 10px;
         grid-area: main;
         display: none;
         grid-template-columns: 170px 170px;
