@@ -217,7 +217,7 @@ const filter = new Tone.BiquadFilter({
 
 filterControls.addEventListener('input', ({ target }) => {
     filter[target.dataset.parameter].value = target.value;
-    circleGrow(target);
+    // circleGrow(target);
 });
 
 //// LFO
