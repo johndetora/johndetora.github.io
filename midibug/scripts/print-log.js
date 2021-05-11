@@ -9,10 +9,10 @@ function velocityColor(velocity) {
         if (velocity < 30) {
             velocityColored.style.color = 'green';
             velElem.appendChild(velocityColored);
-        } else if (velocity < 100 && velocity > 30) {
+        } else if (velocity < 100 && velocity >= 30) {
             velocityColored.style.color = 'orange';
             velElem.appendChild(velocityColored);
-        } else if (velocity <= 127 && velocity > 100) {
+        } else if (velocity <= 127 && velocity >= 100) {
             velocityColored.style.color = 'red';
             velElem.appendChild(velocityColored);
         }
