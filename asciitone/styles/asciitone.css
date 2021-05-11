@@ -1,5 +1,7 @@
 * {
     box-sizing: border-box;
+    padding: 0;
+    /* margin: 0; */
 }
 
 html * {
@@ -20,7 +22,7 @@ input[type='range'] {
     background-color: transparent;
     border: 1px solid black;
     cursor: pointer;
-    opacity: 1;
+    opacity: 0;
 }
 input[type='range']::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -73,24 +75,22 @@ p {
     opacity: 0;
 }
 .label {
-    margin: 1px;
+    margin-bottom: 1px;
 }
 
 /* GUI Overlays */
 #overlay-container {
-    font-family: 'Courier New', Courier, monospace;
     font-size: 14px;
     position: relative;
     pointer-events: none;
     z-index: 0;
-    display: none;
 }
 .overlay {
     position: absolute;
     line-height: 13px;
     font-size: 14px;
-    top: -40px;
-    left: -105px;
+    left: -128px;
+    top: -840px;
 }
 #ascii-synth-overlay {
     display: block;
@@ -101,8 +101,9 @@ p {
 
 /* MAIN */
 #main-container {
-    margin: auto;
-    padding: 5% 10% 10% 10%;
+    /* margin: auto; */
+
+    margin: 5% 10% 10% 10%;
     border-radius: 2rem;
     width: auto;
     height: auto;
@@ -144,45 +145,54 @@ p {
 /*///////   SYNTH LAYOUT    ////////////*/
 
 .synth-control {
-    font-family: 'Courier New', Courier, monospace;
-    padding: 4px;
     z-index: 1;
 }
 .fx-control {
     padding: 4px;
     z-index: 1;
 }
+
+.group-label {
+    padding: 0;
+
+    margin-bottom: 5px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
 .ascii-params {
     font-family: 'Courier New', Courier, monospace;
     font-size: 13px;
     z-index: 0;
     position: absolute;
-    left: 7px;
+    left: 0px;
     font-weight: bold;
     letter-spacing: -4px;
     z-index: -5;
 }
 #synth-container {
-    border: 1px solid red;
+    /* border: 1px solid red; */
+    height: 250px;
     display: grid;
-    grid-template-columns: 95px 155px 155px;
+    padding-right: 20px;
+    /* padding-left: 20px; */
+    grid-template-columns: 95px 145px 145px;
     grid-template-rows: 100px auto auto;
     grid-template-areas:
         'oscillatorA envelope filter'
         'oscillatorB mod mixer';
     gap: 1px;
-    margin: auto auto auto 1px;
-    width: auto;
+    margin: auto auto auto auto;
+
     grid-area: controls;
 }
 #fx-container {
-    height: 245px;
-    border: 1px solid green;
+    height: 250px;
+    /* border: 1px solid green; */
     display: none;
     grid-template-columns: 95px 155px 155px;
     grid-template-rows: 100px auto auto;
     gap: 1px;
-    margin: auto auto auto 1px;
+    margin: auto auto auto auto;
     width: auto;
     grid-area: controls;
 }
@@ -212,6 +222,11 @@ p {
 }
 
 /* wave select "button" */
+
+/* 
+use [class*="ascii-osc-"] to select this and the mod wave
+
+//// */
 #ascii-osc-wave {
     position: absolute;
     display: inline;
@@ -241,7 +256,6 @@ p {
 #glide-container {
     position: relative;
     top: -5px;
-    left: 6px;
 }
 /* input checkbox */
 #glide {
@@ -280,8 +294,7 @@ p {
     cursor: pointer;
     flex-direction: column;
     position: absolute;
-    left: 0px;
-    width: 90%;
+    width: 92%;
     height: 80%;
     line-height: 18px;
     z-index: 4;
@@ -312,8 +325,6 @@ p {
 }
 #crossfader-container {
     position: relative;
-    top: -5px;
-
     width: 100px;
 }
 #crossfader {
@@ -374,12 +385,12 @@ p {
 }
 
 #tabs-container {
-    border: 1px solid orange;
+    /* border: 1px solid orange; */
     display: block;
     position: relative;
-
+    padding: 10px 0px;
     width: 100px;
-    height: 50px;
+    height: 30px;
     font-size: 15px;
     grid-area: footer;
 }

@@ -2,6 +2,13 @@
 
 All notable changes to asciiquencer/asciitone will be documented in this file.
 
+## v0.1b2 - 2021-04-14
+
+### Changed
+
+-   Interface tweaks
+-   Re-organized file structure
+
 ## v0.1b1 - 2021-04-08
 
 ### Added

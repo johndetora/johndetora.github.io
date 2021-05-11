@@ -16,11 +16,11 @@ const skinSelector = document.getElementById('skin');
 let skin = 'default';
 skinSwap.addEventListener('click', function () {
     if (skin === 'default') {
-        skinSelector.setAttribute('href', 'skins/skin-dark.css');
+        skinSelector.setAttribute('href', 'skins/dark.css');
         skinSwap.innerHTML = '[ light mode ]';
         return (skin = 'dark');
     } else if (skin === 'dark') {
-        skinSelector.setAttribute('href', 'skins/skin-light.css');
+        skinSelector.setAttribute('href', 'skins/light.css');
         skinSwap.innerHTML = '[ dark mode ]';
         return (skin = 'default');
     }
@@ -33,7 +33,6 @@ skinSwap.addEventListener('click', function () {
 //Audio play confirmation - needed because of autoplay policy
 document.querySelector('button')?.addEventListener('click', async () => {
     await Tone.start();
-    console.log('audio is ready');
 });
 
 //////////////// Start Stop Init ////////////////////////
@@ -139,7 +138,6 @@ const asciiOscWave = document.querySelector('#ascii-osc-wave-options');
 let waveSelectState = 0;
 oscWaveSwitch.addEventListener('click', function () {
     if (waveSelectState == 0) {
-        console.log('clicked');
         asciiOscWave.style.display = 'flex';
         oscWaveSwitch.style.display = 'none';
         return (waveSelectState = 1);
@@ -148,25 +146,20 @@ oscWaveSwitch.addEventListener('click', function () {
 
 asciiOscWave.addEventListener('click', ({ target }) => {
     synth.oscillator.type = target.dataset.parameter;
-    console.log(synth.oscillator.type);
     asciiOscWave.style.display = 'none';
     oscWaveSwitch.style.display = 'inline';
     oscWaveSwitch.innerHTML = '[' + target.dataset.parameter + ']';
     return (waveSelectState = 0);
 });
 
-console.log(synth.get());
-
 glide.addEventListener('change', function () {
     const glide = document.getElementById('glide');
     const asciiGlide = document.getElementById('ascii-glide');
     if (glide.checked) {
-        console.log('checked');
         synth.portamento = 0.05;
         asciiGlide.innerHTML = '[@]';
     } else {
         synth.portamento = 0;
-        console.log('unchecked');
         asciiGlide.innerHTML = '[ ]';
     }
 });
@@ -510,8 +503,10 @@ stepContainer.addEventListener('change', ({ target }) => {
         // Turns step 'on'
         notes[target.dataset.index].velocity = 1;
         // UI Update
+
         asciiCheck[target.dataset.index].style.color = 'var(--on)';
-        asciiRepeater[target.dataset.index].style.color = 'var(--on)';
+        asciiRepeater[target.dataset.index].style.color = 'var(--repeaterOn)';
+
         meters[target.dataset.index].style.color = 'var(--on)';
     } else if (target.type == 'checkbox' && !target.checked) {
         // Turns step 'off'
@@ -613,10 +608,22 @@ function init() {
 
 ///// Horizontal Slider for Parameters /////
 
+// synthControls.addEventListener('input', ({ target }) => {
+//     let empty = '|';
+//     let emptyAlt = '-';
+
+//     console.log(target.offsetWidth);
+//     // document.getElementById(target.dataset.ascii).getBoundingClientRect().width
+//     let linesAmount = parseInt(target.value * 31);
+//     document.getElementById(target.dataset.ascii).innerHTML = lines + lines.repeat(linesAmount) + block + emptyAlt.repeat(31 - linesAmount) + empty;
+//     console.log(document.getElementById(target.dataset.ascii).getBoundingClientRect().width);
+
+//     /// Envelopes
+// });
 synthControls.addEventListener('input', ({ target }) => {
     let empty = '|';
     let emptyAlt = '-';
-    console.log(target.max);
+    // console.log(target.max);
     //// The '/ n' parts make it so the lines amount equal 31 at their max. Just divide/multiply target max so it reaches 31
 
     /// Mod index
@@ -630,6 +637,7 @@ synthControls.addEventListener('input', ({ target }) => {
         document.getElementById(target.dataset.ascii).innerHTML = lines.repeat(linesAmount) + block + empty.repeat(17 - linesAmount + 1); // Fills in empty space.  +1 so that it doesn't hit 0 and throw an error
         /// Filter
     } else if (target.max == 1) {
+        console.log(target.offsetWidth);
         /// Envelopes
         let linesAmount = parseInt(target.value * 31);
         document.getElementById(target.dataset.ascii).innerHTML =
@@ -671,30 +679,29 @@ fxControls.addEventListener('input', ({ target }) => {
 });
 
 /////// Circle Grow Animation
-let circle = document.getElementById('ascii-cutoff');
-console.log(circle.style.left);
-function circleGrow(target) {
-    if (target.id === 'cutoff') {
-        let circleSize = parseInt(target.value / 50);
-        let circleX = parseInt(target.value / 25);
-        /// IMPORTANT This value is the top position + font.size and may need to be adjusted later
-        let circleLocation = 35;
-        let circlePosition = -circleSize + circleLocation;
+// let circle = document.getElementById('ascii-cutoff');
+// function circleGrow(target) {
+//     if (target.id === 'cutoff') {
+//         let circleSize = parseInt(target.value / 50);
+//         let circleX = parseInt(target.value / 25);
+//         /// IMPORTANT This value is the top position + font.size and may need to be adjusted later
+//         let circleLocation = 35;
+//         let circlePosition = -circleSize + circleLocation;
 
-        // When the animation turns into a period
-        if (target.value <= 400) {
-            circle.style.opacity = 0;
-            document.getElementById('filterLabel').innerHTML = '> cutoff.';
-            // When the animation is growing/shrinking
-        } else {
-            document.getElementById('filterLabel').innerHTML = '> cutoff';
-            circle.style.fontSize = circleSize + '.px';
-            circle.style.opacity = 1;
-            circle.style.top = circlePosition + '.px';
-            circle.style.left = circleX + 50 + '.px'; // Comment this out to have circle stay in x position
-        }
-    }
-}
+//         // When the animation turns into a period
+//         if (target.value <= 400) {
+//             circle.style.opacity = 0;
+//             document.getElementById('filterLabel').innerHTML = '> cutoff.';
+//             // When the animation is growing/shrinking
+//         } else {
+//             document.getElementById('filterLabel').innerHTML = '> cutoff';
+//             circle.style.fontSize = circleSize + '.px';
+//             circle.style.opacity = 1;
+//             circle.style.top = circlePosition + '.px';
+//             circle.style.left = circleX + 50 + '.px'; // Comment this out to have circle stay in x position
+//         }
+//     }
+// }
 
 //////////////// SWAP PARAMETERS ///////////////
 
@@ -726,27 +733,38 @@ fxSwap.addEventListener('click', function () {
 // const synthControls = document.querySelector('#synth-container');
 // const fxControls = document.querySelector('#fx-container');
 
-// const stepContainer = document.querySelector('#steps');
-// const fxSwap = document.getElementById('fx-swap');
-const fxSwapTab = document.getElementById('fx-swap-tab');
-const synthSwap = document.getElementById('synth-swap');
-const seqSwap = document.getElementById('seq-swap');
-const tabContainer = document.querySelector('#tabs-container-mobile');
+function mobileSwap() {
+    // const stepContainer = document.querySelector('#steps');
+    // const fxSwap = document.getElementById('fx-swap');
+    const fxSwapTab = document.getElementById('fx-swap-tab');
+    const synthSwap = document.getElementById('synth-swap');
+    const seqSwap = document.getElementById('seq-swap');
+    const tabContainer = document.querySelector('#tabs-container-mobile');
+    const swapLabels = document.querySelectorAll('#param-swap-text');
+    tabContainer.addEventListener('click', ({ target }) => {
+        tabState = target.dataset.state;
+        // make highlighted text bold
+        swapLabels.forEach((element) => {
+            element.style.fontWeight = 'normal';
+            target.style.fontWeight = 'bold';
+        });
 
-tabContainer.addEventListener('click', ({ target }) => {
-    tabState = target.dataset.state;
-    console.log(target);
-    if (tabState === 'seq') {
-        stepContainer.style.display = 'grid';
-        synthControls.style.display = 'none';
-        fxControls.style.display = 'none';
-    } else if (tabState === 'synth') {
-        stepContainer.style.display = 'none';
-        synthControls.style.display = 'grid';
-        fxControls.style.display = 'none';
-    } else if (tabState === 'fx') {
-        stepContainer.style.display = 'none';
-        synthControls.style.display = 'none';
-        fxControls.style.display = 'grid';
-    }
-});
+        if (tabState === 'seq') {
+            stepContainer.style.display = 'grid';
+            synthControls.style.display = 'none';
+            fxControls.style.display = 'none';
+        } else if (tabState === 'synth') {
+            stepContainer.style.display = 'none';
+            synthControls.style.display = 'grid';
+            fxControls.style.display = 'none';
+            synthSwap.style.fontWeight = 'bold';
+        } else if (tabState === 'fx') {
+            stepContainer.style.display = 'none';
+            synthControls.style.display = 'none';
+            fxControls.style.display = 'grid';
+            fxSwapTab.style.fontWeight = 'bold';
+        }
+    });
+}
+
+mobileSwap();

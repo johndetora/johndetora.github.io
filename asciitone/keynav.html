@@ -5,85 +5,208 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/keynav.css">
     <title>hotkeys</title>
 </head>
 
-<body style="background-color: rgb(77, 109, 98);">
-    <div id="box1" style="background-color: burlywood;">box 1</div>
-    <div id="box2" style="background-color: lightcoral;">box 2</div>
-    <div id="box3" style="background-color: rgb(32, 113, 218);">box 3</div>
+<body>
+    <div id="box1" class="box" style="background-color: green;">box 1</div>
+    <div id="box2" class="box" style="background-color: lightcoral;">box 2</div>
+    <div id="box3" class="box" style="background-color: rgb(32, 113, 218);">box 3</div>
 
+    <pre id="keeb">
+        ,---,---,---,---,---,---,---,---,---,---,---,---,---,-------,
+        | ~ | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 | [ | ] | <-    |
+        |---'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-----|
+        | ->| | " | , | . | P | Y | F | G | C | R | L | / | = |  \  |
+        |-----',--',--',--',--',--',--',--',--',--',--',--',--'-----|
+        | Caps | A | O | E | U | I | D | H | T | N | S | - |  Enter |
+        |------'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'--------|
+        |        | ; | Q | J | K | X | B | M | W | V | Z |          |
+        |------,-',--'--,'---'---'---'---'---'---'-,-'---',--,------|
+        | ctrl |  | alt |                          | alt  |  | ctrl |
+        '------'  '-----'--------------------------'------'  '------'
+
+    </pre>
     <script>
+        const keys = {
+            shiftPressed: false,
+            leftPressed: false,
+            downPressed: false,
+            upPressed: false,
+            rightPressed: false,
+            //Numbers
+            onePressed: false,
+            twoPressed: false,
+            threePressed: false,
+
+        }
         window.addEventListener('keydown', keyDownHandler, false);
         window.addEventListener('keyup', keyUpHandler, false);
+        // Log keys object
+        window.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                console.log(keys)
+            }
+        })
+
 
         const box1 = document.getElementById('box1')
         const box2 = document.getElementById('box2')
         const box3 = document.getElementById('box3')
 
-        let shiftPressed = false;
-        let leftPressed = false;
-        let upPressed = false;
-        let downPressed = false;
 
 
         function keyDownHandler(event) {
             console.log(event)
             if (event.key == "Shift") {
-                console.log('Shift')
-                shiftPressed = true;
+                keys.shiftPressed = true;
             }
-            else if (event.key == "ArrowLeft") {
-                leftPressed = true;
-                console.log('left')
+            if (event.key == "ArrowLeft") {
+                keys.leftPressed = true;
             }
             if (event.key == "ArrowDown") {
-                downPressed = true;
-                console.log('down')
+                keys.downPressed = true;
             }
-            else if (event.key == "ArrowUp") {
-                upPressed = true;
-                console.log('up')
+            if (event.key == "ArrowUp") {
+                keys.upPressed = true;
             }
-            select();
+            if (event.key == "ArrowRight") {
+                keys.rightPressed = true;
+            }
+            if (event.key == "1") {
+                keys.onePressed = true;
+            }
+            if (event.key == "2") {
+                keys.twoPressed = true;
+            }
+            if (event.key == "3") {
+                keys.threePressed = true;
+            }
+            // boxChange(event);
         }
 
         function keyUpHandler(event) {
 
             if (event.key == "Shift") {
-                console.log('Shift up')
-                shiftPressed = false;
+                keys.shiftPressed = false;
             }
-            else if (event.key == "ArrowLeft") {
-                leftPressed = false;
-                console.log('left up')
+            if (event.key == "ArrowLeft") {
+                keys.leftPressed = false;
             }
             if (event.key == "ArrowDown") {
-                downPressed = false;
-                console.log('down up')
+                keys.downPressed = false;
             }
-            else if (event.key == "ArrowUp") {
-                upPressed = false;
-                console.log('up')
+            if (event.key == "ArrowUp") {
+                keys.upPressed = false;
             }
-            select();
+            if (event.key == "ArrowRight") {
+                keys.rightPressed = false;
+            }
+            if (event.key == "1") {
+                keys.onePressed = false;
+            }
+            if (event.key == "2") {
+                keys.twoPressed = false;
+            }
+            if (event.key == "3") {
+                keys.threePressed = false;
+            }
+            // boxChange(event);
+
         }
 
-        function select() {
-            if (shiftPressed) {
-                console.log('SELECTION')
-                return selection = true;
-            } else if (!shiftPressed) {
-                console.log('UNSELECTION')
-                return selection = false;
-            }
+        // this is just for testing
+        const colors = {
+            0: 'lightblue',
+            1: 'blue',
+            2: 'red',
         }
-        select()
-        function colorChange() {
-            if (selection) {
-                // For each step, if ;key; is pressed, set note to that key number (wish scale index)
+
+        // way to simplify some code//
+        // ------------------------//
+        // const boxes = document.querySelectorAll('.box')
+        // window.addEventListener('keydown', (event) => {
+        //     let num = parseInt(event.key - 1)
+        //     // Can try .classList.toggle()
+        //     boxes[num].style.backgroundColor = 'yellow'
+        //     boxes[num].style.backgroundColor = colors[num]
+        //     boxes[num].innerHTML = 'changed'
+
+        // })
+        // window.addEventListener('keyup', (event) => {
+        //     let num = parseInt(event.key - 1)
+        //     boxes[num].style.backgroundColor = colors[num]
+        // })
+        // boxes.forEach((item, index) => {
+        //     if (event.key)
+        // })
+
+
+        // Main system 
+        window.addEventListener('keydown', () => {
+            if (keys.shiftPressed) {
+                doThis();
             }
-        }
+        })
+
+        function doThis() {
+            console.log('ok')
+        };
+
+        // Hold number, use arrows to change value //
+        //----------------------------------------//
+
+        // function boxChange(event) {
+        // let value;
+        //     const boxes = document.querySelectorAll('.box')
+
+        //     //  boxes[parseInt(event.key)].style.backGroundColor = "yellow";
+
+        //     if (keys.onePressed === true) {
+        //         console.log('ONE')
+        //         console.log(boxes[0])
+        //         boxes[0].style.backgroundColor = "gray"
+        //         if (keys.upPressed === true) {
+        //             1
+        //             boxes[0].style.backgroundColor = "blue"
+        //             value++;
+        //             console.log('value is' + value)
+        //         }
+        //     }
+        //     else boxes[0].style.backgroundColor = 'green'
+        // }
+
+        // --- This was so confusing and stupid. will ditch sooon --
+        // let index = 0;
+
+        // 
+        // console.log(index)
+        // function select() {
+        //     const boxes = document.querySelectorAll('.box')
+        //     if (index >= 0 && index < 3) {
+        //         if (shiftPressed && downPressed) {
+        //             boxes[index].style.backgroundColor = 'black'
+        //             index++;
+        //             console.log('index is ' + index)
+        //         }
+        //         if (shiftPressed && upPressed) {
+        //             boxes[index].style.backgroundColor = 'gray'
+        //             index--;
+        //             console.log('index is ' + index)
+
+        //         }
+        //     }
+        //     if (!shiftPressed) {
+
+        //         boxes.forEach((item, index) => {
+        //             boxes[index].style.backgroundColor = 'gray'
+        //         })
+        //         selection = false;
+        //         index = 0;
+        //     }
+
+
 
     </script>
 
