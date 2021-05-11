@@ -462,7 +462,7 @@ use [class*="ascii-osc-"] to select this and the mod wave
         gap: 0px;
 
         width: 350px;
-        height: 470px;
+        height: 450px;
     }
 
     #fx-container {
@@ -489,6 +489,21 @@ use [class*="ascii-osc-"] to select this and the mod wave
         height: 60px;
         font-size: 15px;
         grid-area: footer;
+    }
+    @media all and (max-height: 600px) {
+        #param-swap-text {
+            font-size: 14px;
+        }
+        #tabs-container-mobile {
+            margin-top: 1px;
+            display: flex;
+            flex-direction: row;
+
+            width: 350px;
+            height: 30px;
+            font-size: 15px;
+            grid-area: footer;
+        }
     }
 }
 
