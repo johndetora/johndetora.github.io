@@ -139,7 +139,7 @@ a {
     top: -6px;
 }
 #ascii-repeater {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: Courier, monospace;
     font-size: 18px;
     font-weight: normal;
     text-align: center;

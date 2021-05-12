@@ -52,7 +52,7 @@ window.addEventListener('load', () => {
 // BPM Change input
 let transport = document.querySelector('#bpm');
 transport.addEventListener('input', function () {
-    bpm = this.value;
+    let bpm = this.value;
     Tone.Transport.bpm.value = bpm;
     console.log(bpm);
 });
@@ -608,7 +608,7 @@ fxSwap.addEventListener('click', function () {
 ///////////// MOBILE TABS //////////////
 // const synthControls = document.querySelector('#synth-container');
 // const fxControls = document.querySelector('#fx-container');
-
+let tabState = 'seq';
 function mobileSwap() {
     // const stepContainer = document.querySelector('#steps');
     // const fxSwap = document.getElementById('fx-swap');
