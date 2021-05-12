@@ -162,7 +162,7 @@ p {
     font-weight: bold;
 }
 .ascii-params {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Courier New', Courier, monospace !important;
     font-weight: bold;
     font-size: 13px;
     letter-spacing: -4px;

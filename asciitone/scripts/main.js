@@ -1,30 +1,18 @@
-let OSName = 'Unknown OS';
-if (navigator.appVersion.indexOf('Win') != -1) OSName = 'Windows';
-if (navigator.appVersion.indexOf('Mac') != -1) OSName = 'MacOS';
+import { skinSwapper } from './skin-select.js';
+import { synthParamController } from './synth-controls.js';
 
-console.log('Your OS: ' + OSName);
-const overlay = document.querySelector('.overlay');
-if (navigator.appVersion.indexOf('Win') != -1) {
-    overlay.style.left = '-83px';
-}
-// ------------------------- //
-//      Skin select         //
-// ------------------------- //
+skinSwapper();
+synthParamController();
 
-const skinSwap = document.querySelector('#skinSwap');
-const skinSelector = document.getElementById('skin');
-let skin = 'default';
-skinSwap.addEventListener('click', function () {
-    if (skin === 'default') {
-        skinSelector.setAttribute('href', 'skins/dark.css');
-        skinSwap.innerHTML = '[ light mode ]';
-        return (skin = 'dark');
-    } else if (skin === 'dark') {
-        skinSelector.setAttribute('href', 'skins/light.css');
-        skinSwap.innerHTML = '[ dark mode ]';
-        return (skin = 'default');
-    }
-});
+// let OSName = 'Unknown OS';
+// if (navigator.appVersion.indexOf('Win') != -1) OSName = 'Windows';
+// if (navigator.appVersion.indexOf('Mac') != -1) OSName = 'MacOS';
+// else OSName = 'Linux (probably)';
+// console.log('Your OS: ' + OSName);
+// const overlay = document.querySelector('.overlay');
+// if (navigator.appVersion.indexOf('Win') != -1) {
+//     overlay.style.left = '-83px';
+// }
 
 // ------------------------- //
 //    Transport / Init       //
@@ -57,7 +45,6 @@ playButton.addEventListener('click', () => {
 // Initialization of bpm and ascii meters
 window.addEventListener('load', () => {
     init();
-
     let bpm = transport.value;
     Tone.Transport.bpm.value = bpm;
 });
@@ -77,28 +64,20 @@ transport.addEventListener('input', function () {
 const synthControls = document.querySelector('#synth-container');
 const fxControls = document.querySelector('#fx-container');
 const stepContainer = document.querySelector('#steps');
-const paramContainer = document.querySelector('#params');
 const playHead = document.querySelector('#playhead');
-const checks = document.querySelectorAll('#check');
-const meter = document.getElementById('ascii-meter');
 const meters = document.querySelectorAll('#ascii-meter');
 const asciiRepeater = document.querySelectorAll('#ascii-repeater');
-const paraMeters = document.querySelectorAll('#para-meter');
-const asciiCheck = document.querySelectorAll('#ascii-checkbox');
-const envelope = document.querySelector('#envelope-container');
-const mod = document.querySelector('#modulation-envelope');
-const oscWave = document.querySelector('#osc-wave');
-const modWave = document.querySelector('#mod-wave');
-const steps = 8; // Total step length
 
-const filterControls = document.querySelector('#filter-container');
-const delayControl = document.querySelector('#delay-container');
+const steps = 8; // Total step length
 
 // ------------------------- //
 //    Synth Parameters       //
 // ------------------------- //
 
-const synth = new Tone.FMSynth({
+// TO DO:
+// Put these and routing in their own module, then import all into param controls
+
+export const synth = new Tone.FMSynth({
     harmonicity: 1,
     modulationIndex: 10,
     portamento: 0,
@@ -127,130 +106,17 @@ const synth = new Tone.FMSynth({
 });
 const noiseSynth = new Tone.NoiseSynth();
 
-// ------------------------- //
-//     Synth User Input      //
-// ------------------------- //
-
-/////// OSC ///////
-//////// Select Boxes ////////////
-const oscWaveSwitch = document.querySelector('#ascii-osc-wave');
-const asciiOscWave = document.querySelector('#ascii-osc-wave-options');
-let waveSelectState = 0;
-oscWaveSwitch.addEventListener('click', function () {
-    if (waveSelectState == 0) {
-        asciiOscWave.style.display = 'flex';
-        oscWaveSwitch.style.display = 'none';
-        return (waveSelectState = 1);
-    }
-});
-
-asciiOscWave.addEventListener('click', ({ target }) => {
-    synth.oscillator.type = target.dataset.parameter;
-    asciiOscWave.style.display = 'none';
-    oscWaveSwitch.style.display = 'inline';
-    oscWaveSwitch.innerHTML = '[' + target.dataset.parameter + ']';
-    return (waveSelectState = 0);
-});
-
-glide.addEventListener('change', function () {
-    const glide = document.getElementById('glide');
-    const asciiGlide = document.getElementById('ascii-glide');
-    if (glide.checked) {
-        synth.portamento = 0.05;
-        asciiGlide.innerHTML = '[@]';
-    } else {
-        synth.portamento = 0;
-        asciiGlide.innerHTML = '[ ]';
-    }
-});
-
-/////// MOD WAVE ///////
-
-const modWaveSwitch = document.querySelector('#ascii-mod-wave');
-const asciiModWave = document.querySelector('#ascii-mod-wave-options');
-let modSelectState = 0;
-modWaveSwitch.addEventListener('click', function () {
-    if (modSelectState == 0) {
-        console.log('clicked');
-        asciiModWave.style.display = 'flex';
-        modWaveSwitch.style.display = 'none';
-        return (modSelectState = 1);
-    }
-});
-
-asciiModWave.addEventListener('click', ({ target }) => {
-    synth.modulation.type = target.dataset.parameter;
-    asciiModWave.style.display = 'none';
-    modWaveSwitch.style.display = 'inline';
-    modWaveSwitch.innerHTML = '[' + target.dataset.parameter + ']';
-    return (modSelectState = 0);
-});
-
-///// HARMONICITY ///////
-let harmonicityInput = document.querySelector('#harmonicity');
-harmonicityInput.addEventListener('input', ({ target }) => {
-    synth.harmonicity.value = target.value;
-});
-
-//// ENVELOPE ///////
-envelope.addEventListener('input', ({ target }) => {
-    synth.envelope[target.dataset.action] = target.value;
-});
-
-///// MOD ENVELOPE
-mod.addEventListener('input', ({ target }) => {
-    synth.modulationEnvelope[target.dataset.action] = target.value;
-    if (target.dataset.action === 'modulationIndex') synth[target.dataset.action].value = target.value;
-});
-
-////// CROSSFADER ////////
-let crossFadeInput = document.getElementById('crossfader');
-crossFadeInput.addEventListener('input', () => {
-    crossFade.fade.value = crossFadeInput.value;
-});
-
-const filter = new Tone.BiquadFilter({
-    frequency: 1500,
-    type: 'lowpass',
-});
-/////// FILTER ///////
-
-filterControls.addEventListener('input', ({ target }) => {
-    filter[target.dataset.parameter].value = target.value;
-    // circleGrow(target);
-});
-
-//// LFO
-const lfo = new Tone.LFO(1, 0.1, 1500).start();
-
-const toFilt = new Tone.Gain(0);
-const toModIndex = new Tone.Gain(0);
-lfo.connect(toFilt);
-toFilt.connect(filter.frequency);
-// Connect LFO to mod index
-// lfo.connect(toFreqRatio);
-toModIndex.connect(synth.modulationIndex);
-const lfoRate = document.getElementById('lfo-rate');
-const lfoAmt = document.querySelector('#lfo-amount');
-lfoRate.addEventListener('input', function () {
-    lfo.frequency.value = this.value;
-});
-lfoAmt.addEventListener('input', function () {
-    console.log(this.value);
-    toFilt.gain.value = this.value;
-    // toFreqRatio.gain.value = this.value;
-});
-
-//////// Delay /////////////
-
-const delay = new Tone.FeedbackDelay({
+/// Delay object
+export const delay = new Tone.FeedbackDelay({
     delayTime: 0.2,
     feedback: 0.1,
     wet: 0,
 });
-delayControl.addEventListener('input', ({ target }) => {
-    console.log(target.dataset.parameter);
-    delay[target.dataset.parameter].value = target.value;
+
+// Filter Object
+export const filter = new Tone.BiquadFilter({
+    frequency: 1500,
+    type: 'lowpass',
 });
 
 // ------------------------- //
@@ -266,6 +132,16 @@ synth.modulationEnvelope.chain(modGain, crossFade.b);
 crossFade.connect(filter);
 filter.connect(delay);
 delay.toDestination(0.8);
+
+// LFO Routing
+const lfo = new Tone.LFO(1, 0.1, 1500).start();
+const toFilt = new Tone.Gain(0);
+const toModIndex = new Tone.Gain(0);
+lfo.connect(toFilt);
+toFilt.connect(filter.frequency);
+// Connect LFO to mod index
+// lfo.connect(toFreqRatio);
+toModIndex.connect(synth.modulationIndex);
 
 // ------------------------- //
 //        Note Data          //
@@ -499,11 +375,11 @@ function repeatAnim(target) {
 
 // Snooze Checks
 stepContainer.addEventListener('change', ({ target }) => {
+    const asciiCheck = document.querySelectorAll('#ascii-checkbox');
     if (target.type == 'checkbox' && target.checked) {
         // Turns step 'on'
         notes[target.dataset.index].velocity = 1;
         // UI Update
-
         asciiCheck[target.dataset.index].style.color = 'var(--on)';
         asciiRepeater[target.dataset.index].style.color = 'var(--repeaterOn)';
 
