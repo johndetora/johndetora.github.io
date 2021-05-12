@@ -11,7 +11,7 @@ else OSName = 'Linux (probably)';
 console.log('Your OS: ' + OSName);
 const overlay = document.querySelector('.overlay');
 if (navigator.appVersion.indexOf('Win') != -1) {
-    overlay.style.left = '-103px';
+    overlay.style.left = '-80px';
 }
 
 // ------------------------- //
