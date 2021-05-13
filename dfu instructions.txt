@@ -1,7 +1,0 @@
-hold rec play pause
-user: root
-password: surface-electric-famous
-
-change directory to update (/flash)
-
- dfu-util -a 0 -D UpdateImage.dfu
