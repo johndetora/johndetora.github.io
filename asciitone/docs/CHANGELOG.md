@@ -2,6 +2,18 @@
 
 All notable changes to asciiquencer/asciitone will be documented in this file.
 
+## v0.2b1 - 2021-05-11
+
+### Changed
+
+-   Overlay is now wider and more open.
+-   Font sizes made larger
+-   ascii parameters are now larger on mobile
+
+### Added
+
+-   normalize.css for css reset
+
 ## v0.1b2 - 2021-04-14
 
 ### Changed

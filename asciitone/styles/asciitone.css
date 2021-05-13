@@ -7,7 +7,7 @@
 html * {
     -webkit-tap-highlight-color: transparent;
     /* font-family: 'Courier New', Courier, monospace */
-    font-family: monospace !important;
+    font-family: monospace;
 }
 
 html,
@@ -88,6 +88,7 @@ p {
     z-index: 0;
 }
 .overlay {
+    font-family: Courier, monospace !important;
     position: absolute;
     line-height: 13px;
     font-size: 14px;
@@ -162,7 +163,7 @@ p {
     font-weight: bold;
 }
 .ascii-params {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Courier New', Courier, monospace !important;
     font-weight: bold;
     font-size: 13px;
     letter-spacing: -4px;

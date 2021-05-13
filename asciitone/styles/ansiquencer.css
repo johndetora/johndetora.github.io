@@ -73,11 +73,13 @@ a {
 
 #bpm {
     position: absolute;
-    width: 105px;
+    width: 125px;
     z-index: 5;
 }
 
 #ascii-bpm {
+    font-family: 'Courier New', Courier, monospace !important;
+    font-size: 14px;
     letter-spacing: -5px;
     z-index: 0;
 }
@@ -137,7 +139,7 @@ a {
     top: -6px;
 }
 #ascii-repeater {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: Courier, monospace;
     font-size: 18px;
     font-weight: normal;
     text-align: center;

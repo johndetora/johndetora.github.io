@@ -147,26 +147,26 @@ fxControls.addEventListener('input', ({ target }) => {
 });
 
 /////// Circle Grow Animation
-let circle = document.getElementById('ascii-cutoff');
-function circleGrow(target) {
-    if (target.id === 'cutoff') {
-        let circleSize = parseInt(target.value / 50);
-        let circleX = parseInt(target.value / 25);
-        /// IMPORTANT This value is the top position + font.size and may need to be adjusted later
-        let circleLocation = 35;
-        let circlePosition = -circleSize + circleLocation;
+// let circle = document.getElementById('ascii-cutoff');
+// function circleGrow(target) {
+//     if (target.id === 'cutoff') {
+//         let circleSize = parseInt(target.value / 50);
+//         let circleX = parseInt(target.value / 25);
+//         /// IMPORTANT This value is the top position + font.size and may need to be adjusted later
+//         let circleLocation = 35;
+//         let circlePosition = -circleSize + circleLocation;
 
-        // When the animation turns into a period
-        if (target.value <= 400) {
-            circle.style.opacity = 0;
-            document.getElementById('filterLabel').innerHTML = '> cutoff.';
-            // When the animation is growing/shrinking
-        } else {
-            document.getElementById('filterLabel').innerHTML = '> cutoff';
-            circle.style.fontSize = circleSize + '.px';
-            circle.style.opacity = 1;
-            circle.style.top = circlePosition + '.px';
-            circle.style.left = circleX + 50 + '.px'; // Comment this out to have circle stay in x position
-        }
-    }
-}
+//         // When the animation turns into a period
+//         if (target.value <= 400) {
+//             circle.style.opacity = 0;
+//             document.getElementById('filterLabel').innerHTML = '> cutoff.';
+//             // When the animation is growing/shrinking
+//         } else {
+//             document.getElementById('filterLabel').innerHTML = '> cutoff';
+//             circle.style.fontSize = circleSize + '.px';
+//             circle.style.opacity = 1;
+//             circle.style.top = circlePosition + '.px';
+//             circle.style.left = circleX + 50 + '.px'; // Comment this out to have circle stay in x position
+//         }
+//     }
+// }
