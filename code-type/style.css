@@ -34,6 +34,16 @@ body,
     justify-content: center;
     align-items: center;
 }
+
+#meter {
+    border: 1px solid var(--paleYellow);
+    border-radius: 5px;
+    color: red;
+    height: 20px;
+    width: 600px;
+    margin: 1%;
+}
+
 .container {
     background-color: var(--paleYellow);
     padding: 1rem;

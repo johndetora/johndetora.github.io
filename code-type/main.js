@@ -4,6 +4,7 @@ import { phrases } from './phrases.js';
 const quoteDisplayElement = document.getElementById('quoteDisplay');
 const quoteInputElement = document.getElementById('quoteInput');
 const timerElement = document.getElementById('timer');
+const meter = document.getElementById('meter');
 
 // TIMER
 function getTimerTime() {
@@ -13,12 +14,19 @@ function getTimerTime() {
 let startTime;
 function startTimer() {
     timerElement.innerText = 0;
+    meter.innerHTML = '';
     // We are using the real time as a reference so that setInterval() is exact
     startTime = new Date();
     setInterval(() => {
         // Call the getTimerTime function and have it display in page
         timer.innerText = getTimerTime();
     }, 1000);
+    // Kill meter work in progress
+    // setInterval(() => {
+    //     if (getTimerTime() <= 10) {
+    //         meter.append('$');
+    //     } else meter.innerHTML = 'fail';
+    // }, 150);
 }
 
 // Get random phrase from phrases[]
@@ -55,6 +63,7 @@ quoteInputElement.addEventListener('input', () => {
 function renderNewPhrase() {
     // Get the phrase from the getRandomPhrase function
     const phrase = getRandomPhrase();
+
     // Clear previous quote
     quoteDisplayElement.innerText = '';
     // convert random phrase to array, then create span element for each character
@@ -71,4 +80,12 @@ function renderNewPhrase() {
     // Every time a new quote is rendered, reset the timer
     startTimer();
 }
+
+// Press control to render new phrase
+window.addEventListener('keydown', (e) => {
+    console.log(e.key);
+    if (e.key == 'Meta') {
+        renderNewPhrase();
+    }
+});
 renderNewPhrase();
