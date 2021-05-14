@@ -84,7 +84,7 @@ function renderNewPhrase() {
 // Press control to render new phrase
 window.addEventListener('keydown', (e) => {
     console.log(e.key);
-    if (e.key == 'Meta') {
+    if (e.key == 'Control') {
         renderNewPhrase();
     }
 });
