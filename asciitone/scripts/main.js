@@ -2,16 +2,15 @@ import { skinSwapper } from './skin-select.js';
 import { synthParamController } from './synth-controls.js';
 
 skinSwapper();
-synthParamController();
 
 let OSName = 'Unknown OS';
 if (navigator.appVersion.indexOf('Win') != -1) OSName = 'Windows';
 if (navigator.appVersion.indexOf('Mac') != -1) OSName = 'MacOS';
-// else OSName = 'Linux (probably)';
+else OSName = 'Linux (probably)';
 console.log('Your OS: ' + OSName);
 const overlay = document.querySelector('.overlay');
 if (navigator.appVersion.indexOf('Win') != -1) {
-    overlay.style.left = '-120px';
+    overlay.style.left = '-103px';
 }
 
 // ------------------------- //
@@ -122,10 +121,11 @@ export const filter = new Tone.BiquadFilter({
 // ------------------------- //
 //         Routing           //
 // ------------------------- //
+
 noiseSynth.toDestination(0.7);
 let gain = new Tone.Gain(0.7);
 let modGain = new Tone.Gain(0.2);
-let crossFade = new Tone.CrossFade(0);
+export const crossFade = new Tone.CrossFade(0);
 synth.chain(gain, crossFade.a);
 synth.modulationEnvelope.chain(modGain, crossFade.b);
 //gain.toDestination();
@@ -134,8 +134,8 @@ filter.connect(delay);
 delay.toDestination(0.8);
 
 // LFO Routing
-const lfo = new Tone.LFO(1, 0.1, 1500).start();
-const toFilt = new Tone.Gain(0);
+export const lfo = new Tone.LFO(1, 0.1, 1500).start();
+export const toFilt = new Tone.Gain(0);
 const toModIndex = new Tone.Gain(0);
 lfo.connect(toFilt);
 toFilt.connect(filter.frequency);
@@ -644,3 +644,4 @@ function mobileSwap() {
 }
 
 mobileSwap();
+synthParamController();

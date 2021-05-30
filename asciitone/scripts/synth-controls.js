@@ -1,5 +1,5 @@
 // All of the event listeners for the synth controls
-import { synth, delay, filter } from './main.js';
+import { synth, delay, filter, crossFade, lfo, toFilt } from './main.js';
 
 export function synthParamController() {
     //////// OSC Select Boxes ////////////
