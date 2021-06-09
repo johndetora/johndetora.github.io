@@ -6,7 +6,9 @@ timeEl.innerHTML = time.toLocaleTimeString();
 dateEl.innerHTML = time.toDateString();
 
 const day = document.querySelectorAll('.day');
-document.getElementById(`${currentDay}`).style.backgroundColor = `var(--coral)`;
+setInterval(() => {
+    document.getElementById(`${currentDay}`).style.backgroundColor = `var(--coral)`;
+}, 1000);
 
 // today.style.backgroundColor = `$(var(--coral))`;
 
