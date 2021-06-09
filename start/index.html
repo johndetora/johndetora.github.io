@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
         rel="stylesheet">
-    <script src="./main.js" type="module"></script>
+    <script src="./main.js" defer></script>
 
 
     <title>start</title>
@@ -19,7 +19,18 @@
 
 <body>
     <div class="container">
-        <div class="section welcome">welcome john
+        <div class="section welcome">
+            <div id="time"></div>
+            <div id="date"></div>
+            <div id="calendar">
+                <div class="day" id="1"></div>
+                <div class="day" id="2"></div>
+                <div class="day" id="3"></div>
+                <div class="day" id="4"></div>
+                <div class="day" id="5"></div>
+                <div class="day weekend" id="6"></div>
+                <div class="day weekend" id="7"></div>
+            </div>
         </div>
         <div class="section link-container">
             <div class="link-container__card">
