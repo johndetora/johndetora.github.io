@@ -1,7 +1,10 @@
 import { skinSwapper } from './skin-select.js';
+import { synth, delay, filter, crossFade, lfo, toFilt, reverb, gain, modGain, toModIndex } from './synth-objects.js';
 import { synthParamController } from './synth-controls.js';
 
 skinSwapper();
+
+reverb.generate();
 
 //TODO: Refactor this to its own function.  Add web browser check
 let OSName = 'Unknown OS';
@@ -26,6 +29,7 @@ document.querySelector('button')?.addEventListener('click', async () => {
 //////////////// Start Stop Init ////////////////////////
 //  Starts transport and initializes certain animations like playhead and spin //
 let playButton = document.getElementById('play-button');
+//TODO: add space key to play/pause
 playButton.addEventListener('click', () => {
     if (Tone.Transport.state !== 'started') {
         playButton.innerHTML = '[pause]';
@@ -73,72 +77,20 @@ const asciiRepeater = document.querySelectorAll('#ascii-repeater');
 const steps = 8; // Total step length
 
 // ------------------------- //
-//    Synth Parameters       //
-// ------------------------- //
-
-// TODO: Put these and routing in their own module, then import all into param controls
-
-export const synth = new Tone.FMSynth({
-    harmonicity: 1,
-    modulationIndex: 10,
-    portamento: 0,
-    detune: 0,
-    oscillator: {
-        type: 'sine',
-    },
-
-    envelope: {
-        attack: 0.01,
-        decay: 0,
-        sustain: 1,
-        release: 0.2,
-        attackCurve: 'exponential',
-    },
-    modulation: {
-        type: 'sine',
-    },
-    modulationEnvelope: {
-        attack: 0.01,
-        decay: 0,
-        sustain: 1,
-        release: 0.2,
-        attackCurve: 'exponential',
-    },
-});
-const noiseSynth = new Tone.NoiseSynth();
-
-/// Delay object
-export const delay = new Tone.FeedbackDelay({
-    delayTime: 0.2,
-    feedback: 0.1,
-    wet: 0,
-});
-
-// Filter Object
-export const filter = new Tone.BiquadFilter({
-    frequency: 1500,
-    type: 'lowpass',
-});
-
-// ------------------------- //
 //         Routing           //
 // ------------------------- //
 
-noiseSynth.toDestination(0.7);
-let gain = new Tone.Gain(0.7);
-let modGain = new Tone.Gain(0.2);
-export const crossFade = new Tone.CrossFade(0);
+// noiseSynth.toDestination(0.7);
 synth.chain(gain, crossFade.a);
 synth.modulationEnvelope.chain(modGain, crossFade.b);
 //gain.toDestination();
 crossFade.connect(filter);
 filter.connect(delay);
-delay.toDestination(0.8);
+delay.connect(reverb);
+reverb.toDestination(0.8);
 
 // LFO Routing
-export const lfo = new Tone.LFO(1, 0.1, 1500).start();
-export const toFilt = new Tone.Gain(0);
-const toModIndex = new Tone.Gain(0);
+
 lfo.connect(toFilt);
 toFilt.connect(filter.frequency);
 // Connect LFO to mod index

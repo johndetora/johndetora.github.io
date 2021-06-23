@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="./styles/typefaces.css" />
     <script nomodule src="scripts/main.js"></script>
     <script src="./scripts/main.js" type="module"></script>
+    <script src="./scripts/synth-controls.js" type="module"></script>
     <script src="./scripts/Tone.js"></script>
     <title class="notranslate">ascii-tone</title>
 </head>
@@ -164,7 +165,7 @@
          </pre>
         </div>
         <div id="header">
-            <span id="title">$ ascii-tone v0.3.0b</span>
+            <span id="title">$ ascii-tone v0.3.0</span>
             <span id="about-menu"></span>
             <!-- <a id="money" href=> [ $ ]</span> -->
             <a id="help" href="https://github.com/johndetora/asciitone" target="_blank">[ ? ]</a>
@@ -480,7 +481,7 @@
 
         <!-- //////// FX  ////////// -->
         <div id="fx-container">
-            <div class="fx-control" id="delay-container"><br>
+            <div class="fx-control" id="delay-container">
                 <p class="group-label">delay</p>
                 <p class="label">time</p>
                 <input type="range" class="delay" id="delayTime" data-parameter="delayTime" value="0.2" min="0" max="1"
@@ -495,20 +496,21 @@
                     step="0.01" data-ascii="ascii-delay-mix">
                 <span id="ascii-delay-mix" class="ascii-params">|▓-------------------------------|</span>
             </div>
-            <!-- <div class="fx-control" id="reverb-container">
-                <p class="label">time</p>
-                <input type="range" class="reverb" id="delayTime" data-parameter="delayTime" value="0.2" min="0" max="1"
-                    step="0.05" data-ascii="ascii-delay-time">
-                <span id="ascii-delay-time" class="ascii-params">|||||||▓-------------------------|</span>
-                <p class="label">feedback</p>
-                <input type="range" class="reverb" id="delayFeedback" data-parameter="feedback" value="0.1" min="0"
-                    max="1" step="0.01" data-ascii="ascii-delay-feedback">
-                <span id="ascii-delay-feedback" class="ascii-params">|||||||▓-------------------------|</span>
+            <div class="fx-control" id="reverb-container">
+                <p class="group-label">reverb</p>
                 <p class="label">mix</p>
-                <input type="range" class="reverb" id="delayMix" data-parameter="wet" value="0" min="0" max="1"
-                    step="0.01" data-ascii="ascii-delay-mix">
-                <span id="ascii-delay-mix" class="ascii-params">|▓-------------------------------|</span>
-            </div> -->
+                <input type="range" class="reverb" id="reverbMix" data-parameter="wet" value="0" min="0" max="1"
+                    step="0.05" data-ascii="ascii-reverb-mix">
+                <span id="ascii-reverb-mix" class="ascii-params">|▓-------------------------------|</span>
+                <p class="label">decay</p>
+                <input type="range" class="reverb" id="reverbDecay" data-parameter="decay" value="0.2" min="0" max="10"
+                    step="0.01" data-ascii="ascii-reverb-decay">
+                <span id="ascii-reverb-decay" class="ascii-params">|||||||▓-------------------------|</span>
+                <p class="label">pre-delay</p>
+                <input type="range" class="reverb" id="reverbPreDelay" data-parameter="preDelay" value="0.1" min="0"
+                    max="1" step="0.01" data-ascii="ascii-reverb-predelay">
+                <span id="ascii-reverb-predelay" class="ascii-params">||||▓----------------------------|</span>
+            </div>
             <!-- TODO: x-y pad for a control would be great.  Maybe even for the filter cutoff -->
             <!-- <div id="xy-pad">
                 <div class="xy-row">

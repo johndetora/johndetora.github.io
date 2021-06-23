@@ -195,8 +195,13 @@ p {
     height: 250px;
     /* border: 1px solid green; */
     display: none;
-    grid-template-columns: 95px 155px 155px;
-    grid-template-rows: 100px auto auto;
+    padding-top: 10px;
+
+    grid-template-columns: 195px 195px;
+    grid-template-rows: 100px auto;
+    grid-template-areas:
+        'delay reverb'
+        '. .';
     gap: 1px;
     margin: auto auto auto auto;
     width: auto;
@@ -385,7 +390,13 @@ use [class*="ascii-osc-"] to select this and the mod wave
 }
 
 #delay-container {
-    position: absolute;
+    grid-area: delay;
+    position: relative;
+}
+
+#reverb-container {
+    grid-area: reverb;
+    position: relative;
 }
 .ascii-label {
     font-weight: bold;
@@ -431,10 +442,10 @@ Common Breakpoints
 1300px - Normal Desktop  */
 
 @media all and (min-width: 320px) {
-    #main-container {
-        /* margin-top: 0; */
-        /* overflow: visible; */
-    }
+    /* #main-container { */
+    /* margin-top: 0; */
+    /* overflow: visible; */
+    /* } */
     /* 
     #synth-container {
         padding-top: 0px;
@@ -539,6 +550,14 @@ Common Breakpoints
         font-size: 15px;
         grid-area: footer;
     }
+
+    #scale-select {
+        cursor: pointer;
+        margin-right: 20px;
+        font-size: 14px;
+        padding-top: 5px;
+    }
+
     @media all and (max-height: 600px) {
         #param-swap-text {
             font-size: 14px;

@@ -1,18 +1,47 @@
 # Change Log
 
-All notable changes to asciiquencer/asciitone will be documented in this file.
+All notable changes to ascii-tone will be documented in this file.
 
-## v0.2b1 - 2021-05-11
-
-### Changed
-
--   Overlay is now wider and more open.
--   Font sizes made larger
--   ascii parameters are now larger on mobile
+## v0.3.0 - 2021-06-23
 
 ### Added
 
--   normalize.css for css reset
+-   v0.3.0 introduces convolution reverb to ascii-tone. Click the FX tab to try out the new parameters:
+    -   Mix: Controls the wet/dry mix of reverb. Put this all the way up to hear only the reverb signal, and all the way down to hear only the synth engine.
+    -   Decay: Sets the duration of the reverb.
+    -   Pre-delay: Sets the amount of time before the reverb is fully ramped in once signal is sent.
+
+### Changed
+
+##### Styles
+
+-   v0.3 changes the overall look of ascii-tone by changing the font of the UI.
+-   The main font family is now 'Menlo Regular'. It is also now packaged with ascii-tone so that the UI renders more predictably across platforms.
+-   Changing fonts is now done in the typefaces stylesheet to keep everything organized.
+-   Desktop FX/Synth button now styled to look more like a tab.
+-   Seperated synth and effect objects generated from Tone.js into seperate script 'synth-objects.js'
+-   Misc. stylesheet changes.
+
+##### misc
+
+-   Changed versioning system. Format is now |major version|minor version|patch version| with no 'b' identifier to specify beta.
+-   Refactored the function that renders the horizontal sliders. It is now much cleaner and won't require adding conditions for every parameter added.
+
+### Fixed
+
+-   Fixed UI bug that caused FX/Synth tab to change styles once clicked.
+
+## v0.2b1 - 2021-05-11
+
+### Added
+
+-   normalize.css stylesheet for css reset. This should maintain more consistency across platforms.
+
+### Changed
+
+-   Overlay is now wider and more open
+-   Font sizes made larger
+-   ascii parameters are now larger on mobile
 
 ## v0.1b2 - 2021-04-14
 
@@ -26,8 +55,8 @@ All notable changes to asciiquencer/asciitone will be documented in this file.
 ### Added
 
 -   Implementation of Parameter Tabs for mobile users.
--   Mobile UI now more compact and logical.
--   Scale selection button
+-   Mobile UI is now more compact and logical.
+-   Scale selection button and scale modes.
 
 ### Changed
 

@@ -36,7 +36,7 @@ ANSIquencer is the note input device for ascii-tone. It is made up of 8 steps wi
 2. The playhead is a visual indicator for seeing the current step being played.
 3. The note input sliders are used for selecting which notes to play. Click or click and drag to the desired note position. The default note range is C3 to A4.
 4. To set the scale for the note input sliders, click the [scale] button to select major, minor, pentatonic, or chromatic scale.
-5. Below the note input sliders are the flutter meters. By default the step will play 1 time each pass. Setting this higher will repeat the step n amount of times up to 4 repeats.
+5. Below the note input sliders are the flutter meters. By default the step will play 1 time each pass. Setting this higher will repeat the step n amount of times up to 4 repeats. Note: The flutter values are somewhat tempo dependant. If the tempo is too high or too low, all repeats may not be heard.
 6. Below the flutter meters are the #snooze toggle switches. Click these to toggle rest on or off for that step.
 
 ### Synthesizer
@@ -108,10 +108,24 @@ The $filter section allows you to adjust the low pass filter's frequency cutoff 
 
 The $lfo controls the modulation of the $filter section's cutoff. Note that the effect will be more apparent the more that the cutoff control is lowered.
 
+### effects
+
+Click the fx tab to see all effects controls. Click the synth tab to switch views back to the synth controls.
+
+### delay
+
+-   time:
+-   feedback:
+-   mix:
+
+### reverb
+
+-   mix:
+-   decay:
+-   pre-delay:
+
 ### There are several known issues and things to note:
 
--   Google chrome may think the page is in portuguese. Do not translate it.
--   The flutter (repeat) values are somewhat tempo dependant. If the tempo is too high or too low, repeats may not be heard.
 -   The lfo is uni-polar and only connects to the filter cutoff right now. This means that the filter cutoff must be set relatively low in frequency in order to hear the lfo doing its thing. If the decay is set to a low value, this will be even less noticeable.
 -   Similarly, the glide control will only work if the decay is set low enough.
 -   The volume get slightly louder and then quiet again when the waveforms are set to anything but sine. I'm not sure why, so just consider it a quirk

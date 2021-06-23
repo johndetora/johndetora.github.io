@@ -1,5 +1,5 @@
 // All of the event listeners for the synth controls
-import { synth, delay, filter, crossFade, lfo, toFilt } from './main.js';
+import { synth, delay, filter, crossFade, lfo, toFilt, reverb } from './synth-objects.js';
 
 export function synthParamController() {
     //////// OSC Select Boxes ////////////
@@ -99,5 +99,14 @@ export function synthParamController() {
     const delayControl = document.querySelector('#delay-container');
     delayControl.addEventListener('input', ({ target }) => {
         delay[target.dataset.parameter].value = target.value;
+    });
+
+    const reverbControl = document.querySelector('#reverb-container');
+    reverbControl.addEventListener('input', ({ target }) => {
+        if (target.id === 'reverbMix') {
+            reverb[target.dataset.parameter].value = target.value;
+        } else {
+            reverb[target.dataset.parameter] = target.value;
+        }
     });
 }
