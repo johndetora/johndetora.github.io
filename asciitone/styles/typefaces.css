@@ -15,6 +15,10 @@ html * {
     font-family: 'Menlo-Regular', Courier, monospace !important;
 }
 
+#ascii-bpm {
+    font-family: 'Menlo-Regular', Courier, monospace !important;
+}
+
 /* .overlay {
     font-family: 'Menlo-Regular';
 } */
