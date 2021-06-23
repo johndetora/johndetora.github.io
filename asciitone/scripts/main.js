@@ -540,14 +540,14 @@ fxSwap.addEventListener('click', function () {
         console.log('fx state');
         synthControls.style.display = 'grid';
         fxControls.style.display = 'none';
-        fxSwap.innerHTML = '[ fx ]';
+        fxSwap.innerHTML = '| fx |';
         synthOverlay.style.display = 'block';
         fxOverlay.style.display = 'none';
         return (paramState = 'synth');
     } else {
         fxControls.style.display = 'grid';
         synthControls.style.display = 'none';
-        fxSwap.innerHTML = '[ synth ]';
+        fxSwap.innerHTML = '| synth |';
         console.log('synth state');
         synthOverlay.style.display = 'none';
         fxOverlay.style.display = 'block';
