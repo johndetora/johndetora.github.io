@@ -7,7 +7,7 @@
 html * {
     -webkit-tap-highlight-color: transparent;
     /* font-family: 'Courier New', Courier, monospace */
-    /* font-family: monospace; */
+    font-family: monospace;
 }
 
 html,
@@ -88,7 +88,7 @@ p {
     z-index: 0;
 }
 .overlay {
-    /* font-family: Courier, monospace !important; */
+    font-family: Courier, monospace !important;
     position: absolute;
     line-height: 13px;
     font-size: 14px;
@@ -163,7 +163,7 @@ p {
     font-weight: bold;
 }
 .ascii-params {
-    /* font-family: 'Courier New', Courier, monospace !important; */
+    font-family: 'Courier New', Courier, monospace !important;
     font-weight: bold;
     font-size: 13px;
     letter-spacing: -4px;
@@ -171,7 +171,6 @@ p {
     left: 0px;
     z-index: -5;
 }
-
 #synth-container {
     /* border: 1px solid red; */
     height: 250px;
@@ -400,7 +399,6 @@ use [class*="ascii-osc-"] to select this and the mod wave
     grid-area: footer;
 }
 #fx-swap {
-    display: block;
     text-align: left;
     width: 120px;
 

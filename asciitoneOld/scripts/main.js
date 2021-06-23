@@ -3,7 +3,6 @@ import { synthParamController } from './synth-controls.js';
 
 skinSwapper();
 
-//TODO: Refactor this to its own function.  Add web browser check
 let OSName = 'Unknown OS';
 if (navigator.appVersion.indexOf('Win') != -1) OSName = 'Windows';
 if (navigator.appVersion.indexOf('Mac') != -1) OSName = 'MacOS';
@@ -44,8 +43,7 @@ playButton.addEventListener('click', () => {
 });
 // Initialization of bpm and ascii meters
 window.addEventListener('load', () => {
-    initVerticalControls();
-    initHorizontalControls();
+    init();
     let bpm = transport.value;
     Tone.Transport.bpm.value = bpm;
 });
@@ -62,7 +60,6 @@ transport.addEventListener('input', function () {
 //         Variables         //
 // ------------------------- //
 
-//TODO: See which ones can go into their own functions
 const synthControls = document.querySelector('#synth-container');
 const fxControls = document.querySelector('#fx-container');
 const stepContainer = document.querySelector('#steps');
@@ -76,7 +73,8 @@ const steps = 8; // Total step length
 //    Synth Parameters       //
 // ------------------------- //
 
-// TODO: Put these and routing in their own module, then import all into param controls
+// TO DO:
+// Put these and routing in their own module, then import all into param controls
 
 export const synth = new Tone.FMSynth({
     harmonicity: 1,
@@ -160,7 +158,7 @@ let currentScale = majorScale;
 /// Scale set logic
 const scaleSelect = document.getElementById('scale-select');
 scaleSelect.addEventListener('click', scaleSet);
-let scaleIndex = 0; // Should be global
+let scaleIndex = 0;
 function scaleSet() {
     let currentNotes = document.querySelectorAll('.meter');
     // Round Robin selection
@@ -180,7 +178,24 @@ function scaleSet() {
     return currentScale;
 }
 
+// let sliderNotes = {
+//     0: 'C3',
+//     1: 'D3',
+//     2: 'E3',
+//     3: 'F3',
+//     4: 'G3',
+//     5: 'A3',
+//     6: 'B3',
+//     7: 'C4',
+//     8: 'D4',
+//     9: 'E4',
+//     10: 'F4',
+//     11: 'G4',
+//     12: 'A4',
+// };
+
 ////// Notes, value time object each object is a step
+
 let notes = [
     {
         // Step 1
@@ -267,7 +282,7 @@ let repeatButton = document.getElementById('repeatTest');
 // ------------------------- //
 
 let repStep; // Can delete this soon
-let index = 0; // Never change this.  It is the global reference for each
+let index = 0; // Never change this
 
 let part = new Tone.Part(function (time, value) {
     let step = index % steps;
@@ -443,52 +458,101 @@ function animateLFO(index) {
 //    Slider Animations      //
 // ------------------------- //
 /////// Horizontal Slider Animation ////////
-//TODO: add special classes so that we can target the controls and initialize the renders on load
 const tempoMeter = document.getElementById('ascii-bpm');
-tempoMeter.innerHTML = '||||||||||||||▓══════════════════ |';
+let lines = '|';
+let block = '▓';
 
+tempoMeter.innerHTML = '||||||||||||||▓══════════════════ |';
 transport.addEventListener('input', function () {
-    let block = '▓';
-    let pipe = '|';
-    let equals = '═';
-    let linesAmount = parseInt(this.value / 15);
-    tempoMeter.innerHTML = pipe.repeat(linesAmount - 1) + block + equals.repeat(33 - linesAmount) + ` ${pipe}`; // ' |'
+    let animBars = parseInt(this.value / 15);
+    let empty = '═';
+    tempoMeter.innerHTML = lines.repeat(animBars - 1) + block + empty.repeat(33 - animBars) + ' |';
+});
+/// Initialization
+function init() {
+    for (let i = 0; i < meters.length; i++) {
+        meters[i].innerHTML = bars(6);
+        const empty = '│-│' + '<br>';
+        const arrowUp = '│-│↑' + '<br>';
+        const arrowDown = '│-│↓' + '<br>';
+        const arrowUpFilled = '│o│↑' + '<br>';
+        const arrowDownFilled = '│o│↓' + '<br>';
+        const filled = '│o│' + '<br>';
+        asciiRepeater[i].innerHTML = '│-│' + '<br>' + '│-│↑' + '<br>' + '│-│↓' + '<br>' + '│o│' + '<br>';
+    }
+}
+
+///// Horizontal Slider for Parameters /////
+
+// synthControls.addEventListener('input', ({ target }) => {
+//     let empty = '|';
+//     let emptyAlt = '-';
+
+//     console.log(target.offsetWidth);
+//     // document.getElementById(target.dataset.ascii).getBoundingClientRect().width
+//     let linesAmount = parseInt(target.value * 31);
+//     document.getElementById(target.dataset.ascii).innerHTML = lines + lines.repeat(linesAmount) + block + emptyAlt.repeat(31 - linesAmount) + empty;
+//     console.log(document.getElementById(target.dataset.ascii).getBoundingClientRect().width);
+
+//     /// Envelopes
+// });
+synthControls.addEventListener('input', ({ target }) => {
+    let empty = '|';
+    let emptyAlt = '-';
+    // console.log(target.max);
+    //// The '/ n' parts make it so the lines amount equal 31 at their max. Just divide/multiply target max so it reaches 31
+
+    /// Mod index
+    if (target.max == 100) {
+        let linesAmount = parseInt(target.value / 3.2); // This ends up being the total width essentially
+        console.log(parseInt(32 - linesAmount));
+        document.getElementById(target.dataset.ascii).innerHTML =
+            lines + lines.repeat(linesAmount) + block + emptyAlt.repeat(31 - linesAmount) + empty;
+    } else if (target.id === 'crossfader') {
+        let linesAmount = parseInt(target.value * 18); // Change this value back to 31 if width is reverted
+        document.getElementById(target.dataset.ascii).innerHTML = lines.repeat(linesAmount) + block + empty.repeat(17 - linesAmount + 1); // Fills in empty space.  +1 so that it doesn't hit 0 and throw an error
+        /// Filter
+    } else if (target.max == 1) {
+        console.log(target.offsetWidth);
+        /// Envelopes
+        let linesAmount = parseInt(target.value * 31);
+        document.getElementById(target.dataset.ascii).innerHTML =
+            lines + lines.repeat(linesAmount) + block + emptyAlt.repeat(31 - linesAmount) + empty;
+        /// Filter
+    } else if (target.max == 1500) {
+        let linesAmount = parseInt(target.value / 47);
+        document.getElementById(target.dataset.ascii).innerHTML =
+            lines + lines.repeat(linesAmount) + block + emptyAlt.repeat(31 - linesAmount) + empty;
+        // Resonance
+    } else if (target.max == 10) {
+        let linesAmount = parseInt(target.value * 3.1);
+        document.getElementById(target.dataset.ascii).innerHTML =
+            lines + lines.repeat(linesAmount) + block + emptyAlt.repeat(31 - linesAmount) + empty;
+    } else if (target.id === 'lfo-rate') {
+        let linesAmount = parseInt(target.value * 2.1);
+        document.getElementById(target.dataset.ascii).innerHTML =
+            lines + lines.repeat(linesAmount) + block + emptyAlt.repeat(31 - linesAmount) + empty;
+    } else if (target.id === 'harmonicity') {
+        let linesAmount = parseInt(target.value * 2.7);
+        document.getElementById(target.dataset.ascii).innerHTML = lines + lines.repeat(linesAmount) + block + empty.repeat(17 - linesAmount);
+        document.getElementById('ascii-harmonicity-num').innerHTML = '|' + parseFloat(target.value).toFixed(1) + '|';
+    }
 });
 
-// Synth/FX control slider animations
-function drawHorizontalControls(e) {
-    let target = e.target;
-    let block = '▓';
-    let pipe = '|';
-    let dash = '-';
-    let factor = 31;
-    let linesAmount = parseInt((factor / target.max) * target.value);
-    if (target.id === 'crossfader' || target.id === 'harmonicity') {
-        let linesAmount = parseInt((18 / target.max) * target.value);
-        document.getElementById(target.dataset.ascii).innerText = pipe.repeat(linesAmount) + block + pipe.repeat(18 - linesAmount) + pipe;
-        document.getElementById('ascii-harmonicity-num').innerText = pipe + parseFloat(target.value).toFixed(1) + pipe;
-    } else if (target.id !== 'glide') {
-        document.getElementById(target.dataset.ascii).innerText = pipe + pipe.repeat(linesAmount) + block + dash.repeat(31 - linesAmount) + pipe;
-    }
-}
-//TODO: this does work.  Just gotta see if it's worth adding a class to every control that would use it.
-function initHorizontalControls() {
-    const controls = document.querySelectorAll('.hControl');
-    const controlsAscii = document.querySelectorAll('.ascii-params');
-    let block = '▓';
-    let pipe = '|';
-    let dash = '-';
-    let factor = 31;
-    for (let i = 0; i < controls.length; i++) {
-        let linesAmount = parseInt((factor / controls[i].max) * controls[i].value);
-        console.log(controls[i]);
-        // console.log(controlsAscii[i].innerText);
-        controlsAscii[i].innerText = pipe + pipe.repeat(linesAmount) + block + dash.repeat(31 - linesAmount) + pipe;
-    }
-}
+// FX Horizontal slider animations
 
-synthControls.addEventListener('input', e => drawHorizontalControls(e));
-fxControls.addEventListener('input', e => drawHorizontalControls(e));
+fxControls.addEventListener('input', ({ target }) => {
+    let empty = '|';
+    let emptyAlt = '-';
+    console.log(target.max);
+    if (target.id == 'delayTime' || target.id == 'delayFeedback' || target.id == 'delayMix') {
+        // Target max is 1
+        /// Envelopes
+        let linesAmount = parseInt(target.value * 31);
+        document.getElementById(target.dataset.ascii).innerHTML =
+            lines + lines.repeat(linesAmount) + block + emptyAlt.repeat(31 - linesAmount) + empty;
+    }
+});
 
 /////// Circle Grow Animation
 // let circle = document.getElementById('ascii-cutoff');
@@ -515,19 +579,6 @@ fxControls.addEventListener('input', e => drawHorizontalControls(e));
 //     }
 // }
 
-/// Flutter Controls
-function initVerticalControls() {
-    for (let i = 0; i < meters.length; i++) {
-        meters[i].innerHTML = bars(6);
-        const empty = '│-│' + '<br>';
-        const arrowUp = '│-│↑' + '<br>';
-        const arrowDown = '│-│↓' + '<br>';
-        const arrowUpFilled = '│o│↑' + '<br>';
-        const arrowDownFilled = '│o│↓' + '<br>';
-        const filled = '│o│' + '<br>';
-        asciiRepeater[i].innerHTML = '│-│' + '<br>' + '│-│↑' + '<br>' + '│-│↓' + '<br>' + '│o│' + '<br>';
-    }
-}
 //////////////// SWAP PARAMETERS ///////////////
 
 const fxSwap = document.getElementById('fx-swap');
@@ -535,7 +586,6 @@ let paramState = 'synth';
 fxSwap.addEventListener('click', function () {
     const synthOverlay = document.getElementById('ascii-synth-overlay');
     const fxOverlay = document.getElementById('ascii-fx-overlay');
-
     if (paramState === 'fx') {
         console.log('fx state');
         synthControls.style.display = 'grid';
@@ -570,7 +620,7 @@ function mobileSwap() {
     tabContainer.addEventListener('click', ({ target }) => {
         tabState = target.dataset.state;
         // make highlighted text bold
-        swapLabels.forEach(element => {
+        swapLabels.forEach((element) => {
             element.style.fontWeight = 'normal';
             target.style.fontWeight = 'bold';
         });

@@ -1,18 +1,30 @@
-import { skinSwapper } from './skin-select.js';
-import { synthParamController } from './synth-controls.js';
-
-skinSwapper();
-
-//TODO: Refactor this to its own function.  Add web browser check
 let OSName = 'Unknown OS';
 if (navigator.appVersion.indexOf('Win') != -1) OSName = 'Windows';
 if (navigator.appVersion.indexOf('Mac') != -1) OSName = 'MacOS';
-else OSName = 'Linux (probably)';
+
 console.log('Your OS: ' + OSName);
 const overlay = document.querySelector('.overlay');
 if (navigator.appVersion.indexOf('Win') != -1) {
-    overlay.style.left = '-103px';
+    overlay.style.left = '-83px';
 }
+// ------------------------- //
+//      Skin select         //
+// ------------------------- //
+
+const skinSwap = document.querySelector('#skinSwap');
+const skinSelector = document.getElementById('skin');
+let skin = 'default';
+skinSwap.addEventListener('click', function () {
+    if (skin === 'default') {
+        skinSelector.setAttribute('href', 'skins/dark.css');
+        skinSwap.innerHTML = '[ light mode ]';
+        return (skin = 'dark');
+    } else if (skin === 'dark') {
+        skinSelector.setAttribute('href', 'skins/light.css');
+        skinSwap.innerHTML = '[ dark mode ]';
+        return (skin = 'default');
+    }
+});
 
 // ------------------------- //
 //    Transport / Init       //
@@ -44,8 +56,8 @@ playButton.addEventListener('click', () => {
 });
 // Initialization of bpm and ascii meters
 window.addEventListener('load', () => {
-    initVerticalControls();
-    initHorizontalControls();
+    init();
+
     let bpm = transport.value;
     Tone.Transport.bpm.value = bpm;
 });
@@ -53,7 +65,7 @@ window.addEventListener('load', () => {
 // BPM Change input
 let transport = document.querySelector('#bpm');
 transport.addEventListener('input', function () {
-    let bpm = this.value;
+    bpm = this.value;
     Tone.Transport.bpm.value = bpm;
     console.log(bpm);
 });
@@ -62,23 +74,31 @@ transport.addEventListener('input', function () {
 //         Variables         //
 // ------------------------- //
 
-//TODO: See which ones can go into their own functions
 const synthControls = document.querySelector('#synth-container');
 const fxControls = document.querySelector('#fx-container');
 const stepContainer = document.querySelector('#steps');
+const paramContainer = document.querySelector('#params');
 const playHead = document.querySelector('#playhead');
+const checks = document.querySelectorAll('#check');
+const meter = document.getElementById('ascii-meter');
 const meters = document.querySelectorAll('#ascii-meter');
 const asciiRepeater = document.querySelectorAll('#ascii-repeater');
-
+const paraMeters = document.querySelectorAll('#para-meter');
+const asciiCheck = document.querySelectorAll('#ascii-checkbox');
+const envelope = document.querySelector('#envelope-container');
+const mod = document.querySelector('#modulation-envelope');
+const oscWave = document.querySelector('#osc-wave');
+const modWave = document.querySelector('#mod-wave');
 const steps = 8; // Total step length
+
+const filterControls = document.querySelector('#filter-container');
+const delayControl = document.querySelector('#delay-container');
 
 // ------------------------- //
 //    Synth Parameters       //
 // ------------------------- //
 
-// TODO: Put these and routing in their own module, then import all into param controls
-
-export const synth = new Tone.FMSynth({
+const synth = new Tone.FMSynth({
     harmonicity: 1,
     modulationIndex: 10,
     portamento: 0,
@@ -107,43 +127,149 @@ export const synth = new Tone.FMSynth({
 });
 const noiseSynth = new Tone.NoiseSynth();
 
-/// Delay object
-export const delay = new Tone.FeedbackDelay({
-    delayTime: 0.2,
-    feedback: 0.1,
-    wet: 0,
+// ------------------------- //
+//     Synth User Input      //
+// ------------------------- //
+
+/////// OSC ///////
+//////// Select Boxes ////////////
+const oscWaveSwitch = document.querySelector('#ascii-osc-wave');
+const asciiOscWave = document.querySelector('#ascii-osc-wave-options');
+let waveSelectState = 0;
+oscWaveSwitch.addEventListener('click', function () {
+    if (waveSelectState == 0) {
+        console.log('clicked');
+        asciiOscWave.style.display = 'flex';
+        oscWaveSwitch.style.display = 'none';
+        return (waveSelectState = 1);
+    }
 });
 
-// Filter Object
-export const filter = new Tone.BiquadFilter({
+asciiOscWave.addEventListener('click', ({ target }) => {
+    synth.oscillator.type = target.dataset.parameter;
+    console.log(synth.oscillator.type);
+    asciiOscWave.style.display = 'none';
+    oscWaveSwitch.style.display = 'inline';
+    oscWaveSwitch.innerHTML = '[' + target.dataset.parameter + ']';
+    return (waveSelectState = 0);
+});
+
+glide.addEventListener('change', function () {
+    const glide = document.getElementById('glide');
+    const asciiGlide = document.getElementById('ascii-glide');
+    if (glide.checked) {
+        console.log('checked');
+        synth.portamento = 0.05;
+        asciiGlide.innerHTML = '[@]';
+    } else {
+        synth.portamento = 0;
+        console.log('unchecked');
+        asciiGlide.innerHTML = '[ ]';
+    }
+});
+
+/////// MOD WAVE ///////
+
+const modWaveSwitch = document.querySelector('#ascii-mod-wave');
+const asciiModWave = document.querySelector('#ascii-mod-wave-options');
+let modSelectState = 0;
+modWaveSwitch.addEventListener('click', function () {
+    if (modSelectState == 0) {
+        console.log('clicked');
+        asciiModWave.style.display = 'flex';
+        modWaveSwitch.style.display = 'none';
+        return (modSelectState = 1);
+    }
+});
+
+asciiModWave.addEventListener('click', ({ target }) => {
+    synth.modulation.type = target.dataset.parameter;
+    asciiModWave.style.display = 'none';
+    modWaveSwitch.style.display = 'inline';
+    modWaveSwitch.innerHTML = '[' + target.dataset.parameter + ']';
+    return (modSelectState = 0);
+});
+
+///// HARMONICITY ///////
+let harmonicityInput = document.querySelector('#harmonicity');
+harmonicityInput.addEventListener('input', ({ target }) => {
+    synth.harmonicity.value = target.value;
+});
+
+//// ENVELOPE ///////
+envelope.addEventListener('input', ({ target }) => {
+    synth.envelope[target.dataset.action] = target.value;
+});
+
+///// MOD ENVELOPE
+mod.addEventListener('input', ({ target }) => {
+    synth.modulationEnvelope[target.dataset.action] = target.value;
+    if (target.dataset.action === 'modulationIndex') synth[target.dataset.action].value = target.value;
+});
+
+////// CROSSFADER ////////
+let crossFadeInput = document.getElementById('crossfader');
+crossFadeInput.addEventListener('input', () => {
+    crossFade.fade.value = crossFadeInput.value;
+});
+
+const filter = new Tone.BiquadFilter({
     frequency: 1500,
     type: 'lowpass',
 });
+/////// FILTER ///////
 
-// ------------------------- //
-//         Routing           //
-// ------------------------- //
+filterControls.addEventListener('input', ({ target }) => {
+    filter[target.dataset.parameter].value = target.value;
+    circleGrow(target);
+});
 
-noiseSynth.toDestination(0.7);
-let gain = new Tone.Gain(0.7);
-let modGain = new Tone.Gain(0.2);
-export const crossFade = new Tone.CrossFade(0);
-synth.chain(gain, crossFade.a);
-synth.modulationEnvelope.chain(modGain, crossFade.b);
-//gain.toDestination();
-crossFade.connect(filter);
-filter.connect(delay);
-delay.toDestination(0.8);
+//// LFO
+const lfo = new Tone.LFO(1, 0.1, 1500).start();
 
-// LFO Routing
-export const lfo = new Tone.LFO(1, 0.1, 1500).start();
-export const toFilt = new Tone.Gain(0);
+const toFilt = new Tone.Gain(0);
 const toModIndex = new Tone.Gain(0);
 lfo.connect(toFilt);
 toFilt.connect(filter.frequency);
 // Connect LFO to mod index
 // lfo.connect(toFreqRatio);
 toModIndex.connect(synth.modulationIndex);
+const lfoRate = document.getElementById('lfo-rate');
+const lfoAmt = document.querySelector('#lfo-amount');
+lfoRate.addEventListener('input', function () {
+    lfo.frequency.value = this.value;
+});
+lfoAmt.addEventListener('input', function () {
+    console.log(this.value);
+    toFilt.gain.value = this.value;
+    // toFreqRatio.gain.value = this.value;
+});
+
+//////// Delay /////////////
+
+const delay = new Tone.FeedbackDelay({
+    delayTime: 0.2,
+    feedback: 0.1,
+    wet: 0,
+});
+delayControl.addEventListener('input', ({ target }) => {
+    console.log(target.dataset.parameter);
+    delay[target.dataset.parameter].value = target.value;
+});
+
+// ------------------------- //
+//         Routing           //
+// ------------------------- //
+noiseSynth.toDestination(0.7);
+let gain = new Tone.Gain(0.7);
+let modGain = new Tone.Gain(0.2);
+let crossFade = new Tone.CrossFade(0);
+synth.chain(gain, crossFade.a);
+synth.modulationEnvelope.chain(modGain, crossFade.b);
+//gain.toDestination();
+crossFade.connect(filter);
+filter.connect(delay);
+delay.toDestination(0.8);
 
 // ------------------------- //
 //        Note Data          //
@@ -160,7 +286,7 @@ let currentScale = majorScale;
 /// Scale set logic
 const scaleSelect = document.getElementById('scale-select');
 scaleSelect.addEventListener('click', scaleSet);
-let scaleIndex = 0; // Should be global
+let scaleIndex = 0;
 function scaleSet() {
     let currentNotes = document.querySelectorAll('.meter');
     // Round Robin selection
@@ -180,7 +306,24 @@ function scaleSet() {
     return currentScale;
 }
 
+// let sliderNotes = {
+//     0: 'C3',
+//     1: 'D3',
+//     2: 'E3',
+//     3: 'F3',
+//     4: 'G3',
+//     5: 'A3',
+//     6: 'B3',
+//     7: 'C4',
+//     8: 'D4',
+//     9: 'E4',
+//     10: 'F4',
+//     11: 'G4',
+//     12: 'A4',
+// };
+
 ////// Notes, value time object each object is a step
+
 let notes = [
     {
         // Step 1
@@ -267,7 +410,7 @@ let repeatButton = document.getElementById('repeatTest');
 // ------------------------- //
 
 let repStep; // Can delete this soon
-let index = 0; // Never change this.  It is the global reference for each
+let index = 0; // Never change this
 
 let part = new Tone.Part(function (time, value) {
     let step = index % steps;
@@ -360,11 +503,11 @@ function repeatAnim(target) {
 
 // Snooze Checks
 stepContainer.addEventListener('change', ({ target }) => {
-    const asciiCheck = document.querySelectorAll('#ascii-checkbox');
     if (target.type == 'checkbox' && target.checked) {
         // Turns step 'on'
         notes[target.dataset.index].velocity = 1;
         // UI Update
+
         asciiCheck[target.dataset.index].style.color = 'var(--on)';
         asciiRepeater[target.dataset.index].style.color = 'var(--repeaterOn)';
 
@@ -443,80 +586,18 @@ function animateLFO(index) {
 //    Slider Animations      //
 // ------------------------- //
 /////// Horizontal Slider Animation ////////
-//TODO: add special classes so that we can target the controls and initialize the renders on load
 const tempoMeter = document.getElementById('ascii-bpm');
+let lines = '|';
+let block = '▓';
+
 tempoMeter.innerHTML = '||||||||||||||▓══════════════════ |';
-
 transport.addEventListener('input', function () {
-    let block = '▓';
-    let pipe = '|';
-    let equals = '═';
-    let linesAmount = parseInt(this.value / 15);
-    tempoMeter.innerHTML = pipe.repeat(linesAmount - 1) + block + equals.repeat(33 - linesAmount) + ` ${pipe}`; // ' |'
+    let animBars = parseInt(this.value / 15);
+    let empty = '═';
+    tempoMeter.innerHTML = lines.repeat(animBars - 1) + block + empty.repeat(33 - animBars) + ' |';
 });
-
-// Synth/FX control slider animations
-function drawHorizontalControls(e) {
-    let target = e.target;
-    let block = '▓';
-    let pipe = '|';
-    let dash = '-';
-    let factor = 31;
-    let linesAmount = parseInt((factor / target.max) * target.value);
-    if (target.id === 'crossfader' || target.id === 'harmonicity') {
-        let linesAmount = parseInt((18 / target.max) * target.value);
-        document.getElementById(target.dataset.ascii).innerText = pipe.repeat(linesAmount) + block + pipe.repeat(18 - linesAmount) + pipe;
-        document.getElementById('ascii-harmonicity-num').innerText = pipe + parseFloat(target.value).toFixed(1) + pipe;
-    } else if (target.id !== 'glide') {
-        document.getElementById(target.dataset.ascii).innerText = pipe + pipe.repeat(linesAmount) + block + dash.repeat(31 - linesAmount) + pipe;
-    }
-}
-//TODO: this does work.  Just gotta see if it's worth adding a class to every control that would use it.
-function initHorizontalControls() {
-    const controls = document.querySelectorAll('.hControl');
-    const controlsAscii = document.querySelectorAll('.ascii-params');
-    let block = '▓';
-    let pipe = '|';
-    let dash = '-';
-    let factor = 31;
-    for (let i = 0; i < controls.length; i++) {
-        let linesAmount = parseInt((factor / controls[i].max) * controls[i].value);
-        console.log(controls[i]);
-        // console.log(controlsAscii[i].innerText);
-        controlsAscii[i].innerText = pipe + pipe.repeat(linesAmount) + block + dash.repeat(31 - linesAmount) + pipe;
-    }
-}
-
-synthControls.addEventListener('input', e => drawHorizontalControls(e));
-fxControls.addEventListener('input', e => drawHorizontalControls(e));
-
-/////// Circle Grow Animation
-// let circle = document.getElementById('ascii-cutoff');
-// function circleGrow(target) {
-//     if (target.id === 'cutoff') {
-//         let circleSize = parseInt(target.value / 50);
-//         let circleX = parseInt(target.value / 25);
-//         /// IMPORTANT This value is the top position + font.size and may need to be adjusted later
-//         let circleLocation = 35;
-//         let circlePosition = -circleSize + circleLocation;
-
-//         // When the animation turns into a period
-//         if (target.value <= 400) {
-//             circle.style.opacity = 0;
-//             document.getElementById('filterLabel').innerHTML = '> cutoff.';
-//             // When the animation is growing/shrinking
-//         } else {
-//             document.getElementById('filterLabel').innerHTML = '> cutoff';
-//             circle.style.fontSize = circleSize + '.px';
-//             circle.style.opacity = 1;
-//             circle.style.top = circlePosition + '.px';
-//             circle.style.left = circleX + 50 + '.px'; // Comment this out to have circle stay in x position
-//         }
-//     }
-// }
-
-/// Flutter Controls
-function initVerticalControls() {
+/// Initialization
+function init() {
     for (let i = 0; i < meters.length; i++) {
         meters[i].innerHTML = bars(6);
         const empty = '│-│' + '<br>';
@@ -528,6 +609,91 @@ function initVerticalControls() {
         asciiRepeater[i].innerHTML = '│-│' + '<br>' + '│-│↑' + '<br>' + '│-│↓' + '<br>' + '│o│' + '<br>';
     }
 }
+
+///// Horizontal Slider for Parameters /////
+
+synthControls.addEventListener('input', ({ target }) => {
+    let empty = '|';
+    let emptyAlt = '-';
+    console.log(target.max);
+    //// The '/ n' parts make it so the lines amount equal 31 at their max. Just divide/multiply target max so it reaches 31
+
+    /// Mod index
+    if (target.max == 100) {
+        let linesAmount = parseInt(target.value / 3.2); // This ends up being the total width essentially
+        console.log(parseInt(32 - linesAmount));
+        document.getElementById(target.dataset.ascii).innerHTML =
+            lines + lines.repeat(linesAmount) + block + emptyAlt.repeat(31 - linesAmount) + empty;
+    } else if (target.id === 'crossfader') {
+        let linesAmount = parseInt(target.value * 18); // Change this value back to 31 if width is reverted
+        document.getElementById(target.dataset.ascii).innerHTML = lines.repeat(linesAmount) + block + empty.repeat(17 - linesAmount + 1); // Fills in empty space.  +1 so that it doesn't hit 0 and throw an error
+        /// Filter
+    } else if (target.max == 1) {
+        /// Envelopes
+        let linesAmount = parseInt(target.value * 31);
+        document.getElementById(target.dataset.ascii).innerHTML =
+            lines + lines.repeat(linesAmount) + block + emptyAlt.repeat(31 - linesAmount) + empty;
+        /// Filter
+    } else if (target.max == 1500) {
+        let linesAmount = parseInt(target.value / 47);
+        document.getElementById(target.dataset.ascii).innerHTML =
+            lines + lines.repeat(linesAmount) + block + emptyAlt.repeat(31 - linesAmount) + empty;
+        // Resonance
+    } else if (target.max == 10) {
+        let linesAmount = parseInt(target.value * 3.1);
+        document.getElementById(target.dataset.ascii).innerHTML =
+            lines + lines.repeat(linesAmount) + block + emptyAlt.repeat(31 - linesAmount) + empty;
+    } else if (target.id === 'lfo-rate') {
+        let linesAmount = parseInt(target.value * 2.1);
+        document.getElementById(target.dataset.ascii).innerHTML =
+            lines + lines.repeat(linesAmount) + block + emptyAlt.repeat(31 - linesAmount) + empty;
+    } else if (target.id === 'harmonicity') {
+        let linesAmount = parseInt(target.value * 2.7);
+        document.getElementById(target.dataset.ascii).innerHTML = lines + lines.repeat(linesAmount) + block + empty.repeat(17 - linesAmount);
+        document.getElementById('ascii-harmonicity-num').innerHTML = '|' + parseFloat(target.value).toFixed(1) + '|';
+    }
+});
+
+// FX Horizontal slider animations
+
+fxControls.addEventListener('input', ({ target }) => {
+    let empty = '|';
+    let emptyAlt = '-';
+    console.log(target.max);
+    if (target.id == 'delayTime' || target.id == 'delayFeedback' || target.id == 'delayMix') {
+        // Target max is 1
+        /// Envelopes
+        let linesAmount = parseInt(target.value * 31);
+        document.getElementById(target.dataset.ascii).innerHTML =
+            lines + lines.repeat(linesAmount) + block + emptyAlt.repeat(31 - linesAmount) + empty;
+    }
+});
+
+/////// Circle Grow Animation
+let circle = document.getElementById('ascii-cutoff');
+function circleGrow(target) {
+    if (target.id === 'cutoff') {
+        let circleSize = parseInt(target.value / 50);
+        let circleX = parseInt(target.value / 25);
+        /// IMPORTANT This value is the top position + font.size and may need to be adjusted later
+        let circleLocation = 35;
+        let circlePosition = -circleSize + circleLocation;
+
+        // When the animation turns into a period
+        if (target.value <= 400) {
+            circle.style.opacity = 0;
+            document.getElementById('filterLabel').innerHTML = '> cutoff.';
+            // When the animation is growing/shrinking
+        } else {
+            document.getElementById('filterLabel').innerHTML = '> cutoff';
+            circle.style.fontSize = circleSize + '.px';
+            circle.style.opacity = 1;
+            circle.style.top = circlePosition + '.px';
+            circle.style.left = circleX + 50 + '.px'; // Comment this out to have circle stay in x position
+        }
+    }
+}
+
 //////////////// SWAP PARAMETERS ///////////////
 
 const fxSwap = document.getElementById('fx-swap');
@@ -535,7 +701,6 @@ let paramState = 'synth';
 fxSwap.addEventListener('click', function () {
     const synthOverlay = document.getElementById('ascii-synth-overlay');
     const fxOverlay = document.getElementById('ascii-fx-overlay');
-
     if (paramState === 'fx') {
         console.log('fx state');
         synthControls.style.display = 'grid';
@@ -558,7 +723,7 @@ fxSwap.addEventListener('click', function () {
 ///////////// MOBILE TABS //////////////
 // const synthControls = document.querySelector('#synth-container');
 // const fxControls = document.querySelector('#fx-container');
-let tabState = 'seq';
+
 function mobileSwap() {
     // const stepContainer = document.querySelector('#steps');
     // const fxSwap = document.getElementById('fx-swap');
@@ -570,7 +735,7 @@ function mobileSwap() {
     tabContainer.addEventListener('click', ({ target }) => {
         tabState = target.dataset.state;
         // make highlighted text bold
-        swapLabels.forEach(element => {
+        swapLabels.forEach((element) => {
             element.style.fontWeight = 'normal';
             target.style.fontWeight = 'bold';
         });
@@ -594,4 +759,3 @@ function mobileSwap() {
 }
 
 mobileSwap();
-synthParamController();
