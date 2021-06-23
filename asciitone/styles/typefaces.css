@@ -1,23 +1,18 @@
 /* TODO: remove these styles from the main stylesheets once figured out */
 
-
 @font-face {
     font-family: 'Menlo Regular';
     font-style: normal;
     font-weight: normal;
     src: local('Menlo Regular'), url('Menlo-Regular.woff') format('woff');
-    }
+}
 html * {
     -webkit-tap-highlight-color: transparent;
     /* font-family: 'Courier New', Courier, monospace */
     font-family: 'Menlo-Regular', monospace !important;
-   
-  
 }
 .ascii-params {
     /* font-family: 'Courier New', Courier, monospace !important; */
-
-    
 }
 
 /* .overlay {
@@ -33,4 +28,4 @@ html * {
     font-size: 14px;
     left: -128px;
     top: -840px;
-} */ */
+} */

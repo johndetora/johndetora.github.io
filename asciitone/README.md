@@ -113,5 +113,5 @@ The $lfo controls the modulation of the $filter section's cutoff. Note that the 
 -   Google chrome may think the page is in portuguese. Do not translate it.
 -   The flutter (repeat) values are somewhat tempo dependant. If the tempo is too high or too low, repeats may not be heard.
 -   The lfo is uni-polar and only connects to the filter cutoff right now. This means that the filter cutoff must be set relatively low in frequency in order to hear the lfo doing its thing. If the decay is set to a low value, this will be even less noticeable.
--   Similarly, the glide control will only work if the decay is set too low.
+-   Similarly, the glide control will only work if the decay is set low enough.
 -   The volume get slightly louder and then quiet again when the waveforms are set to anything but sine. I'm not sure why, so just consider it a quirk

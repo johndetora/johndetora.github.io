@@ -180,6 +180,7 @@ p {
     display: grid;
     padding-right: 20px;
     /* padding-left: 20px; */
+    padding-top: 10px;
     grid-template-columns: 95px 148px 148px;
     grid-template-rows: 115px auto;
     grid-template-areas:
@@ -420,6 +421,48 @@ use [class*="ascii-osc-"] to select this and the mod wave
 }
 
 /* ////// START MOBILE ///////// */
+/* https://www.oakharborwebdesigns.com/blog/articles/how-to-build-a-responsive-mobile-first-website-from-scratch.html#blog-post
+
+Common Breakpoints
+400px - Large Phones
+568px - Landscape Mobile
+768px - Tablet
+1024px - Small Desktop (Laptops)
+1300px - Normal Desktop  */
+
+@media all and (min-width: 320px) {
+    #main-container {
+        /* margin-top: 0; */
+        /* overflow: visible; */
+    }
+    /* 
+    #synth-container {
+        padding-top: 0px;
+
+        grid-area: main;
+        display: none;
+        grid-template-columns: 120px 120px;
+        grid-template-rows: auto auto;
+        grid-template-areas:
+            'oscillatorA oscillatorB '
+            'envelope mod '
+            'filter mixer';
+        gap: 0px;
+        width: 320px;
+        height: 400px;
+    }
+
+    #tabs-container-mobile {
+        display: flex;
+        flex-direction: row;
+        bottom: 10px;
+        width: 320px;
+        height: 60px;
+        font-size: 15px;
+        grid-area: footer;
+    } */
+}
+
 @media all and (max-width: 600px) {
     body {
         overflow: hidden;
@@ -447,7 +490,8 @@ use [class*="ascii-osc-"] to select this and the mod wave
         font-size: 12px;
     }
     #main-container {
-        margin-left: 25px;
+        margin-left: 15px;
+        margin-top: 0px;
         grid-template-columns: auto;
         grid-template-rows: auto;
         grid-template-areas: 'header' 'transport' 'main' 'footer';
