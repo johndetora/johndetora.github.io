@@ -2,8 +2,9 @@ import { skinSwapper } from './skin-select.js';
 import { synth, delay, filter, crossFade, lfo, toFilt, reverb, gain, modGain, toModIndex } from './synth-objects.js';
 import { synthParamController } from './synth-controls.js';
 
+// Controls selected skin
 skinSwapper();
-
+// This generates the reverb's impulse response via Tone.js
 reverb.generate();
 
 //TODO: Refactor this to its own function.  Add web browser check
@@ -28,22 +29,24 @@ document.querySelector('button')?.addEventListener('click', async () => {
 
 //////////////// Start Stop Init ////////////////////////
 //  Starts transport and initializes certain animations like playhead and spin //
-let playButton = document.getElementById('play-button');
+
 //TODO: add space key to play/pause
-playButton.addEventListener('click', () => {
+let playButton = document.getElementById('play-button');
+playButton.addEventListener('click', async () => {
+    await Tone.start();
+    const asciiPlay = '[play]';
+    const asciiPause = '[pause]';
     if (Tone.Transport.state !== 'started') {
-        playButton.innerHTML = '[pause]';
-        playButton.style.display = 'hidden';
+        playButton.innerHTML = asciiPause;
         Tone.Transport.start();
         animateLFO(0);
         playHeadUpdate(0);
         index = 0;
     } else {
-        playButton.innerHTML = '[play]';
+        playButton.innerHTML = asciiPlay;
         playHead.innerHTML = '';
         Tone.Transport.stop();
         index = 0;
-        document.getElementById('ascii-spin').innerHTML = '';
     }
 });
 // Initialization of bpm and ascii meters
@@ -73,7 +76,6 @@ const stepContainer = document.querySelector('#steps');
 const playHead = document.querySelector('#playhead');
 const meters = document.querySelectorAll('#ascii-meter');
 const asciiRepeater = document.querySelectorAll('#ascii-repeater');
-
 const steps = 8; // Total step length
 
 // ------------------------- //
@@ -90,7 +92,6 @@ delay.connect(reverb);
 reverb.toDestination(0.8);
 
 // LFO Routing
-
 lfo.connect(toFilt);
 toFilt.connect(filter.frequency);
 // Connect LFO to mod index
@@ -205,6 +206,7 @@ let notes = [
 // Scale Select button
 
 // TEST Buttons
+// Logs the global note and bpm
 function tester() {
     // notes.splice(0, 1, repeatNote[0], repeatNote[1]);
     console.log(notes);
@@ -218,21 +220,16 @@ let repeatButton = document.getElementById('repeatTest');
 //     Play Sequence         //
 // ------------------------- //
 
-let repStep; // Can delete this soon
-let index = 0; // Never change this.  It is the global reference for each
+let index = 0; // Never change this.  It is the global reference for each step
 
 let part = new Tone.Part(function (time, value) {
     let step = index % steps;
-    console.log(value.repeat);
-    // repeatButton.addEventListener('click', () => {
-    //     return (repStep = true);
-    // Regular play
+    // Repeat Logic
     if (value.repeat == 0) {
         playHeadUpdate(step);
         synth.triggerAttackRelease(value.note, value.timing, time, value.velocity);
         index++;
     }
-    // Repeat Logic
     if (value.repeat == 1) {
         playHeadUpdate(step);
         // Can try setting the decay to a low value before this, and then setting it back after the notes play
@@ -319,13 +316,11 @@ stepContainer.addEventListener('change', ({ target }) => {
         // UI Update
         asciiCheck[target.dataset.index].style.color = 'var(--on)';
         asciiRepeater[target.dataset.index].style.color = 'var(--repeaterOn)';
-
         meters[target.dataset.index].style.color = 'var(--on)';
     } else if (target.type == 'checkbox' && !target.checked) {
         // Turns step 'off'
         notes[target.dataset.index].velocity = 0;
         // UI Update
-
         meters[target.dataset.index].style.color = 'var(--off)';
         asciiRepeater[target.dataset.index].style.color = 'var(--off)';
         asciiCheck[target.dataset.index].style.color = 'var(--off)';
@@ -363,6 +358,7 @@ const ASCIIs = [
     ['', '', '', 'pause', 'pause'], // Cursor blink
 ];
 
+// Formerly a fun spinning animation for the tempo speed.  Now used by animateLFO()
 function animate(index) {
     // Update the element id of elementID to have the index-th ASCII array entry in it. (Note: arrays start at 0)
     document.getElementById('ascii-spin').innerHTML = ASCIIs[2][index];
@@ -445,6 +441,8 @@ function initHorizontalControls() {
 synthControls.addEventListener('input', e => drawHorizontalControls(e));
 fxControls.addEventListener('input', e => drawHorizontalControls(e));
 
+// Wonky animation that causes circle to grow based on cutoff.
+// As of now it creates a moving circle, but it may be cleaner to have it static. However, there's not much space
 /////// Circle Grow Animation
 // let circle = document.getElementById('ascii-cutoff');
 // function circleGrow(target) {
@@ -470,7 +468,7 @@ fxControls.addEventListener('input', e => drawHorizontalControls(e));
 //     }
 // }
 
-/// Flutter Controls
+/// Initialize note and flutter controls ui
 function initVerticalControls() {
     for (let i = 0; i < meters.length; i++) {
         meters[i].innerHTML = bars(6);
@@ -484,19 +482,20 @@ let paramState = 'synth';
 fxSwap.addEventListener('click', function () {
     const synthOverlay = document.getElementById('ascii-synth-overlay');
     const fxOverlay = document.getElementById('ascii-fx-overlay');
-
+    const asciiFx = '| fx |';
+    const asciiSynth = '| synth |';
     if (paramState === 'fx') {
         console.log('fx state');
         synthControls.style.display = 'grid';
         fxControls.style.display = 'none';
-        fxSwap.innerHTML = '| fx |';
+        fxSwap.innerHTML = asciiFx;
         synthOverlay.style.display = 'block';
         fxOverlay.style.display = 'none';
         return (paramState = 'synth');
     } else {
         fxControls.style.display = 'grid';
         synthControls.style.display = 'none';
-        fxSwap.innerHTML = '| synth |';
+        fxSwap.innerHTML = asciiSynth;
         console.log('synth state');
         synthOverlay.style.display = 'none';
         fxOverlay.style.display = 'block';
@@ -523,7 +522,6 @@ function mobileSwap() {
             element.style.fontWeight = 'normal';
             target.style.fontWeight = 'bold';
         });
-
         if (tabState === 'seq') {
             stepContainer.style.display = 'grid';
             synthControls.style.display = 'none';
