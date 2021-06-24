@@ -1,8 +1,6 @@
 # ascii-tone
 
-### Created by John DeTora
-
-#### Made with vanilla HTML/CSS and [Tone.js](https://github.com/Tonejs/Tone.js)
+#### Created by John DeTora with vanilla HTML/CSS/JS and [Tone.js](https://github.com/Tonejs/Tone.js)
 
 Welcome to ascii-tone, a web based FM Synth and step sequencer with a 100% text based user interface.
 

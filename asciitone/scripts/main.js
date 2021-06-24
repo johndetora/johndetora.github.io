@@ -127,8 +127,8 @@ function scaleSet() {
 
     if (currentScale === scales[0]) scaleSelect.innerHTML = '[scale: major]';
     if (currentScale === scales[1]) scaleSelect.innerHTML = '[scale: minor]';
-    if (currentScale === scales[2]) scaleSelect.innerHTML = '[scale: pentatonic]';
-    if (currentScale === scales[3]) scaleSelect.innerHTML = '[scale: chromatic]';
+    if (currentScale === scales[2]) scaleSelect.innerHTML = '[scale: pent]';
+    if (currentScale === scales[3]) scaleSelect.innerHTML = '[scale: chrom]';
     return currentScale;
 }
 
@@ -415,10 +415,13 @@ function drawHorizontalControls(e) {
     let dash = '-';
     let factor = 31;
     let linesAmount = parseInt((factor / target.max) * target.value);
-    if (target.id === 'crossfader' || target.id === 'harmonicity') {
+    if (target.id === 'crossfader') {
         let linesAmount = parseInt((18 / target.max) * target.value);
         document.getElementById(target.dataset.ascii).innerText = pipe.repeat(linesAmount) + block + pipe.repeat(18 - linesAmount) + pipe;
-        document.getElementById('ascii-harmonicity-num').innerText = pipe + parseFloat(target.value).toFixed(1) + pipe;
+    } else if (target.id === 'harmonicity') {
+        let linesAmount = parseInt((18 / target.max) * target.value);
+        document.getElementById(target.dataset.ascii).innerText = pipe.repeat(linesAmount) + block + pipe.repeat(18 - linesAmount) + pipe;
+        document.getElementById('ascii-harmonicity-num').innerHTML = pipe + parseFloat(target.value).toFixed(1) + pipe;
     } else if (target.id !== 'glide') {
         document.getElementById(target.dataset.ascii).innerText = pipe + pipe.repeat(linesAmount) + block + dash.repeat(31 - linesAmount) + pipe;
     }
@@ -471,12 +474,6 @@ fxControls.addEventListener('input', e => drawHorizontalControls(e));
 function initVerticalControls() {
     for (let i = 0; i < meters.length; i++) {
         meters[i].innerHTML = bars(6);
-        const empty = '│-│' + '<br>';
-        const arrowUp = '│-│↑' + '<br>';
-        const arrowDown = '│-│↓' + '<br>';
-        const arrowUpFilled = '│o│↑' + '<br>';
-        const arrowDownFilled = '│o│↓' + '<br>';
-        const filled = '│o│' + '<br>';
         asciiRepeater[i].innerHTML = '│-│' + '<br>' + '│-│↑' + '<br>' + '│-│↓' + '<br>' + '│o│' + '<br>';
     }
 }

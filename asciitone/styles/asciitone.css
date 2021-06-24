@@ -1,13 +1,10 @@
 * {
     box-sizing: border-box;
     padding: 0;
-    /* margin: 0; */
 }
 
 html * {
     -webkit-tap-highlight-color: transparent;
-    /* font-family: 'Courier New', Courier, monospace */
-    /* font-family: monospace; */
 }
 
 html,
@@ -38,15 +35,13 @@ input[type='range']::-webkit-slider-thumb {
 }
 
 input[type='range']:focus {
-    outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+    outline: none;
 }
 
 input[type='range']::-ms-track {
     width: 100%;
     -webkit-appearance: none;
     cursor: pointer;
-
-    /* Hides the slider so custom styles can be added */
     background: transparent;
     border-color: transparent;
     color: transparent;
@@ -63,16 +58,7 @@ p {
     margin: 1px;
     margin-bottom: 1px;
 }
-/* 
-#background {
-    position: absolute;
-    margin: auto;
 
-    height: 90%;
-    width: 90%;
-    background-color: blue;
-    z-index: -99;
-} */
 #hidden {
     opacity: 0;
 }
@@ -106,11 +92,8 @@ p {
 
 /* MAIN */
 #main-container {
-    /* margin: auto; */
-
     margin: 5% 10% 10% 10%;
     border-radius: 2rem;
-    width: auto;
     height: auto;
     display: grid;
     grid-template-columns: auto;
@@ -196,7 +179,6 @@ p {
     /* border: 1px solid green; */
     display: none;
     padding-top: 10px;
-
     grid-template-columns: 195px 195px;
     grid-template-rows: 100px auto;
     grid-template-areas:
@@ -249,6 +231,7 @@ use [class*="ascii-osc-"] to select this and the mod wave
     text-align: center;
     width: 59px;
     height: 16px;
+    padding: 2px;
     margin: 0;
     opacity: 1;
     z-index: 3;
@@ -260,22 +243,24 @@ use [class*="ascii-osc-"] to select this and the mod wave
     display: none;
     flex-direction: column;
     position: absolute;
-    margin: 0px 0 6px 0;
-    width: 92%;
-    height: 79%;
+    /* margin: 0px 0 6px 0px; */
+    width: 93%;
+    height: 80%;
     line-height: 18px;
     z-index: 4;
 }
 
 #glide-container {
     position: relative;
-    top: -5px;
+    top: -9px;
 }
 /* input checkbox */
 #glide {
     position: absolute;
-    left: 50px;
-    top: 3px;
+    width: 30px;
+    height: 20px;
+    left: 45px;
+    top: -px;
     margin: auto;
     cursor: pointer;
     opacity: 0;
@@ -283,7 +268,7 @@ use [class*="ascii-osc-"] to select this and the mod wave
 #ascii-glide {
     position: absolute;
     left: 45px;
-    top: -13px;
+    top: -17px;
     z-index: -1;
 }
 
@@ -306,7 +291,7 @@ use [class*="ascii-osc-"] to select this and the mod wave
     display: none;
     flex-direction: column;
     position: absolute;
-    width: 92%;
+    width: 93%;
     height: 80%;
     line-height: 18px;
     z-index: 4;
@@ -326,7 +311,7 @@ use [class*="ascii-osc-"] to select this and the mod wave
 
 #harmonicity {
     position: absolute;
-    width: 80px;
+    width: 90px;
     z-index: 1;
 }
 
@@ -341,7 +326,7 @@ use [class*="ascii-osc-"] to select this and the mod wave
 }
 #crossfader {
     position: absolute;
-    width: 80px;
+    width: 90px;
     left: 1px;
 }
 
@@ -430,175 +415,3 @@ use [class*="ascii-osc-"] to select this and the mod wave
     font-size: 16px;
     z-index: 3;
 }
-
-/* ////// START MOBILE ///////// */
-/* https://www.oakharborwebdesigns.com/blog/articles/how-to-build-a-responsive-mobile-first-website-from-scratch.html#blog-post
-
-Common Breakpoints
-400px - Large Phones
-568px - Landscape Mobile
-768px - Tablet
-1024px - Small Desktop (Laptops)
-1300px - Normal Desktop  */
-
-@media all and (min-width: 320px) {
-    /* #main-container { */
-    /* margin-top: 0; */
-    /* overflow: visible; */
-    /* } */
-    /* 
-    #synth-container {
-        padding-top: 0px;
-
-        grid-area: main;
-        display: none;
-        grid-template-columns: 120px 120px;
-        grid-template-rows: auto auto;
-        grid-template-areas:
-            'oscillatorA oscillatorB '
-            'envelope mod '
-            'filter mixer';
-        gap: 0px;
-        width: 320px;
-        height: 400px;
-    }
-
-    #tabs-container-mobile {
-        display: flex;
-        flex-direction: row;
-        bottom: 10px;
-        width: 320px;
-        height: 60px;
-        font-size: 15px;
-        grid-area: footer;
-    } */
-}
-
-@media all and (max-width: 600px) {
-    body {
-        overflow: hidden;
-        position: fixed;
-    }
-    input[type='range'] {
-        width: 150px;
-    }
-    input[type='range']::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        border: 1px solid #000000;
-        height: 20px;
-        width: 23px;
-        background-color: transparent;
-        border-radius: 3px;
-        background: transparent;
-        cursor: pointer;
-        margin-top: -1px;
-    }
-
-    .ascii-params {
-        font-size: 14px;
-    }
-    #header {
-        font-size: 12px;
-    }
-    #main-container {
-        margin-left: 15px;
-        margin-top: 0px;
-        grid-template-columns: auto;
-        grid-template-rows: auto;
-        grid-template-areas: 'header' 'transport' 'main' 'footer';
-    }
-
-    #synth-container {
-        margin-top: 20px;
-        padding-left: 15px;
-        grid-area: main;
-        display: none;
-        grid-template-columns: 170px 170px;
-        grid-template-rows: auto auto;
-        grid-template-areas:
-            'oscillatorA oscillatorB '
-            'envelope mod '
-            'filter mixer';
-        gap: 0px;
-
-        width: 350px;
-        height: 450px;
-    }
-
-    #fx-container {
-        grid-area: main;
-        width: 350px;
-        height: 470px;
-    }
-
-    #overlay-container {
-        display: none;
-    }
-    #tabs-container {
-        display: none;
-    }
-
-    #param-swap-text {
-        font-size: 16px;
-    }
-    #tabs-container-mobile {
-        display: flex;
-        flex-direction: row;
-
-        width: 350px;
-        height: 60px;
-        font-size: 15px;
-        grid-area: footer;
-    }
-
-    #scale-select {
-        cursor: pointer;
-        margin-right: 20px;
-        font-size: 14px;
-        padding-top: 5px;
-    }
-
-    @media all and (max-height: 600px) {
-        #param-swap-text {
-            font-size: 14px;
-        }
-        #tabs-container-mobile {
-            margin-top: 1px;
-            display: flex;
-            flex-direction: row;
-
-            width: 350px;
-            height: 30px;
-            font-size: 15px;
-            grid-area: footer;
-        }
-    }
-}
-
-/* pixel */
-/* @media all and (max-height: 739px) {
-    #tabs-container-mobile {
-        border: 1px solid black;
-        display: flex;
-        flex-direction: row;
-        position: fixed;
-        top: 75vh;
-        width: 350px;
-        height: 60px;
-        font-size: 15px;
-    }
-}
-
-/* old iphone */
-/* @media all and (max-height: 600px) {
-    #tabs-container-mobile {
-        border: 1px solid black;
-        display: flex;
-        flex-direction: row;
-        position: fixed;
-        top: 85vh;
-        width: 300px;
-        height: 60px;
-        font-size: 15px;
-    }
-} */

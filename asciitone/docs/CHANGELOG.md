@@ -13,14 +13,15 @@ All notable changes to ascii-tone will be documented in this file.
 
 ### Changed
 
-##### Styles
+##### UI
 
--   v0.3 changes the overall look of ascii-tone by changing the font of the UI.
+-   v0.3 improves the overall look of ascii-tone by changing the font of the UI and improving mobile support.
 -   The main font family is now 'Menlo Regular'. It is also now packaged with ascii-tone so that the UI renders more predictably across platforms.
+-   Mobile breakpoints have been added for a more consistent mobile experience
+-   Parameters should now be easier to control on touch screens.
 -   Changing fonts is now done in the typefaces stylesheet to keep everything organized.
 -   Desktop FX/Synth button now styled to look more like a tab.
 -   Seperated synth and effect objects generated from Tone.js into seperate script 'synth-objects.js'
--   Misc. stylesheet changes.
 
 ##### misc
 

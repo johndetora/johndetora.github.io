@@ -55,10 +55,8 @@ a {
     color: orange;
 }
 #top-controls {
-    /* border: 1px solid gray; */
     grid-area: transport;
     height: auto;
-    /* padding-left: 15px; */
     width: auto;
     display: flex;
     flex-direction: row;
@@ -69,8 +67,10 @@ a {
 #bpm-container {
     margin-right: 20px;
     position: relative;
+    width: 140px;
 }
 
+/* TODO: change this width */
 #bpm {
     position: absolute;
     width: 125px;
@@ -95,7 +95,7 @@ a {
 
 #scale-select {
     cursor: pointer;
-    margin-left: 1%;
+    margin-left: 20px;
     font-size: 14px;
     padding-top: 5px;
 }
@@ -177,27 +177,4 @@ a {
     margin: 1px;
     margin-left: 5px;
     z-index: -1;
-}
-
-@media all and (max-width: 600px) {
-    #steps {
-        position: relative;
-        display: grid;
-        grid-template-columns: repeat(8, 44px);
-        grid-template-rows: auto;
-        gap: 1px;
-        padding: 0;
-        margin: 0;
-        width: 350px;
-    }
-    /* #slider-1 {
-        padding: 0;
-        margin: 0;
-    } */
-    #playhead {
-        margin-top: 14px;
-        margin-left: 15px;
-        font-size: 12px;
-        position: absolute;
-    }
 }
