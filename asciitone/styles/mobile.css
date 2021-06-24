@@ -182,6 +182,9 @@
     .ascii-params {
         font-size: 14px;
     }
+    #ascii-lfo-spin {
+        display: none;
+    }
     #header {
         margin-bottom: 0px;
     }
@@ -293,6 +296,9 @@
     }
     .ascii-params {
         font-size: 14px;
+    }
+    #ascii-lfo-spin {
+        display: none;
     }
     #header {
         margin-bottom: 0px;
