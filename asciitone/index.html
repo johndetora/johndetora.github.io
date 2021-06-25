@@ -5,17 +5,19 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <link rel="stylesheet" href="./styles/normalize.css"> -->
-    <link rel="stylesheet" href="./skins/light.css" id="skin">
+    <link rel="stylesheet" href="./styles/normalize.css">
+    <link rel="stylesheet" href="./skins/light.css" id="skin" data-current="light">
     <link rel="stylesheet" href="./styles/asciitone.css" />
     <link rel="stylesheet" href="./styles/ansiquencer.css" />
-
+    <link rel="stylesheet" href="./styles/mobile.css" />
     <link rel="stylesheet" href="./styles/typefaces.css" />
-    <script nomodule src="scripts/main.js"></script>
+    <!-- TODO: change this back to favicon.ico -->
+    <link rel="icon" href="./icon/favicon-32x32.png">
+    <!-- <script nomodule src="scripts/main.js"></script> -->
     <script src="./scripts/main.js" type="module"></script>
     <script src="./scripts/synth-controls.js" type="module"></script>
     <script src="./scripts/Tone.js"></script>
-    <link rel="stylesheet" href="./styles/mobile.css" />
+
     <title class="notranslate">ascii-tone</title>
 </head>
 
@@ -172,6 +174,14 @@
             <!-- <a id="money" href=> [ $ ]</span> -->
             <a id="help" href="https://github.com/johndetora/asciitone" target="_blank">[ ? ]</a>
             <span id="skinSwap">[ dark mode ]</span>
+            <!-- <div id="skin-window">
+                <p class="theme" data-theme="light">light</p>
+                <p class="theme" data-theme="dark">dark</p>
+                <p class="theme" data-theme="9009">9009</p>
+                <p class="theme" data-theme="metropolis">Metropolis</p>
+                <br><br>
+                <p class="themeClose">Close [x]</p>
+            </div> -->
         </div>
         <!-- <pre id="help-menu">
 
@@ -206,7 +216,6 @@
 ~
 ~
                    </pre> -->
-        <!-- <button id="skin-select">[ skins ]</button> -->
         <div id="top-controls">
             <div id="ascii-spin"></div>
             <button id="play-button" class="transport">[play]</button>
@@ -219,7 +228,7 @@
 
         <div id="steps" class="container">
             <div id="playhead"></div>
-            <div class="step" id="step-1">
+            <div class="step">
                 <pre id="ascii-meter"></pre>
                 <div id="repeater-container">
                     <pre id="ascii-repeater">
@@ -241,7 +250,7 @@
                 <input type="range" id="slider-1" data-index="0" class="meter" value="6" min="0" max="12" step="1"
                     orient="vertical" />
             </div>
-            <div class="step" id="step-2">
+            <div class="step">
                 <pre id="ascii-meter"></pre>
                 <div id="repeater-container">
                     <pre id="ascii-repeater">
@@ -262,7 +271,7 @@
                 <input type="range" id="slider-2" data-index="1" class="meter" value="6" min="0" max="12" step="1"
                     orient="vertical" />
             </div>
-            <div class="step" id="step-3">
+            <div class="step">
                 <pre id="ascii-meter"></pre>
                 <div id="repeater-container">
                     <pre id="ascii-repeater">
@@ -282,7 +291,7 @@
                 <input type="range" id="slider-3" data-index="2" class="meter" value="6" min="0" max="12" step="1"
                     orient="vertical" />
             </div>
-            <div class="step" id="step-4">
+            <div class="step">
                 <pre id="ascii-meter"></pre>
                 <div id="repeater-container">
                     <pre id="ascii-repeater">
@@ -301,7 +310,7 @@
                 <input type="range" id="slider-4" data-index="3" class="meter" value="6" min="0" max="12" step="1"
                     orient="vertical" />
             </div>
-            <div class="step" id="step-5">
+            <div class="step">
                 <pre id="ascii-meter"></pre>
                 <div id="repeater-container">
                     <pre id="ascii-repeater">
@@ -320,7 +329,7 @@
                 <input type="range" id="slider-5" data-index="4" class="meter" value="6" min="0" max="12" step="1"
                     orient="vertical" />
             </div>
-            <div class="step" id="step-6">
+            <div class="step">
                 <pre id="ascii-meter"></pre>
                 <div id="repeater-container">
                     <pre id="ascii-repeater">
@@ -339,7 +348,7 @@
                 <input type="range" id="slider-6" data-index="5" class="meter" value="6" min="0" max="12" step="1"
                     orient="vertical" />
             </div>
-            <div class="step" id="step-7">
+            <div class="step">
                 <pre id="ascii-meter"></pre>
                 <div id="repeater-container">
                     <pre id="ascii-repeater">
@@ -358,7 +367,7 @@
                 <input type="range" id="slider-7" data-index="6" class="meter" value="6" min="0" max="12" step="1"
                     orient="vertical" />
             </div>
-            <div class="step" id="step-8">
+            <div class="step">
                 <pre id="ascii-meter"></pre>
                 <div id="repeater-container">
                     <pre id="ascii-repeater">
@@ -532,7 +541,7 @@
                 </div>
             </div> -->
         </div>
-        <!-- /////////// TABS ///////////-->
+        <!-- /////////// Desktop Tabs ///////////-->
         <div id="tabs-container">
             <button id="fx-swap" class="tab-btn">
                 <!-- <p class="label" id="param-swap-text">[ fx ]</p> -->
@@ -540,7 +549,7 @@
 
             </button>
         </div>
-        <!-- //////// Mobile ///////// -->
+        <!-- //////// Mobile Tabs ///////// -->
         <div id="tabs-container-mobile">
             <button id="seq-swap" class="tab-btn">
                 <p class="label" id="param-swap-text" data-state="seq">[ seq ]</p>

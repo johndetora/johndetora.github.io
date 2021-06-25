@@ -130,6 +130,39 @@ p {
     cursor: cell;
 }
 
+#skin-window {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    /* left: 430px; */
+    margin: 60px 0px 0px 170px;
+
+    height: 340px;
+    width: 100%;
+
+    background-color: var(--bg);
+    z-index: 99;
+    grid-area: main;
+}
+
+.theme {
+    cursor: pointer;
+    /* width: auto; */
+    padding: 3px;
+}
+
+.theme:hover {
+    font-weight: bold;
+}
+.themeClose {
+    cursor: pointer;
+    padding: 3px;
+}
+
+.themeClose:hover {
+    font-weight: bold;
+}
+
 /*///////   SYNTH LAYOUT    ////////////*/
 
 .synth-control {
@@ -244,6 +277,7 @@ use [class*="ascii-osc-"] to select this and the mod wave
     flex-direction: column;
     position: absolute;
     /* margin: 0px 0 6px 0px; */
+    right: 10px;
     width: 93%;
     height: 80%;
     line-height: 18px;
@@ -291,10 +325,14 @@ use [class*="ascii-osc-"] to select this and the mod wave
     display: none;
     flex-direction: column;
     position: absolute;
+    right: 10px;
     width: 93%;
     height: 80%;
     line-height: 18px;
     z-index: 4;
+}
+.ascii-wave {
+    padding-left: 2px;
 }
 .ascii-wave:hover {
     font-weight: 700;

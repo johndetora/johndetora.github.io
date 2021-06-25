@@ -1,13 +1,21 @@
 # ascii-tone
 
-#### Created by John DeTora with vanilla HTML/CSS/JS and [Tone.js](https://github.com/Tonejs/Tone.js)
+#### Created with HTML/CSS/JS and the [Tone.js](https://github.com/Tonejs/Tone.js) library.
 
 Welcome to ascii-tone, a web based FM Synth and step sequencer with a 100% text based user interface.
 
-This project is in the early development period and there are a lot of features planned. I am a relatively new developer and this is my sandbox for learning and experimenting.
+This project is in the early development period and there are a lot of features planned. Suggestions are welcome.
 
 ascii-tone runs best on google chrome or mozilla firefox, but will also work with many mobile devices.
 See a live demo [here](www.echocoast.net/asciitone/index.html)
+
+### Quick Start
+
+1. Getting started with ascii-tone couldn't be simpler. First make sure your device's audio is enabled (turn your phone off silent!) and adjust your volume so that it's not too loud.
+2. Click or tap the \[ play \] button and enjoy. You can start adjusting the controls by clicking parts of the sliders, or by clicking and dragging.
+3. Mobile Pro tip: Tap a parameter and continue to hold it to the screen while dragging your finger below the parameter. This makes it so you can see the parameter being adjusted without your finger being in the way. This is especially useful when adjusting some of the smaller controls.
+
+    Keep reading if you want to learn more about ascii-tone and its functions.
 
 ## About
 

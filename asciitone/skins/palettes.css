@@ -33,6 +33,8 @@ https://matrixzj.github.io/docs/gmk-keycaps/ColorCodes/
     --grey: rgb(125, 124, 120);
 }
 
+.dualshot {
+}
 .metropolis {
     --black: rgb(9, 31, 44);
     --blue: rgb(60, 219, 192);
