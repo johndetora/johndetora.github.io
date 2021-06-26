@@ -13,10 +13,6 @@
 }
 
 /* Top Controls and Transport */
-.transport {
-    margin: 0px 30px 0px 10px;
-    padding: 3px;
-}
 
 .active {
     color: orange;
@@ -24,45 +20,57 @@
 #top-controls {
     grid-area: transport;
     height: auto;
-    width: auto;
+    min-width: 320px;
+    max-width: 350px;
     display: flex;
     flex-direction: row;
-
-    align-content: space-between;
-}
-
-#bpm-container {
-    margin-right: 20px;
-    position: relative;
-    width: 140px;
-}
-
-/* TODO: change this width */
-#bpm {
-    position: absolute;
-    width: 125px;
-    z-index: 5;
-}
-
-#ascii-bpm {
-    /* font-family: 'Courier New', Courier, monospace !important; */
+    justify-content: space-between;
+    /* align-content: space-between; */
+    align-items: center;
+    /* flex-wrap: wrap; */
+    /* flex-grow: inherit; */
     font-size: 14px;
-    letter-spacing: -5px;
-    z-index: 0;
+    padding-top: 5px;
 }
 
 #play-button {
-    margin: 0;
-    padding-top: 5px;
-    font-size: 14px;
+    margin: auto;
+    /* padding-top: 5px; */
     font-weight: bold;
     width: 60px;
     height: 20px;
 }
 
+#bpm-container {
+    margin: auto;
+    position: relative;
+    width: auto;
+    padding-bottom: 2px;
+}
+
+/* TODO: change this width */
+#bpm {
+    position: absolute;
+    width: 98px;
+    z-index: 5;
+}
+
+#ascii-bpm {
+    /* font-family: 'Courier New', Courier, monospace !important; */
+    letter-spacing: -5px;
+    z-index: 0;
+}
+
 #scale-select {
     cursor: pointer;
-    margin-left: 20px;
-    font-size: 14px;
-    padding-top: 5px;
+    margin: auto;
+    /* margin-left: 20px; */
+    /* padding-top: 5px; */
+}
+
+#seq-mode {
+    margin: auto;
+
+    cursor: pointer;
+    letter-spacing: -2px;
 }

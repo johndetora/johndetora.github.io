@@ -30,26 +30,24 @@
         margin-left: 5px;
     }
 
-    #play-button {
-        margin-left: 0px;
-    }
-    #bpm-container {
-        margin-right: 0px;
-        position: relative;
-        width: 140px;
+    #scale-select {
+        letter-spacing: -1px;
     }
 
-    #bpm-container {
-        margin-right: 0px;
-        margin-left: 0px;
-        width: 140px;
+    #top-controls {
+        width: 320px;
     }
-    #scale-select {
-        margin-right: 10px;
-        margin-left: 0px;
-        font-size: 14px;
-        padding-top: 5px;
+
+    #seq-mode {
+        cursor: pointer;
+        letter-spacing: -2px;
     }
+
+    /* #bpm-container {
+        margin-right: 1px;
+        margin-left: 0px;
+    } */
+
     #steps {
         grid-template-columns: repeat(8, 40px);
         gap: 0px;
@@ -59,7 +57,7 @@
     }
     #playhead {
         margin-top: 12px;
-        margin-left: 10px;
+        margin-left: 15px;
         font-size: 11px;
     }
     .label {
@@ -145,22 +143,13 @@
         margin-left: 5px;
     }
     /* untouched */
-    #top-controls {
-        height: auto;
-        width: auto;
-        align-content: space-between;
-    }
+
     #bpm-container {
         margin-right: 5px;
         margin-left: 5px;
-        position: relative;
-        width: 140px;
     }
     #scale-select {
-        margin-right: 10px;
         margin-left: 0px;
-        font-size: 14px;
-        padding-top: 5px;
     }
     #steps {
         position: relative;
@@ -175,7 +164,7 @@
 
     #playhead {
         margin-top: 14px;
-        margin-left: 15px;
+        margin-left: 17px;
         font-size: 12px;
         position: absolute;
     }
@@ -223,12 +212,6 @@
         font-size: 18px;
     }
 
-    #scale-select {
-        margin-right: 20px;
-        font-size: 14px;
-        padding-top: 5px;
-    }
-
     #tabs-container-mobile {
         margin-top: 1px;
         display: flex;
@@ -268,14 +251,11 @@
     #bpm-container {
         margin-right: 5px;
         margin-left: 5px;
-        position: relative;
-        width: 140px;
     }
     #scale-select {
         margin-right: 10px;
         margin-left: 0px;
-        font-size: 14px;
-        padding-top: 5px;
+        padding-top: 0px;
     }
     #steps {
         position: relative;
@@ -338,12 +318,6 @@
         font-size: 16px;
     }
 
-    #scale-select {
-        margin-right: 20px;
-        font-size: 14px;
-        padding-top: 5px;
-    }
-
     #tabs-container-mobile {
         margin-top: 10px;
         display: flex;
@@ -354,7 +328,7 @@
         grid-area: footer;
     }
 }
-@media all and (min-height: 600) {
+/* @media all and (min-height: 600) {
     body {
         overflow: hidden;
         position: fixed;
@@ -467,4 +441,4 @@
         font-size: 15px;
         grid-area: footer;
     }
-}
+} */

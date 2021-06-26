@@ -76,7 +76,7 @@ const stepContainer = document.querySelector('#steps');
 const playHead = document.querySelector('#playhead');
 const meters = document.querySelectorAll('#ascii-meter');
 const asciiRepeater = document.querySelectorAll('#ascii-repeater');
-const steps = 8; // Total step length
+let steps = 8; // Total step length
 
 // ------------------------- //
 //         Routing           //
@@ -95,7 +95,7 @@ reverb.toDestination(0.8);
 lfo.connect(toFilt);
 toFilt.connect(filter.frequency);
 // Connect LFO to mod index
-// lfo.connect(toFreqRatio);
+// lfo.connect(toFreqRatio);/notes
 toModIndex.connect(synth.modulationIndex);
 
 // ------------------------- //
@@ -116,16 +116,21 @@ scaleSelect.addEventListener('click', scaleSet);
 let scaleIndex = 0; // Should be global
 function scaleSet() {
     let currentNotes = document.querySelectorAll('.meter');
+
     // Round Robin selection
     scaleIndex++;
     if (scaleIndex === scales.length) scaleIndex = 0; // counter resets to 0
     currentScale = scales[scaleIndex];
     // Loop through the current note object and set the values to the current slider values
-    for (let i = 0; i < notes.length; i++) {
+
+    for (let i = 0; i < currentNotes.length; i++) {
+        // Note at meter index = major scale note at index of 1-8
         notes[i].note = currentScale[currentNotes[i].value];
+        // // Set opposite side note for reverse mode
+        notes[16 - i - 1].note = currentScale[currentNotes[i].value];
     }
     // DOM
-
+    //TODO: change to innertext
     if (currentScale === scales[0]) scaleSelect.innerHTML = '[scale: major]';
     if (currentScale === scales[1]) scaleSelect.innerHTML = '[scale: minor]';
     if (currentScale === scales[2]) scaleSelect.innerHTML = '[scale: pent]';
@@ -201,73 +206,74 @@ let notes = [
         repeat: 0,
     },
     // // Added
-    // {
-    //     // Step 9
-    //     time: '2:0:0',
-    //     note: currentScale[6],
-    //     velocity: 1,
-    //     timing: '16n',
-    //     repeat: 0,
-    // },
+    {
+        // Step 9
+        time: '2:0:0',
+        note: currentScale[6],
+        velocity: 1,
+        timing: '16n',
+        repeat: 0,
+    },
 
-    // {
-    //     // Step 10
-    //     time: '2:1:0',
-    //     note: currentScale[6],
-    //     velocity: 1,
-    //     timing: '16n',
-    //     repeat: 0,
-    // },
-    // {
-    //     // Step 11
-    //     time: '2:2:0',
-    //     note: currentScale[6],
-    //     velocity: 1,
-    //     timing: '16n',
-    //     repeat: 0,
-    // },
+    {
+        // Step 10
+        time: '2:1:0',
+        note: currentScale[6],
+        velocity: 1,
+        timing: '16n',
+        repeat: 0,
+    },
+    {
+        // Step 11
+        time: '2:2:0',
+        note: currentScale[6],
+        velocity: 1,
+        timing: '16n',
+        repeat: 0,
+    },
 
-    // {
-    //     // Step 12
-    //     time: '2:3:0',
-    //     note: currentScale[6],
-    //     velocity: 1,
-    //     timing: '16n',
-    //     repeat: 0,
-    // },
-    // {
-    //     // Step 13
-    //     time: '3:0:0',
-    //     note: currentScale[6],
-    //     velocity: 1,
-    //     timing: '16n',
-    //     repeat: 0,
-    // },
-    // {
-    //     // Step 14
-    //     time: '3:1:0',
-    //     note: currentScale[6],
-    //     velocity: 1,
-    //     timing: '16n',
-    //     repeat: 0,
-    // },
-    // {
-    //     // Step 15
-    //     time: '3:2:0',
-    //     note: currentScale[6],
-    //     velocity: 1,
-    //     timing: '16n',
-    //     repeat: 0,
-    // },
-    // {
-    //     // Step 16
-    //     time: '3:3:0',
-    //     note: currentScale[6],
-    //     velocity: 1,
-    //     timing: '16n',
-    //     repeat: 0,
-    // },
+    {
+        // Step 12
+        time: '2:3:0',
+        note: currentScale[6],
+        velocity: 1,
+        timing: '16n',
+        repeat: 0,
+    },
+    {
+        // Step 13
+        time: '3:0:0',
+        note: currentScale[6],
+        velocity: 1,
+        timing: '16n',
+        repeat: 0,
+    },
+    {
+        // Step 14
+        time: '3:1:0',
+        note: currentScale[6],
+        velocity: 1,
+        timing: '16n',
+        repeat: 0,
+    },
+    {
+        // Step 15
+        time: '3:2:0',
+        note: currentScale[6],
+        velocity: 1,
+        timing: '16n',
+        repeat: 0,
+    },
+    {
+        // Step 16
+        time: '3:3:0',
+        note: currentScale[6],
+        velocity: 1,
+        timing: '16n',
+        repeat: 0,
+    },
 ];
+
 // Scale Select button
 
 // TEST Buttons
@@ -289,44 +295,27 @@ let index = 0; // Never change this.  It is the global reference for each step
 
 let part = new Tone.Part((time, value) => {
     let step = index % steps;
-
     if (value.repeat === 0) {
-        playHeadUpdate(step);
         synth.triggerAttackRelease(value.note, value.timing, time, value.velocity);
     }
     if (value.repeat === 1) {
-        playHeadUpdate(step);
         // Can try setting the decay to a low value before this, and then setting it back after the notes play
         synth.triggerAttackRelease(value.note, '32n', time, value.velocity);
         synth.triggerAttackRelease(value.note, '32n', time + 0.1, value.velocity);
     }
     if (value.repeat === 2) {
-        playHeadUpdate(step);
         synth.triggerAttackRelease(value.note, '48n', time, value.velocity);
         synth.triggerAttackRelease(value.note, '48n', time + 0.075, value.velocity);
         synth.triggerAttackRelease(value.note, '48n', time + 0.15, value.velocity);
     }
     if (value.repeat === 3) {
-        playHeadUpdate(step);
         synth.triggerAttackRelease(value.note, '64n', time, value.velocity);
         synth.triggerAttackRelease(value.note, '64n', time + 0.05, value.velocity);
         synth.triggerAttackRelease(value.note, '64n', time + 0.1, value.velocity);
         synth.triggerAttackRelease(value.note, '64n', time + 0.15, value.velocity);
     }
-    console.log(index);
-    // if (step === 16) {
-    //     // reverseNotes();
-    // }
-    // if (index === 20) {
-    //     console.log('end');
-    //     // reverseNotes();
-
-    //     part.loopEnd = '4m';
-    //     console.log(notes);
-    //     // part.loopEnd = '2m';
-    // }
-    console.log(notes);
-
+    // console.log(notes);
+    playHeadUpdate(step);
     index++;
 }, notes);
 
@@ -347,7 +336,6 @@ Tone.Transport.loop = true;
 
 // Notes and Repeats
 stepContainer.addEventListener('input', ({ target }) => {
-    const length = 16;
     // Note Sliders
     if (target.className === 'meter') {
         let reverse = 16 - target.dataset.index - 1;
@@ -410,22 +398,73 @@ stepContainer.addEventListener('change', ({ target }) => {
     }
 });
 
+// Sequence mode
+function setSeqMode() {
+    const modeBtn = document.getElementById('seq-mode');
+    let pendulum = false;
+    modeBtn.addEventListener('click', e => {
+        pendulum = !pendulum;
+        // pendulum = !pendulum;
+        if (pendulum === true) {
+            modeBtn.innerText = '[ <-> ]';
+            part.loopEnd = '4m';
+            steps = 16;
+        } else {
+            modeBtn.innerText = '[ --> ]';
+            part.loopEnd = '2m';
+            steps = 16;
+        }
+    });
+}
+setSeqMode();
 // ------------------------- //
 //       Animations          //
 // ------------------------- //
 
 ///// ASCII Playhead Animation
 function playHeadUpdate(step) {
-    const asciiArrow = ['►', '------►', '-──────-----►', '──────────────────►'];
-    const tail = '──────';
-    const arrowHead = '►';
-    const arrow = tail + arrowHead;
+    let headFwd = '>';
+    let headBack = '<';
+
+    let tail = '──────';
+    let space = '&nbsp'.repeat(6);
+
+    console.log('step', step);
+    // Draw Forward
+    if (step === 0) {
+        playHead.innerHTML = headFwd;
+    }
     if (step > 0 && step <= 7) {
-        playHead.prepend('──────');
-    } else if (step === 0) {
-        playHead.innerHTML = '►';
+        playHead.innerHTML = tail.repeat(step) + headFwd;
+    }
+    // Draw Backward
+    if (step === 8) {
+        playHead.innerHTML = space.repeat(15 - step) + headBack;
+    }
+    if (step === 15) {
+        playHead.innerHTML = headBack + tail.repeat(step - 8);
+    }
+    // if (step === 14) {
+    //     playHead.innerHTML = headBack + tail;
+    // }
+
+    if (step > 8 && step < 15) {
+        playHead.innerHTML = '';
+        playHead.innerHTML = space.repeat(15 - step) + headBack + tail.repeat(step - 8); // + tail.repeat(step);
     }
 }
+// function playHeadUpdate(step) {
+//     const asciiArrow = ['►', '------►', '-──────-----►', '──────────────────►'];
+//     const tail = '──────';
+//     const arrowHead = '►';
+//     const arrow = tail + arrowHead;
+//     if (step > 0 && step <= 7) {
+//         playHead.prepend('──────');
+
+//     } else if (step === 0) {
+//         playHead.innerHTML = '>';
+//     }
+// }
 ///
 ///////  Bar  ////////
 function bars(v) {
@@ -446,21 +485,21 @@ const ASCIIs = [
 ];
 
 // Formerly a fun spinning animation for the tempo speed.  Now used by animateLFO()
-function animate(index) {
-    // Update the element id of elementID to have the index-th ASCII array entry in it. (Note: arrays start at 0)
-    document.getElementById('ascii-spin').innerHTML = ASCIIs[2][index];
-    let inputSlider = document.getElementById('bpm');
-    let frequency = inputSlider.value;
-    // Call the update function after 1 second / frequency (Hz).
-    setTimeout(function () {
-        if (Tone.Transport.state === 'started') {
-            // Pass the update function the index that it was called with this time, plus 1.
-            // % means modulus (remainder when divided by)
-            // This way, it doesnt' try to look for the 1000th element which doesn't exist
-            animate((index + 1) % ASCIIs[2].length);
-        }
-    }, 10000 / frequency);
-}
+// function animate(index) {
+//     // Update the element id of elementID to have the index-th ASCII array entry in it. (Note: arrays start at 0)
+//     document.getElementById('ascii-spin').innerHTML = ASCIIs[2][index];
+//     let inputSlider = document.getElementById('bpm');
+//     let frequency = inputSlider.value;
+//     // Call the update function after 1 second / frequency (Hz).
+//     setTimeout(function () {
+//         if (Tone.Transport.state === 'started') {
+//             // Pass the update function the index that it was called with this time, plus 1.
+//             // % means modulus (remainder when divided by)
+//             // This way, it doesnt' try to look for the 1000th element which doesn't exist
+//             animate((index + 1) % ASCIIs[2].length);
+//         }
+//     }, 10000 / frequency);
+// }
 
 function animateLFO(index) {
     document.getElementById('ascii-lfo-spin').innerHTML = ASCIIs[1][index];
@@ -480,14 +519,13 @@ function animateLFO(index) {
 /////// Horizontal Slider Animation ////////
 //TODO: add special classes so that we can target the controls and initialize the renders on load
 const tempoMeter = document.getElementById('ascii-bpm');
-tempoMeter.innerHTML = '||||||||||||||▓══════════════════ |';
-
-transport.addEventListener('input', function () {
+transport.addEventListener('input', ({ target }) => {
+    console.log(target.value);
     let block = '▓';
     let pipe = '|';
     let equals = '═';
-    let linesAmount = parseInt(this.value / 15);
-    tempoMeter.innerHTML = pipe.repeat(linesAmount - 1) + block + equals.repeat(33 - linesAmount) + ` ${pipe}`; // ' |'
+    let linesAmount = parseInt(target.value / 20);
+    tempoMeter.innerHTML = pipe.repeat(linesAmount - 1) + block + equals.repeat(25 - linesAmount) + ` ${pipe}`; // ' |'
 });
 
 // Synth/FX control slider animations
