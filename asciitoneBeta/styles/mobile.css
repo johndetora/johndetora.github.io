@@ -240,7 +240,7 @@
         grid-area: footer;
     }
 }
-@media all and (min-width: 391px) and (max-width: 450px), screen and (max-height: 850px) {
+@media all and (min-width: 391px) and (max-width: 450px) {
     body {
         overflow: hidden;
         position: fixed;
