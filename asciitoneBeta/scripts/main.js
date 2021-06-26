@@ -133,75 +133,6 @@ function scaleSet() {
     return currentScale;
 }
 
-////// Notes, value time object. each object is a step
-// let notes = [
-//     {
-//         // Step 1
-//         time: '0:0:0',
-//         note: currentScale[6],
-//         velocity: 1,
-//         timing: '16n',
-//         repeat: 0,
-//     },
-
-//     {
-//         // Step 2
-//         time: '0:1:0',
-//         note: currentScale[6],
-//         velocity: 1,
-//         timing: '16n',
-//         repeat: 0,
-//     },
-//     {
-//         // Step 3
-//         time: '0:2:0',
-//         note: currentScale[6],
-//         velocity: 1,
-//         timing: '16n',
-//         repeat: 0,
-//     },
-
-//     {
-//         // Step 4
-//         time: '0:3:0',
-//         note: currentScale[6],
-//         velocity: 1,
-//         timing: '16n',
-//         repeat: 0,
-//     },
-//     {
-//         // Step 5
-//         time: '1:0:0',
-//         note: currentScale[6],
-//         velocity: 1,
-//         timing: '16n',
-//         repeat: 0,
-//     },
-//     {
-//         // Step 6
-//         time: '1:1:0',
-//         note: currentScale[6],
-//         velocity: 1,
-//         timing: '16n',
-//         repeat: 0,
-//     },
-//     {
-//         // Step 7
-//         time: '1:2:0',
-//         note: currentScale[6],
-//         velocity: 1,
-//         timing: '16n',
-//         repeat: 0,
-//     },
-//     {
-//         // Step 8
-//         time: '1:3:0',
-//         note: currentScale[6],
-//         velocity: 1,
-//         timing: '16n',
-//         repeat: 0,
-//     },
-// ];
 let notes = [
     {
         // Step 1
@@ -269,73 +200,73 @@ let notes = [
         timing: '16n',
         repeat: 0,
     },
-    // Added
-    {
-        // Step 9
-        time: '2:0:0',
-        note: currentScale[6],
-        velocity: 1,
-        timing: '16n',
-        repeat: 0,
-    },
+    // // Added
+    // {
+    //     // Step 9
+    //     time: '2:0:0',
+    //     note: currentScale[6],
+    //     velocity: 1,
+    //     timing: '16n',
+    //     repeat: 0,
+    // },
 
-    {
-        // Step 10
-        time: '2:1:0',
-        note: currentScale[6],
-        velocity: 1,
-        timing: '16n',
-        repeat: 0,
-    },
-    {
-        // Step 11
-        time: '2:2:0',
-        note: currentScale[6],
-        velocity: 1,
-        timing: '16n',
-        repeat: 0,
-    },
+    // {
+    //     // Step 10
+    //     time: '2:1:0',
+    //     note: currentScale[6],
+    //     velocity: 1,
+    //     timing: '16n',
+    //     repeat: 0,
+    // },
+    // {
+    //     // Step 11
+    //     time: '2:2:0',
+    //     note: currentScale[6],
+    //     velocity: 1,
+    //     timing: '16n',
+    //     repeat: 0,
+    // },
 
-    {
-        // Step 12
-        time: '2:3:0',
-        note: currentScale[6],
-        velocity: 1,
-        timing: '16n',
-        repeat: 0,
-    },
-    {
-        // Step 13
-        time: '3:0:0',
-        note: currentScale[6],
-        velocity: 1,
-        timing: '16n',
-        repeat: 0,
-    },
-    {
-        // Step 14
-        time: '3:1:0',
-        note: currentScale[6],
-        velocity: 1,
-        timing: '16n',
-        repeat: 0,
-    },
-    {
-        // Step 15
-        time: '3:2:0',
-        note: currentScale[6],
-        velocity: 1,
-        timing: '16n',
-        repeat: 0,
-    },
-    {
-        // Step 16
-        time: '3:3:0',
-        note: currentScale[6],
-        velocity: 1,
-        timing: '16n',
-        repeat: 0,
-    },
+    // {
+    //     // Step 12
+    //     time: '2:3:0',
+    //     note: currentScale[6],
+    //     velocity: 1,
+    //     timing: '16n',
+    //     repeat: 0,
+    // },
+    // {
+    //     // Step 13
+    //     time: '3:0:0',
+    //     note: currentScale[6],
+    //     velocity: 1,
+    //     timing: '16n',
+    //     repeat: 0,
+    // },
+    // {
+    //     // Step 14
+    //     time: '3:1:0',
+    //     note: currentScale[6],
+    //     velocity: 1,
+    //     timing: '16n',
+    //     repeat: 0,
+    // },
+    // {
+    //     // Step 15
+    //     time: '3:2:0',
+    //     note: currentScale[6],
+    //     velocity: 1,
+    //     timing: '16n',
+    //     repeat: 0,
+    // },
+    // {
+    //     // Step 16
+    //     time: '3:3:0',
+    //     note: currentScale[6],
+    //     velocity: 1,
+    //     timing: '16n',
+    //     repeat: 0,
+    // },
 ];
 // Scale Select button
 
@@ -425,7 +356,6 @@ stepContainer.addEventListener('input', ({ target }) => {
         notes[target.dataset.index].note = currentScale[target.value];
 
         notes[reverse].note = currentScale[target.value];
-
         console.log(notes);
     }
     if (target.className === 'repeater-range') {
