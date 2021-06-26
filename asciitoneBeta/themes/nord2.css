@@ -1,0 +1,112 @@
+:root {
+    /* Set Base Colors here */
+    --black: #2e3440;
+    --gray: #434c5e;
+    --blue: #8fbcbb;
+    --blue2: #88c0d0;
+    --yellow: #ebcb8b;
+    --red: #d08770;
+    --green: #a3be8c;
+
+    /* Quick Change */
+    --bg: var(--black);
+    --primary: var(--blue);
+    --secondary: var(--yellow);
+    --accent1: var(--red);
+
+    /* Change these as long as they match condition*/
+    --metersOn: var(--primary); /*  note meters are set to this */
+    --repeaterOn: var(--green); /* ascii-repeater is set to this */
+    --checksOn: var(--secondary); /* Checks are set to this */
+    --off: var(--gray);
+}
+
+/* Background and text color 1 */
+body {
+    /* Text Colors */
+    color: var(--red);
+    /* frame color -- set to same as --bg if no frame is needed*/
+    background-color: var(--bg);
+}
+
+#header {
+    color: var(--green);
+}
+/* ascii-tone background color */
+#main-container {
+    /* This has to be the --bg variable */
+    background: var(--bg);
+    z-index: -999;
+}
+
+/* main overlay */
+.overlay {
+    color: var(--primary);
+}
+
+#ascii-repeater {
+    color: var(--repeaterOn);
+}
+
+/* For f and Zzz */
+.ascii-label {
+    color: var(--accent1);
+}
+
+/*//////////*/
+/* Transport */
+/*//////////*/
+#play-button {
+    color: var(--red);
+}
+
+#ascii-bpm {
+    color: var(--green);
+}
+
+#scale-select {
+    color: var(--secondary);
+}
+
+/* The 'playhead' arrow that moves along the top */
+#playhead {
+    color: var(--accent1);
+}
+
+/* The note selection meters */
+#ascii-meter {
+    color: var(--metersOn);
+}
+
+/* The snooze buttons */
+#ascii-checkbox {
+    color: var(--checksOn);
+}
+
+/* The synth control parameters */
+.ascii-params {
+    color: var(--blue);
+}
+
+/*  Control box titles */
+.group-label {
+    color: var(--off);
+}
+
+/* titles for each parameter */
+.label {
+    color: var(--green);
+}
+
+#ascii-lfo-spin {
+    color: var(--accent1);
+}
+/* the fx tab */
+#fx-swap {
+    color: var(--secondary);
+}
+
+/* param tabs on mobile */
+#tabs-container-mobile {
+    color: var(--secondary);
+}

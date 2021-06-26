@@ -1,0 +1,701 @@
+import { themeSelector } from './theme-select.js';
+import { synth, delay, filter, crossFade, lfo, toFilt, reverb, gain, modGain, toModIndex } from './synth-objects.js';
+import { synthParamController } from './synth-controls.js';
+
+// Controls selected skin
+themeSelector();
+// This generates the reverb's impulse response via Tone.js
+reverb.generate();
+
+//TODO: Refactor this to its own function.  Add web browser check
+let OSName = 'Unknown OS';
+if (navigator.appVersion.indexOf('Win') != -1) OSName = 'Windows';
+if (navigator.appVersion.indexOf('Mac') != -1) OSName = 'MacOS';
+else OSName = 'Linux (probably)';
+console.log('Your OS: ' + OSName);
+const overlay = document.querySelector('.overlay');
+if (navigator.appVersion.indexOf('Win') != -1) {
+    overlay.style.left = '-103px';
+}
+
+// ------------------------- //
+//    Transport / Init       //
+// ------------------------- //
+
+//Audio play confirmation - needed because of autoplay policy
+document.querySelector('button')?.addEventListener('click', async () => {
+    await Tone.start();
+});
+
+//////////////// Start Stop Init ////////////////////////
+//  Starts transport and initializes certain animations like playhead and spin //
+
+//TODO: add space key to play/pause
+let playButton = document.getElementById('play-button');
+playButton.addEventListener('click', async () => {
+    await Tone.start();
+    const asciiPlay = '[play]';
+    const asciiPause = '[pause]';
+    if (Tone.Transport.state !== 'started') {
+        playButton.innerText = asciiPause;
+        Tone.Transport.start();
+        animateLFO(0);
+        playHeadUpdate(0);
+        index = 0;
+    } else {
+        playButton.innerText = asciiPlay;
+        playHead.innerText = '';
+        Tone.Transport.stop();
+        index = 0;
+    }
+});
+// Initialization of bpm and ascii meters
+window.addEventListener('load', () => {
+    initVerticalControls();
+    initHorizontalControls();
+    let bpm = transport.value;
+    Tone.Transport.bpm.value = bpm;
+});
+
+// BPM Change input
+let transport = document.querySelector('#bpm');
+transport.addEventListener('input', function () {
+    let bpm = this.value;
+    Tone.Transport.bpm.value = bpm;
+    console.log(bpm);
+});
+
+// ------------------------- //
+//         Variables         //
+// ------------------------- //
+
+//TODO: See which ones can go into their own functions
+const synthControls = document.querySelector('#synth-container');
+const fxControls = document.querySelector('#fx-container');
+const stepContainer = document.querySelector('#steps');
+const playHead = document.querySelector('#playhead');
+const meters = document.querySelectorAll('#ascii-meter');
+const asciiRepeater = document.querySelectorAll('#ascii-repeater');
+const steps = 8; // Total step length
+
+// ------------------------- //
+//         Routing           //
+// ------------------------- //
+
+// noiseSynth.toDestination(0.7);
+synth.chain(gain, crossFade.a);
+synth.modulationEnvelope.chain(modGain, crossFade.b);
+//gain.toDestination();
+crossFade.connect(filter);
+filter.connect(delay);
+delay.connect(reverb);
+reverb.toDestination(0.8);
+
+// LFO Routing
+lfo.connect(toFilt);
+toFilt.connect(filter.frequency);
+// Connect LFO to mod index
+// lfo.connect(toFreqRatio);
+toModIndex.connect(synth.modulationIndex);
+
+// ------------------------- //
+//        Note Data          //
+// ------------------------- //
+
+/// SCALES /////
+const chromaticScale = ['C3', 'C#3', 'D3', 'D#3', 'E3', 'F3', 'F#3', 'G3', 'G#3', 'A3', 'A#3', 'B3', 'C4'];
+const majorScale = ['C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3', 'C4', 'D4', 'E4', 'F4', 'G4', 'A4'];
+const minorScale = ['A3', 'B3', 'C3', 'D3', 'E3', 'F3', 'G3', 'A4', 'B4', 'C4', 'D4', 'E4', 'F4'];
+const pentScale = ['C3', 'D3', 'E3', 'G3', 'A3', 'C4', 'D4', 'E4', 'G4', 'A4', 'C5', 'D5', 'E5'];
+const scales = [majorScale, minorScale, pentScale, chromaticScale];
+let currentScale = majorScale;
+
+/// Scale set logic
+const scaleSelect = document.getElementById('scale-select');
+scaleSelect.addEventListener('click', scaleSet);
+let scaleIndex = 0; // Should be global
+function scaleSet() {
+    let currentNotes = document.querySelectorAll('.meter');
+    // Round Robin selection
+    scaleIndex++;
+    if (scaleIndex === scales.length) scaleIndex = 0; // counter resets to 0
+    currentScale = scales[scaleIndex];
+    // Loop through the current note object and set the values to the current slider values
+    for (let i = 0; i < notes.length; i++) {
+        notes[i].note = currentScale[currentNotes[i].value];
+    }
+    // DOM
+
+    if (currentScale === scales[0]) scaleSelect.innerHTML = '[scale: major]';
+    if (currentScale === scales[1]) scaleSelect.innerHTML = '[scale: minor]';
+    if (currentScale === scales[2]) scaleSelect.innerHTML = '[scale: pent]';
+    if (currentScale === scales[3]) scaleSelect.innerHTML = '[scale: chrom]';
+    return currentScale;
+}
+
+////// Notes, value time object. each object is a step
+// let notes = [
+//     {
+//         // Step 1
+//         time: '0:0:0',
+//         note: currentScale[6],
+//         velocity: 1,
+//         timing: '16n',
+//         repeat: 0,
+//     },
+
+//     {
+//         // Step 2
+//         time: '0:1:0',
+//         note: currentScale[6],
+//         velocity: 1,
+//         timing: '16n',
+//         repeat: 0,
+//     },
+//     {
+//         // Step 3
+//         time: '0:2:0',
+//         note: currentScale[6],
+//         velocity: 1,
+//         timing: '16n',
+//         repeat: 0,
+//     },
+
+//     {
+//         // Step 4
+//         time: '0:3:0',
+//         note: currentScale[6],
+//         velocity: 1,
+//         timing: '16n',
+//         repeat: 0,
+//     },
+//     {
+//         // Step 5
+//         time: '1:0:0',
+//         note: currentScale[6],
+//         velocity: 1,
+//         timing: '16n',
+//         repeat: 0,
+//     },
+//     {
+//         // Step 6
+//         time: '1:1:0',
+//         note: currentScale[6],
+//         velocity: 1,
+//         timing: '16n',
+//         repeat: 0,
+//     },
+//     {
+//         // Step 7
+//         time: '1:2:0',
+//         note: currentScale[6],
+//         velocity: 1,
+//         timing: '16n',
+//         repeat: 0,
+//     },
+//     {
+//         // Step 8
+//         time: '1:3:0',
+//         note: currentScale[6],
+//         velocity: 1,
+//         timing: '16n',
+//         repeat: 0,
+//     },
+// ];
+let notes = [
+    {
+        // Step 1
+        time: '0:0:0',
+        note: currentScale[6],
+        velocity: 1,
+        timing: '16n',
+        repeat: 0,
+    },
+
+    {
+        // Step 2
+        time: '0:1:0',
+        note: currentScale[6],
+        velocity: 1,
+        timing: '16n',
+        repeat: 0,
+    },
+    {
+        // Step 3
+        time: '0:2:0',
+        note: currentScale[6],
+        velocity: 1,
+        timing: '16n',
+        repeat: 0,
+    },
+
+    {
+        // Step 4
+        time: '0:3:0',
+        note: currentScale[6],
+        velocity: 1,
+        timing: '16n',
+        repeat: 0,
+    },
+    {
+        // Step 5
+        time: '1:0:0',
+        note: currentScale[6],
+        velocity: 1,
+        timing: '16n',
+        repeat: 0,
+    },
+    {
+        // Step 6
+        time: '1:1:0',
+        note: currentScale[6],
+        velocity: 1,
+        timing: '16n',
+        repeat: 0,
+    },
+    {
+        // Step 7
+        time: '1:2:0',
+        note: currentScale[6],
+        velocity: 1,
+        timing: '16n',
+        repeat: 0,
+    },
+    {
+        // Step 8
+        time: '1:3:0',
+        note: currentScale[6],
+        velocity: 1,
+        timing: '16n',
+        repeat: 0,
+    },
+    // Added
+    {
+        // Step 9
+        time: '2:0:0',
+        note: currentScale[6],
+        velocity: 1,
+        timing: '16n',
+        repeat: 0,
+    },
+
+    {
+        // Step 10
+        time: '2:1:0',
+        note: currentScale[6],
+        velocity: 1,
+        timing: '16n',
+        repeat: 0,
+    },
+    {
+        // Step 11
+        time: '2:2:0',
+        note: currentScale[6],
+        velocity: 1,
+        timing: '16n',
+        repeat: 0,
+    },
+
+    {
+        // Step 12
+        time: '2:3:0',
+        note: currentScale[6],
+        velocity: 1,
+        timing: '16n',
+        repeat: 0,
+    },
+    {
+        // Step 13
+        time: '3:0:0',
+        note: currentScale[6],
+        velocity: 1,
+        timing: '16n',
+        repeat: 0,
+    },
+    {
+        // Step 14
+        time: '3:1:0',
+        note: currentScale[6],
+        velocity: 1,
+        timing: '16n',
+        repeat: 0,
+    },
+    {
+        // Step 15
+        time: '3:2:0',
+        note: currentScale[6],
+        velocity: 1,
+        timing: '16n',
+        repeat: 0,
+    },
+    {
+        // Step 16
+        time: '3:3:0',
+        note: currentScale[6],
+        velocity: 1,
+        timing: '16n',
+        repeat: 0,
+    },
+];
+// Scale Select button
+
+// TEST Buttons
+// Logs the global note and bpm
+function tester() {
+    // notes.splice(0, 1, repeatNote[0], repeatNote[1]);
+    console.log(notes);
+    console.log(bpm);
+}
+
+// For testing purposes.  Hidden
+let repeatButton = document.getElementById('repeatTest');
+
+// ------------------------- //
+//     Play Sequence         //
+// ------------------------- //
+
+let index = 0; // Never change this.  It is the global reference for each step
+
+let part = new Tone.Part((time, value) => {
+    let step = index % steps;
+
+    if (value.repeat === 0) {
+        playHeadUpdate(step);
+        synth.triggerAttackRelease(value.note, value.timing, time, value.velocity);
+    }
+    if (value.repeat === 1) {
+        playHeadUpdate(step);
+        // Can try setting the decay to a low value before this, and then setting it back after the notes play
+        synth.triggerAttackRelease(value.note, '32n', time, value.velocity);
+        synth.triggerAttackRelease(value.note, '32n', time + 0.1, value.velocity);
+    }
+    if (value.repeat === 2) {
+        playHeadUpdate(step);
+        synth.triggerAttackRelease(value.note, '48n', time, value.velocity);
+        synth.triggerAttackRelease(value.note, '48n', time + 0.075, value.velocity);
+        synth.triggerAttackRelease(value.note, '48n', time + 0.15, value.velocity);
+    }
+    if (value.repeat === 3) {
+        playHeadUpdate(step);
+        synth.triggerAttackRelease(value.note, '64n', time, value.velocity);
+        synth.triggerAttackRelease(value.note, '64n', time + 0.05, value.velocity);
+        synth.triggerAttackRelease(value.note, '64n', time + 0.1, value.velocity);
+        synth.triggerAttackRelease(value.note, '64n', time + 0.15, value.velocity);
+    }
+    console.log(index);
+    // if (step === 16) {
+    //     // reverseNotes();
+    // }
+    // if (index === 20) {
+    //     console.log('end');
+    //     // reverseNotes();
+
+    //     part.loopEnd = '4m';
+    //     console.log(notes);
+    //     // part.loopEnd = '2m';
+    // }
+    console.log(notes);
+
+    index++;
+}, notes);
+
+console.log(index);
+/////// Transport and Loop ////////////
+part.start('0m');
+part.loopStart = '0m';
+part.loopEnd = '2m';
+part.loop = true;
+
+Tone.Transport.loopStart = '0m';
+Tone.Transport.loopEnd = '4m';
+Tone.Transport.loop = true;
+
+// ------------------------- //
+//   Sequencer User Input    //
+// ------------------------- //
+
+// Notes and Repeats
+stepContainer.addEventListener('input', ({ target }) => {
+    const length = 16;
+    // Note Sliders
+    if (target.className === 'meter') {
+        let reverse = 16 - target.dataset.index - 1;
+        // className == Meter so that the repeater slider isn't targeted
+        meters[target.dataset.index].innerHTML = bars(target.value); // Sets bar animation value
+        notes[target.dataset.index].note = currentScale[target.value];
+
+        notes[reverse].note = currentScale[target.value];
+
+        console.log(notes);
+    }
+    if (target.className === 'repeater-range') {
+        notes[target.dataset.index].repeat = parseInt(target.value);
+        repeatAnim(target);
+    }
+});
+
+// Repeater ascii-animation
+// There's probably a better way to do this but it works.
+function repeatAnim(target) {
+    let repeats = parseInt(target.value);
+    const empty = '│-│' + '<br>';
+    const arrowUp = '│-│↑' + '<br>';
+    const arrowDown = '│-│↓' + '<br>';
+    const arrowUpFilled = '│o│↑' + '<br>';
+    const arrowDownFilled = '│o│↓' + '<br>';
+    const filled = '│o│' + '<br>';
+    // console.log(asciiRepeater[target.dataset.index][asciiRepCount[0]]);
+
+    if (repeats === 0) {
+        asciiRepeater[target.dataset.index].innerHTML = empty + arrowUp + arrowDown + filled;
+    }
+    if (repeats === 1) {
+        asciiRepeater[target.dataset.index].innerHTML = empty + arrowUp + arrowDownFilled + empty;
+    }
+    if (repeats === 2) {
+        asciiRepeater[target.dataset.index].innerHTML = empty + arrowUpFilled + arrowDown + empty;
+    }
+    if (repeats === 3) {
+        asciiRepeater[target.dataset.index].innerHTML = filled + arrowUp + arrowDown + empty;
+    }
+}
+
+// Snooze Checks
+stepContainer.addEventListener('change', ({ target }) => {
+    const asciiCheck = document.querySelectorAll('#ascii-checkbox');
+    if (target.type == 'checkbox' && target.checked) {
+        // Turns step 'on'
+        notes[target.dataset.index].velocity = 1;
+        // UI Update
+        asciiCheck[target.dataset.index].style.color = 'var(--checksOn)';
+        asciiRepeater[target.dataset.index].style.color = 'var(--repeaterOn)';
+        meters[target.dataset.index].style.color = 'var(--metersOn)';
+    } else if (target.type == 'checkbox' && !target.checked) {
+        // Turns step 'off'
+        notes[target.dataset.index].velocity = 0;
+        // UI Update
+        meters[target.dataset.index].style.color = 'var(--off)';
+        asciiRepeater[target.dataset.index].style.color = 'var(--off)';
+        asciiCheck[target.dataset.index].style.color = 'var(--off)';
+    }
+});
+
+// ------------------------- //
+//       Animations          //
+// ------------------------- //
+
+///// ASCII Playhead Animation
+function playHeadUpdate(step) {
+    const asciiArrow = ['►', '------►', '-──────-----►', '──────────────────►'];
+    const tail = '──────';
+    const arrowHead = '►';
+    const arrow = tail + arrowHead;
+    if (step > 0 && step <= 7) {
+        playHead.prepend('──────');
+    } else if (step === 0) {
+        playHead.innerHTML = '►';
+    }
+}
+///
+///////  Bar  ////////
+function bars(v) {
+    const max = 12; // Max slider value for note meters
+    let top = '_' + '<br>';
+    let bottom = '^' + '<br>';
+    let row = '|░|' + '<br>';
+    let filled = '|▓|' + '<br>';
+    return top + row.repeat(max - v) + filled.repeat(v) + filled + bottom;
+}
+
+///////  Spin  ////////
+
+const ASCIIs = [
+    ['&ndash;', '\\', '|', '/'], // Forward Spin
+    ['&ndash;', '/', '|', '\\'], // Backward Spin
+    ['', '', '', 'pause', 'pause'], // Cursor blink
+];
+
+// Formerly a fun spinning animation for the tempo speed.  Now used by animateLFO()
+function animate(index) {
+    // Update the element id of elementID to have the index-th ASCII array entry in it. (Note: arrays start at 0)
+    document.getElementById('ascii-spin').innerHTML = ASCIIs[2][index];
+    let inputSlider = document.getElementById('bpm');
+    let frequency = inputSlider.value;
+    // Call the update function after 1 second / frequency (Hz).
+    setTimeout(function () {
+        if (Tone.Transport.state === 'started') {
+            // Pass the update function the index that it was called with this time, plus 1.
+            // % means modulus (remainder when divided by)
+            // This way, it doesnt' try to look for the 1000th element which doesn't exist
+            animate((index + 1) % ASCIIs[2].length);
+        }
+    }, 10000 / frequency);
+}
+
+function animateLFO(index) {
+    document.getElementById('ascii-lfo-spin').innerHTML = ASCIIs[1][index];
+    let inputSlider = document.getElementById('lfo-rate');
+    let frequency = inputSlider.value;
+    // Call the update function after 1 second / frequency (Hz).
+    setTimeout(function () {
+        if (Tone.Transport.state === 'started') {
+            animateLFO((index + 1) % ASCIIs[1].length);
+        }
+    }, 500 / frequency);
+}
+
+// ------------------------- //
+//    Slider Animations      //
+// ------------------------- //
+/////// Horizontal Slider Animation ////////
+//TODO: add special classes so that we can target the controls and initialize the renders on load
+const tempoMeter = document.getElementById('ascii-bpm');
+tempoMeter.innerHTML = '||||||||||||||▓══════════════════ |';
+
+transport.addEventListener('input', function () {
+    let block = '▓';
+    let pipe = '|';
+    let equals = '═';
+    let linesAmount = parseInt(this.value / 15);
+    tempoMeter.innerHTML = pipe.repeat(linesAmount - 1) + block + equals.repeat(33 - linesAmount) + ` ${pipe}`; // ' |'
+});
+
+// Synth/FX control slider animations
+function drawHorizontalControls(e) {
+    let target = e.target;
+    let block = '▓';
+    let pipe = '|';
+    let dash = '-';
+    let factor = 31;
+    let linesAmount = parseInt((factor / target.max) * target.value);
+    if (target.id === 'crossfader') {
+        let linesAmount = parseInt((18 / target.max) * target.value);
+        document.getElementById(target.dataset.ascii).innerText = pipe.repeat(linesAmount) + block + pipe.repeat(18 - linesAmount) + pipe;
+    } else if (target.id === 'harmonicity') {
+        let linesAmount = parseInt((18 / target.max) * target.value);
+        document.getElementById(target.dataset.ascii).innerText = pipe.repeat(linesAmount) + block + pipe.repeat(18 - linesAmount) + pipe;
+        document.getElementById('ascii-harmonicity-num').innerHTML = pipe + parseFloat(target.value).toFixed(1) + pipe;
+    } else if (target.id !== 'glide') {
+        document.getElementById(target.dataset.ascii).innerText = pipe + pipe.repeat(linesAmount) + block + dash.repeat(31 - linesAmount) + pipe;
+    }
+}
+//TODO: this does work.  Just gotta see if it's worth adding a class to every control that would use it.
+function initHorizontalControls() {
+    const controls = document.querySelectorAll('.hControl');
+    const controlsAscii = document.querySelectorAll('.ascii-params');
+    let block = '▓';
+    let pipe = '|';
+    let dash = '-';
+    let factor = 31;
+    for (let i = 0; i < controls.length; i++) {
+        let linesAmount = parseInt((factor / controls[i].max) * controls[i].value);
+        console.log(controls[i]);
+        // console.log(controlsAscii[i].innerText);
+        controlsAscii[i].innerText = pipe + pipe.repeat(linesAmount) + block + dash.repeat(31 - linesAmount) + pipe;
+    }
+}
+
+synthControls.addEventListener('input', e => drawHorizontalControls(e));
+fxControls.addEventListener('input', e => drawHorizontalControls(e));
+
+// Wonky animation that causes circle to grow based on cutoff.
+// As of now it creates a moving circle, but it may be cleaner to have it static. However, there's not much space
+/////// Circle Grow Animation
+// let circle = document.getElementById('ascii-cutoff');
+// function circleGrow(target) {
+//     if (target.id === 'cutoff') {
+//         let circleSize = parseInt(target.value / 50);
+//         let circleX = parseInt(target.value / 25);
+//         /// IMPORTANT This value is the top position + font.size and may need to be adjusted later
+//         let circleLocation = 35;
+//         let circlePosition = -circleSize + circleLocation;
+
+//         // When the animation turns into a period
+//         if (target.value <= 400) {
+//             circle.style.opacity = 0;
+//             document.getElementById('filterLabel').innerHTML = '> cutoff.';
+//             // When the animation is growing/shrinking
+//         } else {
+//             document.getElementById('filterLabel').innerHTML = '> cutoff';
+//             circle.style.fontSize = circleSize + '.px';
+//             circle.style.opacity = 1;
+//             circle.style.top = circlePosition + '.px';
+//             circle.style.left = circleX + 50 + '.px'; // Comment this out to have circle stay in x position
+//         }
+//     }
+// }
+
+/// Initialize note and flutter controls ui
+function initVerticalControls() {
+    for (let i = 0; i < meters.length; i++) {
+        meters[i].innerHTML = bars(6);
+        asciiRepeater[i].innerHTML = '│-│' + '<br>' + '│-│↑' + '<br>' + '│-│↓' + '<br>' + '│o│' + '<br>';
+    }
+}
+//////////////// SWAP PARAMETERS ///////////////
+
+const fxSwap = document.getElementById('fx-swap');
+let paramState = 'synth';
+fxSwap.addEventListener('click', function () {
+    const synthOverlay = document.getElementById('ascii-synth-overlay');
+    const fxOverlay = document.getElementById('ascii-fx-overlay');
+    const asciiFx = '| fx |';
+    const asciiSynth = '| synth |';
+    if (paramState === 'fx') {
+        console.log('fx state');
+        synthControls.style.display = 'grid';
+        fxControls.style.display = 'none';
+        fxSwap.innerHTML = asciiFx;
+        synthOverlay.style.display = 'block';
+        fxOverlay.style.display = 'none';
+        return (paramState = 'synth');
+    } else {
+        fxControls.style.display = 'grid';
+        synthControls.style.display = 'none';
+        fxSwap.innerHTML = asciiSynth;
+        console.log('synth state');
+        synthOverlay.style.display = 'none';
+        fxOverlay.style.display = 'block';
+        return (paramState = 'fx');
+    }
+});
+
+///////////// MOBILE TABS //////////////
+// const synthControls = document.querySelector('#synth-container');
+// const fxControls = document.querySelector('#fx-container');
+let tabState = 'seq';
+function mobileSwap() {
+    // const stepContainer = document.querySelector('#steps');
+    // const fxSwap = document.getElementById('fx-swap');
+    const fxSwapTab = document.getElementById('fx-swap-tab');
+    const synthSwap = document.getElementById('synth-swap');
+    const seqSwap = document.getElementById('seq-swap');
+    const tabContainer = document.querySelector('#tabs-container-mobile');
+    const swapLabels = document.querySelectorAll('#param-swap-text');
+    tabContainer.addEventListener('click', ({ target }) => {
+        tabState = target.dataset.state;
+        // make highlighted text bold
+        swapLabels.forEach(element => {
+            element.style.fontWeight = 'normal';
+            target.style.fontWeight = 'bold';
+        });
+        if (tabState === 'seq') {
+            stepContainer.style.display = 'grid';
+            synthControls.style.display = 'none';
+            fxControls.style.display = 'none';
+        } else if (tabState === 'synth') {
+            stepContainer.style.display = 'none';
+            synthControls.style.display = 'grid';
+            fxControls.style.display = 'none';
+            synthSwap.style.fontWeight = 'bold';
+        } else if (tabState === 'fx') {
+            stepContainer.style.display = 'none';
+            synthControls.style.display = 'none';
+            fxControls.style.display = 'grid';
+            fxSwapTab.style.fontWeight = 'bold';
+        }
+    });
+}
+
+mobileSwap();
+synthParamController();

@@ -1,0 +1,430 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+html * {
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    max-width: 100%;
+    height: 100%;
+}
+
+input[type='range'] {
+    margin: 0;
+    -webkit-appearance: none;
+    background-color: transparent;
+    border: 1px solid black;
+    cursor: pointer;
+    opacity: 0;
+    width: 135px;
+}
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: 1px solid #000000;
+    height: 18px;
+    width: 23px;
+    background-color: transparent;
+    border-radius: 3px;
+    background: transparent;
+    cursor: pointer;
+    margin-top: -1px;
+}
+
+input[type='range']:focus {
+    outline: none;
+}
+
+input[type='range']::-ms-track {
+    width: 100%;
+    -webkit-appearance: none;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+
+button {
+    -webkit-appearance: none;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+p {
+    margin: 1px;
+    margin-bottom: 1px;
+}
+
+#hidden {
+    opacity: 0;
+}
+.label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    margin-bottom: 1px;
+}
+
+/* GUI Overlays */
+#overlay-container {
+    font-size: 14px;
+    position: relative;
+    pointer-events: none;
+    z-index: 0;
+}
+.overlay {
+    /* font-family: Courier, monospace !important; */
+    position: absolute;
+    line-height: 13px;
+    font-size: 14px;
+    left: -128px;
+    top: -840px;
+}
+#ascii-synth-overlay {
+    display: block;
+}
+#ascii-fx-overlay {
+    display: none;
+}
+
+/* MAIN */
+#main-container {
+    margin: 5% 10% 10% 10%;
+    border-radius: 2rem;
+    height: auto;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas: 'header' 'transport' 'main' 'controls' 'footer';
+    justify-content: center;
+    align-items: center;
+}
+
+/* //////// TOP BAR /////////////*/
+#help {
+    margin-bottom: 1px;
+    padding: 5px 0px;
+}
+#help:hover {
+    width: 70%;
+    cursor: help;
+}
+#help-menu {
+    position: absolute;
+    color: red;
+    font-weight: bold;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 1;
+    /* border: 1px solid black; */
+    background-color: transparent;
+}
+#help:hover + #help-menu {
+    display: block;
+}
+#theme-select {
+    cursor: cell;
+    padding: 5px 0px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/*///////   SYNTH LAYOUT    ////////////*/
+
+.synth-control {
+    z-index: 1;
+}
+.fx-control {
+    padding: 4px;
+    z-index: 1;
+}
+
+.group-label {
+    padding: 0;
+    font-size: 14px;
+    margin-bottom: 5px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+.ascii-params {
+    /* font-family: 'Courier New', Courier, monospace !important; */
+    font-weight: bold;
+    font-size: 13px;
+    letter-spacing: -4px;
+    position: absolute;
+    left: 0px;
+    z-index: -5;
+}
+
+#synth-container {
+    /* border: 1px solid red; */
+    height: 250px;
+    display: grid;
+    padding-right: 20px;
+    /* padding-left: 20px; */
+    padding-top: 10px;
+    grid-template-columns: 95px 148px 148px;
+    grid-template-rows: 115px auto;
+    grid-template-areas:
+        'oscillatorA envelope filter'
+        'oscillatorB mod mixer';
+    gap: 1px;
+    margin: auto auto auto auto;
+
+    grid-area: controls;
+}
+#fx-container {
+    height: 250px;
+    /* border: 1px solid green; */
+    display: none;
+    padding-top: 10px;
+    grid-template-columns: 195px 195px;
+    grid-template-rows: 100px auto;
+    grid-template-areas:
+        'delay reverb'
+        '. .';
+    gap: 1px;
+    margin: auto auto auto auto;
+    width: auto;
+    grid-area: controls;
+}
+#oscillator-container-a {
+    position: relative;
+    text-align: left;
+    grid-area: oscillatorA;
+}
+
+#oscillator-container-b {
+    position: relative;
+    text-align: left;
+    /* border: 1px solid black; */
+    grid-area: oscillatorB;
+}
+
+.wave-select {
+    width: 60px;
+    margin: 3px;
+}
+#osc-wave {
+    display: none;
+    position: absolute;
+    width: 60px;
+    opacity: 1;
+    z-index: 2;
+}
+
+/* wave select "button" */
+
+/* 
+use [class*="ascii-osc-"] to select this and the mod wave
+
+//// */
+.ascii-dropdown {
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#ascii-osc-wave {
+    position: absolute;
+    display: inline;
+    text-align: center;
+    width: 59px;
+    height: 16px;
+    padding: 2px;
+    margin: 0;
+    opacity: 1;
+    z-index: 3;
+}
+
+/* wave options */
+#ascii-osc-wave-options {
+    background-color: var(--bg);
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    /* margin: 0px 0 6px 0px; */
+    right: 10px;
+    width: 93%;
+    height: 80%;
+    line-height: 18px;
+    z-index: 4;
+}
+
+#glide-container {
+    position: relative;
+    top: -9px;
+}
+/* input checkbox */
+#glide {
+    position: absolute;
+    width: 30px;
+    height: 20px;
+    left: 45px;
+    top: -3px;
+    margin: auto;
+    cursor: pointer;
+    opacity: 0;
+}
+#ascii-glide {
+    position: absolute;
+    left: 45px;
+    top: -17px;
+    z-index: -1;
+}
+
+/* MOD select "button" */
+#ascii-mod-wave {
+    position: absolute;
+    display: inline;
+    text-align: center;
+    width: 59px;
+    height: 16px;
+    padding: 2px;
+    margin: 0;
+    opacity: 1;
+    z-index: 3;
+}
+
+/* MOD options */
+#ascii-mod-wave-options {
+    background-color: var(--bg);
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    right: 10px;
+    width: 93%;
+    height: 80%;
+    line-height: 18px;
+    z-index: 4;
+}
+.ascii-wave {
+    padding-left: 2px;
+}
+.ascii-wave:hover {
+    font-weight: 700;
+}
+/* .ascii-waves {
+    line-height: 50%;
+    letter-spacing: 50%;
+} */
+#harmonicity-container {
+    position: relative;
+    width: 100px;
+    top: 10px;
+}
+
+#harmonicity {
+    position: absolute;
+    width: 90px;
+    z-index: 1;
+}
+
+#ascii-harmonicity-num {
+    position: absolute;
+    left: 20px;
+    top: 40px;
+}
+#crossfader-container {
+    position: relative;
+    width: 100px;
+}
+#crossfader {
+    position: absolute;
+    width: 90px;
+    left: 1px;
+}
+
+#filter-container {
+    position: relative;
+    /* border: 1px solid black; */
+    grid-area: filter;
+}
+#ascii-cutoff {
+    font-size: 30px;
+    opacity: 1;
+    position: absolute;
+    height: 30px;
+    margin: 1px;
+    width: 30px;
+    height: 30px;
+    left: 110px;
+    top: 5px;
+}
+#envelope-container {
+    position: relative;
+    /* border: 1px solid black; */
+    grid-area: envelope;
+}
+
+#modulation-envelope {
+    position: relative;
+    /* border: 1px solid black; */
+    grid-area: mod;
+}
+
+#modulation {
+    position: relative;
+
+    /* border: 1px solid black; */
+    grid-area: mixer;
+}
+
+#ascii-lfo-spin {
+    font-size: 18px;
+    font-weight: bold;
+    margin: auto;
+    width: 3rem;
+    height: 2rem;
+    text-align: center;
+}
+
+#delay-container {
+    grid-area: delay;
+    position: relative;
+}
+
+#reverb-container {
+    grid-area: reverb;
+    position: relative;
+}
+.ascii-label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#tabs-container {
+    /* border: 1px solid orange; */
+    display: block;
+    position: relative;
+    padding: 30px 0px 0px 0px;
+    width: 100px;
+    height: 30px;
+    font-size: 15px;
+    grid-area: footer;
+}
+#fx-swap {
+    display: block;
+    text-align: left;
+    width: 120px;
+
+    top: 10px;
+}
+#tabs-container-mobile {
+    display: none;
+    grid-area: footer;
+}
+
+.tab-btn {
+    margin: auto;
+    font-size: 16px;
+    z-index: 3;
+}

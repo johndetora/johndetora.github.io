@@ -1,0 +1,114 @@
+:root {
+    /* Set Base Colors here */
+    --black: #002b36;
+    --dark: #073642;
+    --green: #859900;
+    --cyan: #2aa198;
+    --blue: #268bd2;
+    --yellow: #b58900;
+    --purple: #d33682;
+    --red: #dc322f;
+    --white: #fdf6e3;
+    --white2: #eee8d5;
+    /* Quick Change */
+    --bg: var(--black);
+    --primary: var(--blue);
+    --secondary: var(--yellow);
+    --accent1: var(--red);
+
+    /* Change these as long as they match condition*/
+    --metersOn: var(--cyan); /*  note meters are set to this */
+    --repeaterOn: var(--purple); /* ascii-repeater is set to this */
+    --checksOn: var(--green); /* Checks are set to this */
+    --off: rgba(60, 219, 192, 0.5); /* primary with half opacity */
+}
+
+/* Background and text color 1 */
+body {
+    /* Text Colors */
+    color: var(--purple);
+    /* frame color -- set to same as --bg if no frame is needed*/
+    background-color: var(--bg);
+}
+
+#header {
+    color: var(--yellow);
+}
+/* ascii-tone background color */
+#main-container {
+    /* This has to be the --bg variable */
+    background: var(--bg);
+    z-index: -999;
+}
+
+/* main overlay */
+.overlay {
+    color: var(--green);
+}
+
+#ascii-repeater {
+    color: var(--repeaterOn);
+}
+
+/* For f and Zzz */
+.ascii-label {
+    color: var(--accent1);
+}
+
+/*//////////*/
+/* Transport */
+/*//////////*/
+#play-button {
+    color: var(--green);
+}
+
+#ascii-bpm {
+    color: var(--primary);
+}
+
+#scale-select {
+    color: var(--secondary);
+}
+
+/* The 'playhead' arrow that moves along the top */
+#playhead {
+    color: var(--purple);
+}
+
+/* The note selection meters */
+#ascii-meter {
+    color: var(--metersOn);
+}
+
+/* The snooze buttons */
+#ascii-checkbox {
+    color: var(--checksOn);
+}
+
+/* The synth control parameters */
+.ascii-params {
+    color: var(--primary);
+}
+
+/*  Control box titles */
+.group-label {
+    color: var(--secondary);
+}
+
+/* titles for each parameter */
+.label {
+    color: var(--red);
+}
+
+#ascii-lfo-spin {
+    color: var(--accent1);
+}
+/* the fx tab */
+#fx-swap {
+    color: var(--purple);
+}
+
+/* param tabs on mobile */
+#tabs-container-mobile {
+    color: var(--purple);
+}
