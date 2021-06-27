@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="./styles/normalize.css">
     <link rel="stylesheet" href="./themes/light.css" id="theme" data-current="light">
     <link rel="stylesheet" href="./styles/header.css" />
-
     <link rel="stylesheet" href="./styles/asciitone.css" />
     <link rel="stylesheet" href="./styles/ansiquencer.css" />
     <link rel="stylesheet" href="./styles/mobile.css" />
@@ -19,20 +18,12 @@
     <script src="./scripts/main.js" type="module"></script>
     <script src="./scripts/synth-controls.js" type="module"></script>
     <script src="./scripts/Tone.js"></script>
-
     <title class="notranslate">ascii-tone</title>
 </head>
 
 <body>
-
-    <!-- <div id="hidden">This is a hidden div for the purpose of telling google that this web page is in English, and not
-        Portuguese like it seems to think.</div> -->
-    <!--<button id="repeatTest">[Repeat]</button> -->
-    <!-- <button class="transport" id="test-button" onclick="tester()">[ array tester ]</button> teasfs-->
-
     <div id="main-container">
         <div id="overlay-container">
-
             <pre id="ascii-synth-overlay" class="overlay">
             ___________________________________________________    
            |                                                   |
@@ -171,58 +162,17 @@
          </pre>
         </div>
         <div id="header">
-            <span id="title">$ ascii-tone v0.3.2</span>
+            <span id="title">$ ascii-tone v0.3.3</span>
             <span id="about-menu"></span>
             <!-- <a id="money" href=> [ $ ]</span> -->
             <a id="help" href="https://github.com/johndetora/asciitone" target="_blank">[ ? ]</a>
             <span id="theme-select">[ light ]</span>
-            <!-- <div id="skin-window">
-                <p class="theme" data-theme="light">light</p>
-                <p class="theme" data-theme="dark">dark</p>
-                <p class="theme" data-theme="9009">9009</p>
-                <p class="theme" data-theme="metropolis">Metropolis</p>
-                <br><br>
-                <p class="themeClose">Close [x]</p>
-            </div> -->
         </div>
-        <!-- <pre id="help-menu">
-
-~ click     s l i d e
-~ 
-~
-~
-~ 
-~ 
-~
-~
-~ c
-~
-~ l
-~
-~ i
-~
-~ c
-~ 
-~ k
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~
-~ the #snooze buttons allow the steps to snooze
-~
-~
-                   </pre> -->
         <div id="top-controls">
             <div id="ascii-spin"></div>
             <button id="play-button" class="transport">[play]</button>
             <div id="bpm-container" class="transport">
-                <input id="bpm" class="transport" type="range" min="50" max="500" value="200">
+                <input id="bpm" class="transport" type="range" min="40" max="500" value="200">
                 <span id="ascii-bpm">||||||||||||||▓══════════ |</span>
             </div>
             <span id="seq-mode">[ --> ]</span>
@@ -235,21 +185,13 @@
             <div class="step">
                 <pre id="ascii-meter"></pre>
                 <div id="repeater-container">
-                    <pre id="ascii-repeater">
-                       <span id="rep-1" class="rep-count"></span>
-                       <span id="rep-2" class="rep-count"></span>
-                       <span id="rep-3" class="rep-count"></span>
-                       <span id="rep-4" class="rep-count"></span>
-                    </pre>
+                    <pre id="ascii-repeater"> </pre>
                     <input type="range" class="repeater-range" data-index="0" orient="vertical" value="0" min="0"
                         max="3" step="1">
-                    <!-- <span id="rep-divider">...................................................</span> -->
                 </div>
                 <div class="check-container">
-
                     <pre id="ascii-checkbox">[#]</pre>
                     <input type="checkbox" data-index="0" id="check" checked />
-
                 </div>
                 <input type="range" id="slider-1" data-index="0" class="meter" value="6" min="0" max="12" step="1"
                     orient="vertical" />
@@ -257,20 +199,13 @@
             <div class="step">
                 <pre id="ascii-meter"></pre>
                 <div id="repeater-container">
-                    <pre id="ascii-repeater">
-                        <!-- I can remove this unless I decide to style the different reps-->
-                       <span id="rep-1" class="rep-count"></span>
-                       <span id="rep-2" class="rep-count"></span>
-                       <span id="rep-3" class="rep-count"></span>
-                       <span id="rep-4" class="rep-count"></span>
-                    </pre>
+                    <pre id="ascii-repeater"> </pre>
                     <input type="range" class="repeater-range" data-index="1" orient="vertical" value="0" min="0"
                         max="3" step="1">
                 </div>
                 <div class="check-container">
                     <pre id="ascii-checkbox">[#]</pre>
                     <input type="checkbox" data-index="1" id="check" checked />
-
                 </div>
                 <input type="range" id="slider-2" data-index="1" class="meter" value="6" min="0" max="12" step="1"
                     orient="vertical" />
@@ -278,19 +213,13 @@
             <div class="step">
                 <pre id="ascii-meter"></pre>
                 <div id="repeater-container">
-                    <pre id="ascii-repeater">
-                       <span id="rep-1" class="rep-count"></span>
-                       <span id="rep-2" class="rep-count"></span>
-                       <span id="rep-3" class="rep-count"></span>
-                       <span id="rep-4" class="rep-count"></span>
-                    </pre>
+                    <pre id="ascii-repeater"> </pre>
                     <input type="range" class="repeater-range" data-index="2" orient="vertical" value="0" min="0"
                         max="3" step="1">
                 </div>
                 <div class="check-container">
                     <pre id="ascii-checkbox">[#]</pre>
                     <input type="checkbox" data-index="2" id="check" checked />
-
                 </div>
                 <input type="range" id="slider-3" data-index="2" class="meter" value="6" min="0" max="12" step="1"
                     orient="vertical" />
@@ -298,12 +227,7 @@
             <div class="step">
                 <pre id="ascii-meter"></pre>
                 <div id="repeater-container">
-                    <pre id="ascii-repeater">
-                       <span id="rep-1" class="rep-count"></span>
-                       <span id="rep-2" class="rep-count"></span>
-                       <span id="rep-3" class="rep-count"></span>
-                       <span id="rep-4" class="rep-count"></span>
-                    </pre>
+                    <pre id="ascii-repeater"> </pre>
                     <input type="range" class="repeater-range" data-index="3" orient="vertical" value="6" min="0"
                         max="3" step="1">
                 </div>
@@ -317,12 +241,7 @@
             <div class="step">
                 <pre id="ascii-meter"></pre>
                 <div id="repeater-container">
-                    <pre id="ascii-repeater">
-                       <span id="rep-1" class="rep-count"></span>
-                       <span id="rep-2" class="rep-count"></span>
-                       <span id="rep-3" class="rep-count"></span>
-                       <span id="rep-4" class="rep-count"></span>
-                    </pre>
+                    <pre id="ascii-repeater"> </pre>
                     <input type="range" class="repeater-range" data-index="4" orient="vertical" value="0" min="0"
                         max="3" step="1">
                 </div>
@@ -336,12 +255,7 @@
             <div class="step">
                 <pre id="ascii-meter"></pre>
                 <div id="repeater-container">
-                    <pre id="ascii-repeater">
-                       <span id="rep-1" class="rep-count"></span>
-                       <span id="rep-2" class="rep-count"></span>
-                       <span id="rep-3" class="rep-count"></span>
-                       <span id="rep-4" class="rep-count"></span>
-                    </pre>
+                    <pre id="ascii-repeater"> </pre>
                     <input type="range" class="repeater-range" data-index="5" orient="vertical" value="0" min="0"
                         max="3" step="1">
                 </div>
@@ -355,12 +269,7 @@
             <div class="step">
                 <pre id="ascii-meter"></pre>
                 <div id="repeater-container">
-                    <pre id="ascii-repeater">
-                       <span id="rep-1" class="rep-count"></span>
-                       <span id="rep-2" class="rep-count"></span>
-                       <span id="rep-3" class="rep-count"></span>
-                       <span id="rep-4" class="rep-count"></span>
-                    </pre>
+                    <pre id="ascii-repeater"> </pre>
                     <input type="range" class="repeater-range" data-index="6" orient="vertical" value="0" min="0"
                         max="3" step="1">
                 </div>
@@ -374,12 +283,7 @@
             <div class="step">
                 <pre id="ascii-meter"></pre>
                 <div id="repeater-container">
-                    <pre id="ascii-repeater">
-                       <span id="rep-1" class="rep-count"></span>
-                       <span id="rep-2" class="rep-count"></span>
-                       <span id="rep-3" class="rep-count"></span>
-                       <span id="rep-4" class="rep-count"></span>
-                    </pre>
+                    <pre id="ascii-repeater"> </pre>
                     <input type="range" class="repeater-range" data-index="7" orient="vertical" value="0" min="0"
                         max="3" step="1">
                 </div>
@@ -390,23 +294,17 @@
                 <input type="range" id="slider-8" data-index="7" class="meter" value="6" min="0" max="12" step="1"
                     orient="vertical" />
             </div>
-
         </div>
 
-
-
         <div id="synth-container">
-            <!-- ////// Synth Controls /////// -->
             <div class="synth-control" id="oscillator-container-a">
                 <p class="group-label">osc</p>
                 <pre id="ascii-osc-wave" class="ascii-dropdown">[sine]</pre>
                 <div id="ascii-osc-wave-options" class="ascii-dropdown">
-
                     <span id="a-sine" class="ascii-wave" data-parameter="sine">~ sine</span>
                     <span id="a-triangle" class="ascii-wave" data-parameter="triangle">~ triangle</span>
                     <span id="a-square" class="ascii-wave" data-parameter="square">~ square</span>
                     <span id="a-sawtooth" class="ascii-wave" data-parameter="sawtooth">~ sawtooth</span>
-
                 </div>
                 <br><br>
                 <div id="glide-container">
@@ -494,7 +392,6 @@
             </div>
         </div>
 
-        <!-- //////// FX  ////////// -->
         <div id="fx-container">
             <div class="fx-control" id="delay-container">
                 <p class="group-label">delay</p>
@@ -518,32 +415,14 @@
                     step="0.05" data-ascii="ascii-reverb-mix">
                 <span id="ascii-reverb-mix" class="ascii-params">|▓-------------------------------|</span>
                 <p class="label">decay</p>
-                <input type="range" class="reverb" id="reverbDecay" data-parameter="decay" value="0.2" min="0" max="10"
-                    step="0.01" data-ascii="ascii-reverb-decay">
+                <input type="range" class="reverb" id="reverbDecay" data-parameter="decay" value="0.2" min="0.1"
+                    max="10" step="0.01" data-ascii="ascii-reverb-decay">
                 <span id="ascii-reverb-decay" class="ascii-params">|||||||▓-------------------------|</span>
                 <p class="label">pre-delay</p>
                 <input type="range" class="reverb" id="reverbPreDelay" data-parameter="preDelay" value="0.1" min="0"
                     max="1" step="0.01" data-ascii="ascii-reverb-predelay">
                 <span id="ascii-reverb-predelay" class="ascii-params">||||▓----------------------------|</span>
             </div>
-            <!-- TODO: x-y pad for a control would be great.  Maybe even for the filter cutoff -->
-            <!-- <div id="xy-pad">
-                <div class="xy-row">
-                    <span id="x1">o</span>
-                    <span>o</span>
-                    <span>o</span>
-                </div>
-                <div class="xy-row">
-                    <span id="x1">o</span>
-                    <span>o</span>
-                    <span>o</span>
-                </div>
-                <div class="xy-row">
-                    <span id="x1">o</span>
-                    <span>o</span>
-                    <span>o</span>
-                </div>
-            </div> -->
         </div>
         <!-- /////////// Desktop Tabs ///////////-->
         <div id="tabs-container">

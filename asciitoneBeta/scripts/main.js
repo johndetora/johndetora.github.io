@@ -2,10 +2,8 @@ import { themeSelector } from './theme-select.js';
 import { synth, delay, filter, crossFade, lfo, toFilt, reverb, gain, modGain, toModIndex } from './synth-objects.js';
 import { synthParamController } from './synth-controls.js';
 
-// Controls selected skin
-themeSelector();
-// This generates the reverb's impulse response via Tone.js
-reverb.generate();
+themeSelector(); // Controls selected skin
+reverb.generate(); // This generates the reverb's impulse response via Tone.js
 
 //TODO: Refactor this to its own function.  Add web browser check
 let OSName = 'Unknown OS';
@@ -21,7 +19,6 @@ if (navigator.appVersion.indexOf('Win') != -1) {
 // ------------------------- //
 //    Transport / Init       //
 // ------------------------- //
-
 //Audio play confirmation - needed because of autoplay policy
 document.querySelector('button')?.addEventListener('click', async () => {
     await Tone.start();
@@ -29,7 +26,6 @@ document.querySelector('button')?.addEventListener('click', async () => {
 
 //////////////// Start Stop Init ////////////////////////
 //  Starts transport and initializes certain animations like playhead and spin //
-
 //TODO: add space key to play/pause
 let playButton = document.getElementById('play-button');
 playButton.addEventListener('click', async () => {
@@ -62,7 +58,6 @@ let transport = document.querySelector('#bpm');
 transport.addEventListener('input', function () {
     let bpm = this.value;
     Tone.Transport.bpm.value = bpm;
-    console.log(bpm);
 });
 
 // ------------------------- //
@@ -74,7 +69,7 @@ const synthControls = document.querySelector('#synth-container');
 const fxControls = document.querySelector('#fx-container');
 const stepContainer = document.querySelector('#steps');
 const playHead = document.querySelector('#playhead');
-const meters = document.querySelectorAll('#ascii-meter');
+const noteMeters = document.querySelectorAll('#ascii-meter');
 const asciiRepeater = document.querySelectorAll('#ascii-repeater');
 let steps = 8; // Total step length
 
@@ -82,16 +77,12 @@ let steps = 8; // Total step length
 //         Routing           //
 // ------------------------- //
 
-// noiseSynth.toDestination(0.7);
 synth.chain(gain, crossFade.a);
 synth.modulationEnvelope.chain(modGain, crossFade.b);
-//gain.toDestination();
 crossFade.connect(filter);
 filter.connect(delay);
 delay.connect(reverb);
 reverb.toDestination(0.8);
-
-// LFO Routing
 lfo.connect(toFilt);
 toFilt.connect(filter.frequency);
 // Connect LFO to mod index
@@ -105,58 +96,53 @@ toModIndex.connect(synth.modulationIndex);
 /// SCALES /////
 const chromaticScale = ['C3', 'C#3', 'D3', 'D#3', 'E3', 'F3', 'F#3', 'G3', 'G#3', 'A3', 'A#3', 'B3', 'C4'];
 const majorScale = ['C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3', 'C4', 'D4', 'E4', 'F4', 'G4', 'A4'];
-const minorScale = ['C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3', 'C4', 'D4', 'E4', 'F4', 'G4', 'A4'];
+const minorScale = ['C3', 'D3', 'D#3', 'F3', 'G3', 'G#3', 'A#3', 'C4', 'D4', 'D#4', 'F4', 'G4', 'G#4'];
 const pentScale = ['C3', 'D3', 'E3', 'G3', 'A3', 'C4', 'D4', 'E4', 'G4', 'A4', 'C5', 'D5', 'E5'];
-const scales = [majorScale, minorScale, pentScale, chromaticScale];
+const scales = [majorScale, minorScale, pentScale, chromaticScale, randomNoteScale(chromaticScale)];
 let currentScale = majorScale;
 
+//TODO: figure out a way to make scale selection, seq mode, and note entry functions work together
+function randomNoteScale(scale) {
+    const array = [];
+    for (let i = 0; i < scale.length; i++) {
+        const random = Math.floor(Math.random() * scale.length);
+        array.push(chromaticScale[random]);
+    }
+    return array;
+}
+
 /// Scale set logic
+
 const scaleSelect = document.getElementById('scale-select');
 scaleSelect.addEventListener('click', scaleSet);
 let scaleIndex = 0; // Should be global
 function scaleSet() {
     let currentNotes = document.querySelectorAll('.meter');
-
-    // Round Robin selection
-
     scaleIndex++;
     if (scaleIndex === scales.length) scaleIndex = 0; // counter resets to 0
     currentScale = scales[scaleIndex];
-    // Loop through the current note object and set the values to the current slider values
-
+    // Loop through the current note object and set the notes to the current slider values
     for (let i = 0; i < currentNotes.length; i++) {
         // Note at meter index = major scale note at index of 1-8
         notes[i].note = currentScale[currentNotes[i].value];
         // // Set opposite side note for reverse mode
-
         notes[15 - i].note = notes[i].note;
     }
     // DOM
     //TODO: change to innertext
-    if (currentScale === scales[0]) scaleSelect.innerHTML = '[scale: major]';
-    if (currentScale === scales[1]) scaleSelect.innerHTML = '[scale: minor]';
-    if (currentScale === scales[2]) scaleSelect.innerHTML = '[scale: pent]';
-    if (currentScale === scales[3]) scaleSelect.innerHTML = '[scale: chrom]';
-    return currentScale;
+    if (currentScale === scales[0]) scaleSelect.innerText = '[scale: major]';
+    if (currentScale === scales[1]) scaleSelect.innerText = '[scale: minor]';
+    if (currentScale === scales[2]) scaleSelect.innerText = '[scale: pent]';
+    if (currentScale === scales[3]) scaleSelect.innerText = '[scale: chrom]';
+    if (currentScale === scales[4]) scaleSelect.innerText = '[scale: random]';
 }
-// setInterval(() => {
-//     console.log('notes', notes);
-// }, 2000);
 
 // Helper
-window.addEventListener('click', () => {
+// window.addEventListener('click', helper);
+
+function helper() {
     console.log(currentScale);
     console.log(notes);
-});
-
-function resetNotes() {
-    let currentNotes = document.querySelectorAll('.meter');
-    for (let i = 0; i < currentNotes.length; i++) {
-        // Note at meter index = major scale note at index of 1-8
-        notes[i].note = currentScale[currentNotes[i].value];
-        // // Set opposite side note for reverse mode
-        notes[15 - i].note = currentScale[currentNotes[i].value];
-    }
 }
 
 let notes = [
@@ -295,19 +281,6 @@ let notes = [
     },
 ];
 
-// Scale Select button
-
-// TEST Buttons
-// Logs the global note and bpm
-function tester() {
-    // notes.splice(0, 1, repeatNote[0], repeatNote[1]);
-    console.log(notes);
-    console.log(bpm);
-}
-
-// For testing purposes.  Hidden
-let repeatButton = document.getElementById('repeatTest');
-
 // ------------------------- //
 //     Play Sequence         //
 // ------------------------- //
@@ -335,12 +308,10 @@ let part = new Tone.Part((time, value) => {
         synth.triggerAttackRelease(value.note, '64n', time + 0.1, value.velocity);
         synth.triggerAttackRelease(value.note, '64n', time + 0.15, value.velocity);
     }
-    console.log(notes);
     playHeadUpdate(step);
     index++;
 }, notes);
 
-console.log(index);
 /////// Transport and Loop ////////////
 part.start('0m');
 part.loopStart = '0m';
@@ -361,11 +332,9 @@ stepContainer.addEventListener('input', ({ target }) => {
     if (target.className === 'meter') {
         let reverse = 15 - target.dataset.index;
         // className == Meter so that the repeater slider isn't targeted
-        meters[target.dataset.index].innerHTML = bars(target.value); // Sets bar animation value
+        noteMeters[target.dataset.index].innerHTML = drawNoteMeters(target.value); // Sets bar animation value
         notes[target.dataset.index].note = currentScale[target.value];
-
         notes[reverse].note = currentScale[target.value];
-        console.log(notes);
     }
     if (target.className === 'repeater-range') {
         notes[target.dataset.index].repeat = parseInt(target.value);
@@ -373,8 +342,7 @@ stepContainer.addEventListener('input', ({ target }) => {
     }
 });
 
-// Repeater ascii-animation
-// There's probably a better way to do this but it works.
+// Repeater ascii-animation. There's probably a better way to do this but it works.
 function repeatAnim(target) {
     let repeats = parseInt(target.value);
     const empty = '│-│' + '<br>';
@@ -383,7 +351,6 @@ function repeatAnim(target) {
     let arrowUpFilled = '│o│↑' + '<br>';
     let arrowDownFilled = '│o│↓' + '<br>';
     const filled = '│o│' + '<br>';
-
     // Don't render the arrows on the last step
     if (parseInt(target.dataset.index) === 7) {
         console.log(target);
@@ -407,30 +374,32 @@ stepContainer.addEventListener('change', ({ target }) => {
         // UI Update
         asciiCheck[target.dataset.index].style.color = 'var(--checksOn)';
         asciiRepeater[target.dataset.index].style.color = 'var(--repeaterOn)';
-        meters[target.dataset.index].style.color = 'var(--metersOn)';
+        noteMeters[target.dataset.index].style.color = 'var(--metersOn)';
     } else if (target.type == 'checkbox' && !target.checked) {
         // Turns step 'off'
         notes[target.dataset.index].velocity = 0;
         // UI Update
-        meters[target.dataset.index].style.color = 'var(--off)';
+        noteMeters[target.dataset.index].style.color = 'var(--off)';
         asciiRepeater[target.dataset.index].style.color = 'var(--off)';
         asciiCheck[target.dataset.index].style.color = 'var(--off)';
     }
 });
 
 // Sequence mode
+//TODO: refactor and add add array of modes like in scale select
 function setSeqMode() {
+    const ASCII_FORWARD = '[ --> ]';
+    const ASCII_PENDULUM = '[ <--> ]';
     const modeBtn = document.getElementById('seq-mode');
     let pendulum = false;
     modeBtn.addEventListener('click', e => {
         pendulum = !pendulum;
-        // pendulum = !pendulum;
         if (pendulum === true) {
-            modeBtn.innerText = '[ <-> ]';
+            modeBtn.innerText = ASCII_PENDULUM;
             part.loopEnd = '4m';
             steps = 16;
         } else {
-            modeBtn.innerText = '[ --> ]';
+            modeBtn.innerText = ASCII_FORWARD;
             part.loopEnd = '2m';
             steps = 8;
         }
@@ -445,90 +414,39 @@ setSeqMode();
 function playHeadUpdate(step) {
     let headFwd = '>';
     let headBack = '<';
-
     let tail = '──────';
     let space = '&nbsp'.repeat(6);
-
-    console.log('step', step);
     // Draw Forward
-    if (step === 0) {
-        playHead.innerHTML = headFwd;
-    }
-    if (step > 0 && step <= 7) {
-        playHead.innerHTML = tail.repeat(step) + headFwd;
-    }
+    if (step === 0) playHead.innerHTML = headFwd;
+    if (step > 0 && step <= 7) playHead.innerHTML = tail.repeat(step) + headFwd;
     // Draw Backward
-    if (step === 8) {
-        playHead.innerHTML = space.repeat(15 - step) + headBack;
-    }
-    if (step === 15) {
-        playHead.innerHTML = headBack + tail.repeat(step - 8);
-    }
-    // if (step === 14) {
-    //     playHead.innerHTML = headBack + tail;
-    // }
-
+    if (step === 8) playHead.innerHTML = space.repeat(15 - step) + headBack;
+    if (step === 15) playHead.innerHTML = headBack + tail.repeat(step - 8);
     if (step > 8 && step < 15) {
         playHead.innerHTML = '';
-        playHead.innerHTML = space.repeat(15 - step) + headBack + tail.repeat(step - 8); // + tail.repeat(step);
+        playHead.innerHTML = space.repeat(15 - step) + headBack + tail.repeat(step - 8);
     }
 }
-// function playHeadUpdate(step) {
-//     const asciiArrow = ['►', '------►', '-──────-----►', '──────────────────►'];
-//     const tail = '──────';
-//     const arrowHead = '►';
-//     const arrow = tail + arrowHead;
-//     if (step > 0 && step <= 7) {
-//         playHead.prepend('──────');
-
-//     } else if (step === 0) {
-//         playHead.innerHTML = '>';
-//     }
-// }
-///
-///////  Bar  ////////
-function bars(v) {
-    const max = 12; // Max slider value for note meters
+///////  UpdateMeters  ////////
+function drawNoteMeters(inputVal) {
+    const BARS_MAX = 12; // Max slider value for note meters
     let top = '_' + '<br>';
     let bottom = '^' + '<br>';
     let row = '|░|' + '<br>';
     let filled = '|▓|' + '<br>';
-    return top + row.repeat(max - v) + filled.repeat(v) + filled + bottom;
+    return top + row.repeat(BARS_MAX - inputVal) + filled.repeat(inputVal) + filled + bottom;
 }
 
 ///////  Spin  ////////
-
-const ASCIIs = [
-    ['&ndash;', '\\', '|', '/'], // Forward Spin
-    ['&ndash;', '/', '|', '\\'], // Backward Spin
-    ['', '', '', 'pause', 'pause'], // Cursor blink
-];
-
-// Formerly a fun spinning animation for the tempo speed.  Now used by animateLFO()
-// function animate(index) {
-//     // Update the element id of elementID to have the index-th ASCII array entry in it. (Note: arrays start at 0)
-//     document.getElementById('ascii-spin').innerHTML = ASCIIs[2][index];
-//     let inputSlider = document.getElementById('bpm');
-//     let frequency = inputSlider.value;
-//     // Call the update function after 1 second / frequency (Hz).
-//     setTimeout(function () {
-//         if (Tone.Transport.state === 'started') {
-//             // Pass the update function the index that it was called with this time, plus 1.
-//             // % means modulus (remainder when divided by)
-//             // This way, it doesnt' try to look for the 1000th element which doesn't exist
-//             animate((index + 1) % ASCIIs[2].length);
-//         }
-//     }, 10000 / frequency);
-// }
-
 function animateLFO(index) {
-    document.getElementById('ascii-lfo-spin').innerHTML = ASCIIs[1][index];
+    const ASCII_SPIN = ['&ndash;', '/', '|', '\\']; // Backward Spin
+    document.getElementById('ascii-lfo-spin').innerHTML = ASCII_SPIN[index];
     let inputSlider = document.getElementById('lfo-rate');
     let frequency = inputSlider.value;
     // Call the update function after 1 second / frequency (Hz).
     setTimeout(function () {
         if (Tone.Transport.state === 'started') {
-            animateLFO((index + 1) % ASCIIs[1].length);
+            animateLFO((index + 1) % ASCII_SPIN.length);
         }
     }, 500 / frequency);
 }
@@ -586,37 +504,10 @@ function initHorizontalControls() {
 synthControls.addEventListener('input', e => drawHorizontalControls(e));
 fxControls.addEventListener('input', e => drawHorizontalControls(e));
 
-// Wonky animation that causes circle to grow based on cutoff.
-// As of now it creates a moving circle, but it may be cleaner to have it static. However, there's not much space
-/////// Circle Grow Animation
-// let circle = document.getElementById('ascii-cutoff');
-// function circleGrow(target) {
-//     if (target.id === 'cutoff') {
-//         let circleSize = parseInt(target.value / 50);
-//         let circleX = parseInt(target.value / 25);
-//         /// IMPORTANT This value is the top position + font.size and may need to be adjusted later
-//         let circleLocation = 35;
-//         let circlePosition = -circleSize + circleLocation;
-
-//         // When the animation turns into a period
-//         if (target.value <= 400) {
-//             circle.style.opacity = 0;
-//             document.getElementById('filterLabel').innerHTML = '> cutoff.';
-//             // When the animation is growing/shrinking
-//         } else {
-//             document.getElementById('filterLabel').innerHTML = '> cutoff';
-//             circle.style.fontSize = circleSize + '.px';
-//             circle.style.opacity = 1;
-//             circle.style.top = circlePosition + '.px';
-//             circle.style.left = circleX + 50 + '.px'; // Comment this out to have circle stay in x position
-//         }
-//     }
-// }
-
 /// Initialize note and flutter controls ui
 function initVerticalControls() {
-    for (let i = 0; i < meters.length; i++) {
-        meters[i].innerHTML = bars(6);
+    for (let i = 0; i < noteMeters.length; i++) {
+        noteMeters[i].innerHTML = drawNoteMeters(6);
         asciiRepeater[i].innerHTML = '│-│' + '<br>' + '│-│↑' + '<br>' + '│-│↓' + '<br>' + '│o│' + '<br>';
         if (i === 7) {
             // Don't render arrows on last step

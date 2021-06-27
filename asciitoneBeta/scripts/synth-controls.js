@@ -92,7 +92,6 @@ export function synthParamController() {
     });
     lfoAmt.addEventListener('input', function () {
         toFilt.gain.value = this.value;
-        // toFreqRatio.gain.value = this.value;
     });
 
     //////// Delay /////////////
