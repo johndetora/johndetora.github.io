@@ -341,8 +341,13 @@ use [class*="ascii-osc-"] to select this and the mod wave
     position: relative;
 }
 .ascii-label {
-    font-weight: bold;
+    /* font-weight: bold; */
+
     font-size: 14px;
+}
+#zzz {
+    letter-spacing: -3px;
+    padding-right: 3.5px;
 }
 
 #tabs-container {

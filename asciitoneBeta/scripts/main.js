@@ -105,7 +105,7 @@ toModIndex.connect(synth.modulationIndex);
 /// SCALES /////
 const chromaticScale = ['C3', 'C#3', 'D3', 'D#3', 'E3', 'F3', 'F#3', 'G3', 'G#3', 'A3', 'A#3', 'B3', 'C4'];
 const majorScale = ['C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3', 'C4', 'D4', 'E4', 'F4', 'G4', 'A4'];
-const minorScale = ['A3', 'B3', 'C3', 'D3', 'E3', 'F3', 'G3', 'A4', 'B4', 'C4', 'D4', 'E4', 'F4'];
+const minorScale = ['C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3', 'C4', 'D4', 'E4', 'F4', 'G4', 'A4'];
 const pentScale = ['C3', 'D3', 'E3', 'G3', 'A3', 'C4', 'D4', 'E4', 'G4', 'A4', 'C5', 'D5', 'E5'];
 const scales = [majorScale, minorScale, pentScale, chromaticScale];
 let currentScale = majorScale;
@@ -118,6 +118,7 @@ function scaleSet() {
     let currentNotes = document.querySelectorAll('.meter');
 
     // Round Robin selection
+
     scaleIndex++;
     if (scaleIndex === scales.length) scaleIndex = 0; // counter resets to 0
     currentScale = scales[scaleIndex];
@@ -127,7 +128,8 @@ function scaleSet() {
         // Note at meter index = major scale note at index of 1-8
         notes[i].note = currentScale[currentNotes[i].value];
         // // Set opposite side note for reverse mode
-        notes[16 - i - 1].note = currentScale[currentNotes[i].value];
+
+        notes[15 - i].note = notes[i].note;
     }
     // DOM
     //TODO: change to innertext
@@ -136,6 +138,25 @@ function scaleSet() {
     if (currentScale === scales[2]) scaleSelect.innerHTML = '[scale: pent]';
     if (currentScale === scales[3]) scaleSelect.innerHTML = '[scale: chrom]';
     return currentScale;
+}
+// setInterval(() => {
+//     console.log('notes', notes);
+// }, 2000);
+
+// Helper
+window.addEventListener('click', () => {
+    console.log(currentScale);
+    console.log(notes);
+});
+
+function resetNotes() {
+    let currentNotes = document.querySelectorAll('.meter');
+    for (let i = 0; i < currentNotes.length; i++) {
+        // Note at meter index = major scale note at index of 1-8
+        notes[i].note = currentScale[currentNotes[i].value];
+        // // Set opposite side note for reverse mode
+        notes[15 - i].note = currentScale[currentNotes[i].value];
+    }
 }
 
 let notes = [
@@ -314,7 +335,7 @@ let part = new Tone.Part((time, value) => {
         synth.triggerAttackRelease(value.note, '64n', time + 0.1, value.velocity);
         synth.triggerAttackRelease(value.note, '64n', time + 0.15, value.velocity);
     }
-    // console.log(notes);
+    console.log(notes);
     playHeadUpdate(step);
     index++;
 }, notes);
@@ -338,7 +359,7 @@ Tone.Transport.loop = true;
 stepContainer.addEventListener('input', ({ target }) => {
     // Note Sliders
     if (target.className === 'meter') {
-        let reverse = 16 - target.dataset.index - 1;
+        let reverse = 15 - target.dataset.index;
         // className == Meter so that the repeater slider isn't targeted
         meters[target.dataset.index].innerHTML = bars(target.value); // Sets bar animation value
         notes[target.dataset.index].note = currentScale[target.value];
@@ -357,25 +378,24 @@ stepContainer.addEventListener('input', ({ target }) => {
 function repeatAnim(target) {
     let repeats = parseInt(target.value);
     const empty = '│-│' + '<br>';
-    const arrowUp = '│-│↑' + '<br>';
-    const arrowDown = '│-│↓' + '<br>';
-    const arrowUpFilled = '│o│↑' + '<br>';
-    const arrowDownFilled = '│o│↓' + '<br>';
+    let arrowUp = '│-│↑' + '<br>';
+    let arrowDown = '│-│↓' + '<br>';
+    let arrowUpFilled = '│o│↑' + '<br>';
+    let arrowDownFilled = '│o│↓' + '<br>';
     const filled = '│o│' + '<br>';
-    // console.log(asciiRepeater[target.dataset.index][asciiRepCount[0]]);
 
-    if (repeats === 0) {
-        asciiRepeater[target.dataset.index].innerHTML = empty + arrowUp + arrowDown + filled;
+    // Don't render the arrows on the last step
+    if (parseInt(target.dataset.index) === 7) {
+        console.log(target);
+        arrowUp = empty;
+        arrowDown = empty;
+        arrowUpFilled = filled;
+        arrowDownFilled = filled;
     }
-    if (repeats === 1) {
-        asciiRepeater[target.dataset.index].innerHTML = empty + arrowUp + arrowDownFilled + empty;
-    }
-    if (repeats === 2) {
-        asciiRepeater[target.dataset.index].innerHTML = empty + arrowUpFilled + arrowDown + empty;
-    }
-    if (repeats === 3) {
-        asciiRepeater[target.dataset.index].innerHTML = filled + arrowUp + arrowDown + empty;
-    }
+    if (repeats === 0) asciiRepeater[target.dataset.index].innerHTML = empty + arrowUp + arrowDown + filled;
+    if (repeats === 1) asciiRepeater[target.dataset.index].innerHTML = empty + arrowUp + arrowDownFilled + empty;
+    if (repeats === 2) asciiRepeater[target.dataset.index].innerHTML = empty + arrowUpFilled + arrowDown + empty;
+    if (repeats === 3) asciiRepeater[target.dataset.index].innerHTML = filled + arrowUp + arrowDown + empty;
 }
 
 // Snooze Checks
@@ -412,7 +432,7 @@ function setSeqMode() {
         } else {
             modeBtn.innerText = '[ --> ]';
             part.loopEnd = '2m';
-            steps = 16;
+            steps = 8;
         }
     });
 }
@@ -598,6 +618,10 @@ function initVerticalControls() {
     for (let i = 0; i < meters.length; i++) {
         meters[i].innerHTML = bars(6);
         asciiRepeater[i].innerHTML = '│-│' + '<br>' + '│-│↑' + '<br>' + '│-│↓' + '<br>' + '│o│' + '<br>';
+        if (i === 7) {
+            // Don't render arrows on last step
+            asciiRepeater[i].innerHTML = '│-│' + '<br>' + '│-│' + '<br>' + '│-│' + '<br>' + '│o│' + '<br>';
+        }
     }
 }
 //////////////// SWAP PARAMETERS ///////////////
