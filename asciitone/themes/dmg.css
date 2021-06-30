@@ -3,13 +3,8 @@
     --lightGreen: #8bac0f;
     --midGreen: #306230;
     --midishGreen: #4a8a3a;
-    --darkGreen: #0f380f;
-    --darkestGreen: #0f380f;
-
     --purple: #8c2a59;
     --blue: #240773;
-    /*--gray: #919191;*/
-
     --black: #202020;
     --gray: #646464;
     --beige: #e4e2e2;
@@ -38,11 +33,13 @@ body {
 #header {
     color: var(--purple);
 }
+#seq-mode {
+    color: var(--purple);
+}
 /* ascii-tone background color */
 #main-container {
-    /* This has to be the --bg variable */
+    /* This has to be the --bg variable. do not change it */
     background: var(--bg);
-    z-index: -999;
 }
 
 /* main overlay */
