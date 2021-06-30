@@ -1,0 +1,35 @@
+/* TODO: remove these styles from the main stylesheets once figured out */
+
+@font-face {
+    font-family: 'Menlo Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Menlo Regular'), url('Menlo-Regular.woff') format('woff');
+}
+html * {
+    -webkit-tap-highlight-color: transparent;
+    /* font-family: 'Courier New', Courier, monospace */
+    font-family: 'Menlo-Regular', monospace !important;
+}
+.ascii-params {
+    font-family: 'Menlo-Regular', Courier, monospace !important;
+}
+
+#ascii-bpm {
+    font-family: 'Menlo-Regular', Courier, monospace !important;
+}
+
+/* .overlay {
+    font-family: 'Menlo-Regular';
+} */
+/* #ascii-repeater {
+    font-family: Courier, monospace;
+}
+.overlay {
+    font-family: Courier, monospace !important;
+    position: absolute;
+    line-height: 13px;
+    font-size: 14px;
+    left: -128px;
+    top: -840px;
+} */
