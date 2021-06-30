@@ -1,0 +1,111 @@
+:root {
+    /* Set Base Colors here */
+    --black: rgb(4, 19, 27);
+    --gray: #aca693;
+    /*--white: #d8d2c3;*/
+    --white: #f7f7f7;
+    --red: #c87e74;
+    --green: #768e72;
+
+    /* Quick Change */
+    --bg: var(--white);
+    --primary: var(--black);
+    --secondary: var(--green);
+    --accent1: var(--red);
+
+    /* Change these as long as they match condition*/
+    --metersOn: var(--green); /*  note meters are set to this */
+    --repeaterOn: var(--green); /* ascii-repeater is set to this */
+    --checksOn: var(--accent1); /* Checks are set to this */
+    --off: var(--gray); /* primary with half opacity */
+}
+
+/* Background and text color 1 */
+body {
+    /* Text Colors */
+    color: var(--red);
+    /* frame color -- set to same as --bg if no frame is needed*/
+    background-color: var(--bg);
+}
+
+#header {
+    color: var(--gray);
+}
+/* ascii-tone background color */
+#main-container {
+    /* This has to be the --bg variable */
+    background: var(--bg);
+    z-index: -999;
+}
+
+/* main overlay */
+.overlay {
+    color: var(--black);
+}
+
+#ascii-repeater {
+    color: var(--repeaterOn);
+}
+
+/* For f and Zzz */
+.ascii-label {
+    color: var(--accent1);
+}
+
+/*//////////*/
+/* Transport */
+/*//////////*/
+#play-button {
+    color: var(--red);
+}
+
+#ascii-bpm {
+    color: var(--green);
+}
+
+#scale-select {
+    color: var(--red);
+}
+
+/* The 'playhead' arrow that moves along the top */
+#playhead {
+    color: var(--accent1);
+}
+
+/* The note selection meters */
+#ascii-meter {
+    color: var(--metersOn);
+}
+
+/* The snooze buttons */
+#ascii-checkbox {
+    color: var(--checksOn);
+}
+
+/* The synth control parameters */
+.ascii-params {
+    color: var(--gray);
+}
+
+/*  Control box titles */
+.group-label {
+    color: var(--green);
+}
+
+/* titles for each parameter */
+.label {
+    color: var(--primary);
+}
+
+#ascii-lfo-spin {
+    color: var(--accent1);
+}
+/* the fx tab */
+#fx-swap {
+    color: var(--green);
+}
+
+/* param tabs on mobile */
+#tabs-container-mobile {
+    color: var(--green);
+}

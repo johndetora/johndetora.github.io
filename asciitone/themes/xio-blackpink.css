@@ -1,30 +1,24 @@
 :root {
     /* Set Base Colors here */
-    --black: rgb(9, 31, 44);
-    --blue: rgb(60, 219, 192);
-    --yellow: rgb(241, 190, 72);
-    --red: #bf616a;
-    --orange: #d08770;
-    --yellow: #ebcb8b;
-    --green: #a3be8c;
-    --purple: #b48ead;
-    --gray: #232525;
+    --pink: #f0aeaf;
 
     /* Quick Change */
-    --bg: var(--gray);
-    --primary: var(--green);
-    --secondary: var(--orange);
-    --accent1: var(--red);
+    --bg: black;
+    --primary: var(--pink);
+    --secondary: white;
+    --accent1: var(--pink);
 
     /* Change these as long as they match condition*/
-    --metersOn: var(--purple); /*  note meters are set to this */
-    --repeaterOn: var(--yellow); /* ascii-repeater is set to this */
+    --metersOn: var(--primary); /*  note meters are set to this */
+    --repeaterOn: white; /* ascii-repeater is set to this */
     --checksOn: var(--secondary); /* Checks are set to this */
-    --off: #a3be8c; /*Background and text color 1 */
+    --off: #f0aeaf80;
 }
+
+/* Background and text color 1 */
 body {
     /* Text Colors */
-    color: var(--yellow);
+    color: white;
     /* frame color -- set to same as --bg if no frame is needed*/
     background-color: var(--bg);
 }
@@ -50,7 +44,7 @@ body {
 
 /* For f and Zzz */
 .ascii-label {
-    color: var(--green);
+    color: var(--accent1);
 }
 
 /*//////////*/
@@ -61,7 +55,7 @@ body {
 }
 
 #ascii-bpm {
-    color: var(--orange);
+    color: var(--primary);
 }
 
 #scale-select {
@@ -85,12 +79,12 @@ body {
 
 /* The synth control parameters */
 .ascii-params {
-    color: var(--purple);
+    color: var(--primary);
 }
 
 /*  Control box titles */
 .group-label {
-    color: var(--yellow);
+    color: var(--secondary);
 }
 
 /* titles for each parameter */
@@ -108,5 +102,5 @@ body {
 
 /* param tabs on mobile */
 #tabs-container-mobile {
-    color: var(--primary);
+    color: var(--secondary);
 }
