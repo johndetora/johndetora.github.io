@@ -481,7 +481,7 @@ template {
 /* TODO: change this width */
 #bpm {
     position: absolute;
-    width: 98px;
+    width: 94px;
     z-index: 5;
 }
 
