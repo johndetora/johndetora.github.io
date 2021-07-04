@@ -547,8 +547,7 @@ p {
 }
 .label {
     font-size: 14px;
-    margin-bottom: 5px;
-    margin-bottom: 1px;
+    margin-bottom: 2px;
 }
 
 /* GUI Overlays */
@@ -599,7 +598,7 @@ p {
 .group-label {
     padding: 0;
     font-size: 14px;
-    margin-bottom: 5px;
+    margin: 5px 0px;
     letter-spacing: 2px;
     font-weight: bold;
 }
@@ -617,9 +616,9 @@ p {
     /* border: 1px solid red; */
     height: 250px;
     display: grid;
+    padding-top: 5px;
     padding-right: 20px;
     /* padding-left: 20px; */
-    padding-top: 10px;
     grid-template-columns: 95px 148px 148px;
     grid-template-rows: 115px auto;
     grid-template-areas:
@@ -649,6 +648,8 @@ p {
     position: relative;
     text-align: left;
     grid-area: oscillatorA;
+    display: flex;
+    flex-direction: column;
 }
 
 #oscillator-container-b {
@@ -659,59 +660,23 @@ p {
 }
 
 .wave-select {
-    width: 60px;
-    margin: 3px;
-}
-#osc-wave {
-    display: none;
-    position: absolute;
-    width: 60px;
-    opacity: 1;
-    z-index: 2;
-}
-
-/* wave select "button" */
-
-/* 
-use [class*="ascii-osc-"] to select this and the mod wave
-
-//// */
-.ascii-dropdown {
     font-size: 14px;
     cursor: pointer;
-}
-
-#ascii-osc-wave {
-    position: absolute;
-    display: inline;
-    text-align: center;
+    display: block;
+    text-align: left;
     width: 59px;
-    height: 16px;
-    padding: 2px;
+    height: 20px;
+    padding: 5px 15px 20px 0px;
     margin: 0;
-    opacity: 1;
     z-index: 3;
 }
 
-/* wave options */
-#ascii-osc-wave-options {
-    background-color: var(--bg);
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    /* margin: 0px 0 6px 0px; */
-    right: 10px;
-    width: 93%;
-    height: 80%;
-    line-height: 18px;
-    z-index: 4;
-}
+/* input checkbox */
 
 #glide-container {
     position: relative;
-    top: -9px;
+    margin-top: 8px;
 }
-/* input checkbox */
 #glide {
     position: absolute;
     width: 30px;
@@ -725,49 +690,14 @@ use [class*="ascii-osc-"] to select this and the mod wave
 #ascii-glide {
     position: absolute;
     left: 45px;
-    top: -17px;
+    top: -15px;
     z-index: -1;
 }
 
-/* MOD select "button" */
-#ascii-mod-wave {
-    position: absolute;
-    display: inline;
-    text-align: center;
-    width: 59px;
-    height: 16px;
-    padding: 2px;
-    margin: 0;
-    opacity: 1;
-    z-index: 3;
-}
-
-/* MOD options */
-#ascii-mod-wave-options {
-    background-color: var(--bg);
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    right: 10px;
-    width: 93%;
-    height: 80%;
-    line-height: 18px;
-    z-index: 4;
-}
-.ascii-wave {
-    padding-left: 2px;
-}
-.ascii-wave:hover {
-    font-weight: 700;
-}
-/* .ascii-waves {
-    line-height: 50%;
-    letter-spacing: 50%;
-} */
 #harmonicity-container {
     position: relative;
     width: 100px;
-    top: 10px;
+    top: 8px;
 }
 
 #harmonicity {
@@ -781,8 +711,10 @@ use [class*="ascii-osc-"] to select this and the mod wave
     left: 20px;
     top: 40px;
 }
+
 #crossfader-container {
     position: relative;
+    margin-top: 5px;
     width: 100px;
 }
 #crossfader {
