@@ -1127,7 +1127,7 @@ p {
     }
 
     #tabs-container-mobile {
-        margin-top: 1px;
+        margin-top: 10%;
         display: flex;
         flex-direction: row;
 
@@ -1233,7 +1233,7 @@ p {
     }
 
     #tabs-container-mobile {
-        margin-top: 10px;
+        margin-top: 10%;
         display: flex;
         flex-direction: row;
         width: 350px;
