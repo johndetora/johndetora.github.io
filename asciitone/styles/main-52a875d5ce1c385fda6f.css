@@ -626,22 +626,23 @@ p {
         'oscillatorB mod mixer';
     gap: 1px;
     margin: auto auto auto auto;
-
     grid-area: controls;
 }
 #fx-container {
     height: 250px;
     /* border: 1px solid green; */
     display: none;
-    padding-top: 10px;
+    padding-top: 5px;
+
     grid-template-columns: 195px 195px;
-    grid-template-rows: 100px auto;
+    grid-template-rows: auto auto;
     grid-template-areas:
         'delay reverb'
-        '. .';
+        'chorus .';
     gap: 1px;
+
     margin: auto auto auto auto;
-    width: auto;
+
     grid-area: controls;
 }
 #oscillator-container-a {
@@ -676,21 +677,13 @@ p {
     position: relative;
     margin-top: 8px;
 }
-#glide {
-    position: absolute;
-    width: 30px;
-    height: 20px;
-    left: 45px;
-    top: -3px;
-    margin: auto;
-    cursor: pointer;
-    opacity: 0;
-}
+
 #ascii-glide {
+    cursor: pointer;
     position: absolute;
     left: 45px;
     top: -15px;
-    z-index: -1;
+    z-index: 10;
 }
 
 #harmonicity-container {
@@ -750,6 +743,13 @@ p {
     grid-area: mod;
 }
 
+#lfo-options {
+    display: flex;
+}
+
+#lfo-wave {
+    cursor: pointer;
+}
 #modulation {
     position: relative;
 
@@ -776,6 +776,11 @@ p {
 
 #reverb-container {
     grid-area: reverb;
+    position: relative;
+}
+
+#chorus-container {
+    grid-area: chorus;
     position: relative;
 }
 .ascii-label {
