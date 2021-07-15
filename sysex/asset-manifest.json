@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/sysex/static/css/main.c8867283.chunk.css",
+    "main.js": "/sysex/static/js/main.16138e2c.chunk.js",
+    "main.js.map": "/sysex/static/js/main.16138e2c.chunk.js.map",
+    "runtime-main.js": "/sysex/static/js/runtime-main.ef58675e.js",
+    "runtime-main.js.map": "/sysex/static/js/runtime-main.ef58675e.js.map",
+    "static/js/2.504bf058.chunk.js": "/sysex/static/js/2.504bf058.chunk.js",
+    "static/js/2.504bf058.chunk.js.map": "/sysex/static/js/2.504bf058.chunk.js.map",
+    "index.html": "/sysex/index.html",
+    "static/css/main.c8867283.chunk.css.map": "/sysex/static/css/main.c8867283.chunk.css.map",
+    "static/js/2.504bf058.chunk.js.LICENSE.txt": "/sysex/static/js/2.504bf058.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ef58675e.js",
+    "static/js/2.504bf058.chunk.js",
+    "static/css/main.c8867283.chunk.css",
+    "static/js/main.16138e2c.chunk.js"
+  ]
+}
