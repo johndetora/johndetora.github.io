@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/sysex/static/css/main.3dc58377.chunk.css",
-    "main.js": "/sysex/static/js/main.c7a5acc1.chunk.js",
-    "main.js.map": "/sysex/static/js/main.c7a5acc1.chunk.js.map",
+    "main.js": "/sysex/static/js/main.be58a081.chunk.js",
+    "main.js.map": "/sysex/static/js/main.be58a081.chunk.js.map",
     "runtime-main.js": "/sysex/static/js/runtime-main.ef58675e.js",
     "runtime-main.js.map": "/sysex/static/js/runtime-main.ef58675e.js.map",
     "static/js/2.4a44eb91.chunk.js": "/sysex/static/js/2.4a44eb91.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.ef58675e.js",
     "static/js/2.4a44eb91.chunk.js",
     "static/css/main.3dc58377.chunk.css",
-    "static/js/main.c7a5acc1.chunk.js"
+    "static/js/main.be58a081.chunk.js"
   ]
 }
