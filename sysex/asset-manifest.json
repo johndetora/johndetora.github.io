@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/sysex/static/css/main.0e399c85.chunk.css",
-    "main.js": "/sysex/static/js/main.a9b0949b.chunk.js",
-    "main.js.map": "/sysex/static/js/main.a9b0949b.chunk.js.map",
+    "main.css": "/sysex/static/css/main.585bd456.chunk.css",
+    "main.js": "/sysex/static/js/main.ce29eaed.chunk.js",
+    "main.js.map": "/sysex/static/js/main.ce29eaed.chunk.js.map",
     "runtime-main.js": "/sysex/static/js/runtime-main.ef58675e.js",
     "runtime-main.js.map": "/sysex/static/js/runtime-main.ef58675e.js.map",
     "static/js/2.ec53caa8.chunk.js": "/sysex/static/js/2.ec53caa8.chunk.js",
     "static/js/2.ec53caa8.chunk.js.map": "/sysex/static/js/2.ec53caa8.chunk.js.map",
     "index.html": "/sysex/index.html",
-    "static/css/main.0e399c85.chunk.css.map": "/sysex/static/css/main.0e399c85.chunk.css.map",
+    "static/css/main.585bd456.chunk.css.map": "/sysex/static/css/main.585bd456.chunk.css.map",
     "static/js/2.ec53caa8.chunk.js.LICENSE.txt": "/sysex/static/js/2.ec53caa8.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.ef58675e.js",
     "static/js/2.ec53caa8.chunk.js",
-    "static/css/main.0e399c85.chunk.css",
-    "static/js/main.a9b0949b.chunk.js"
+    "static/css/main.585bd456.chunk.css",
+    "static/js/main.ce29eaed.chunk.js"
   ]
 }
