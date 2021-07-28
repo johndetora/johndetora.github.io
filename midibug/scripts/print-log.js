@@ -75,16 +75,16 @@ export function printLog(status, note, velocity) {
     }
 
     // Note Handling
-    if (status == 144 || status == 128 || status == 185) {
+    if (noteOnBytes.includes(status) || noteOffBytes.includes(status)) {
         velocityColor(velocity);
-        if (status == 144) {
+        if (noteOnBytes.includes(status)) {
             status = 'note on ';
             const noteOn = document.createElement('text');
             noteOn.textContent = status;
             noteOn.style.color = 'var(--green)';
             statusEl.appendChild(noteOn);
             statusEl.append(lineBreak);
-        } else if (status == 128) {
+        } else if (noteOffBytes.includes(status)) {
             status = 'note off';
             statusEl.append(status + lineBreak);
         }
