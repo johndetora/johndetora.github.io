@@ -2,10 +2,13 @@ import { noteTranslator } from './note-chart.js';
 import { drawVelocityBar } from './velocity-bar.js';
 import { randomRGB } from './randomRGB.js';
 import { printLog } from './print-log.js';
+// import { Tone } from './Tone.js';
 
 const statusEl = document.querySelector('.connection-status');
 const currentNoteCard = document.querySelector('.status');
 navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
+const noteOnBytes = [128, 144, 145, 159, 185, 176, 153];
+const noteOffBytes = [128, 129, 137, 143];
 
 function onMIDIFailure() {
     statusEl.innerHTML = 'status: midi device not found';
@@ -28,8 +31,9 @@ function getMIDIMessage(midiMessage) {
     let velocity = midiMessage.data[2];
     currentNoteOn(status, note, velocity);
     drawVelocityBar(velocity);
+    synthPlay(noteTranslator(note), velocity);
     // If note is pressed
-    if (status == 144 || status == 153) {
+    if (noteOnBytes.includes(status)) {
         getVelocityAvg(velocity);
     }
     printLog(status, note, velocity);
@@ -70,3 +74,49 @@ function getVelocityAvg(velocity) {
 const logCols = document.querySelectorAll('.log__column');
 // RGB
 document.querySelector('.log__button').addEventListener('click', () => randomRGB(null, logCols));
+
+// Synth
+const enableBtn = document.querySelector('.synth__check');
+let enableState;
+
+enableBtn?.addEventListener('click', async () => {
+    !enableState ? (enableState = true) : (enableState = false);
+
+    console.log(enableState);
+    await Tone.start();
+    console.log('audio is ready');
+});
+
+enableBtn.addEventListener('click', function () {
+    // .state: the playback state of the source, either "started", "stopped", or "paused"
+    if (Tone.Transport.state !== 'started') {
+        enableBtn.textContent = '[enabled]';
+        enableBtn.style.color = 'var(--green)';
+        Tone.Transport.start();
+    } else {
+        enableBtn.textContent = '[disabled]';
+        enableBtn.style.color = 'var(--red)';
+
+        Tone.Transport.stop();
+    }
+});
+
+//Synth parameters
+const synth = new Tone.Synth({
+    oscillator: {
+        type: 'sawtooth',
+    },
+});
+
+let gain = new Tone.Gain(0.2);
+
+// Routing
+synth.connect(gain);
+gain.toDestination();
+
+function synthPlay(note, velocity) {
+    const now = Tone.now();
+    if (Tone.Transport.state === 'started') {
+        velocity ? synth.triggerAttack(note, now, velocity / 12) : synth.triggerRelease(now + '32n');
+    }
+}

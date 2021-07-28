@@ -9,6 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="scripts/Tone.js"></script>
+
     <script src="scripts/note-chart.js" type=module></script>
     <script src="scripts/velocity-bar.js" type=module></script>
     <script src="scripts/randomRGB.js" type=module></script>
@@ -57,6 +59,13 @@
             </div>
             <button class="session__reset">reset</button>
         </div>
+
+        <div class="card card__synth">
+            <p class="title">synth</p>
+            <div class="card__content card__synth--content">
+                <span class="synth__check">[disabled]</span>
+            </div>
+        </div>
         <div class="card log-container">
             <p class="title">log</p>
 
@@ -68,6 +77,7 @@
             </div>
             <button class="log__button">rgb</button>
         </div>
+
         <div class="connection-status">status: </div>
     </div>
 
