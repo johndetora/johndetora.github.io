@@ -7,8 +7,8 @@ import { printLog } from './print-log.js';
 const statusEl = document.querySelector('.connection-status');
 const currentNoteCard = document.querySelector('.status');
 navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
-const noteOnBytes = [128, 144, 145, 159, 185, 176, 153];
-const noteOffBytes = [128, 129, 137, 143];
+export const noteOnBytes = [128, 144, 145, 159, 185, 176, 153];
+export const noteOffBytes = [128, 129, 137, 143];
 
 function onMIDIFailure() {
     statusEl.innerHTML = 'status: midi device not found';

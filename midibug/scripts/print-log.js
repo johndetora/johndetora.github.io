@@ -1,5 +1,5 @@
 import { noteTranslator } from './note-chart.js';
-
+import { noteOnBytes, noteOffBytes } from './main.js';
 function velocityColor(velocity) {
     const lineBreak = '\n';
     const velElem = document.querySelector('.log__velocity');
