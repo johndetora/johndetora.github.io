@@ -1,21 +1,20 @@
 :root {
     /* Set Base Colors here */
-    --black: rgb(9, 31, 44);
-    --blue: rgb(60, 219, 192);
-    --yellow: rgb(241, 190, 72);
-    --red: rgb(224, 60, 49);
+    --white: #dde5ed;
+    --medium: #3e5d58;
+    --light: #92aca0;
 
     /* Quick Change */
-    --bg: var(--black);
-    --primary: var(--blue);
-    --secondary: var(--yellow);
-    --accent1: var(--red);
+    --bg: var(--medium);
+    --primary: var(--light);
+    --secondary: var(--light);
+    --accent1: var(--light);
 
     /* Change these as long as they match condition*/
     --metersOn: var(--primary); /*  note meters are set to this */
     --repeaterOn: var(--primary); /* ascii-repeater is set to this */
-    --checksOn: var(--secondary); /* Checks are set to this */
-    --off: rgba(60, 219, 192, 0.5); /* primary with half opacity */
+    --checksOn: var(--dark); /* Checks are set to this */
+    --off: #92aca074; /* primary with half opacity */
 }
 
 /* Background and text color 1 */
@@ -48,14 +47,14 @@ body {
 
 /* For f and Zzz */
 .ascii-label {
-    color: var(--accent1);
+    color: var(--off);
 }
 
 /*//////////*/
 /* Transport */
 /*//////////*/
 #play-button {
-    color: var(--accent1);
+    color: var(--primary);
 }
 
 #ascii-bpm {
@@ -66,7 +65,7 @@ body {
     color: var(--primary);
 }
 #scale-select {
-    color: var(--secondary);
+    color: var(--primary);
 }
 
 /* The 'playhead' arrow that moves along the top */

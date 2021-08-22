@@ -1,27 +1,24 @@
 :root {
     /* Set Base Colors here */
-    --black: rgb(9, 31, 44);
-    --blue: rgb(60, 219, 192);
-    --yellow: rgb(241, 190, 72);
-    --red: rgb(224, 60, 49);
+    --pink: #f0aeaf;
 
     /* Quick Change */
-    --bg: var(--black);
-    --primary: var(--blue);
-    --secondary: var(--yellow);
-    --accent1: var(--red);
+    --bg: black;
+    --primary: var(--pink);
+    --secondary: white;
+    --accent1: var(--pink);
 
     /* Change these as long as they match condition*/
     --metersOn: var(--primary); /*  note meters are set to this */
-    --repeaterOn: var(--primary); /* ascii-repeater is set to this */
+    --repeaterOn: white; /* ascii-repeater is set to this */
     --checksOn: var(--secondary); /* Checks are set to this */
-    --off: rgba(60, 219, 192, 0.5); /* primary with half opacity */
+    --off: #f0aeaf80;
 }
 
 /* Background and text color 1 */
 body {
     /* Text Colors */
-    color: var(--primary);
+    color: white;
     /* frame color -- set to same as --bg if no frame is needed*/
     background-color: var(--bg);
 }
@@ -29,7 +26,6 @@ body {
 #header {
     color: var(--off);
 }
-
 /* ascii-tone background color */
 #main-container {
     /* This has to be the --bg variable */
@@ -55,16 +51,13 @@ body {
 /* Transport */
 /*//////////*/
 #play-button {
-    color: var(--accent1);
+    color: var(--red);
 }
 
 #ascii-bpm {
     color: var(--primary);
 }
-/* sequence mode */
-#seq-mode {
-    color: var(--primary);
-}
+
 #scale-select {
     color: var(--secondary);
 }

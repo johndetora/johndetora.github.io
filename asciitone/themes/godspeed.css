@@ -1,20 +1,23 @@
 :root {
     /* Set Base Colors here */
-    --black: rgb(9, 31, 44);
-    --blue: rgb(60, 219, 192);
-    --yellow: rgb(241, 190, 72);
-    --red: rgb(224, 60, 49);
+    --white: rgb(227, 213, 185);
+    --blue: rgb(89, 145, 174);
+    --yellow: rgb(255, 219, 88);
+    --red: rgb(186, 19, 18);
+    --green: rgb(105, 208, 165);
+    --grey: rgb(125, 124, 120);
 
     /* Quick Change */
-    --bg: var(--black);
-    --primary: var(--blue);
+    --bg: var(--blue);
+
+    --primary: var(--white);
     --secondary: var(--yellow);
     --accent1: var(--red);
 
     /* Change these as long as they match condition*/
     --metersOn: var(--primary); /*  note meters are set to this */
     --repeaterOn: var(--primary); /* ascii-repeater is set to this */
-    --checksOn: var(--secondary); /* Checks are set to this */
+    --checksOn: var(--white); /* Checks are set to this */
     --off: rgba(60, 219, 192, 0.5); /* primary with half opacity */
 }
 
@@ -27,7 +30,7 @@ body {
 }
 
 #header {
-    color: var(--off);
+    color: var(--gray);
 }
 
 /* ascii-tone background color */
@@ -48,7 +51,7 @@ body {
 
 /* For f and Zzz */
 .ascii-label {
-    color: var(--accent1);
+    color: var(--yellow);
 }
 
 /*//////////*/
@@ -59,14 +62,14 @@ body {
 }
 
 #ascii-bpm {
-    color: var(--primary);
+    color: var(--yellow);
 }
 /* sequence mode */
 #seq-mode {
-    color: var(--primary);
+    color: var(--yellow);
 }
 #scale-select {
-    color: var(--secondary);
+    color: var(--yellow);
 }
 
 /* The 'playhead' arrow that moves along the top */

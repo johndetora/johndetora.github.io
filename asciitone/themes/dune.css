@@ -16,7 +16,7 @@
     --metersOn: var(--rust); /*  note meters are set to this */
     --repeaterOn: var(--red); /* ascii-repeater is set to this */
     --checksOn: var(--sand); /* Checks are set to this */
-    --off: #e0a24486;
+    --off: #e0a24445;
 }
 
 /* Background and text color 1 */
