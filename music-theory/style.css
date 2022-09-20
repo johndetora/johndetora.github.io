@@ -1,0 +1,35 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    font-family: 'Ubuntu Mono', monospace;
+    height: 100vh;
+    background-color: rgb(255, 253, 238);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+.button {
+    margin: auto;
+    width: 300px;
+    height: 100px;
+    background-color: rgb(58, 207, 16);
+    font-size: 2rem;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.noteName {
+    margin: auto;
+    margin-top: 10%;
+    width: 80vw;
+    height: 60vh;
+    font-size: 5rem;
+}
