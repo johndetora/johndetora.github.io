@@ -5,57 +5,123 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src *;">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/2653a36393.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet">
     <title>start</title>
 </head>
 
 <body>
-    <div class="container">
-        <div class="section welcome">
-            <div id="time"></div>
+    <div class="main">
+        <div id="date-time-container">
+            <div id="time"></div><br>
             <div id="date"></div>
-            <div id="calendar">
-                <div class="day" id="1"></div>
-                <div class="day" id="2"></div>
-                <div class="day" id="3"></div>
-                <div class="day" id="4"></div>
-                <div class="day" id="5"></div>
-                <div class="day weekend" id="6"></div>
-                <div class="day weekend" id="7"></div>
+        </div>
+
+        <div class="art">
+            <pre class="ascii">
+             ,,,,,,.
+         o#'9MMHb':'-%,.
+      .oH":HH$' "' ' -*R&o,
+     dMMM*""'`'      .oM"HM?.
+   ,MMM'          "HLbd< ?&H\
+  .:MH ."           ` MM  MM&b
+ . "*H    -        &MMMMMMMMMH:
+ .    dboo        MMMMMMMMMMMM.
+ .   dMMMMMMb      *MMMMMMMMMP.
+ .    MMMMMMMP        *MMMMMP .
+      `#MMMMM           MM6P ,
+  '    `MMMP"           HM*`,
+   '    :MM             .- ,
+    '.   `#?..  .       ..'
+       -.   .         .-
+         ''-.oo,oo.-''
+            </pre>
+        </div>
+
+        <div class="search">
+            <input id="search-field" type="text" name="search-field" onkeypress="return search(event)"
+                autofocus="true" />
+            <div id="search-cursor">></div>
+        </div>
+        <div class="link-box" id="a">
+            <div class="links-title">favorites</div>
+            <div class="links-container">
+
+                <div class="link">
+                    <span><a href="https://github.com/">> GitHub</a></span>
+                </div>
+                <div class="link">
+                    <span><a href="https://monkeytype.com/">> monkeytype</a></span>
+                </div>
+                <div class="link">
+                    <span><a href=https://www.how-to-type.com/typing-practice/programming/js />> typing
+                        pratice</a></span>
+                </div>
+
+                <div class="link">
+                    <span><a href="https://www.youtube.com">> YouTube</a></span>
+                </div>
             </div>
         </div>
-        <div class="section link-container">
-            <div class="link-container__card">
-                <p><a class="link" href="https://github/"><i class="fas fa-code-branch"></i> github</a></p>
-                <p><a class="link" href="https://echocoast.net/asciitone/"><i class="far fa-file-code"></i>
-                        asciitone</a></p>
-                <p><a class="link" href="https://echocoast.net/midibug/"><i class="fas fa-bug"></i> midi-bug</a></p>
-                <p><a class="link" href="https://github.com/karan/Projects"><i class="fas fa-code"></i> ideas</a></p>
+        <div class="link-box" id="b">
+            <div class="links-title">web dev</div>
+            <div class="links-container">
+                <div class="link">
+                    <span><a href="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/">>
+                            freeCodeCamp</a></span>
+                </div>
+                <div class="link">
+                    <span><a href="https://coolors.co/generate">> coolors.co</a></span>
+                </div>
+                <div class="link">
+                    <span><a href="https://tonejs.github.io/">> Tone.js</a></span>
+                </div>
+                <div class="link">
+                    <span><a href="https://tonejs.github.io/docs/r13/Tone">> Tone.js r13 manual</a></span>
+                </div>
 
+                <div class="link">
+                    <span><a href="https://echocoast.net/asciiquencer/">> asciiquencer</a></span>
+                </div>
+                <div class="link">
+                    <span><a href="https://github.com/karan/Projects">> project ideas</a></span>
+
+                </div>
+                <div class="link">
+                    <span><a href="https://javascript.info/">> javascript.info</a></span>
+                </div>
             </div>
-            <div class="link-container__card">
-
-                <p><a class="link" href="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/">
-                        <i class="fab fa-free-code-camp"></i> freeCodeCamp</a></p>
-                <p><a class="link" href="https://workforcenow.adp.com"><i class="far fa-clock"></i> ADP</a></p>
-                <p><a class="link" href="https://teams.microsoft.com/"><i class="fas fa-users"></i> Teams</a></p>
-                <p><a class="link" href="https://trello.com/john94180064/cards"><i class="fab fa-trello"></i> Trello</a>
-                </p>
-                <p><a class="link" href=" https://inmusicbrands.atlassian.net/wiki/home"><i
-                            class="fab fa-confluence"></i> Confluence</a></p>
-
-            </div>
-
-
-
         </div>
+        <div class="link-box" id="c">
+            <div class="links-title">shop</div>
+            <div class="links-container">
+                <div class="link">
+                    <span><a href='https://www.amazon.com/''>> amazon</a></span>
+                </div>
+            </div>
+        </div>
+        <div class="link-box" id="d">
+            <div class="links-title">work</div>
+            <div class="links-container">
+                <div class="link">
+                    <span><a href="https://workforcenow.adp.com">> ADP</a></span>
+                </div>
+                <div class="link">
+                    <span><a href="https://teams.microsoft.com/">> Teams</a></span>
+                </div>
+                <div class="link">
+                    <span><a href="https://trello.com/john94180064/cards">> Trello</a></span>
+                </div>
+                
+               
+               
+            </div>
+        </div>
+
     </div>
-    <script src="./main.js"></script>
-</body>
 
-</html>
+   <script src="main.js"></script>
+</body >
+
+</html >
